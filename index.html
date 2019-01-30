@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="./lib/layui-v2.4.5/layui/css/layui.css">
+</head>
+<body>
+    <ul class="layui-nav layui-bg-cyan" lay-filter="header_nav">
+        <li class="layui-nav-item">
+            <a href="javascript:;">藏青导航</a>
+            <dl class="layui-nav-child">
+              <dd><a data-url="" data-id="111" data-title="移动模块" lay-id="111">移动模块</a></dd>
+              <dd><a data-url="" data-id="222" data-title="后台模版" lay-id="222">后台模版</a></dd>
+              <dd><a data-url="" data-id="333" data-title="电商平台" lay-id="333">电商平台</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item layui-this"><a>产品</a></li>
+        <li class="layui-nav-item">
+            <a href="javascript:;">大数据</a>
+            <dl class="layui-nav-child">
+              <dd><a data-url="" data-id="444" data-title="移动模块" lay-id="444">移动模块</a></dd>
+              <dd><a data-url="" data-id="555" data-title="后台模版" lay-id="555">后台模版</a></dd>
+              <dd><a data-url="" data-id="666" data-title="电商平台" lay-id="666">电商平台</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;">解决方案</a>
+          <dl class="layui-nav-child">
+            <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
+            <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
+            <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item"><a>社区</a></li>
+    </ul>
+
+    <div class="layui-tab" lay-allowclose="true" lay-filter="demodemo">
+        <ul class="layui-tab-title" >
+          <li class="layui-this" lay-id="11">首页</li>
+          
+        </ul>
+        <div class="layui-tab-content">
+          <div class="layui-tab-item layui-show">内容1</div>
+         
+        </div>
+    </div>
+
+
+</body>
+<script src="./lib/layui-v2.4.5/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use('element', function(){
+      var $ = layui.$;
+      var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+      var title=''
+      var id=''
+      var url='1'
+
+       //监听导航点击
+       element.on('nav(header_nav)', function(elem){
+        console.log(elem,'header_nav');
+        title=elem.context.dataset.title;
+        id=elem.context.dataset.id;
+        console.log(id,'121');
+
+        if(title!=''&&title){
+          element.tabDelete('demodemo', id);
+          element.tabAdd('demodemo', {
+            title: title
+            ,content: '<iframe data-frameid="'+id+'" frameborder="0" name="content" scrolling="no" width="100%" src="' + url + '"></iframe>' //支持传入html
+            ,id: id
+          }); 
+          //切换到指定Tab项
+          element.tabChange('demodemo', id); //切换到：用户管理
+          $("iframe[data-frameid='"+id+"']").attr("src",$("iframe[data-frameid='"+id+"']").attr("src"))//切换后刷新框架
+              
+        }
+        
+      });
+
+      
+    });
+
+
+    // layui.use('element', function(){
+    //   var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+    // });
+
+
+
+    
+    </script>
+</html>
