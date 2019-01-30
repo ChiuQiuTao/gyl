@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 后台大布局 - Layui</title>
-    <link rel="stylesheet" href="../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../public/dist/css/layui.css">
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
 </head>
@@ -50,7 +50,7 @@
                         <!--加 layui-nav-itemed 张开 -->
                         <a class="" href="javascript:;">所有商品</a>
                         <dl class="layui-nav-child">
-                            <dd lay-id="111"><a href="javascript:;" data-options="{url:'../component/home.html',title:'列表一'}">列表一</a></dd>
+                            <dd lay-id="111"><a href="javascript:;" data-options="{url:'../../index.html',title:'列表一'}">列表一</a></dd>
                             <dd lay-id="222"><a href="javascript:;" data-options="{url:'../component/home.html',title:'列表er'}">列表er</a></dd>
                             <dd><a href="javascript:;">列表二</a></dd>
                             <dd><a href="javascript:;">列表三</a></dd>
@@ -80,21 +80,27 @@
             <!-- 底部固定区域 -->
         </div>
     </div>
-    <script src="../public/dist/layui.js"></script>
+    <script src="../../public/dist/layui.js"></script>
     <script>
         //JavaScript代码区域
         layui.use('element', function() {
             var $ = layui.$,
                 element = layui.element;
             element.init();
-            element.on("collapse(navtest)", function(elem) {
-                console.log(elem)
-            })
+            // element.on("collapse(navtest)", function(elem) {
+            //     console.log(elem)
+            // })
             element.on('nav(navtest)', function(elem) {
+                // console.log(elem)
+                console.log($("#contentsss"))
+                console.log('_____')
+                console.log(document.querySelector('#contentsss'))
+                
                 // console.log(this)
                 // console.log(elem)
-                // var obj = eval('(' + elem[0].dataset.options + ')');
-                // console.log(obj.url)
+                 var obj = eval('(' + elem[0].dataset.options + ')');
+                 console.log(obj.url);
+                 document.querySelector('#contentsss').src=obj.url
                 // var url = obj.url;
                 // var title = obj.title;
                 // console.log($("#contentsss"))
