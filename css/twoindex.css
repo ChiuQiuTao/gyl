@@ -1,0 +1,45 @@
+.two-in-logo {
+    font-size: 22px !important;
+}
+
+.two-in-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.two-in-title>p {
+    font-size: 14px;
+    color: #6F6C6C;
+    text-align: left;
+}
+
+.two-in-login {
+    display: flex;
+    align-items: center;
+}
+
+.two-in-login>a {
+    padding: 0 0 0 5px;
+}
+
+.two-in-top-approve {
+    font-size: 14px;
+    color: rgba(255, 255, 255, .7);
+}
+
+.two-in-message {
+    display: inline-block;
+    width: 30px;
+    height: 35px;
+    position: relative;
+}
+
+.two-in-message>span {
+    top: 30% !important;
+    right: 0;
+}
+
+.two-in-data>a {
+    padding: 0 10px 0 6px!important;
+}
