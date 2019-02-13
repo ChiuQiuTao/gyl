@@ -55,12 +55,12 @@
                             <i class="iconfont icon-ios-archive"></i> 我的工作
                         </a>
                         <dl class="layui-nav-child">
-                            <dd lay-id="111">
+                            <dd>
                                 <a href="javascript:;" data-options="{url:'../../index.html',title:'列表一'}">列表一</a>
                             </dd>
-                            <dd lay-id="222"><a href="javascript:;" data-options="{url:'../component/home.html',title:'列表er'}">列表er</a></dd>
-                            <dd><a href="javascript:;">列表二</a></dd>
-                            <dd><a href="javascript:;">列表三</a></dd>
+                            <dd>
+                                <a href="javascript:;" data-options="{url:'../component/home.html',title:'列表er'}">列表er</a>
+                            </dd>
                         </dl>
                     </li>
                 </ul>
@@ -70,16 +70,16 @@
             </div>
         </div>
 
-        <div class="layui-body">
+        <div class="layui-body two-in-con">
             <!-- 内容主体区域 -->
-            <div style="padding: 15px;">
-                <iframe scrolling="auto" src frameborder="0" id="contentsss" style="width:100%;height:100%;"></iframe>
+            <div style="padding:10px;height: 100%;">
+                <iframe scrolling="auto" src="" frameborder="0" id="contentsss" style="width:100%;height:100%;"></iframe>
             </div>
         </div>
-
-        <div class="layui-footer">
-            <!-- 底部固定区域 -->
-        </div>
+        <!-- 底部固定区域 -->
+        <!-- <div class="layui-footer">
+          
+        </div> -->
     </div>
     <script src="../../public/dist/layui.js"></script>
     <script>
@@ -89,19 +89,15 @@
                 element = layui.element;
             element.init();
             element.on('nav(navtest)', function(elem) {
-                console.log(eval('(' + elem[0].dataset.options + ')'))
-                if (eval('(' + elem[0].dataset.options + ')') != "") {
-                    alert()
+                var cun = elem[0].dataset.options
+                if (cun != undefined) {
+                    var obj = eval('(' + cun + ')')
+                    $("#contentsss").attr("src", obj.url)
                 }
-                console.log($("#contentsss"))
-                    // console.log(document.querySelector('#contentsss'))
-                    // var obj = eval('(' + elem[0].dataset.options + ')');
-                    // console.log(obj.url);
-                    // document.querySelector('#contentsss').src = obj.url
             });
             element.render('nav');
         });
     </script>
 </body>
 
-</html>Q
+</html>

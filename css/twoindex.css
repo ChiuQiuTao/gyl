@@ -81,3 +81,8 @@
     line-height: 40px;
     cursor: pointer;
 }
+
+.two-in-con {
+    left: 180px !important;
+    bottom: 10px !important;
+}
