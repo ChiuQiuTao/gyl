@@ -43,3 +43,41 @@
 .two-in-data>a {
     padding: 0 10px 0 6px!important;
 }
+
+.two-in-menu {
+    width: 180px !important;
+}
+
+.two-in-menu-one {
+    background-color: #009688;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.two-in-menu-one>label {
+    font-size: 16px;
+}
+
+.two-in-menu-one>i {
+    padding-left: 20px;
+    font-size: 16x;
+}
+
+.layui-nav-item>a>i {
+    padding: 0 5px;
+}
+
+.two-in-menu-bottom {
+    height: 40px;
+    width: 180px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    background-color: #009688;
+    color: #f2f2f2;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}

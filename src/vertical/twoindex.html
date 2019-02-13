@@ -41,13 +41,19 @@
             </div>
         </div>
         <!-- 上/头部 -->
-        <div class="layui-side layui-bg-cyan ">
+        <div class="layui-side layui-bg-cyan two-in-menu">
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree layui-bg-cyan" lay-filter="navtest">
-                    <li class="layui-nav-item ">
+                <ul class="layui-nav layui-nav-tree layui-bg-cyan two-in-menu" lay-filter="navtest">
+                    <li class="layui-nav-item two-in-menu-one">
+                        <label>切换菜单模式</label>
+                        <i class="iconfont icon-shuangjiantouyou"></i>
+                    </li>
+                    <li class="layui-nav-item">
                         <!--加 layui-nav-itemed 张开 -->
-                        <a class="" href="javascript:;">所有商品</a>
+                        <a class="" href="javascript:;">
+                            <i class="iconfont icon-ios-archive"></i> 我的工作
+                        </a>
                         <dl class="layui-nav-child">
                             <dd lay-id="111">
                                 <a href="javascript:;" data-options="{url:'../../index.html',title:'列表一'}">列表一</a>
@@ -57,16 +63,10 @@
                             <dd><a href="javascript:;">列表三</a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item ">
-                        <a href="javascript:;">解决方案</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;">列表一</a></dd>
-                            <dd><a href="javascript:;">列表二</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item"><a href="">云市场</a></li>
-                    <li class="layui-nav-item"><a href="">发布商品</a></li>
                 </ul>
+                <div class="two-in-menu-bottom ">
+                    隐藏菜单栏
+                </div>
             </div>
         </div>
 
@@ -88,29 +88,16 @@
             var $ = layui.$,
                 element = layui.element;
             element.init();
-            // element.on("collapse(navtest)", function(elem) {
-            //     console.log(elem)
-            // })
             element.on('nav(navtest)', function(elem) {
-                // console.log(elem)
+                console.log(eval('(' + elem[0].dataset.options + ')'))
+                if (eval('(' + elem[0].dataset.options + ')') != "") {
+                    alert()
+                }
                 console.log($("#contentsss"))
-                console.log('_____')
-                console.log(document.querySelector('#contentsss'))
-
-                // console.log(this)
-                // console.log(elem)
-                var obj = eval('(' + elem[0].dataset.options + ')');
-                console.log(obj.url);
-                document.querySelector('#contentsss').src = obj.url
-                    // var url = obj.url;
-                    // var title = obj.title;
-                    // console.log($("#contentsss"))
-
-                // element.tabAdd('tabs', {
-                //     title: title,
-                //     content: '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>',
-                //     id: '111'
-                // });
+                    // console.log(document.querySelector('#contentsss'))
+                    // var obj = eval('(' + elem[0].dataset.options + ')');
+                    // console.log(obj.url);
+                    // document.querySelector('#contentsss').src = obj.url
             });
             element.render('nav');
         });
