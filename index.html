@@ -6,20 +6,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>首页</title>
     <link rel="stylesheet" href="./public/dist/css/layui.css">
+    <link rel="stylesheet" href="./css/index.css">
+
 </head>
 <body>
     <ul class="layui-nav layui-bg-cyan" lay-filter="header_nav">
+        <li class="layui-nav-item layui-this"><a href="">首页</a></li>
         <li class="layui-nav-item">
-            <a href="javascript:;">藏青导航</a>
+            <a href="javascript:;">采购</a>
             <dl class="layui-nav-child">
               <dd><a data-url="" data-id="111" data-title="移动模块" lay-id="111">移动模块</a></dd>
               <dd><a data-url="" data-id="222" data-title="后台模版" lay-id="222">后台模版</a></dd>
               <dd><a data-url="" data-id="333" data-title="电商平台" lay-id="333">电商平台</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item layui-this"><a>产品</a></li>
         <li class="layui-nav-item">
-            <a href="javascript:;">大数据</a>
+            <a href="javascript:;">销售</a>
             <dl class="layui-nav-child">
               <dd><a data-url="" data-id="444" data-title="移动模块" lay-id="444">移动模块</a></dd>
               <dd><a data-url="" data-id="555" data-title="后台模版" lay-id="555">后台模版</a></dd>
@@ -27,24 +29,276 @@
             </dl>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:;">解决方案</a>
+          <a href="javascript:;">统计报表</a>
           <dl class="layui-nav-child">
             <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
             <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
             <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a>社区</a></li>
+
+        <li class="layui-nav-item">
+          <a href="javascript:;">运营分析</a>
+          <dl class="layui-nav-child">
+            <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
+            <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
+            <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
+          </dl>
+        </li>
+
+        <li class="layui-nav-item">
+          <a href="javascript:;">基础数据</a>
+          <dl class="layui-nav-child">
+            <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
+            <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
+            <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
+          </dl>
+        </li>
+
+        <li class="layui-nav-item">
+          <a href="javascript:;">统计管理</a>
+          <dl class="layui-nav-child">
+            <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
+            <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
+            <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
+          </dl>
+        </li>
+
+        <li class="layui-nav-item">
+          <a href="javascript:;">帮助</a>
+          <dl class="layui-nav-child">
+            <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
+            <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
+            <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
+          </dl>
+        </li>
     </ul>
 
     <div class="layui-tab" lay-allowclose="true" lay-filter="demodemo">
         <ul class="layui-tab-title" >
           <li class="layui-this" lay-id="11">首页</li>
-          
         </ul>
         <div class="layui-tab-content">
-          <div class="layui-tab-item layui-show">内容1</div>
-         
+          <div class="layui-tab-item layui-tab-item-back layui-show">
+            <div class="order">
+
+              <div class="order-title">
+                <div class="order-title-line"></div>
+                <div class="order-title-txt">订单进度</div>
+                <div class="order-title-icon">
+                  <img src="./img/refresh.png" alt="">
+                </div>
+              </div>
+              <div class="order-content">
+                <div class="order-content-row">
+                  <div class="order-content-sales">销售</div>
+                  <div class="order-content-right">
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待接单
+                      </div>
+                      <div class="order-content-number">
+                        0
+                      </div>
+                    </div>
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待审批
+                      </div>
+                      <div class="order-content-number">
+                        0
+                      </div>
+                    </div>
+
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待对方确认
+                      </div>
+                      <div class="order-content-number">
+                        0
+                      </div>
+                    </div>
+
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待发货
+                      </div>
+                      <div class="order-content-number">
+                        0
+                      </div>
+                    </div>
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待收款
+                      </div>
+                      <div class="order-content-number">
+                        0
+                      </div>
+                    </div>
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        已完成
+                      </div>
+                      <div class="order-content-number">
+                        0
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="order-content-row">
+                  <div class="order-content-purchase">采购</div>
+                  <div class="order-content-right">
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待接单
+                      </div>
+                      <div class="order-content-numbers">
+                        0
+                      </div>
+                    </div>
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待审批
+                      </div>
+                      <div class="order-content-numbers">
+                        0
+                      </div>
+                    </div>
+
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待对方确认
+                      </div>
+                      <div class="order-content-numbers">
+                        0
+                      </div>
+                    </div>
+
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待发货
+                      </div>
+                      <div class="order-content-numbers">
+                        0
+                      </div>
+                    </div>
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        待收款
+                      </div>
+                      <div class="order-content-numbers">
+                        0
+                      </div>
+                    </div>
+                    <div class="order-content-item">
+                      <div class="order-content-text">
+                        已完成
+                      </div>
+                      <div class="order-content-numbers">
+                        0
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="order">
+
+              <div class="order-title">
+                <div class="order-title-line"></div>
+                <div class="order-title-txt">待办分类</div>
+                <div class="order-title-icon">
+                  <img src="./img/refresh.png" alt="">
+                </div>
+              </div>
+              <div class="order-type">
+                <div class="order-type-item">待审批单据:0</div>
+                <div class="order-type-item">预警消息:0</div>
+                <div class="order-type-item" style="border-right: 2px solid #c9c9c9;">已逾期工作:0</div>
+              </div>
+            </div>
+
+            <div class="order">
+
+              <div class="order-title">
+                <div class="order-title-line"></div>
+                <div class="order-title-txt">最新消息</div>
+                <div class="order-title-icon">
+                  <img src="./img/refresh.png" alt="">
+                </div>
+              </div>
+              <div class="order-table">
+                  <div class="layui-tab layui-tab-card">
+                    <ul class="layui-tab-title">
+                      <li class="layui-this">
+                        全部
+                        <div class="tab-number">0</div>
+                      </li>
+                      <li>
+                        未查看 
+                        <div class="tab-number">0</div>
+                      </li>
+                      <li>
+                        已查看
+                        <div class="tab-number">0</div>
+                      </li>
+                      <li>
+                        处理中
+                        <div class="tab-number">0</div>
+                      </li>
+                      <li>
+                        已处理
+                        <div class="tab-number">0</div>
+                      </li>
+                    </ul>
+                    <div class="layui-tab-content" style="height: 100px;">
+                      <div class="layui-tab-item layui-show">
+                        <div class="input-item">
+                          <div class="date-title">日期:</div>
+                          <div class="date-select">
+                              <input type="text" class="layui-input" id="date1">
+                              <div class="date-line"></div>
+                              <input type="text" class="layui-input" id="date2">
+
+                          </div>
+                        </div>
+
+
+                        <div class="input-item">
+                          <div class="date-title">单号:</div>
+                          <div class="date-select">
+                              <input type="text" class="layui-input">
+                          </div>
+                        </div>
+
+
+                        <div class="input-item">
+                          <div class="date-title">关键字:</div>
+                          <div class="date-select">
+                              <input type="text" class="layui-input">
+                          </div>
+                          <div class="btn">查询</div>
+                          <div class="btn">清除</div>
+                        </div>
+                      </div>
+                      <div class="layui-tab-item">2</div>
+                      <div class="layui-tab-item">3</div>
+                      <div class="layui-tab-item">4</div>
+                      <div class="layui-tab-item">5</div>
+                      <div class="layui-tab-item">6</div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+          </div>
         </div>
     </div>
 
@@ -90,7 +344,17 @@
     //   var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
     // });
 
-
+    layui.use('laydate', function(){
+      var laydate = layui.laydate;
+      
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#date1' //指定元素
+      });
+      laydate.render({
+        elem: '#date2' //指定元素
+      });
+    });
 
     
     </script>
