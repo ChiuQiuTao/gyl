@@ -15,7 +15,7 @@
         <li class="layui-nav-item">
             <a href="javascript:;">采购</a>
             <dl class="layui-nav-child">
-              <dd><a data-url="" data-id="111" data-title="移动模块" lay-id="111">移动模块</a></dd>
+              <dd><a data-url="" data-id="111" data-title="采购订单" href="javascript:;" data-options="{url:'./src/sidewards/purchase/purchaseorder.html',title:'采购订单'}">采购订单</a></dd>
               <dd><a data-url="" data-id="222" data-title="后台模版" lay-id="222">后台模版</a></dd>
               <dd><a data-url="" data-id="333" data-title="电商平台" lay-id="333">电商平台</a></dd>
             </dl>
@@ -258,7 +258,7 @@
                         <div class="tab-number">0</div>
                       </li>
                     </ul>
-                    <div class="layui-tab-content" style="height: 100px;">
+                    <div class="layui-tab-content" style="">
                       <div class="layui-tab-item layui-show">
                         <div class="input-item">
                           <div class="date-title">日期:</div>
@@ -287,6 +287,45 @@
                           <div class="btn">查询</div>
                           <div class="btn">清除</div>
                         </div>
+
+
+
+
+
+                        <!-- 表单 -->
+                        <div class="table">
+                          <table class="layui-table">
+                            <colgroup>
+                              <col width="150">
+                              <col width="200">
+                              <col>
+                            </colgroup>
+                            <thead>
+                              <tr>
+                                <th>单号</th>
+                                <th>简称</th>
+                                <th>平台账号</th>
+                                <th>单据信息</th>
+                                <th>时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                              </tr> 
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>20151212100051</td>
+                                <td>寒战</td>
+                                <td>1056896522</td>
+                                <td>已完成</td>
+                                <td>2016-11-28</td>
+                                <td>已完成</td>
+                                <td>成功</td>
+
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                       <div class="layui-tab-item">2</div>
                       <div class="layui-tab-item">3</div>
@@ -307,7 +346,25 @@
 <script src="./public/dist/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
+    getClientHeight();
+      function getClientHeight()
+      {
+        var clientHeight=0;
+        if(document.body.clientHeight&&document.documentElement.clientHeight)
+        {
+        var clientHeight = (document.body.clientHeight<document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
+        }
+        else
+        {
+        var clientHeight = (document.body.clientHeight>document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
+        }
+        console.log(clientHeight,'clientHeight');
+        document.querySelector('.layui-tab-content').style.height=clientHeight+'px';
+        return clientHeight;
+      }
+
     layui.use('element', function(){
+      var self = this;
       var $ = layui.$;
       var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
       var title=''
@@ -320,18 +377,21 @@
         title=elem.context.dataset.title;
         id=elem.context.dataset.id;
         console.log(id,'121');
-
+        var obj = eval('(' + elem[0].dataset.options + ')');
+        console.log(obj.url);
         if(title!=''&&title){
           element.tabDelete('demodemo', id);
           element.tabAdd('demodemo', {
             title: title
-            ,content: '<iframe data-frameid="'+id+'" frameborder="0" name="content" scrolling="no" width="100%" src="' + url + '"></iframe>' //支持传入html
+            ,content: '<iframe data-frameid="'+id+'" frameborder="0" name="content" scrolling="true" width="100%" height="100%" src="' + obj.url + '"></iframe>' //支持传入html
             ,id: id
           }); 
           //切换到指定Tab项
           element.tabChange('demodemo', id); //切换到：用户管理
           $("iframe[data-frameid='"+id+"']").attr("src",$("iframe[data-frameid='"+id+"']").attr("src"))//切换后刷新框架
-              
+
+
+          
         }
         
       });
