@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>首页</title>
     <link rel="stylesheet" href="./public/dist/css/layui.css">
     <link rel="stylesheet" href="./css/index.css">
@@ -37,10 +37,51 @@
         <li class="layui-nav-item">
           <a href="javascript:;">统计报表</a>
           <dl class="layui-nav-child">
-            <dt>移动模块</dt>
-            <dd><a data-url="" data-id="777" data-title="移动模块" lay-id="777">移动模块</a></dd>
-            <dd><a data-url="" data-id="888" data-title="后台模版" lay-id="888">后台模版</a></dd>
-            <dd><a data-url="" data-id="999" data-title="电商平台" lay-id="999">电商平台</a></dd>
+
+            <dd>
+              <div class="form-dialog">
+                <div class="item">
+                  <span>采购</span>
+                  <a data-url="" data-id="13" data-title="采购订单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'采购订单明细表'}">采购订单明细表</a>
+                  <a data-url="" data-id="14" data-title="采购订单跟踪表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasetrackingform.html',title:'采购订单跟踪表'}">采购订单跟踪表</a>
+                  <a data-url="" data-id="15" data-title="采购逾期表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchaseoverdueform.html',title:'采购逾期表'}">采购逾期表</a>
+                  <a data-url="" data-id="16" data-title="采购收货明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasegoodsform.html',title:'采购收货明细表'}">采购收货明细表</a>
+                  <a data-url="" data-id="17" data-title="采购退货明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchaserefundform.html',title:'采购退货明细表'}">采购退货明细表</a>
+                  <a data-url="" data-id="18" data-title="供应商发货进度表" href="javascript:;" data-options="{url:'./src/sidewards/form/supplierform.html',title:'供应商发货进度表'}">供应商发货进度表</a>
+                </div>
+                <div class="item">
+                  <span>销售</span>
+                  <a data-url="" data-id="19" data-title="销售订单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/salesdetailform.html',title:'销售订单明细表'}">销售订单明细表</a>
+                  <a data-url="" data-id="20" data-title="销售订单跟踪表" href="javascript:;" data-options="{url:'./src/sidewards/form/salestrackingform.html',title:'销售订单跟踪表'}">销售订单跟踪表</a>
+                  <a data-url="" data-id="21" data-title="销售逾期表" href="javascript:;" data-options="{url:'./src/sidewards/form/salesoverdueform.html',title:'销售逾期表'}">销售逾期表</a>
+                  <a data-url="" data-id="22" data-title="销售发货明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/salesdeliveryform.html',title:'销售发货明细表'}">销售发货明细表</a>
+                  <a data-url="" data-id="23" data-title="销售退货明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/salesreturnform.html',title:'销售退货明细表'}">销售退货明细表</a>
+                </div>
+                <div class="item">
+                  <span>库存</span>
+                  <a data-url="" data-id="24" data-title="库存查询" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'库存查询'}">库存查询</a>
+                  <a data-url="" data-id="25" data-title="出入账统计" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'出入账统计'}">出入账统计</a>
+                  <a data-url="" data-id="26" data-title="其它入库明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'其它入库明细表'}">其它入库明细表</a>
+                  <a data-url="" data-id="27" data-title="其它出库明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'其它出库明细表'}">其它出库明细表</a>
+                  <a data-url="" data-id="28" data-title="拨转单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'拨转单明细表'}">拨转单明细表</a>
+                  <a data-url="" data-id="29" data-title="盘亏单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'盘亏单明细表'}">盘亏单明细表</a>
+                  <a data-url="" data-id="30" data-title="盘盈单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'盘盈单明细表'}">盘盈单明细表</a>
+                </div>
+                <div class="item">
+                  <span style="color:#000;">财务</span>
+                  <a data-url="" data-id="31" data-title="应付账单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'应付账单明细表'}">应付账单明细表</a>
+                  <a data-url="" data-id="32" data-title="付款账单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'付款账单明细表'}">付款账单明细表</a>
+                  <a data-url="" data-id="33" data-title="应收账单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'应收账单明细表'}">应收账单明细表</a>
+                  <a data-url="" data-id="34" data-title="收款单明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'收款单明细表'}">收款单明细表</a>
+                  <a data-url="" data-id="35" data-title="预收款查询" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'预收款查询'}">预收款查询</a>
+                  <a data-url="" data-id="36" data-title="预付款查询" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'预付款查询'}">预付款查询</a>
+                  <a data-url="" data-id="37" data-title="资金余额汇总表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'资金余额汇总表'}">资金余额汇总表</a>
+                  <a data-url="" data-id="38" data-title="资金余额明细表" href="javascript:;" data-options="{url:'./src/sidewards/form/purchasedetailform.html',title:'资金余额明细表'}">资金余额明细表</a>
+                </div>
+              </div>
+            </dd>
+            
+
           </dl>
         </li>
 

@@ -7,7 +7,7 @@
     
     <title>Document</title>
     <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../css/salesinvoice.css">
+    <link rel="stylesheet" href="../../../css/purchasedetailform.css">
     <link rel="stylesheet" href="../../../public/font/iconfont.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
         <div class="select-left">
             <div class="select-item">
                 <div class="select-item-text">
-                    客户名称
+                    供应商名称
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
@@ -47,21 +47,31 @@
 
             <div class="select-item">
                 <div class="select-item-text">
-                    关键词
+                    材料代号
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
 
+
             <div class="select-item">
                 <div class="select-item-text">
-                    客户单号
+                    物料名称
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
 
+
             <div class="select-item">
                 <div class="select-item-text">
-                    部门
+                    关键字
+                </div>
+                <input type="text" class="layui-input select-item-input">
+            </div>
+    
+
+            <div class="select-item">
+                <div class="select-item-text">
+                    关闭状态
                 </div>
                 <select name="" id="" class="select-item-select2">
                     <option value=""></option>
@@ -71,18 +81,7 @@
                 </select>
             </div>
 
-            <div class="select-item">
-                <div class="select-item-text">
-                    制表人
-                </div>
-                <select name="" id="" class="select-item-select2">
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-
-                </select>
-            </div>
-
+            
         </div>
 
         <div class="select-right">
@@ -99,13 +98,13 @@
     <!-- 表单 -->
     <div class="table">
         <div class="table-hand">
-            <div class="tab">
+            <!-- <div class="tab">
                 <div class="tab-item tab-item-this">全部</div>
                 <div class="tab-item">未批</div>
                 <div class="tab-item">已批</div>
                 <div class="tab-item">退回</div>
                 <div class="tab-item tab-item-right">作废</div>
-            </div>
+            </div> -->
             <div class="hand">
                 <div class="hand-item">
                     <!-- <span class="iconfont layui-icon-add-1"></span> -->
@@ -196,7 +195,7 @@
     </div>
 </body>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/salesinvoice.js" charset="utf-8"></script>
+<script src="../../../js/purchasedetailform.js" charset="utf-8"></script>
 <script>
     layui.use(['table','laypage','laydate'], function(){
       var table = layui.table;

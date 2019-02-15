@@ -7,7 +7,7 @@
     
     <title>Document</title>
     <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../css/salesinvoice.css">
+    <link rel="stylesheet" href="../../../css/salesreturnform.css">
     <link rel="stylesheet" href="../../../public/font/iconfont.css">
 </head>
 <body>
@@ -45,44 +45,31 @@
                 </select>
             </div>
 
+
+
             <div class="select-item">
                 <div class="select-item-text">
-                    关键词
+                        产品代号
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
 
             <div class="select-item">
                 <div class="select-item-text">
-                    客户单号
+                        物料名称
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
 
             <div class="select-item">
                 <div class="select-item-text">
-                    部门
+                        关键词
                 </div>
-                <select name="" id="" class="select-item-select2">
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-
-                </select>
+                <input type="text" class="layui-input select-item-input">
             </div>
-
-            <div class="select-item">
-                <div class="select-item-text">
-                    制表人
-                </div>
-                <select name="" id="" class="select-item-select2">
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-
-                </select>
-            </div>
-
+            
+           
+           
         </div>
 
         <div class="select-right">
@@ -99,34 +86,12 @@
     <!-- 表单 -->
     <div class="table">
         <div class="table-hand">
-            <div class="tab">
-                <div class="tab-item tab-item-this">全部</div>
-                <div class="tab-item">未批</div>
-                <div class="tab-item">已批</div>
-                <div class="tab-item">退回</div>
-                <div class="tab-item tab-item-right">作废</div>
-            </div>
+           
             <div class="hand">
-                <div class="hand-item">
-                    <!-- <span class="iconfont layui-icon-add-1"></span> -->
-                    <i class="layui-icon layui-icon-add-1"></i> 
-                    新增 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-delete"></i> 
-                    删除 
-                </div>
+                
                 <div class="hand-item">
                     <i class="layui-icon layui-icon-refresh"></i> 
                     刷新 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-edit"></i> 
-                    审批 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-edit"></i> 
-                    反审批 
                 </div>
                 <div class="hand-item">
                     <i class="layui-icon layui-icon-form"></i> 
@@ -134,7 +99,15 @@
                 </div>
                 <div class="hand-item">
                     <i class="layui-icon layui-icon-form"></i> 
+                    打印全部
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-form"></i> 
                     打印设置 
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-share"></i> 
+                    导出
                 </div>
             </div>
         </div>
@@ -196,7 +169,7 @@
     </div>
 </body>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/salesinvoice.js" charset="utf-8"></script>
+<script src="../../../js/salesreturnform.js" charset="utf-8"></script>
 <script>
     layui.use(['table','laypage','laydate'], function(){
       var table = layui.table;

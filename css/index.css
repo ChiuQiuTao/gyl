@@ -171,3 +171,16 @@ iframe{
 .layui-table thead tr{
     background-color: #fff !important;
 }
+
+.form-dialog{
+    display: flex;
+}
+.lt,.cr,.rt{
+    display: flex;
+    flex-direction: column;
+}
+.form-dialog span{
+    color: #000;
+    margin-left:20px; 
+    font-weight: bold;
+}
