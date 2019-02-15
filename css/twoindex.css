@@ -54,6 +54,11 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    position: fixed !important;
+    top: 60px;
+    left: 0;
+    width: 180px !important;
+    z-index: 22;
 }
 
 .two-in-menu-one>label {
@@ -66,14 +71,14 @@
 }
 
 .layui-nav-item>a>i {
-    padding: 0 5px;
+    padding: 0 5px 0 0;
 }
 
 .two-in-menu-bottom {
     height: 40px;
     width: 180px;
     position: fixed;
-    bottom: 10px;
+    bottom: 0px;
     left: 0;
     background-color: #009688;
     color: #f2f2f2;
