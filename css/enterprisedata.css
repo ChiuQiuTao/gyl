@@ -1,0 +1,186 @@
+.select{
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.select-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 255px;
+}
+.select-item-text{
+    font-size: 14px;
+    width: 95px;
+    text-align: center;
+    margin-right: 5px;
+}
+.select-item-input{
+    width: 150px;
+    height: 25px;
+}
+.select-item-select{
+    width: 100px;
+    height: 25px;
+    margin-left: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.select-item-select2{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.select-left{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.select-right{
+    display: flex;
+    align-items: center;
+}
+.select-btn{
+    width: 80px;
+    height: 25px;
+    background-color: #e42a2f;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+.select-textarea{
+    width: 960px;
+    
+}
+.line{
+    width: 20px;
+    height: 2px;
+    background-color: #c9c9c9;
+    margin: 0 2px;
+}
+.table{
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    margin-top: 10px;
+}
+.table-hand{
+    display: flex;
+    align-items: center;
+}
+.tab{
+    display: flex;
+    align-items: center;
+}
+.tab-item{
+    width: 70px;
+    height: 25px;
+    border-left:1px solid #c9c9c9; 
+    border-top:1px solid #c9c9c9; 
+    border-bottom:1px solid #c9c9c9; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.tab-item-right{
+    border-right:1px solid #c9c9c9; 
+
+}
+.tab-item-this{
+    background-color: #2F4056;
+    color: #fff;
+}
+.hand{
+    display: flex;
+    align-items: center;
+}
+.hand-item{
+    padding: 0 5px;
+    padding-right: 7px;
+    height: 25px;
+    border-radius: 13px;
+    border:1px solid #2F4056;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    font-size: 13px;
+    cursor: pointer;
+}
+.page{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+}
+.layui-form-item .layui-form-checkbox[lay-skin=primary]{
+    margin-top: 0;
+}
+.layui-form-pane .layui-form-checkbox{
+    margin:0;
+    margin-left: 6px;
+}
+.switch{
+    margin-top: 20px;
+}
+.switch-nav{
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+}
+.switch-nav .item{
+    border: 4px solid #fff;
+    padding: 4px;
+    cursor: pointer;
+}
+.switch-nav .item-this{
+    border-bottom: 4px solid #000;
+}
+.switch-content{
+    border: 1px solid #c9c9c9;
+    display: flex;
+    flex-wrap: wrap;
+}
+.upload-img{
+    width: 150px;
+    height: 100px;
+}
+.upload-img-code{
+    width: 150px;
+    height: 150px;
+}
+.uploadimg-txt{
+    text-align: center;
+}
+.switch-content{
+    display: none;
+    padding: 15px 0;
+}
+.switch-content-this{
+    display: flex;
+}
+.switch-content button{
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+}
+.layui-upload{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.switch-content-title{
+    width: 100%;
+    margin-left: 24px;
+    margin-bottom: 14px;
+}
+.link{
+    width: 100%;
+    padding-left: 24px;
+}
