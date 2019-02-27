@@ -42,7 +42,7 @@ var menudata = [{
         title: "风控管理",
         child: [{
             url: "../vertical/Ccontrol/control.html",
-            title: "采购管理"
+            title: "风控管理中心"
         }]
     },
     {

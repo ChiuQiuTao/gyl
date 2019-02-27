@@ -1,0 +1,76 @@
+body {
+    background-color: #ffffff;
+}
+
+a {
+    list-style: none;
+}
+
+li {
+    list-style: none;
+}
+
+.bgfff {
+    background-color: #ffffff;
+}
+
+.bgred {
+    background-color: #009688;
+    width: 13px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.process-editor-lis>table {}
+
+.table-zhong {
+    text-align: center;
+    cursor: pointer;
+}
+
+.table-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table-text div>a {
+    display: block;
+    width: 20px;
+    height: 17px;
+    margin: 0 auto;
+}
+
+.table-text>div:first-child>a,
+.table-text>div:last-child>a {
+    display: flex;
+    height: 22px;
+    align-items: center;
+}
+
+.table-zhong>.table-text div>a>i {
+    display: none;
+}
+
+.table-tex-zhong {
+    display: block;
+    width: 120px !important;
+    height: 30px !important;
+    border: 1px solid #c2c2c2;
+    line-height: 30px;
+    text-align: center;
+}
+
+table>tbody>tr>td>p {
+    width: 30px;
+    height: 30px;
+}
+
+.lzhong {
+    width: 30px;
+}
+
+.lzhong>p>i {
+    text-align: center;
+    font-size: 30px;
+}

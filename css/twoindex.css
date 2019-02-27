@@ -1,5 +1,6 @@
 .two-in-logo {
     font-size: 22px !important;
+    width: 180px !important;
 }
 
 .two-in-title {
@@ -90,4 +91,5 @@
 .two-in-con {
     left: 180px !important;
     bottom: 10px !important;
+    background-color: #f2f2f2;
 }
