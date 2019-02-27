@@ -7,7 +7,7 @@
     
     <title>Document</title>
     <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../css/purchasechange.css">
+    <link rel="stylesheet" href="../../../css/purchaseoverdueform.css">
     <link rel="stylesheet" href="../../../public/font/iconfont.css">
 </head>
 <body>
@@ -16,33 +16,16 @@
         <div class="select-left">
             <div class="select-item">
                 <div class="select-item-text">
-                    供应商名称
+                    单据代号
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
 
             <div class="select-item">
                 <div class="select-item-text">
-                    单号
+                    单据名称
                 </div>
                 <input type="text" class="layui-input select-item-input">
-            </div>
-
-
-            <div class="select-item">
-                <div class="select-item-text">
-                    日期
-                </div>
-                <input type="text" class="layui-input select-item-input" id="date1">
-                <div class="line"></div>
-                <input type="text" class="layui-input select-item-input" id="date2">
-
-                <select name="" id="" class="select-item-select">
-                    <option value="">期间</option>
-                    <option value="">期间</option>
-                    <option value="">期间</option>
-
-                </select>
             </div>
 
             <div class="select-item">
@@ -51,29 +34,7 @@
                 </div>
                 <input type="text" class="layui-input select-item-input">
             </div>
-
-            <div class="select-item">
-                <div class="select-item-text">
-                    部门
-                </div>
-                <select name="" id="" class="select-item-select2">
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select>
-            </div>
-
-            <div class="select-item">
-                <div class="select-item-text">
-                    制表人
-                </div>
-                <select name="" id="" class="select-item-select2">
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-
-                </select>
-            </div>
+            
 
            
         </div>
@@ -94,31 +55,14 @@
         <div class="table-hand">
             <div class="tab">
                 <div class="tab-item tab-item-this">全部</div>
-                <div class="tab-item">未批</div>
-                <div class="tab-item">已批</div>
-                <div class="tab-item">退回</div>
-                <div class="tab-item tab-item-right">作废</div>
+                <div class="tab-item">单据</div>
+                <div class="tab-item tab-item-right">基础资料</div>
             </div>
             <div class="hand">
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-add-1"></i> 
-                    新增 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-delete"></i> 
-                    删除 
-                </div>
+                
                 <div class="hand-item">
                     <i class="layui-icon layui-icon-refresh"></i> 
                     刷新 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-edit"></i> 
-                    审批 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-edit"></i> 
-                    反审批 
                 </div>
                 <div class="hand-item">
                     <i class="layui-icon layui-icon-form"></i> 
@@ -126,7 +70,15 @@
                 </div>
                 <div class="hand-item">
                     <i class="layui-icon layui-icon-form"></i> 
+                    打印全部
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-form"></i> 
                     打印设置 
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-share"></i> 
+                    导出
                 </div>
             </div>
         </div>
@@ -188,7 +140,7 @@
     </div>
 </body>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/purchasechange.js" charset="utf-8"></script>
+<script src="../../../js/documentsset.js" charset="utf-8"></script>
 <script>
     layui.use(['table','laypage','laydate'], function(){
       var table = layui.table;
