@@ -1,0 +1,206 @@
+.mess-com {
+    width: 100%;
+}
+
+.mess-com>div {
+    padding: 3px 0 10px 0;
+}
+
+.kongbai {
+    background-color: #f3f3f3;
+    height: 7px;
+}
+
+.message-top {
+    width: 100%;
+}
+
+.mess-refresh {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.mess-refresh>span {
+    display: inline-block;
+    height: 20px;
+    width: 5px;
+}
+
+.mess-refresh>label {
+    color: #009688;
+    font-size: 16px;
+    margin: 0 5px 0px 10px;
+    line-height: 20px;
+}
+
+.mess-refresh>i {
+    color: #009688;
+    cursor: pointer;
+}
+
+.mess-schedule {
+    width: 100%;
+}
+
+.mess-schedule-sole {
+    display: flex;
+    align-items: center;
+}
+
+.mess-schedule-sole-tex {
+    width: 100px;
+    height: 33px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+.mess-schedule-sole>ul,
+.mess-purchase-caigou>ul {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    border: 1px solid #c2c2c2;
+}
+
+.mess-schedule-sole>ul>li,
+.mess-purchase-caigou>ul>li {
+    width: 110px;
+    height: 30px;
+    color: #393D49;
+    text-align: start;
+    line-height: 30px;
+    font-size: 12px;
+}
+
+.mess-schedule-sole>ul>li>a {
+    background-color: #009688;
+}
+
+.mess-purchase-caigou>ul>li>a {
+    background-color: #2F4056;
+}
+
+.mess-schedule-sole>ul>li>a,
+.mess-purchase-caigou>ul>li>a {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+    margin-top: 2.5px;
+    color: #fff;
+    float: right;
+}
+
+.mess-purchase-caigou>ul>li:last-child,
+.mess-schedule-sole>ul>li:last-child {
+    width: 100px;
+}
+
+.mess-purchase-caigou>ul>li>i,
+.mess-schedule-sole>ul>li>i {
+    font-size: 35px;
+    color: #c2c2c2;
+    float: right;
+    width: 25px;
+}
+
+.mess-purchase {
+    margin-top: 5px;
+}
+
+.mess-purchase-caigou {
+    display: flex;
+    align-items: center;
+}
+
+.mess-classify {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.mess-classify>div:first-child {
+    margin-left: 15px;
+}
+
+.mess-points {
+    width: 150px;
+    height: 60px;
+    border-radius: 7px;
+    margin-right: 20px;
+}
+
+.mess-points>i {
+    font-size: 50px;
+    color: #f2f2f2;
+}
+
+.mess-points-r {
+    display: inline-block;
+}
+
+.mess-points-r>p {
+    font-weight: 600;
+    font-size: 15px;
+    color: #fff;
+}
+
+.mess-data {
+    padding: 0 15px;
+}
+
+.mess-data>.layui-tab>ul>li>span {
+    border: 1px solid #009688;
+    padding: 0 2px;
+    margin-left: 3px;
+    color: #009688;
+}
+
+.mess-data>.layui-tab>ul>li:last-child {
+    color: #009688;
+    padding: 0;
+}
+
+.mess-data>.layui-tab>ul>li:last-child::after {
+    border-bottom: 0;
+}
+
+.mess-data-more {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    font-size: 12px;
+    padding: 4px;
+    cursor: pointer;
+    color: #2F4056;
+}
+
+.mess-check {
+    display: flex;
+    align-items: center;
+}
+
+.mess-time {
+    width: auto;
+}
+
+.mess-time-c {
+    display: flex;
+    align-items: center;
+}
+
+.mess-time-c>label {
+    color: #c2c2c2;
+}
+
+.mess-input {
+    width: 100px;
+    height: 30px;
+    margin-top: 4px;
+}
