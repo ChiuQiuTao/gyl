@@ -249,6 +249,10 @@ var menudata = [{
             {
                 url: "../vertical/Jbasis/inventory.html",
                 title: "仓库信息"
+            },
+            {
+                url: "../vertical/Jbasis/material.html",
+                title: "原辅料信息"
             }
         ]
     },
