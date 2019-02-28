@@ -73,19 +73,25 @@
                             <table id="alldemo" lay-filter="controldata" style="height:100%;"></table>
                         </div>
 
+                        <div class="con-operation">
+                            <button class="layui-btn layui-bg-green layui-btn-sm">同步</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm">刷新</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm">字段设置</button>
+                        </div>
                     </div>
-                    <div class="layui-tab-item">2</div>
-                    <div class="layui-tab-item">3</div>
                 </div>
+                <div class="layui-tab-item">2</div>
+                <div class="layui-tab-item">3</div>
             </div>
         </div>
+    </div>
 </body>
 <script src="../../../public/dist/layui.js"></script>
 
 </html>
 
 <script>
-    layui.use(['element', 'layedit', 'form', "table"], function() {
+    layui.use(['element', 'form', "table"], function() {
         var $ = layui.jquery,
             form = layui.form,
             table = layui.table,
