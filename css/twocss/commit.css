@@ -48,10 +48,16 @@
     border: 1px solid #bbbbbb;
     border-top: 1px solid #fff;
 }
-.select-hand-left,.select-hand-right{
+.select-hand-right{
+    display: flex;
+    width: 250px;
+}
+.select-hand-left{
     display: flex;
     padding-right: 20px;
+    flex-wrap: wrap;
 }
+
 .select-hand-right button{
     margin: 10px 0;
 
