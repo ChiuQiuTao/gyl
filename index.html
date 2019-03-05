@@ -10,6 +10,34 @@
 
 </head>
 <body>
+    <div class="login">
+        <div class="logo">
+          <div class="foreign">JLFZFDA</div> 
+          <div class="china">
+            <div class="top">吉林(中国-新加坡)食品区食品药品监督管理局</div>
+            <div class="bottom">供应链协同管理平台</div>
+          </div> 
+
+        </div> 
+        <div class="login-hand">
+          <div class="state">
+            认证状态（未录入）
+          </div>
+          <div class="people">
+              <i class="layui-icon layui-icon-username" style="font-size: 24px;cursor: pointer;"></i> 
+              <div class="">
+                <i class="layui-icon layui-icon-down" style="font-size: 12px;margin: 10px;cursor: pointer;" id='more'></i>  
+              </div>
+              黄奕(1053395537)
+          </div>
+          <div class="exit">
+            退出登录
+          </div>
+        </div>
+    </div>
+    <div class="logininfo">
+      上次登录时间:2018-01-01
+    </div>
     <ul class="layui-nav layui-bg-cyan" lay-filter="header_nav">
         <li class="layui-nav-item layui-this"><a href="">首页</a></li>
         <li class="layui-nav-item">
@@ -271,7 +299,6 @@
 
 
             <div class="order">
-
               <div class="order-title">
                 <div class="order-title-line"></div>
                 <div class="order-title-txt">待办分类</div>
@@ -404,7 +431,32 @@
 
 
 </body>
+<script>
+  console.log(getExploreName());
+  function getExploreName(){
+      var userAgent = navigator.userAgent;
+      if(userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1){
+        return 'Opera';
+      }else if(userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1){
+        window.location.href="./src/upload.html";
+        return 'IE';
+      }else if(userAgent.indexOf("Edge") > -1){
+        return 'Edge';
+      }else if(userAgent.indexOf("Firefox") > -1){
+        return 'Firefox';
+      }else if(userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1){
+        return 'Safari';
+      }else if(userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1){
+        return 'Chrome';
+      }else if(!!window.ActiveXObject || "ActiveXObject" in window){
+        return 'IE>=11';
+      }else{
+        return 'Unkonwn';
+      }
+  }
+</script>
 <script src="./public/dist/layui.js" charset="utf-8"></script>
+<script src="./js/index.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     getClientHeight();
