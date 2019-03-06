@@ -93,3 +93,25 @@ body {
 .process-editor-one {
     display: none;
 }
+
+.editor-follow {
+    width: 120px;
+    border: 1px solid #e2e2e2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 9;
+    display: none;
+}
+
+.editor-follow>p {
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.editor-follow>p:hover {
+    cursor: pointer;
+    background-color: #009688;
+}
