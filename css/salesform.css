@@ -1,0 +1,150 @@
+
+.container{
+    border: 1px solid #c9c9c9;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #c9c9c9;
+
+}
+.nav{
+    display: flex;
+    align-items: center;
+}
+.nav-item{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin:0 20px;
+    border: 3px solid #fff;
+}
+.nav-item-this{
+    color: #5FB878;
+    border-bottom: 3px solid #5FB878;
+}
+.select-item{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.select-item-text{
+    font-size: 14px;
+    width: 70px;
+    text-align: right;
+    margin-right: 5px;
+}
+.select-item-input{
+    width: 150px;
+    height: 25px;
+}
+.select-item-select{
+    width: 100px;
+    height: 25px;
+    margin-left: 10px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.line{
+    width: 20px;
+    height: 2px;
+    background-color: #c9c9c9;
+    margin: 0 2px;
+}
+.date{
+    margin-right: 20px;
+}
+.money{
+    display: flex;
+    align-items: center;
+    height: 60px;
+    border-bottom: 1px solid #c9c9c9;
+
+}
+.money-item{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.money-item-left{
+    display: flex;
+    align-items: center;
+}
+.money-item-txt{
+    font-size: 16px;
+    margin-left: 20px;
+}
+.money-item-number{
+    font-size: 32px;
+    color: #5FB878;
+    margin-left: 15px;
+}
+.money-item-right{
+    margin-right: 20px;
+}
+.money-item-r{
+    border-right: 1px solid #c9c9c9;
+}
+.select{
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+.select>.item{
+    width: 200px;
+}
+.select-item-select{
+    width: 150px;
+    height: 25px;
+    margin-left: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+}
+.type{
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #e6e6e6;
+}
+.type-item{
+    height: 25px;
+    padding: 0 10px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.type-item-this{
+    color: #fff;
+    background-color: #2F4056;
+}
+.tip{
+    width: 100px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    border: 1px solid #e6e6e6;
+    float: right;
+    margin-right: 20px;
+}
+.data{
+    padding: 20px;
+    height: 500px;
+}
+.selectbtn{
+    background-color: #2F4056;
+    padding: 0 10px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+}

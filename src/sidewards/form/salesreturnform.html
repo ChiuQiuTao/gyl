@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../css/salesreturnform.css">
+    <link rel="stylesheet" href="../../../public/font/iconfont.css">
+</head>
+<body>
+    <!-- 查询 -->
+    <div class="select">
+        <div class="select-left">
+            <div class="select-item">
+                <div class="select-item-text">
+                    客户名称
+                </div>
+                <input type="text" class="layui-input select-item-input">
+            </div>
+
+            <div class="select-item">
+                <div class="select-item-text">
+                    单号
+                </div>
+                <input type="text" class="layui-input select-item-input">
+            </div>
+
+
+            <div class="select-item">
+                <div class="select-item-text">
+                    日期
+                </div>
+                <input type="text" class="layui-input select-item-input" id="date1">
+                <div class="line"></div>
+                <input type="text" class="layui-input select-item-input" id="date2">
+
+                <select name="" id="" class="select-item-select">
+                    <option value="">期间</option>
+                    <option value="">期间</option>
+                    <option value="">期间</option>
+
+                </select>
+            </div>
+
+
+
+            <div class="select-item">
+                <div class="select-item-text">
+                        产品代号
+                </div>
+                <input type="text" class="layui-input select-item-input">
+            </div>
+
+            <div class="select-item">
+                <div class="select-item-text">
+                        物料名称
+                </div>
+                <input type="text" class="layui-input select-item-input">
+            </div>
+
+            <div class="select-item">
+                <div class="select-item-text">
+                        关键词
+                </div>
+                <input type="text" class="layui-input select-item-input">
+            </div>
+            
+           
+           
+        </div>
+
+        <div class="select-right">
+            <div class="select-btn">
+                查询
+            </div>
+            <div class="select-btn">
+                清除
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 表单 -->
+    <div class="table">
+        <div class="table-hand">
+           
+            <div class="hand">
+                
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-refresh"></i> 
+                    刷新 
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-form"></i> 
+                    打印 
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-form"></i> 
+                    打印全部
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-form"></i> 
+                    打印设置 
+                </div>
+                <div class="hand-item">
+                    <i class="layui-icon layui-icon-share"></i> 
+                    导出
+                </div>
+            </div>
+        </div>
+
+        <div class="table-content">
+            <!-- <table class="layui-hide" id="test"></table> -->
+
+
+            <table class="layui-table">
+                <colgroup>
+                    <!-- <col width="150">
+                    <col width="200"> -->
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                    <th>序号</th>
+                    <th>操作</th>
+                    <th>采购单号</th>
+                    <th>采购日期</th>
+                    <th>付款方式</th>
+                    <th>单据类型名称</th>
+                    <th>付款状态</th>
+                    <th>供应商名称</th>
+                    <th>采购员</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20152205120315</td>
+                        <td>删除</td>
+                        <td>20152205120315</td>
+                        <td>2015-10-10</td>
+                        <td>支付宝</td>
+                        <td>订单</td>
+                        <td>已支付</td>
+                        <td>雅诗兰黛</td>
+                        <td>阿伟</td>
+                    </tr>
+                    <tr>
+                        <td>20152205120315</td>
+                        <td>删除</td>
+                        <td>20152205120315</td>
+                        <td>2015-10-10</td>
+                        <td>支付宝</td>
+                        <td>订单</td>
+                        <td>已支付</td>
+                        <td>雅诗兰黛</td>
+                        <td>阿伟</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class='page'>
+            <div id="page"></div>
+        </div>
+    </div>
+</body>
+<script src="../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../js/salesreturnform.js" charset="utf-8"></script>
+<script>
+    layui.use(['table','laypage','laydate'], function(){
+      var table = layui.table;
+      var laydate = layui.laydate;
+      var laypage = layui.laypage
+        ,layer = layui.layer;
+      //执行一个laydate实例
+      laydate.render({
+        elem: '#date1' //指定元素
+      });
+      laydate.render({
+        elem: '#date2' //指定元素
+      });
+
+      laypage.render({
+        elem: 'page'
+        ,count: 100 //数据总数
+      });
+
+      table.render({
+        elem: '#test'
+        ,url:'/demo/table/user/'
+        ,cols: [[
+        {type:'checkbox'}
+        ,{field:'id', title: '序号'}
+        ,{field:'username', title: '操作'}
+        ,{field:'sex', title: '	采购单号'}
+        ,{field:'city', title: '采购日期'}
+        ,{field:'sign', title: '付款方式'}
+        ,{field:'experience', title: '单据类型名称'}
+        ,{field:'score', title: '付款状态'}
+        ,{field:'classify', title: '供应商名称	'}
+        ,{field:'wealth', title: '采购员'}
+        ]]
+        ,page: true
+      });
+    });
+
+
+    // layui.use(['laypage', 'layer'], function(){
+    //     var laypage = layui.laypage
+    //     ,layer = layui.layer;
+        
+    //     //总页数低于页码总数
+    //     laypage.render({
+    //         elem: 'page'
+    //         ,count: 50 //数据总数
+    //     });
+    // });
+</script>
+</html>

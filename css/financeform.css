@@ -1,0 +1,116 @@
+.head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.head>div{
+    width: 300px;
+}
+.select{
+    width: 150px;
+    height: 25px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    margin-left: 10px;
+}
+.head-cr{
+    text-align: center;
+}
+.head-rt{
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+.container{
+    margin: 0 20px;
+    margin-top: 10px;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+    border-left: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+}
+.container-sec{
+    display: flex;
+}
+.item{
+    width: 50%;
+    height: 300px;
+    border-right: 1px solid #e9e9e9;
+}
+.item-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e9e9e9;
+    height: 40px;
+
+}
+.item-txt{
+    margin-left: 15px;
+}
+.item-icon{
+    margin-right: 15px;
+}
+.item-content{
+ 
+}
+.item-content-rt{
+    margin-right: 10px;
+}
+.item-content-cr{
+    margin: 0 15px;
+}
+.item-content-lt{
+    margin-left: 20px;
+    margin-top: 5px;
+    position: absolute;
+}
+.tip{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.tip-box1{
+    background-color: #eb7c3b;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.tip-box2{
+    background-color: #a5a5a5;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.tip-box3{
+    background-color: #fdc02d;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.tip-box4{
+    background-color: #4674c2;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.tip-box5{
+    background-color: #50c6a8;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
+.tip-box6{
+    background-color: #72ac4c;
+    width: 20px;
+    height: 14px;
+    border-radius: 3px;
+    margin-left: 4px;
+}
