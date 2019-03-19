@@ -44,11 +44,11 @@
             </div>
         </div>
         <!-- 上/头部 -->
-        <div class="layui-side layui-bg-cyan two-in-menu">
+        <div class="layui-side layui-bg-cyan two-in-menu" id='menu'>
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree layui-bg-cyan two-in-menu" id="twoinmenu" lay-filter="navtest">
-                    <li class="layui-nav-item two-in-menu-one">
+                    <li class="layui-nav-item two-in-menu-one" id='tzsidewards'>
                         <label style="cursor: pointer;">切换菜单模式</label>
                         <i class="iconfont icon-shuangjiantouyou"></i>
                     </li>
@@ -68,7 +68,7 @@
                         </dl>
                     </li> -->
                 </ul>
-                <div class="two-in-menu-bottom ">
+                <div class="two-in-menu-bottom" id='hiddenmenu'>
                     隐藏菜单栏
                 </div>
             </div>
@@ -78,6 +78,9 @@
             <!-- 内容主体区域 -->
             <div style="padding:10px;" class="two-in-coms">
                 <iframe scrolling="auto" src="../vertical/Amywork/message.html" frameborder="0" id="contentsss" style="width:100%;height:100%;"></iframe>
+            </div>
+            <div class="showmenu">
+                <i class="layui-icon layui-icon-next"></i> 
             </div>
         </div>
         <!-- 底部固定区域 -->
@@ -138,6 +141,22 @@
             });
             element.render('nav');
         });
+    </script>
+
+    <script>
+        document.querySelector('#tzsidewards').addEventListener('click',function(){
+            window.location.href="../../index.html";
+        })
+        document.querySelector('#hiddenmenu').addEventListener('click',function(){
+            document.querySelector('.layui-body').classList.add('two-all');
+            document.querySelector('.showmenu').style.display = 'flex';
+            // document.querySelector('#hiddenmenu').style.backgroundColor = '#fff';
+        })
+        document.querySelector('.showmenu').addEventListener('click',function(){
+            document.querySelector('.layui-body').classList.remove('two-all');
+            document.querySelector('.showmenu').style.display = 'none';
+            // document.querySelector('#hiddenmenu').style.backgroundColor = '#009688';
+        })
     </script>
 </body>
 

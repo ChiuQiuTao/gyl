@@ -235,3 +235,16 @@ iframe{
     margin-left:20px; 
     font-weight: bold;
 }
+.tzvertical{
+    position: fixed;
+    left: 0;
+    top: 30%;
+    width: 27px;
+    height: 120px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background-color: #2F4056;
+    color: #fff;
+    cursor: pointer;
+}
