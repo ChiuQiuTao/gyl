@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./public/dist/css/layui.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="./public/favicon.ico">
+    <script src="./js/common/jquery.min.js"></script>
+    <script src="./js/common/api.js"></script>
 </head>
 
 <body>
@@ -458,6 +460,7 @@
         }
     }
 </script>
+
 <script src="./public/dist/layui.js" charset="utf-8"></script>
 <script src="./js/index.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -531,8 +534,9 @@
     });
 </script>
 <script>
- document.querySelector('.tzvertical').addEventListener('click',function(){
-    window.location.href="./src/vertical/twoindex.html";
- })
+    document.querySelector('.tzvertical').addEventListener('click', function() {
+        window.location.href = "./src/vertical/twoindex.html";
+    })
 </script>
+
 </html>

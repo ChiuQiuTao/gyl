@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>登录</title>
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" href="../public/favicon.ico">
 </head>
 
 <body>
@@ -18,14 +19,16 @@
         <div class="dialog">
             <div class="title">供应链协同管理平台</div>
             <div class="input">
-                <input type="text" placeholder="请输入账号">
+                <input type="text" class="login-use" placeholder="请输入账号">
             </div>
             <div class="input">
-                <input type="password" placeholder="请输入密码">
+                <input type="password" class="login-pass" placeholder="请输入密码">
             </div>
             <div class="code">
-                <input type="text" placeholder="请输入验证码">
-                <img src="../img/code.jpg" alt="">
+                <input type="text" placeholder="请输入验证码" class="login-tex">
+                <div id="v_container">
+                    <canvas id="verifyCanvas" width="100" height="40" style="cursor: pointer;"></canvas>
+                </div>
             </div>
             <div class="password">
                 <div class="password-r">
@@ -33,7 +36,6 @@
                 </div>
                 <div class="password-f">
                     <a href="../src/forget.html">忘记密码</a>
-
                 </div>
 
             </div>
@@ -44,9 +46,65 @@
 </body>
 
 </html>
+<script type="text/javascript" src="../js/common/jquery.min.js"></script>
 <script src="../js/login.js"></script>
+<script src="../js/common/api.js"></script>
+<script src="../js/common/code.js"></script>
+<script src="../public/dist/layui.js"></script>
 <script>
-    document.querySelector('.login').addEventListener('click', function() {
-        window.location.href = "../index.html";
-    })
+    var verifyCode = new GVerify("v_container");
+    layui.use('layer', function() {
+        var $ = layui.jquery,
+            layer = layui.layer;
+
+
+        $(".login").click(function() {
+
+            if (verify($(".login-use"), "请输入用户名!")) {
+                if ($(".login-pass").val() == "") {
+                    alerts("请输入密码！")
+                } else {
+                    if ($(".login-tex").val() == "") {
+                        alerts("请输入验证码！");
+                    } else {
+                        var tex = verifyCode.options.code;
+                        if ($(".login-tex").val().toLowerCase() != tex.substring(0, 3).toLowerCase()) {
+                            alerts("请输入正确的验证码！");
+                            return
+                        }
+
+                        handleAjax('login', {
+                            username: $(".login-use").val(),
+                            password: $(".login-pass").val()
+                        }).done(function(resp) {
+                            console.log(resp)
+                            window.location.href = "../index.html";
+
+                        }).fail(function(err) {
+                            console.log(err)
+                            if (err.status == "400") {
+                                layer.msg('账号与密码不正确', {
+                                    icon: 5
+                                });
+                            }
+                        });
+                    }
+                }
+            }
+            return
+        })
+
+        /*验证*/
+        function verify(eles, tex) {
+            var str = eles.val().trim();
+            if (str.length == 0) {
+                alerts(tex)
+                eles.val("");
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    });
 </script>
