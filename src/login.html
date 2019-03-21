@@ -57,9 +57,22 @@
         var $ = layui.jquery,
             layer = layui.layer;
 
-
+        //点击登录
         $(".login").click(function() {
+            events();
+            return
+        })
 
+        /*键盘enter登录*/
+        $(document).keydown(function(event) {
+            if (event.keyCode == 13) {
+                events();
+            };
+            return;
+        });
+
+        /*事件*/
+        function events() {
             if (verify($(".login-use"), "请输入用户名!")) {
                 if ($(".login-pass").val() == "") {
                     alerts("请输入密码！")
@@ -91,8 +104,8 @@
                     }
                 }
             }
-            return
-        })
+        }
+
 
         /*验证*/
         function verify(eles, tex) {

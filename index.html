@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="./public/dist/css/layui.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="icon" href="./public/favicon.ico">
-    <script src="./js/common/jquery.min.js"></script>
-    <script src="./js/common/api.js"></script>
+
 </head>
 
 <body>
@@ -460,8 +459,11 @@
         }
     }
 </script>
-
 <script src="./public/dist/layui.js" charset="utf-8"></script>
+
+<script src="./js/common/jquery.min.js"></script>
+<script src="./js/common/api.js"></script>
+
 <script src="./js/index.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
@@ -480,7 +482,8 @@
     }
 
     layui.use('element', function() {
-        var self = this;
+        var $ = layui.jquery,
+            self = this;
         var $ = layui.$;
         var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
         var title = ''
@@ -490,8 +493,11 @@
         //监听导航点击
         element.on('nav(header_nav)', function(elem) {
             console.log(elem, 'header_nav');
-            title = elem.context.dataset.title;
-            id = elem.context.dataset.id;
+            console.log(elem[0].dataset.title)
+                // title = elem.context.dataset.title;
+            title = elem[0].dataset.title
+                // id = elem.context.dataset.id;
+            id = elem[0].dataset.id
             console.log(id, '121');
             var obj = eval('(' + elem[0].dataset.options + ')');
             console.log(obj.url);
