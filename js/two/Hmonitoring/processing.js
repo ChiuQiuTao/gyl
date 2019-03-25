@@ -5,9 +5,6 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         laydate = layui.laydate,
         util = layui.util;
 
-
-
-
     //时间
     laydate.render({
         elem: '#date1' //指定元素 
@@ -70,6 +67,8 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             }
         });
     }
+
+
 
 
 
