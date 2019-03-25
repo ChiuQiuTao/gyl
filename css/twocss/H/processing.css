@@ -1,0 +1,55 @@
+.basis-h {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #c9c9c9;
+    justify-content: space-around;
+}
+
+.basis-h li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 4px 10px;
+}
+
+.basis-h li label {
+    padding: 6px 10px;
+    width: 100px;
+}
+
+.basis-h li p {
+    width: 150px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+.empty-h {
+    background-color: #fff !important;
+}
+
+.mess-pronew {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.layui-laydate-main {
+    width: 250px !important;
+}
+
+.layui-form-selected dl {
+    width: 100px;
+}
+
+.jia-btns {
+    width: 40px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+}

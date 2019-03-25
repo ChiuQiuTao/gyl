@@ -31,8 +31,39 @@ function handleAjax(url, param, type) {
             setCookie('token', resp.jwtToken);
             return resp;
         }
+        //傻叉没有写状态的接口 （生产加工|查看）
+        if (resp.ordProcessingproducts) {
+            return resp;
+        }
 
         if (resp.code == 10000) {
+            return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
+        } else {
+
+            return jq.Deferred().reject(resp); // 返回一个失败状态的deferred对象，把错误代码作为默认参数传入之后fail()方法的回调
+        }
+    }, function(err) {
+        // 失败回调    
+        layer.load();
+        //此处演示关闭
+        setTimeout(function() {
+            layer.closeAll('loading');
+        }, 2000);
+        console.log(err); // 打印状态码
+    });
+}
+
+
+
+//没有状态码
+function noAjax(url, param, type) {
+    return ajax(url, param, type).then(function(resp) {
+        // 成功回调
+        if (typeof resp == 'string') {
+            resp = JSON.parse(resp)
+        }
+
+        if (resp) {
             return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
         } else {
 
