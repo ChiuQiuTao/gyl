@@ -6,6 +6,8 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         util = layui.util;
 
 
+
+
     //时间
     laydate.render({
         elem: '#date1' //指定元素 
@@ -82,13 +84,14 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         },
         toolbar: '#toolbarinter',
         done: function(res, curr, count) {
-            //如果是异步请求数据方式，res即为你接口返回的信息。
-            //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-            // console.log(res);
-            // //得到当前页码
-            // console.log(curr);
-            // //得到数据总量
-            // console.log(count);
+            console.log(res)
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                // console.log(res);
+                // //得到当前页码
+                // console.log(curr);
+                // //得到数据总量
+                // console.log(count);
         },
         request: {
             pageName: 'currentPage' //页码的参数名称，默认：page

@@ -1,4 +1,4 @@
-var base = "http://192.168.163.100:9191/";
+var base = "http://47.98.167.96:9191/";
 var jq = jQuery.noConflict();
 var sessions = getCookie('token');
 
@@ -44,6 +44,7 @@ function handleAjax(url, param, type) {
         }
     }, function(err) {
         // 失败回调    
+
         layer.load();
         //此处演示关闭
         setTimeout(function() {

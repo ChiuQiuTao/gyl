@@ -214,6 +214,7 @@
 
         //产品名称
         handleAjax('OrdProcessing/getProcessingName', {}, "GET").done(function(resp) {
+            console.log(resp)
             $.each(resp.list, function(index, item) {
                 $('.selectfilters').append(new Option(item.productName, item.productId)); // 下拉菜单里添加元素
             });
