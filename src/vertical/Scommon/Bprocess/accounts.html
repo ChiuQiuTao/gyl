@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>应收应付</title>
+    <link rel="stylesheet" href="../../../../public/thinking/jsmind.css">
+    <link rel="stylesheet" href="../../../../css/twocss/public.css">
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../css/twocss/aprocess.css">
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
+</head>
+
+</html>
+<div class="process-con">
+    <div class="process-l bgfff">
+        <div class="process-l-top">
+            <div class="process-l-top-l">
+                <div class="bgred"></div>
+                <p>sdfds</p>
+                <input type="text" class="layui-input">
+            </div>
+            <div class="process-l-top-r">
+                <button class="layui-btn  layui-btn-sm process-add">新增</button>
+                <button class="layui-btn layui-btn-sm  proeditor">编辑</button>
+            </div>
+        </div>
+
+        <div class="process-editor">
+            <ul>
+                <li class="process-editor-one">
+                    <a href="javascript:;"><i class="iconfont icon-tianjia" size="20"></i>增加流程</a>
+                </li>
+                <li id="jsmind_container" class="jsmind_container" style="height:90%;width:100%;display:block;">
+                    <div class="editor-follow">
+                        <p>标记项目</p>
+                        <p>删除项目</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="process-r bgfff">
+        <div class="process-r-li">
+            <a href="javascript:;" class="bgred"></a>
+            <p>流程图列表</p>
+        </div>
+        <ul>
+
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../../../../public/dist/layui.js"></script>
+<script src="../../../../public/thinking/jsmind.js"></script>
+<script src="../../../../public/thinking/jsmind.draggable.js"></script>
+
+</html>
+<script>
+    geteditor()
+
+    function geteditor() {
+        document.querySelector(".process-editor>ul").style.height = document.documentElement.clientHeight - 70 + "px";
+        addedi()
+    }
+
+    function addedi() {
+        layui.use('layer', function() {
+            var $ = layui.$,
+                layer = layui.layer,
+                namesli = null,
+                lisname = null;
+
+            //数据
+            var mind = {
+                "meta": {
+                    "name": "",
+                    "author": "",
+                    "version": "",
+                },
+                "format": "node_array",
+                "data": [{
+                        "id": "root",
+                        "isroot": true,
+                        "topic": "jsMind",
+                        "bg": true
+                    },
+
+                    {
+                        "id": "sub1",
+                        "parentid": "root",
+                        "topic": "sub1",
+                        // "background-color": "#0000ff",
+                        "bg": true
+                    }, {
+                        "id": "sub11",
+                        "parentid": "sub1",
+                        "topic": "sub11",
+                        "bg": true
+                    }, {
+                        "id": "sub12",
+                        "parentid": "sub1",
+                        "topic": "sub12",
+                        "bg": true
+                    }, {
+                        "id": "sub13",
+                        "parentid": "sub1",
+                        "topic": "sub13",
+                        "bg": true
+                    },
+
+                    {
+                        "id": "sub2",
+                        "parentid": "root",
+                        "topic": "sub2",
+                        "bg": true
+                    }, {
+                        "id": "sub21",
+                        "parentid": "sub2",
+                        "topic": "sub21",
+                        "bg": true
+                    }, {
+                        "id": "sub22",
+                        "parentid": "sub2",
+                        "topic": "sub22",
+                        // "foreground-color": "#33ff33" //文字颜色
+                        "bg": true
+                    },
+
+                    {
+                        "id": "sub3",
+                        "parentid": "root",
+                        "topic": "sub3",
+                        "bg": true
+                    },
+                ]
+            };
+            var options = {
+                container: 'jsmind_container',
+                editable: false,
+                theme: 'greensea'
+            }
+
+            var jm = jsMind.show(options, mind);
+
+
+            $(".process-add").click(function() {
+                var _this = $(this);
+                //新增
+                $('.process-l-top-l>p').css("display", "none");
+                if ($(this).text() == "新增") {
+                    layer.open({
+                        title: "输入流程图名称",
+                        offset: ['100px'],
+                        Number: 1,
+                        content: '<input type="text" class="layui-input newlis">',
+                        btn: ['确定'],
+                        btnAlign: 'c',
+                        yes: function(index) {
+                            if ($(".newlis").val() == "") {
+                                alert("请输入流程图名称！");
+                                return;
+                            }
+                            $(".process-l-top-l>input").css("display", "block");
+                            $(".process-editor-one").css("display", "block");
+                            $(".process-l-top-l>input").val($(".newlis").val());
+                            _this.text("取消新增");
+                            $(".proeditor").text("保存");
+                            //列表
+                            lisname = '<li>' + $(".newlis").val() + '</li>'
+                            $(".process-r>ul").append(lisname);
+                            layer.close(layer.index);
+                            return;
+                        }
+                    });
+                    return;
+                }
+                //取消新增
+                if ($(this).text() == "取消新增") {
+                    var r = confirm("你确定放弃当前修改，取消新增？")
+                    if (r == true) {
+
+                        _this.text("新增");
+                        $(".proeditor").text("编辑");
+                        console.log(lisname)
+                        $(".process-r>ul>li:last-child").remove();
+                    }
+                    return;
+                }
+                //删除
+                if ($(this).text() == "删除") {
+                    var r = confirm('你确定要删除当前流程图？');
+                    if ($(".process-r>ul>li").length > 0) {
+                        var r = confirm('你确定要删除当前流程图[' + namesli + ']？')
+                    }
+                    if (r == true) {
+
+                        _this.text("新增");
+                        $(".proeditor").text("编辑");
+                    }
+                    return;
+                }
+                return;
+            })
+
+            //编辑||保存
+            $(".proeditor").click(function() {
+                var _thiss = $(this);
+
+                $('.process-l-top-l>p').css("display", "none");
+                if ($(this).text() == "编辑") {
+                    $(".process-l-top-l>input").css("display", "block");
+                    $(".process-editor-one").css("display", "block");
+                    _thiss.text("保存");
+                    $(".process-add").text("删除");
+
+                    jm.enable_edit(); //可编辑
+                    gaibain(); //可改变背景
+                    return;
+                }
+                if ($(this).text() == "保存") {
+                    jm.disable_edit(); //不可编辑
+                    if ($(".process-l-top-l>input").val() == "") {
+                        alert("流程图名称不能为空！")
+                        return;
+                    } else {
+                        layer.msg('确定保存?', {
+                            time: 20000, //20s后自动关闭
+                            offset: ["20px"],
+                            btn: ['确认', '取消'],
+                            btnAlign: 'c',
+                            yes: function(index) {
+                                $(".process-r>ul").append('<li class="prolis">' + $(".process-l-top-l>input").val() + '</li>');
+
+                                _thiss.text("编辑");
+                                $(".process-add").text("新增");
+
+                                $('.process-l-top-l>p').text($(".process-r>ul>li:last-child").text());
+                                layer.close(layer.index);
+
+                                //保存数据
+                                var mind_data = jm.get_data();
+                                var mind_string = jsMind.util.json.json2string(mind_data);
+                                prompt_info(mind_string);
+                                hime(); //隐藏
+
+                                return;
+                            },
+                            btn2: function(index, layero) {
+                                layer.close(layer.index);
+                            }
+                        });
+                    }
+                }
+                return;
+            })
+
+
+            //添加
+            $(".process-editor>ul>.process-editor-one>a").click(function() {
+                var selected_node = jm.get_selected_node();
+                if (!selected_node) {
+                    prompt_info('请先选择一个流程!');
+                    return;
+                }
+                var nodeid = jsMind.util.uuid.newid();
+                //console.log(nodeid);
+                var topic = '* 请输入' + ' *';
+                //  var topic = '* Node_' + nodeid.substr(0, 5) + ' *';
+                var data = {
+                    bg: true
+                }
+                var node = jm.add_node(selected_node, nodeid, topic, data);
+
+            })
+
+            function hime() {
+                $(".process-editor-one").hide();
+            }
+            //改变背景||删除
+            function gaibain() {
+                var arrs = [];
+                var newelm = null;
+                $(document).bind("contextmenu", "jmnode", function(e) {
+                    var selected_node = jm.get_selected_node();
+                    arrs.push(selected_node);
+                    if (!!arrs[arrs.length - 1]) {
+                        newelm = arrs[arrs.length - 1];
+                        arrs = [];
+
+                        if (newelm.data.bg) {
+                            $(".editor-follow>p:first-child").text("标记项目");
+
+                        } else {
+                            $(".editor-follow>p:first-child").text("取消标记");
+
+                        }
+                        //标记
+                        $(".editor-follow>p:first-child").click(function(e) {
+                            if ($(this).text() == "标记项目") {
+                                var data = {
+                                    bg: false
+                                }
+                                newelm.data = data;
+                                var newelms = newelm.id;
+                                jm.set_node_color(newelms, '#FF5722', null);
+                            } else {
+                                var data = {
+                                    bg: true
+                                }
+                                newelm.data = data;
+                                var newelms = newelm.id;
+                                jm.set_node_color(newelms, '#1abc9c', null);
+                            }
+                            newelms = "";
+                            e.preventDefault();
+                            return
+                        })
+
+                        //删除
+                        $(".editor-follow>p:last-child").click(function(e) {
+                            var newelms = newelm.id;
+
+                            if (newelms != undefined) {
+                                console.log(newelms)
+                                jm.remove_node(newelms);
+                            }
+                            newelms = "";
+                            e.preventDefault();
+                            return
+                        })
+
+                        $(".editor-follow").css({
+                            "top": e.pageY + 10 + "px",
+                            "left": e.pageX + 10 + "px",
+                            "display": "block"
+                        });
+
+                    } else {
+
+                    }
+
+                    var timsss = null;
+                    $("jmnode").bind("mouseout", function() {
+                        timsss = setTimeout(function() {
+                            $(".editor-follow").css("display", "none");
+                        }, 100);
+                        return
+                    })
+                    $(".editor-follow").mouseover(function() {
+                        clearTimeout(timsss);
+                        return
+                    })
+                    $("jmnodes").mouseover(function() {
+                        $(".editor-follow").hide();
+                        return
+                    })
+                    return false;
+                });
+            }
+
+        });
+    }
+
+    function prompt_info(msg) {
+        alert(msg);
+    }
+</script>

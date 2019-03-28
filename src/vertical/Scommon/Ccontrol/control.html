@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>风控管理中心</title>
+    <link rel="stylesheet" href="../../../../css/twocss/public.css">
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../css/twocss/ccontrol.css">
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
+</head>
+
+<body>
+    <div class="control-com">
+        <div class="layui-tab layui-tab-card" lay-filter="controldemo" style="margin:0;">
+            <ul class="layui-tab-title">
+                <li class="layui-this">全部</li>
+                <li>单据业务</li>
+                <li>基础资料</li>
+            </ul>
+
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <ul class="control-all">
+                        <li>销售预警 (0)</li>
+                        <li>采购预警 (0)</li>
+                        <li>库存预警 (0)</li>
+                        <li>财务预警 (0)</li>
+                    </ul>
+
+                    <div class="control-can">
+                        <ul class="control-sales">
+                            <li>销售报价 (0)</li>
+                            <li>销售订单 (0)</li>
+                            <li>销售发货 (0)</li>
+                            <li>销售退货 (0)</li>
+                            <li>销售发票单 (0)</li>
+                            <li>销售折扣率 (0)</li>
+                        </ul>
+                        <div class="control-module">
+                            <div class="con-module-l">
+                                <form class="layui-form" action="">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">模块:</label>
+                                        <div class="layui-input-inline">
+                                            <select name="quiz1">
+                                            <option value="">请选择省</option>
+                                            <option value="浙江" selected="">浙江省</option>
+                                        </select>
+                                        </div>
+                                        <label class="layui-form-label">功能:</label>
+                                        <div class="layui-input-inline">
+                                            <select name="quiz2">
+                                            <option value="">请选择市</option>
+                                            <option value="温州">绍兴</option>
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-search">
+                                        <input type="text" placeholder="" class="layui-input">
+                                        <i class="iconfont icon-sousuo"></i>
+                                        <label>清空</label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 数据 -->
+                        <div class="control-data">
+                            <table id="alldemo" lay-filter="controldata" style="height:100%;"></table>
+                        </div>
+
+                        <div class="con-operation">
+                            <button class="layui-btn layui-bg-green layui-btn-sm">同步</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm">刷新</button>
+                            <button class="layui-btn layui-bg-green layui-btn-sm">字段设置</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">2</div>
+                <div class="layui-tab-item">3</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../../../../public/dist/layui.js"></script>
+
+</html>
+
+<script>
+    layui.use(['element', 'form', "table"], function() {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table,
+            element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+        //换色
+        $(".control-all>li").click(function() {
+            $(this).css("color", "#009688").siblings().css("color", "#2F4056");
+        })
+
+
+        element.on('tab(controldemo)', function(data) {
+            console.log(this); //当前Tab标题所在的原始DOM元素
+            console.log(data.index); //得到当前Tab的所在下标
+            console.log(data.elem); //得到当前的Tab大容器
+        });
+
+
+        //数据
+        table.render({
+            elem: '#alldemo',
+            method: "get",
+            contentType: "application/json",
+            headers: {
+                token: 'sasasas'
+            },
+            height: 370,
+            url: '../../../../js/two/data.json', //数据接口
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip', 'count'],
+                groups: 5, //只显示 1 个连续页码
+                first: '首页', //不显示首页
+                last: '尾页',
+                prev: '<button class="layui-btn layui-btn-primary layui-btn-sm">上一页</button>',
+                next: '<button class="layui-btn layui-btn-primary layui-btn-sm">下一页</button>'
+                    //不显示尾页
+            }, //开启分页
+            done: function(res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+            },
+            // toolbar: 'alldemo',
+            // totalRow: true, //开启合计行
+            cols: [
+                [ //表头
+                    {
+                        type: 'checkbox',
+                        width: 80,
+                        sort: true,
+                        fixed: 'left'
+                    }, {
+                        field: 'id',
+                        title: 'ID',
+                        width: 80,
+                        sort: true,
+                        // fixed: 'left'
+                    }, {
+                        field: 'username',
+                        title: '用户名',
+                        width: 80
+                    }, {
+                        field: 'sex',
+                        title: '性别',
+                        width: 80,
+                        sort: true
+                    }, {
+                        field: 'city',
+                        title: '城市',
+                        width: 80
+                    }, {
+                        field: 'sign',
+                        title: '签名',
+                        width: 177
+                    }, {
+                        field: 'experience',
+                        title: '积分',
+                        width: 80,
+                        sort: true
+                    }, {
+                        field: 'score',
+                        title: '评分',
+                        width: 80,
+                        sort: true
+                    }, {
+                        field: 'classify',
+                        title: '职业',
+                        width: 80
+                    }, {
+                        field: 'wealth',
+                        title: '财富',
+                        width: 135,
+                        sort: true
+                    },
+                ]
+            ]
+        });
+    });
+</script>

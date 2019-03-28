@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>单据中心</title>
+    <link rel="stylesheet" href="../../../../css/twocss/public.css">
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../../css/twocss/avoucher.css">
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
+</head>
+
+<body>
+    <div class="vou-com">
+        <div class="vou-top">
+            <div class="vou-operation layui-bg-red">
+                <div><i class="iconfont icon-xunhuan" size="13"></i> </div>
+                <p>未处理</p>
+                <span>0</span>
+            </div>
+
+            <div class="vou-operation layui-bg-orange">
+                <div><i class="iconfont icon-xunhuan" size="13"></i> </div>
+                <p>处理中</p>
+                <span>0</span>
+            </div>
+
+            <div class="vou-operation layui-bg-green">
+                <div><i class="iconfont icon-xunhuan" size="13"></i> </div>
+                <p>已处理</p>
+                <span>0</span>
+            </div>
+        </div>
+        <div class="vou-choose">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin:0;">
+                <ul class="layui-tab-title" style="background-color:#eeeeee;">
+                    <li class="layui-this">全部</li>
+                    <li>未处理</li>
+                    <li>处理中</li>
+                    <li>已处理</li>
+                </ul>
+                <div class="layui-tab-content" style="height: 100px;">
+                    <div class="layui-tab-item layui-show">
+                        <div class="vou-patrol">
+                            <div class="layui-form">
+                                <div class="layui-form-item" style="margin:0;">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">日期:</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input" id="test6">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">单号:</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">关键字:</label>
+                                        <div class="layui-input-inline" style="width: 150px;">
+                                            <input type="text" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <button class="layui-btn  layui-btn-sm layui-bg-red">查询</button>
+                                    <button class="layui-btn layui-bg-red layui-btn-sm">重置</button>
+                                </div>
+                            </div>
+
+                            <div class="vou-date">
+                                <table id="alldemo" lay-filter="test1" style="height:100%;"></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">内容2</div>
+                    <div class="layui-tab-item">内容3</div>
+                    <div class="layui-tab-item">内容4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../../../../public/dist/layui.js"></script>
+</body>
+
+</html>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use(['element', "laydate", "table"], function() {
+        var $ = layui.jquery,
+            element = layui.element, //Tab的切换功能，切换事件监听等，需要依赖element模块
+            laydate = layui.laydate,
+            table = layui.table;
+        //时间
+        laydate.render({
+            elem: '#test6',
+            range: true,
+            theme: 'molv',
+            done: function(value, date) {
+                console.log('你选择的日期是：' + value + '<br>获得的对象是' + JSON.stringify(date));
+            }
+        });
+        //选择卡
+        element.on('tab(docDemoTabBrief)', function(data) {
+            console.log(this); //当前Tab标题所在的原始DOM元素
+            console.log(data.index); //得到当前Tab的所在下标
+            console.log(data.elem); //得到当前的Tab大容器
+            console.log(data);
+        });
+
+        table.render({
+            elem: '#alldemo',
+            method: "get",
+            contentType: "application/json",
+            headers: {
+                token: 'sasasas'
+            },
+            height: 370,
+            url: '../../../../js/two/data.json', //数据接口
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip', 'count'],
+                groups: 5, //只显示 1 个连续页码
+                first: '首页', //不显示首页
+                last: '尾页',
+                prev: '<button class="layui-btn layui-btn-primary layui-btn-sm">上一页</button>',
+                next: '<button class="layui-btn layui-btn-primary layui-btn-sm">下一页</button>'
+                    //不显示尾页
+            }, //开启分页
+            done: function(res, curr, count) {
+                //如果是异步请求数据方式，res即为你接口返回的信息。
+                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                console.log(res);
+
+                //得到当前页码
+                console.log(curr);
+
+                //得到数据总量
+                console.log(count);
+            },
+            // toolbar: 'alldemo',
+            // totalRow: true, //开启合计行
+            cols: [
+                [ //表头
+                    {
+                        type: 'checkbox',
+                        width: 80,
+                        sort: true,
+                        fixed: 'left'
+                    }, {
+                        field: 'id',
+                        title: 'ID',
+                        width: 80,
+                        sort: true,
+                        // fixed: 'left'
+                    }, {
+                        field: 'username',
+                        title: '用户名',
+                        width: 80
+                    }, {
+                        field: 'sex',
+                        title: '性别',
+                        width: 80,
+                        sort: true
+                    }, {
+                        field: 'city',
+                        title: '城市',
+                        width: 80
+                    }, {
+                        field: 'sign',
+                        title: '签名',
+                        width: 177
+                    }, {
+                        field: 'experience',
+                        title: '积分',
+                        width: 80,
+                        sort: true
+                    }, {
+                        field: 'score',
+                        title: '评分',
+                        width: 80,
+                        sort: true
+                    }, {
+                        field: 'classify',
+                        title: '职业',
+                        width: 80
+                    }, {
+                        field: 'wealth',
+                        title: '财富',
+                        width: 135,
+                        sort: true
+                    }, {
+                        fixed: 'right',
+                        width: 150,
+                        align: 'center',
+                        toolbar: '#barDemo'
+                    }
+                ]
+            ]
+        });
+        //操作数据
+        table.on('tool(test1)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if (layEvent === 'detail') { //查看
+                //do somehing
+                console.log("sds")
+            } else if (layEvent === 'del') { //删除
+                layer.confirm('真的删除行么', function(index) {
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令
+                });
+            } else if (layEvent === 'edit') { //编辑
+                //do something
+                alert()
+                    //同步更新缓存对应的值
+                obj.update({
+                    username: '123',
+                    title: 'xxx'
+                });
+            }
+        });
+    });
+</script>

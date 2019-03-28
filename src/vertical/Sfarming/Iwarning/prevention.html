@@ -5,44 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>入栏登记</title>
-    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../../css/twocss/commit.css">
+
+    <title>防疫预警</title>
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
+    <link rel="stylesheet" href="../../../../css/twocss/commit.css">
 </head>
 
 <body>
     <form class="layui-form" action="">
+
         <div class="select common">
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
 
+
+
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">种苗名称:</label>
+                        <label class="layui-form-label" style="width:95px;">禽畜名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <select name="city" lay-verify="">
+                  <option value="">请选择</option>
+                  <option value="010">北京</option>
+                  <option value="021">上海</option>
+                  <option value="0571">杭州</option>
+                </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">供应商:</label>
+                        <label class="layui-form-label" style="width:95px;">基地:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <select name="city" lay-verify="">
+                  <option value="">请选择</option>
+                  <option value="010">北京</option>
+                  <option value="021">上海</option>
+                  <option value="0571">杭州</option>
+                </select>
                         </div>
                     </div>
                 </div>
 
-
-
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:95px;">圈舍:</label>
+                        <div class="layui-input-inline">
+                            <select name="city" lay-verify="">
+                  <option value="">请选择</option>
+                  <option value="010">北京</option>
+                  <option value="021">上海</option>
+                  <option value="0571">杭州</option>
+                </select>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="layui-form-item">
                     <div class="select-hand-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">入栏日期:</label>
+                            <label class="layui-form-label" style="width:95px;">预计防疫日期:</label>
                             <input type="text" class="layui-input" id="date1">
                             <div style="margin:0 10px;">至</div>
                             <input type="text" class="layui-input" id="date2">
@@ -53,9 +78,14 @@
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">入栏单号:</label>
+                        <label class="layui-form-label" style="width:95px;">防疫项名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <select name="city" lay-verify="">
+                              <option value="">请选择</option>
+                              <option value="010">北京</option>
+                              <option value="021">上海</option>
+                              <option value="0571">杭州</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -66,14 +96,13 @@
                     <div class="layui-bg-green comquery ">重置</div>
                 </div>
             </div>
-
         </div>
+
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
+        <table class="layui-hide" id="test" lay-filter="testdome"></table>
     </div>
-
 </body>
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
@@ -88,17 +117,22 @@
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
-<script src="../../../js/common/jquery.min.js"></script>
-<script src="../../../js/common/api.js"></script>
-<script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/common/template-web.js"></script>
-<script src="../../../js/two/Efarming/registered.js"></script>
-<!-- 
+
+<script src="../../../../js/common/jquery.min.js"></script>
+<script src="../../../../js/common/api.js"></script>
+<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['table', "laydate"], function() {
         var $ = layui.jquery,
             table = layui.table,
             laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#date1' //指定元素 
+        });
+        laydate.render({
+            elem: '#date2' //指定元素
+        });
 
         //监听头部监听
         table.on('toolbar(testdome)', function(obj) {
@@ -157,7 +191,10 @@
                 //得到数据总量
                 console.log(count);
             },
-
+            request: {
+                limitName: '10'
+            },
+            limits: [10, 20],
             response: {
                 statusName: 'code', //数据状态的字段名称，默认：code
                 statusCode: 0, //成功的状态码，默认：0
@@ -188,44 +225,54 @@
                     type: 'numbers',
                     fixed: 'left'
                 }, {
-                    field: 'title',
-                    width: 240,
-                    title: '标题',
-                    minWidth: 100
+                    type: 'checkbox',
+                    fixed: 'left'
                 }, {
-                    field: 'releasePeople',
-                    title: '发布人',
+                    field: 'id',
+                    title: 'ID',
                     width: 80,
-                    align: "center",
-                    minWidth: 20,
-                    sort: true
+                    sort: true,
+                    fixed: 'left',
+                    totalRowText: '合计：'
                 }, {
-                    field: 'releaseTime',
-
-                    title: '发布时间',
-                    align: "center",
-                    minWidth: 100,
-                    sort: true
+                    field: 'username',
+                    title: '用户名',
+                    width: 80
                 }, {
-                    field: 'replyFew',
+                    field: 'experience',
+                    title: '积分',
+                    width: 90,
+                    sort: true,
+                    totalRow: true
+                }, {
+                    field: 'sex',
+                    title: '性别',
                     width: 80,
-                    title: '回复数',
-                    minWidth: 20,
-                    align: "center",
                     sort: true
                 }, {
-                    field: 'lastRespondent',
-                    title: '最后回复人',
-                    align: "center",
-                    minWidth: 20,
-                    width: 140,
-                    sort: true
+                    field: 'score',
+                    title: '评分',
+                    width: 80,
+                    sort: true,
+                    totalRow: true
                 }, {
-                    field: 'lastReplyTime',
-                    title: '最后回复时间',
-                    align: "center",
-                    minWidth: 180,
-                    sort: true
+                    field: 'city',
+                    title: '城市',
+                    width: 150
+                }, {
+                    field: 'sign',
+                    title: '签名',
+                    width: 200
+                }, {
+                    field: 'classify',
+                    title: '职业',
+                    width: 100
+                }, {
+                    field: 'wealth',
+                    title: '财富',
+                    width: 135,
+                    sort: true,
+                    totalRow: true
                 }, {
                     field: 'wealth',
                     width: 137,
@@ -238,6 +285,7 @@
             ]
         });
     })
-</script> -->
+</script>
+
 
 </html>
