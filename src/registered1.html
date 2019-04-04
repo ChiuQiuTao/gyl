@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>注册账号</title>
+    <link rel="stylesheet" href="../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../public/font/iconfont.css">
+    <link rel="stylesheet" href="../css/forget.css">
+    <link rel="icon" href="../public/favicon.ico">
+</head>
+
+<body>
+    <div class="logo">供应链协同管理平台</div>
+    <div class="head">
+        注册账号
+    </div>
+
+    <div class="input  jump3">
+
+        <div class="item jis">
+            <div class="item-txt">
+                企业名称:
+            </div>
+            <input type="text" placeholder="请输入您的企业名称" class="layui-input enterprises">
+        </div>
+        <div class="item jis">
+            <div class="item-txt">
+                统一社会信用代码:
+            </div>
+            <input type="text" placeholder="请输入统一社会信用代码" class="layui-input credit" maxlength="18">
+        </div>
+
+        <div class="item jis">
+            <div class="item-txt">
+                账号名:
+            </div>
+            <input type="text " placeholder="请输入您的账号名" class="layui-input accounts">
+        </div>
+        <div class="item jis">
+            <div class="item-txt">
+                密码:
+            </div>
+            <input type="password" placeholder="请输入您的密码" class="layui-input password">
+        </div>
+
+        <div class="btns">
+            <div class="btns-item determines" style="margin:0 0 0 135px;padding:4px 100px;">确定</div>
+        </div>
+    </div>
+
+    <div class="jump4" style="display:none">
+        <div class="input-s">
+            <i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> 已完成!
+        </div>
+
+        <div class="btns">
+            <div class="btns-item loginss" style="margin:0 auto;padding:4px 110px;"><i class="layui-icon layui-icon-return" style="margin-right: 10px;"></i>放回登录</div>
+        </div>
+    </div>
+</body>
+<script src="../js/common/jquery.min.js"></script>
+<script src="../js/common/api.js"></script>
+<script src="../public/dist/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use("layer", function() {
+        var $ = layui.jquery,
+            layer = layui.layer;
+
+        $(".determines").click(function() {
+            var enterpr = $(".enterprises").val(),
+                credit = $(".credit").val(),
+                rescre = /^[A-Za-z0-9]*$/,
+                accounts = $(".accounts").val(),
+                password = $(".password").val();
+
+            if (enterpr.trim() == "") {
+                layer.msg('请输入企业名称', {
+                    time: 500,
+                    offset: ['200px']
+                });
+                $(".enterprises").val("");
+                return
+            }
+            if (!rescre.test(credit) || credit.length != 18) {
+                layer.msg('请正确输入统一社会信用代码', {
+                    time: 500,
+                    offset: ['200px']
+                });
+                return
+            }
+            if (accounts.trim() == "") {
+                layer.msg('账号名', {
+                    time: 500,
+                    offset: ['200px']
+                });
+                $(".accounts").val("");
+                return
+            }
+            if (password == "") {
+                layer.msg('密码不能为空', {
+                    time: 500,
+                    offset: ['200px']
+                });
+                $(".accounts").val("");
+                return
+            }
+
+
+            handleAjax('register/createRegister', {
+                username: accounts,
+                password: password,
+                enterpriseName: enterpr,
+                enterpriseType: "1",
+                telephone: "13128665471",
+                license: credit
+            }).done(function(resp) {
+                layer.msg('注册成功', {
+                    icon: 1,
+                    time: 1000
+                });
+                setTimeout(function() {
+                    window.location.href = "../src/login.html";
+                }, 2500)
+            }).fail(function(err) {
+                if (err.status == "400") {
+                    layer.msg('账号与密码不正确', {
+                        icon: 5,
+                        time: 2000
+                    });
+                }
+            });
+        });
+
+    })
+</script>
+
+</html>

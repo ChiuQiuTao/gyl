@@ -460,12 +460,16 @@
     }
 </script>
 <script src="./public/dist/layui.js" charset="utf-8"></script>
-
 <script src="./js/common/jquery.min.js"></script>
 <script src="./js/common/api.js"></script>
-
 <script src="./js/index.js"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+    if (sessions == "" || sessions == null) {
+        window.location.href = "./src/login.html";
+    }
+</script>
+
 <script>
     getClientHeight();
 

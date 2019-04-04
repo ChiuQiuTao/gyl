@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>注册账号</title>
+    <link rel="stylesheet" href="../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../public/font/iconfont.css">
+    <link rel="stylesheet" href="../css/forget.css">
+    <link rel="icon" href="../public/favicon.ico">
+</head>
+
+<body>
+    <div class="logo">供应链协同管理平台</div>
+    <div class="head">
+        注册账号
+    </div>
+    <div class="input jump1">
+        <div class="Hasregistered" dateurl="1">
+            (暂时账号)我要注册
+        </div>
+        <div class="Hasregistered" dateurl="2">
+            (已有账号)建立协同关系
+        </div>
+        <div class="btns registereds">
+            <div class="btns-item determine">确定</div>
+            <div class="btns-item cancels">取消</div>
+        </div>
+    </div>
+
+
+
+
+    <div class="input  jump2" style="display:none;">
+        <div class="regexsrr">
+            <span>邀请码:</span>
+            <input type="text" placeholder="输入邀请码" class="no-invitation">
+        </div>
+        <div class="btns registereds">
+            <div class="btns-item nextstep" style="margin:0 auto;padding:4px 110px;">下一步</div>
+        </div>
+    </div>
+
+
+
+    <div class="input  jump2-1" style="display:none;">
+        <div class="item itemw">
+            <div class="item-txt">
+                账号名:
+            </div>
+            <input type="text" placeholder="请输入您的账号名" class="layui-input">
+        </div>
+        <div class="item itemw">
+            <div class="item-txt">
+                手机号:
+            </div>
+            <input type="text" placeholder="请输入您的手机号" class="layui-input">
+        </div>
+        <div class="item itemw">
+            <div class="item-txt">
+                验证号:
+            </div>
+            <input type="text" placeholder="请输入您的验证号" class="layui-input" style="width:180px;margin-right: 30px;">
+            <button class="times btns-item">
+                发送
+            </button>
+        </div>
+
+        <div class="item itemw">
+            <div class="item-txt">
+                企业名:
+            </div>
+            <input type="text" placeholder="请输入您的企业名" class="layui-input">
+        </div>
+
+        <div class="list">
+            <div class="item itemw plates">
+                <div class="item-txt">
+                    企业类型:
+                </div>
+                <input type="text" placeholder="请输入您的企业类型" class="layui-input">
+                <div class="add">
+                    <i class="layui-icon">&#xe608;</i>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns">
+            <div class="btns-item pres">上一步</div>
+            <div class="btns-item nsees">下一步</div>
+        </div>
+    </div>
+
+
+
+
+    <div class="input  jump2-2" style="display:none;">
+        <div class="item itemw">
+            <div class="item-txt">
+                密码:
+            </div>
+            <input type="text" placeholder="请输入您的密码" class="layui-input">
+        </div>
+        <div class="item itemw">
+            <div class="item-txt">
+                确定密码:
+            </div>
+            <input type="text" placeholder="请输入您的确定密码" class="layui-input">
+        </div>
+
+        <div class="btns">
+            <div class="btns-item determines" style="margin:0 auto;padding:4px 110px;">确定</div>
+        </div>
+    </div>
+
+
+    <div class="input  jump3" style="display:none">
+        <div class="item itemw">
+            <div class="item-txt">
+                账号名:
+            </div>
+            <input type="text" placeholder="请输入您的账号名" class="layui-input">
+        </div>
+        <div class="item itemw">
+            <div class="item-txt">
+                密码:
+            </div>
+            <input type="text" placeholder="请输入您的手机号" class="layui-input">
+        </div>
+        <div class="item itemw">
+            <div class="item-txt">
+                邀请码:
+            </div>
+            <input type="text" placeholder="请输入您的邀请码" class="layui-input">
+        </div>
+
+        <div class="btns">
+            <div class="btns-item" style="margin:0 auto;padding:4px 110px;">建立协同关系</div>
+        </div>
+    </div>
+
+    <div class="jump4" style="display:none">
+        <div class="input-s">
+            <i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> 已完成!
+        </div>
+
+        <div class="btns">
+            <div class="btns-item loginss" style="margin:0 auto;padding:4px 110px;"><i class="layui-icon layui-icon-return" style="margin-right: 10px;"></i>放回登录</div>
+        </div>
+    </div>
+</body>
+<script src="../js/common/jquery.min.js"></script>
+<script src="../public/dist/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use("layer", function() {
+        var $ = layui.jquery,
+            layer = layui.layer,
+            open = false,
+            suns = null;
+
+        //选中
+        $(".Hasregistered").click(function() {
+            if ($(this).attr("dateurl") == 1) {
+                suns = 1;
+            } else {
+                suns = 2;
+            }
+
+            $(this).css("backgroundColor", "#c9c9c9").siblings().css("backgroundColor", "#fff");
+            open = true;
+        })
+
+        //确定
+        $(".determine").click(function() {
+            if (open) {
+                console.log(suns)
+                if (suns == 1) {
+                    $(".jump2").css("display", "block");
+                } else {
+                    $(".jump3").css("display", "block");
+                }
+                $(".jump1").css("display", "none");
+            } else {
+                layer.msg('请选择！', {
+                    time: 1000,
+                });
+                return;
+            }
+            return;
+        })
+
+
+        //下一步
+        $(".nextstep").click(function() {
+            var days = $(".no-invitation").val().trim();
+            if (days == "" || days == " ") {
+                layer.msg('请输入邀请码！', {
+                    offset: "200",
+                    time: 1000,
+                });
+                $(".no-invitation").val("");
+                return;
+            } else {
+
+                $(".jump2").css("display", "none");
+                $(".jump2-1").css("display", "block");
+            }
+            return;
+        })
+
+        //账号的页面
+        $(".add").click(function() {
+            $(".list").append('<div class="item itemw plates"><div class="item-txt">企业类型:</div>' +
+                '<input type="text" placeholder="请输入您的企业类型" class="layui-input"></div>');
+            return;
+        })
+
+
+        //发送
+        var tims = null;
+        var numss = 60;
+        $(".times").click(function() {
+            var thenss = $(this);
+            $(this).attr("disabled", true);
+            tims = setInterval(function() {
+                numss--;
+                thenss.text(numss + "s");
+                if (numss == 0) {
+                    clearInterval(tims);
+                    thenss.text("发送");
+                    numss = 60;
+                    thenss.removeAttr("disabled");
+                }
+            }, 1000);
+            return
+        })
+
+
+        //页面||上一步
+        $(".pres").click(function() {
+            $(".jump2-1").hide();
+            $(".jump2").show();
+            return;
+        });
+
+
+        //页面||下一步
+        $(".nsees").click(function() {
+            $(".jump2-1").hide();
+            $(".jump2-2").show();
+            return;
+        });
+
+
+        //密码
+        $(".determines").click(function() {
+            $(".jump2-2").hide();
+            $(".jump4").show();
+            return;
+        });
+
+        //反回登录页面
+        $(".loginss").click(function() {
+            window.location.href = "../src/login.html";
+            return;
+        });
+
+        //取消
+        $(".cancels").click(function() {
+            window.location.href = "./login.html";
+        })
+
+    })
+</script>
+
+</html>

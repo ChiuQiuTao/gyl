@@ -1,71 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    
     <title>忘记密码</title>
     <link rel="stylesheet" href="../public/dist/css/layui.css">
     <link rel="stylesheet" href="../public/font/iconfont.css">
     <link rel="stylesheet" href="../css/forget.css">
 
 </head>
-<body>
-   <div class="logo">供应链协同管理平台</div>
-   <div class="head">
-       设置新密码
-   </div>
-   <div class="input" id="jump1">
-       <div class="item">
-           <div class="item-txt">
-               手机号:
-           </div>
-           <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input"> 
-       </div>
 
-       <div class="item">
+<body>
+    <div class="logo">供应链协同管理平台</div>
+    <div class="head">
+        设置新密码
+    </div>
+    <div class="input" id="jump1">
+        <div class="item">
+            <div class="item-txt">
+                手机号:
+            </div>
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input">
+        </div>
+
+        <div class="item">
             <div class="item-txt">
                 验证码:
             </div>
-           
+
             <input type="text" name="title" required lay-verify="required" placeholder="请输入您的验证码。。" autocomplete="off" class="layui-input">
             <div class="item-btn">
                 获取验证码
-            </div> 
+            </div>
         </div>
 
-       <div class="item">
+        <div class="item">
             <div class="item-txt">
                 企业名称:
             </div>
-            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input"> 
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input">
         </div>
 
         <div class="item">
             <div class="item-txt">
                 用户名称:
             </div>
-            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input"> 
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input">
         </div>
         <div class="btns">
             <div class="btns-item">返回登录</div>
             <div class="btns-item" id='jump-2'>下一步</div>
         </div>
-   </div>
-   
-   <div class="input" id="jump2" style="display:none">
+    </div>
+
+    <div class="input" id="jump2" style="display:none">
         <div class="item">
             <div class="item-txt">
                 新密码:
             </div>
-            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input"> 
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input">
         </div>
         <div class="item">
             <div class="item-txt">
                 确认密码:
             </div>
-            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input"> 
+            <input type="text" name="title" required lay-verify="required" placeholder="请输入您的手机号码。。" autocomplete="off" class="layui-input">
         </div>
         <div class="btns">
             <div class="btns-item" id="jump-1">上一步</div>
@@ -73,23 +74,21 @@
         </div>
     </div>
 
-    <div  id="jump3" style="display:none">
+    <div id="jump3" style="display:none">
         <div class="input-s">
-                <i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> 
-                已完成!
+            <i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i> 已完成!
         </div>
-    
+
         <div class="btns">
             <div class="btns-item" id="jump-2s">上一步</div>
             <div class="btns-item">完成</div>
         </div>
     </div>
-    
 </body>
 <script src="../public/dist/layui.js" charset="utf-8"></script>
 <script src="../js/forget.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-
 </script>
+
 </html>

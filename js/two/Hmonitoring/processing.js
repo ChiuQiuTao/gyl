@@ -3,24 +3,53 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         table = layui.table,
         layer = layui.layer,
         laydate = layui.laydate,
-        util = layui.util;
+        util = layui.util,
+        datas = {}
 
     //时间
     laydate.render({
-        elem: '#date1' //指定元素 
+        elem: '#date1',
+        done: function(value) {
+            console.log(value)
+            datas.orderdateq = value + " " + "00:00:00";
+        }
+
     });
     laydate.render({
-        elem: '#date2' //指定元素
+        elem: '#date2',
+        done: function(value) {
+            console.log(value)
+            datas.orderdateh = value + " " + "00:00:00";
+        }
     });
+
+
+    //生产加工单号
+    $(".Orders").blur(function() {
+        var reg = /^[1-9]\d*$/;
+        if (!reg.test($(".Orders").val())) {
+            alerts("请正确输入单号!");
+            $(".Orders").val("");
+            return
+        }
+        datas.ordercode = $(this).val();
+    })
+
+    //商品名称
+    $(".Orders").blur(function() {
+        datas.names = $(this).val();
+    })
+
 
 
     //监听头部监听 ||新增
     table.on('toolbar(testdome)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id),
             data = checkStatus.data; //获取选中的数据
+
         switch (obj.event) {
             case 'add':
-                window.location.href = "../../../src/vertical/Hmonitoring/newpage/pronew.html";
+                window.location.href = "./newpage/pronew.html";
                 break;
         };
     });
@@ -49,7 +78,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             content: '<div class="ssss"></div>',
             success: function(layero, index) {
 
-                handleAjax('OrdProcessing/getProcessingProduct', {
+                noAjax('OrdProcessing/getProcessingProduct', {
                     Id: ee
                 }, "GET").done(function(resp) {
                     console.log(resp)
@@ -70,10 +99,8 @@ layui.use(['table', "layer", "laydate", "util"], function() {
 
 
 
-
-
     //获取列表
-    table.render({
+    var tableIns = table.render({
         elem: '#testee',
         url: base + "OrdProcessing/getProcessingListVo",
         method: "GET",
@@ -83,14 +110,13 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         },
         toolbar: '#toolbarinter',
         done: function(res, curr, count) {
-            console.log(res)
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                // console.log(res);
-                // //得到当前页码
-                // console.log(curr);
-                // //得到数据总量
-                // console.log(count);
+            //如果是异步请求数据方式，res即为你接口返回的信息。
+            //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+            // console.log(res);
+            // //得到当前页码
+            // console.log(curr);
+            // //得到数据总量
+            // console.log(count);
         },
         request: {
             pageName: 'currentPage' //页码的参数名称，默认：page
@@ -98,6 +124,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             limitName: 'pageSize' //每页数据量的参数名，默认：limit
         },
         parseData: function(res) { //res 即为原始返回的数据
+            console.log(res)
             return {
                 "code": res.code, //解析接口状态
                 "msg": res.message, //解析提示文本
@@ -120,9 +147,9 @@ layui.use(['table', "layer", "laydate", "util"], function() {
                 ,
             groups: 5 //只显示 1 个连续页码
                 ,
-            first: false //不显示首页
+            first: "首页" //不显示首页
                 ,
-            last: false //不显示尾页
+            last: "尾页" //不显示尾页
                 ,
             prev: '上一页',
             next: "下一页",
@@ -182,4 +209,35 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             }]
         ]
     });
+
+
+
+    //重置
+    $(".heavys").click(function() {
+        $("#date1").val("");
+        $("#date2").val("");
+        $(".Orders").val("");
+        $(".names").val("");
+        datas = {};
+    })
+
+
+    //查询
+    $(".checks").click(function() {
+
+        if ($("#date1").val() == "" && $("#date2").val() == "" && $(".Orders").val() == "" && $(".names").val() == "") {
+
+            layer.msg('请输入查询条件！', { time: 1000, offset: 't', });
+            return;
+        }
+
+        tableIns.reload({
+            where: datas,
+            page: {
+                curr: 1, //重新从第 1 页开始
+                layout: ['prev', 'page', 'next', 'skip', 'count']
+            },
+
+        })
+    })
 })

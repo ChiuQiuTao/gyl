@@ -1,12 +1,14 @@
-body{
+body {
     padding-bottom: 50px;
 }
-.logo{
+
+.logo {
     font-size: 36px;
     padding-left: 20px;
     line-height: 80px;
 }
-.head{
+
+.head {
     height: 60px;
     display: flex;
     align-items: center;
@@ -15,7 +17,8 @@ body{
     color: #fff;
     padding-left: 20px;
 }
-.input{
+
+.input {
     width: 960px;
     border: 1px solid #c9c9c9;
     padding: 50px;
@@ -24,21 +27,25 @@ body{
     margin-top: 30px;
     padding-bottom: 30px;
 }
-.item{
+
+.item {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
     margin-left: 200px;
 }
-.item-txt{
+
+.item-txt {
     width: 100px;
     text-align: right;
 }
-.item input{
+
+.item input {
     width: 300px;
     margin-left: 15px;
 }
-.item-btn{
+
+.item-btn {
     width: 100px;
     height: 36px;
     background-color: #2F4056;
@@ -50,7 +57,8 @@ body{
     margin-left: 20px;
     cursor: pointer;
 }
-.input-s{
+
+.input-s {
     width: 960px;
     border: 1px solid #c9c9c9;
     padding: 50px;
@@ -63,10 +71,12 @@ body{
     color: #1E9FFF;
     font-size: 20px;
 }
-.input-s i{
+
+.input-s i {
     margin-right: 20px;
 }
-.btns{
+
+.btns {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -74,13 +84,79 @@ body{
     margin: 0 auto;
     margin-top: 30px;
 }
-.btns-item{
-    padding: 0 15px;
+
+.btns-item {
+    padding: 0 40px;
     height: 40px;
     color: #fff;
     background-color: #2F4056;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    
+    cursor: pointer;
+}
+
+.Hasregistered {
+    margin: 20px auto;
+    height: 45px;
+    width: 330px;
+    text-align: center;
+    line-height: 45px;
+    font-size: 20px;
+    border: 1px solid #c9c9c9;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.Hasregistered:hover {
+    background-color: #c9c9c9;
+}
+
+.registereds {
+    width: 322px;
+}
+
+.regexsrr {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.regexsrr span {
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+.regexsrr input {
+    padding-left: 10px;
+    width: 220px;
+    display: inline-block;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.itemw {
+    margin-left: 245px;
+}
+
+.times {
+    padding: 0px 30px;
+}
+
+.plates {
+    position: relative;
+}
+
+.add {
+    width: 20px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.jis .item-txt {
+    width: 200px;
+    text-align: right;
 }

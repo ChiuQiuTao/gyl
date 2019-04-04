@@ -1,10 +1,14 @@
 var base = "http://47.98.167.96:9191/";
 var jq = jQuery.noConflict();
-var sessions = getCookie('token');
+var sessions = sessionStorage.getItem("keyssname");
 
 function ajax(url, param, type) {
 
     if (sessions == "" && url != "login") {
+        window.location.href = "../../src/login.html";
+        return;
+    }
+    if (sessions == null) {
         window.location.href = "../../src/login.html";
         return;
     }
@@ -28,16 +32,14 @@ function handleAjax(url, param, type) {
         }
         if (resp.status == 200) {
 
-            setCookie('token', resp.jwtToken);
-            return resp;
-        }
-        //傻叉没有写状态的接口 （生产加工|查看）
-        if (resp.ordProcessingproducts) {
+            // setCookie('token', resp.jwtToken);
+            sessionStorage.setItem("keyssname", resp.jwtToken);
             return resp;
         }
 
         if (resp.code == 10000) {
             return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
+
         } else {
 
             return jq.Deferred().reject(resp); // 返回一个失败状态的deferred对象，把错误代码作为默认参数传入之后fail()方法的回调
