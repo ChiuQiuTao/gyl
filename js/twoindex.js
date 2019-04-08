@@ -250,6 +250,10 @@ var menudata = [{
         icon: "icon-ios-folder-open",
         title: "基础信息",
         child: [{
+                url: "../vertical/Scommon/Jbasis/supplier.html",
+                title: "供应商信息",
+                type:"1"
+            },{
                 url: "../vertical/Splanting/Jbasis/inputs.html",
                 title: "投入品信息",
                 type:"4"
