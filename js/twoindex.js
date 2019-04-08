@@ -392,17 +392,32 @@ var menudata = [{
         ]
     },{
         icon: "icon-ios-folder-open",
-        type:"1",
+        type:"5",
         title: "仓库管理",
         child: [{
                 url: "../vertical/Sfood/warehouse/examine.html",
                 title: "仓库查看",
-                type:"1"
+                type:"5"
             },
             {
                 url: "../vertical/Sfood/warehouse/transfers.html",
                 title: "仓库调拨",
-                type:"1"
+                type:"5"
+            }
+        ]
+    },{
+        icon: "icon-ios-folder-open",
+        type:"2",
+        title: "仓库管理",
+        child: [{
+                url: "../vertical/Sprocessing/warehouse/examine.html",
+                title: "仓库查看",
+                type:"2"
+            },
+            {
+                url: "../vertical/Sprocessing/warehouse/transfers.html",
+                title: "仓库调拨",
+                type:"2"
             }
         ]
     },{
