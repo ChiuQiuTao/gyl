@@ -203,6 +203,15 @@ var menudata = [{
                 type:"3"
             },
             {
+                url: "../vertical/Sfarming/Iwarning/inventory.html",
+                title: "投入品库存预警",
+                type:"4"
+            }, {
+                url: "../vertical/Sfarming/Iwarning/shelflife.html",
+                title: "投入品保质期预警",
+                type:"4"
+            },
+            {
                 url: "../vertical/Splanting/Iwarning/proinven.html",
                 title: "农产品库存预警",
                 type:"4"
@@ -263,6 +272,14 @@ var menudata = [{
                 url: "../vertical/Scommon/Jbasis/supplier.html",
                 title: "供应商信息",
                 type:"1"
+            },{
+                url: "../vertical/Sfarming/Jbasis/customer.html",
+                title: "客户信息",
+                type:"3"
+            },{
+                url: "../vertical/Sfarming/Jbasis/customer.html",
+                title: "客户信息",
+                type:"5"
             },{
                 url: "../vertical/Splanting/Jbasis/inputs.html",
                 title: "投入品信息",
@@ -328,7 +345,7 @@ var menudata = [{
                 type:"4"
             },
             {
-                url: "../vertical/Sfarming/Jbasis/inventory.html",
+                url: "../vertical/Sfood/Jbasis/inventory.html",
                 title: "仓库信息",
                 type:"5"
             },
@@ -336,7 +353,8 @@ var menudata = [{
                 url: "../vertical/Sprocessing/Jbasis/material.html",
                 title: "原辅料信息",
                 type:"2"
-            }
+            },
+            
         ]
     },{
         icon: "icon-ios-folder-open",

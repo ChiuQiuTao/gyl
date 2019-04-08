@@ -108,13 +108,13 @@
         //动态添加菜单
         var elms = "";
         for (var index = 0; index < menudata.length; index++) {
-            if(menudata[index].type==1||menudata[index].type==2){
+            if(menudata[index].type==1||menudata[index].type==5){
                 var child = "";
                 var meunchid = menudata[index].child;
                 if (meunchid) {
                     for (var i in meunchid) {
                         // console.log(meunchid[i].title)
-                        if(meunchid[i].type==1||meunchid[i].type==2){
+                        if(meunchid[i].type==1||meunchid[i].type==5){
                             child +=
                             '<dl class="layui-nav-child">' +
                             '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
