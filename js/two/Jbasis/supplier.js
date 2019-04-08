@@ -68,21 +68,22 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         });
     }
 
-    document.querySelector('#selectcondition').addEventListener('click',function(){
+    document.querySelector('#selectcondition').addEventListener('click', function() {
         getBasEnterprise();
     })
     getBasEnterprise();
-    function getBasEnterprise(){
-        var enterprisename=document.querySelector('#enterprisename').value;
-        var license=document.querySelector('#license').value;
-        var currentPage=1;
+
+    function getBasEnterprise() {
+        var enterprisename = document.querySelector('#enterprisename').value;
+        var license = document.querySelector('#license').value;
+        var currentPage = 1;
 
         //获取列表
         table.render({
             elem: '#testee',
             url: base + "basic/getBasEnterprise",
             method: "GET",
-            where: {enterprisename:enterprisename,license:license,enterpriseclass:'2',currentPage:currentPage},
+            where: { enterprisename: enterprisename, license: license, enterpriseclass: '2', currentPage: currentPage },
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
@@ -142,68 +143,58 @@ layui.use(['table', "layer", "laydate", "util"], function() {
                 }, {
                     field: 'createname',
                     title: '创建人名称',
-                    align: "center"
+                    align: "center",
+                    minWidth: 100
                 }, {
                     field: 'enterprisename',
                     title: '企业名称',
                     align: "center",
-                    // sort: true,
-                    // width: 100,
-                    // templet: function(d) {
-                    //     return d.num + "(" + d.unit + ")"
-                    // }
+                    minWidth: 100
+                        // sort: true,
+                        // width: 100,
+                        // templet: function(d) {
+                        //     return d.num + "(" + d.unit + ")"
+                        // }
                 }, {
                     field: 'enterpriseclass',
                     title: '生产重量',
                     align: "center",
+                    minWidth: 100
                 }, {
                     field: 'license',
                     title: '营业执照号',
                     align: "center",
+                    minWidth: 120
                 }, {
                     field: 'picturepath',
                     title: '营业执照图片地址',
                     align: "center",
+                    minWidth: 180
                 }, {
                     field: 'enterprisecode',
                     title: '企业编号',
                     align: "center",
-                }, {
-                    field: 'state',
-                    title: '国家省市区国家',
-                    align: "center",
-                }, {
-                    field: 'province',
-                    title: '省',
-                    align: "center",
-                }, {
-                    field: 'city',
-                    title: '市',
-                    align: "center",
-                }, {
-                    field: 'district',
-                    title: '区',
-                    align: "center",
-                }, {
-                    field: 'address',
-                    title: '详细地址',
-                    align: "center",
+                    minWidth: 100
                 }, {
                     field: 'corporation',
                     title: '法定负责人',
                     align: "center",
+                    minWidth: 120
                 }, {
                     field: 'linkman',
                     title: '联系人',
                     align: "center",
+                    minWidth: 130
                 }, {
                     field: 'phone',
                     title: '联系人电话',
                     align: "center",
+                    minWidth: 150
                 }, {
                     field: 'auditstaus',
                     title: '审核状态',
                     align: "center",
+                    minWidth: 100
                 }, {
                     field: 'createenterprisename',
                     title: '创建人的企业',
@@ -212,22 +203,16 @@ layui.use(['table', "layer", "laydate", "util"], function() {
                     field: 'auditdate',
                     title: '审批日期',
                     align: "center",
-                }, {
-                    field: 'scope',
-                    title: '经营范围',
-                    align: "center",
+                    minWidth: 120
                 }, {
                     field: 'enterprisetype',
                     title: '企业类型名称',
                     align: "center",
-                }, {
-                    field: 'remark',
-                    title: '备注',
-                    align: "right",
+                    minWidth: 140
                 }]
             ]
         });
     }
 
-    
+
 })

@@ -12,67 +12,67 @@
 </head>
 
 <body>
-        <div class="layui-tab">
-            <ul class="layui-tab-title">
-                <li class="layui-this">企业供应商</li>
-                <li>个人供应商</li>
-            </ul>
-            <div class="layui-tab-content" style="padding:0">
-                <div class="layui-tab-item layui-show">
-                    <!-- 企业供应商 -->
-                    <form class="layui-form" action="">
-                        <div class="select common">
-                            <div class="select-title">查询条件</div>
-                
-                            <div class="select-con">
-                
-                
-                                <div class="layui-form-item">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">企业名称:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" id="enterprisename">
-                                        </div>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">企业供应商</li>
+            <li>个人供应商</li>
+        </ul>
+        <div class="layui-tab-content" style="padding:0">
+            <div class="layui-tab-item layui-show">
+                <!-- 企业供应商 -->
+                <form class="layui-form" action="">
+                    <div class="select common">
+                        <div class="select-title">查询条件</div>
+
+                        <div class="select-con">
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">企业名称:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="enterprisename">
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label">营业执照号:</label>
-                                        <div class="layui-input-inline">
-                                            <input type="text" class="layui-input" id="license">
-                                        </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:100px;">营业执照号:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="license">
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
-                                    <div class="layui-inline">
-                                        <label class="layui-form-label" style="width:95px;">状态:</label>
-                                        <div class="layui-input-inline">
-                                            <select name="city" lay-verify="">
+                            </div>
+                            <!-- <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:95px;">状态:</label>
+                                    <div class="layui-input-inline">
+                                        <select name="city" lay-verify="">
                                                 <option value="">全部</option>
                                                 <option value="010">待审批</option>
                                                 <option value="021">审批通过</option>
                                                 <option value="0571">审批未通过</option>
                                             </select>
-                                        </div>
                                     </div>
                                 </div>
-                
-                                <div class="select-btn">
-                                    <div class="layui-bg-green comquery" id='selectcondition'>查询</div>
-                                    <div class="layui-bg-green comquery">重置</div>
-                                </div>
+                            </div> -->
+
+                            <div class="select-btn">
+                                <div class="layui-bg-green comquery" id='selectcondition'>查询</div>
+                                <div class="layui-bg-green comquery">重置</div>
                             </div>
                         </div>
-                    </form>
-                
-                    <div class="common-padding">
-                        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
                     </div>
+                </form>
+
+                <div class="common-padding">
+                    <table class="layui-hide" id="testee" lay-filter="testdome"></table>
                 </div>
-                <div class="layui-tab-item">内容2</div>
             </div>
+            <div class="layui-tab-item">内容2</div>
         </div>
-    
+    </div>
+
 
 </body>
 <!-- 头部 -->
@@ -93,4 +93,5 @@
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../js/common/template-web.js"></script>
 <script src="../../../../js/two/Jbasis/supplier.js"></script>
+
 </html>
