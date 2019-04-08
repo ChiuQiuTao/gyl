@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="../../css/twoindex.css">
     <link rel="stylesheet" href="../../public/font/iconfont.css">
     <link rel="icon" href="../../public/favicon.ico">
+    <script src="../../js/common/jquery.min.js"></script>
     <script src="../../js/twoindex.js"></script>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+
 </head>
 
 <body class="layui-layout-body">
@@ -107,11 +107,11 @@
 
         //动态添加菜单
         var elms = "";
-        for (let index = 0; index < menudata.length; index++) {
+        for (var index = 0; index < menudata.length; index++) {
             var child = "";
             var meunchid = menudata[index].child;
             if (meunchid) {
-                for (const i in meunchid) {
+                for (var i in meunchid) {
                     // console.log(meunchid[i].title)
                     child +=
                         '<dl class="layui-nav-child">' +

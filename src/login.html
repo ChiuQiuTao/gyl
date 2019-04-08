@@ -27,7 +27,7 @@
             <div class="code">
                 <input type="text" placeholder="请输入验证码" class="login-tex">
                 <div id="v_container">
-                    <canvas id="verifyCanvas" width="100" height="40" style="cursor: pointer;"></canvas>
+                    <canvas id="verifyCanvas" width="135" height="40" style="cursor: pointer;"></canvas>
                 </div>
             </div>
             <div class="password">
@@ -81,7 +81,7 @@
                         alerts("请输入验证码！");
                     } else {
                         var tex = verifyCode.options.code;
-                        if ($(".login-tex").val().toLowerCase() != tex.substring(0, 3).toLowerCase()) {
+                        if ($(".login-tex").val().toLowerCase() != tex.toLowerCase()) {
                             alerts("请输入正确的验证码！");
                             return
                         }

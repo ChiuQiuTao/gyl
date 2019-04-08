@@ -8,10 +8,7 @@ function ajax(url, param, type) {
         window.location.href = "../../src/login.html";
         return;
     }
-    if (sessions == null) {
-        window.location.href = "../../src/login.html";
-        return;
-    }
+
     // 利用了jquery延迟对象回调的方式对ajax封装，使用done()，fail()，always()等方法进行链式回调操作
     return jq.ajax({
         url: base + url,
@@ -57,7 +54,6 @@ function handleAjax(url, param, type) {
 }
 
 
-
 //没有状态码
 function noAjax(url, param, type) {
     return ajax(url, param, type).then(function(resp) {
@@ -90,23 +86,4 @@ function alerts(texts) {
         time: 1000,
     })
     return;
-}
-
-/*写cookie*/
-function setCookie(name, value) {
-    var Days = 1;
-    var exp = new Date();
-    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-}
-
-/*读cookie*/
-function getCookie(name) {
-    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-
-    if (arr = document.cookie.match(reg))
-
-        return unescape(arr[2]);
-    else
-        return null;
 }
