@@ -81,9 +81,10 @@
     text-align: right;
 }
 
-body {
+
+/* body {
     background-color: #fff;
-}
+} */
 
 .select {
     margin: 15px;
@@ -94,16 +95,20 @@ body {
     padding-left: 20px;
     line-height: 50px;
     font-size: 16px;
-    background-color: #f9f9f9;
-    border: 1px solid #c9c9c9;
-    border-bottom-color: #fff;
+    /* background-color: #f9f9f9; */
+    /* border: 1px solid #c9c9c9; */
+    /* border-bottom-color: #fff; */
+    background-color: #fff;
+    border-bottom: 13px solid #f2f2f2;
 }
 
 .select-con {
-    border: 1px solid #c9c9c9;
+    /* border: 1px solid #c9c9c9; */
     display: flex;
     flex-wrap: wrap;
     padding-bottom: 10px;
+    background-color: #fff;
+    padding-top: 10px;
 }
 
 .common .layui-inline,
