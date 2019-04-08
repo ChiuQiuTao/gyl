@@ -20,27 +20,26 @@
         <div class="layui-header layui-bg-cyan">
             <div class="layui-logo two-in-logo">服务交易</div>
             <div class="layui-nav layui-layout-left two-in-title">
-                <p>欢迎<label class="uses" style="margin:0px 6px;">黄焱（1053385537）</label>用户登录供应链协同管理平台，这是您的第<span>10</span>次登录</p>
+                <p>欢迎<label>黄焱（1053385537）</label>用户登录供应链协同管理平台，这是您的第<span>10</span>次登录</p>
             </div>
 
             <div class="layui-nav layui-layout-right two-in-login">
                 <div class="two-in-top-approve">认证状态：<span>（未录入）</span></div>
-                <a href="javascript:;" class="exits">
+                <a href="javascript:;">
                     <i class="iconfont  icon-tuichu" style="font-size:30px;color:#6F6C6C;"></i>
                 </a>
                 <a href="javascript:;" class="two-in-message">
                     <i class="iconfont  icon-ios-notifications" style="font-size:30px;color:#6F6C6C"></i>
                     <span class="layui-badge-dot"></span>
                 </a>
-                <div class="layui-nav-item two-in-data " style="position:relative;">
-                    <a href="javascript:;" class="username" style="margin: 0px 10px;">
-                        黄焱
+                <div class="layui-nav-item two-in-data">
+                    <a href="javascript:;">
+                        黄焱（1053385537）
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="">基本资料</a></dd>
                         <dd><a href="">安全设置</a></dd>
                     </dl>
-
                 </div>
             </div>
         </div>
@@ -84,6 +83,10 @@
                 <i class="layui-icon layui-icon-next"></i>
             </div>
         </div>
+        <!-- 底部固定区域 -->
+        <!-- <div class="layui-footer">
+          
+        </div> -->
     </div>
     <script src="../../public/dist/layui.js"></script>
     <script>
@@ -105,27 +108,19 @@
         //动态添加菜单
         var elms = "";
         for (var index = 0; index < menudata.length; index++) {
-<<<<<<< HEAD
-            if (menudata[index].type == 1 || menudata[index].type == 2) {
-=======
-            if(menudata[index].type==1||menudata[index].type==5){
->>>>>>> 3cbea903c54c5921b932cd6b0c8edc21f224bc16
+            if(menudata[index].type==1||menudata[index].type==2){
                 var child = "";
                 var meunchid = menudata[index].child;
                 if (meunchid) {
                     for (var i in meunchid) {
                         // console.log(meunchid[i].title)
-<<<<<<< HEAD
-                        if (meunchid[i].type == 1 || meunchid[i].type == 2) {
-=======
-                        if(meunchid[i].type==1||meunchid[i].type==5){
->>>>>>> 3cbea903c54c5921b932cd6b0c8edc21f224bc16
+                        if(meunchid[i].type==1||meunchid[i].type==2){
                             child +=
-                                '<dl class="layui-nav-child">' +
-                                '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
-                                '</dl>'
+                            '<dl class="layui-nav-child">' +
+                            '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
+                            '</dl>'
                         }
-
+                        
                     }
                 }
                 elms += '<li class="layui-nav-item">' +
@@ -134,7 +129,7 @@
                     child +
                     '</li>'
             }
-
+            
         }
         document.querySelector("#twoinmenu").innerHTML += elms;
         document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
@@ -151,15 +146,6 @@
                 }
             });
             element.render('nav');
-
-            /*获取企业信息*/
-            noAjax('user/getUser', {}, "get").done(function(resp) {
-                $(".username").html(resp.username + '<i style="margin-left:5px;"  class="layui-icon layui-icon-triangle-d"></i>');
-                $(".uses").text(resp.username);
-            }).fail(function(err) {
-                console.log(err);
-            });
-
         });
     </script>
 
@@ -177,13 +163,7 @@
             document.querySelector('.showmenu').style.display = 'none';
             // document.querySelector('#hiddenmenu').style.backgroundColor = '#009688';
         })
-
-        /*头部右上角操作|退出*/
-        document.querySelector(".exits").addEventListener("click", function() {
-            window.location.href = "../login.html";
-        })
     </script>
 </body>
 
 </html>
-<script src="../../js/common/api.js"></script>

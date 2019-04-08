@@ -400,19 +400,48 @@ var menudata = [{
                 type: "5"
             }
         ]
+<<<<<<< HEAD
     }, {
         icon: "icon-cangku",
         type: "1",
+=======
+    },{
+        icon: "icon-ios-folder-open",
+        type:"5",
+>>>>>>> a8b296b4c75e58faf5db8e9b66a369cb89978f9c
         title: "仓库管理",
         child: [{
                 url: "../vertical/Sfood/warehouse/examine.html",
                 title: "仓库查看",
+<<<<<<< HEAD
                 type: "1"
+=======
+                type:"5"
+>>>>>>> a8b296b4c75e58faf5db8e9b66a369cb89978f9c
             },
             {
                 url: "../vertical/Sfood/warehouse/transfers.html",
                 title: "仓库调拨",
+<<<<<<< HEAD
                 type: "1"
+=======
+                type:"5"
+            }
+        ]
+    },{
+        icon: "icon-ios-folder-open",
+        type:"2",
+        title: "仓库管理",
+        child: [{
+                url: "../vertical/Sprocessing/warehouse/examine.html",
+                title: "仓库查看",
+                type:"2"
+            },
+            {
+                url: "../vertical/Sprocessing/warehouse/transfers.html",
+                title: "仓库调拨",
+                type:"2"
+>>>>>>> a8b296b4c75e58faf5db8e9b66a369cb89978f9c
             }
         ]
     }, {
