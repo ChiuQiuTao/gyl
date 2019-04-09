@@ -2,7 +2,9 @@
     font-size: 22px !important;
     width: 180px !important;
 }
-
+.layui-layout-admin .layui-side{
+    padding-bottom: 40px;
+}
 .two-in-title {
     height: 100%;
     display: flex;

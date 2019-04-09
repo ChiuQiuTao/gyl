@@ -164,6 +164,26 @@ var menudata = [{
         ]
     },
     {
+        icon: "icon-jiankong",
+        type: "5",
+        title: "统计分析",
+        child: [{
+                url: "../vertical/Sfood/\statistics/purchasinginformation.html",
+                title: "采购信息统计",
+                type: "5"
+            }, {
+                url: "../vertical/Sfood/\statistics/salesreturn.html",
+                title: "销售退货统计",
+                type: "5"
+            },{
+                url: "../vertical/Sfood/\statistics/salesinformation.html",
+                title: "销售信息统计",
+                type: "5"
+            },
+
+        ]
+    },
+    {
         icon: "icon-shejishengchan",
         type: "2",
         title: "生产加工管理",
@@ -247,6 +267,16 @@ var menudata = [{
                 type: "2"
             },
             {
+                url: "../vertical/Sfood/Iwarning/productpro.html",
+                title: "产品库存预警",
+                type: "5"
+            },
+            {
+                url: "../vertical/Sfood/Iwarning/probao.html",
+                title: "产品保质期预警",
+                type: "5"
+            },
+            {
                 url: "../vertical/Sfarming/Iwarning/livestockproduct.html",
                 title: "禽畜产品库存预警",
                 type: "3"
@@ -271,10 +301,6 @@ var menudata = [{
         child: [{
                 url: "../vertical/Scommon/Jbasis/supplier.html",
                 title: "供应商信息",
-<<<<<<< HEAD
-                type: "1"
-            }, {
-=======
                 type:"1"
             },{
                 url: "../vertical/Sfarming/Jbasis/customer.html",
@@ -285,7 +311,6 @@ var menudata = [{
                 title: "客户信息",
                 type:"5"
             },{
->>>>>>> 3cbea903c54c5921b932cd6b0c8edc21f224bc16
                 url: "../vertical/Splanting/Jbasis/inputs.html",
                 title: "投入品信息",
                 type: "4"
@@ -340,12 +365,22 @@ var menudata = [{
                 type: "2"
             },
             {
+                url: "../vertical/Splanting/Jbasis/base.html",
+                title: "基地信息",
+                type: "4"
+            },
+            {
+                url: "../vertical/Splanting/Jbasis/customer.html",
+                title: "客户信息",
+                type: "4"
+            },
+            {
                 url: "../vertical/Sfarming/Jbasis/inventory.html",
                 title: "仓库信息",
                 type: "3"
             },
             {
-                url: "../vertical/Sfarming/Jbasis/inventory.html",
+                url: "../vertical/Splanting/Jbasis/inventory.html",
                 title: "仓库信息",
                 type: "4"
             },
@@ -355,16 +390,16 @@ var menudata = [{
                 type: "5"
             },
             {
+                url: "../vertical/Sfood/Jbasis/product.html",
+                title: "商品信息",
+                type: "5"
+            },
+            {
                 url: "../vertical/Sprocessing/Jbasis/material.html",
                 title: "原辅料信息",
-<<<<<<< HEAD
-                type: "2"
-            }
-=======
                 type:"2"
             },
             
->>>>>>> 3cbea903c54c5921b932cd6b0c8edc21f224bc16
         ]
     }, {
         icon: "icon-ios-folder-open",
@@ -400,34 +435,6 @@ var menudata = [{
                 type: "5"
             }
         ]
-<<<<<<< HEAD
-    }, {
-        icon: "icon-cangku",
-        type: "1",
-=======
-    },{
-        icon: "icon-ios-folder-open",
-        type:"5",
->>>>>>> a8b296b4c75e58faf5db8e9b66a369cb89978f9c
-        title: "仓库管理",
-        child: [{
-                url: "../vertical/Sfood/warehouse/examine.html",
-                title: "仓库查看",
-<<<<<<< HEAD
-                type: "1"
-=======
-                type:"5"
->>>>>>> a8b296b4c75e58faf5db8e9b66a369cb89978f9c
-            },
-            {
-                url: "../vertical/Sfood/warehouse/transfers.html",
-                title: "仓库调拨",
-<<<<<<< HEAD
-                type: "1"
-=======
-                type:"5"
-            }
-        ]
     },{
         icon: "icon-ios-folder-open",
         type:"2",
@@ -441,7 +448,51 @@ var menudata = [{
                 url: "../vertical/Sprocessing/warehouse/transfers.html",
                 title: "仓库调拨",
                 type:"2"
->>>>>>> a8b296b4c75e58faf5db8e9b66a369cb89978f9c
+            }
+        ]
+    },{
+        icon: "icon-ios-folder-open",
+        type:"3",
+        title: "仓库管理",
+        child: [{
+                url: "../vertical/Sfarming/warehouse/examine.html",
+                title: "仓库查看",
+                type:"3"
+            },
+            {
+                url: "../vertical/Sfarming/warehouse/transfers.html",
+                title: "仓库调拨",
+                type:"3"
+            }
+        ]
+    },{
+        icon: "icon-ios-folder-open",
+        type:"4",
+        title: "仓库管理",
+        child: [{
+                url: "../vertical/Splanting/warehouse/examine.html",
+                title: "仓库查看",
+                type:"4"
+            },
+            {
+                url: "../vertical/Splanting/warehouse/transfers.html",
+                title: "仓库调拨",
+                type:"4"
+            }
+        ]
+    },{
+        icon: "icon-ios-folder-open",
+        type:"5",
+        title: "仓库管理",
+        child: [{
+                url: "../vertical/Sfood/warehouse/examine.html",
+                title: "仓库查看",
+                type:"5"
+            },
+            {
+                url: "../vertical/Sfood/warehouse/transfers.html",
+                title: "仓库调拨",
+                type:"5"
             }
         ]
     }, {
@@ -510,6 +561,47 @@ var menudata = [{
             }
         ]
     }, {
+        icon: "icon-jindu",
+        type: "4",
+        title: "种植进销存管理",
+        child: [{
+                url: "../vertical/Splanting/enterssellssaves/productsales.html",
+                title: "农产品销售",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsprocurement.html",
+                title: "投入品采购",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsinventory.html",
+                title: "投入品库存",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
+                title: "投入品不合格处理",
+                type: "4"
+            },
+           
+            {
+                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
+                title: "农产品退货",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
+                title: "投入品不合格处理",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
+                title: "农产品退货",
+                type: "4"
+            }
+        ]
+    }, {
         icon: "icon-xiaoshouxiangqing",
         type: "2",
         title: "销售管理",
@@ -535,6 +627,7 @@ var menudata = [{
             }
         ]
     },
+   
     {
         icon: "",
         title: "",

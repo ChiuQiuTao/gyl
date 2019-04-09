@@ -1,8 +1,14 @@
+html{
+    /* background-color: #fff; */
+
+}
 .container {
     background-color: #fff;
     padding-bottom: 20px;
 }
-
+.basis-h{
+    background-color: #fff !important;
+}
 .select-nav {
     height: 60px;
     padding-left: 20px;
