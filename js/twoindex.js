@@ -126,34 +126,34 @@ var menudata = [{
                 type: "4"
             },
             {
-                url: "../vertical/Sfarming/enterssellssaves/inputsprocurement.html",
+                url: "../vertical/Splanting/enterssellssaves/inputsprocurement.html",
                 title: "投入品采购",
                 type: "4"
             },
             {
-                url: "../vertical/Sfarming/enterssellssaves/inputsinventory.html",
+                url: "../vertical/Splanting/enterssellssaves/inputsinventory.html",
                 title: "投入品库存",
                 type: "4"
             },
             {
-                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
+                url: "../vertical/Splanting/enterssellssaves/inputsunqualified.html",
                 title: "投入品不合格处理",
                 type: "4"
             },
 
             {
-                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
+                url: "../vertical/Splanting/enterssellssaves/productreturn.html",
                 title: "农产品退货",
                 type: "4"
             },
             {
-                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
-                title: "投入品不合格处理",
+                url: "../vertical/Splanting/enterssellssaves/inputsunqualified.html",
+                title: "农产品不合格处理",
                 type: "4"
             },
             {
-                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
-                title: "农产品退货",
+                url: "../vertical/Splanting/enterssellssaves/productinventory.html",
+                title: "农产品库存",
                 type: "4"
             }
         ]
@@ -252,41 +252,9 @@ var menudata = [{
     },
     {
         icon: "icon-xianshi_jinggaotianchong",
-        type: "1",
-        title: "预警信息",
-        child: [{
-                url: "../vertical/Sfarming/Iwarning/inventory.html",
-                title: "投入品库存预警",
-                type: "3"
-            }, {
-                url: "../vertical/Sfarming/Iwarning/shelflife.html",
-                title: "投入品保质期预警",
-                type: "3"
-            },
-            {
-                url: "../vertical/Sfarming/Iwarning/inventory.html",
-                title: "投入品库存预警",
-                type: "4"
-            }, {
-                url: "../vertical/Sfarming/Iwarning/shelflife.html",
-                title: "投入品保质期预警",
-                type: "4"
-            },
-            {
-                url: "../vertical/Splanting/Iwarning/proinven.html",
-                title: "农产品库存预警",
-                type: "4"
-            },
-            {
-                url: "../vertical/Splanting/Iwarning/product.html",
-                title: "农产品保质期预警",
-                type: "4"
-            },
-            {
-                url: "../vertical/Splanting/Iwarning/harvest.html",
-                title: "农产品采收预警",
-                type: "4"
-            },
+        type: "2",
+        title: "加工企业预警信息",
+        child: [
             {
                 url: "../vertical/Sprocessing/Iwarning/rawmaterialsinven.html",
                 title: "原辅料库存预警",
@@ -307,15 +275,22 @@ var menudata = [{
                 title: "产品保质期预警",
                 type: "2"
             },
-            {
-                url: "../vertical/Sfood/Iwarning/productpro.html",
-                title: "产品库存预警",
-                type: "5"
-            },
-            {
-                url: "../vertical/Sfood/Iwarning/probao.html",
-                title: "产品保质期预警",
-                type: "5"
+           
+        ]
+    },
+
+    {
+        icon: "icon-xianshi_jinggaotianchong",
+        type: "3",
+        title: "养殖企业预警信息",
+        child: [{
+                url: "../vertical/Sfarming/Iwarning/inventory.html",
+                title: "投入品库存预警",
+                type: "3"
+            }, {
+                url: "../vertical/Sfarming/Iwarning/shelflife.html",
+                title: "投入品保质期预警",
+                type: "3"
             },
             {
                 url: "../vertical/Sfarming/Iwarning/livestockproduct.html",
@@ -331,6 +306,56 @@ var menudata = [{
                 url: "../vertical/Sfarming/Iwarning/such.html",
                 title: "出栏提醒",
                 type: "3"
+            },
+        ]
+    },
+
+    {
+        icon: "icon-xianshi_jinggaotianchong",
+        type: "4",
+        title: "种植企业预警信息",
+        child: [
+            {
+                url: "../vertical/Splanting/Iwarning/inventory.html",
+                title: "投入品库存预警",
+                type: "4"
+            }, {
+                url: "../vertical/Splanting/Iwarning/shelflife.html",
+                title: "投入品保质期预警",
+                type: "4"
+            },
+            {
+                url: "../vertical/Splanting/Iwarning/proinven.html",
+                title: "农产品库存预警",
+                type: "4"
+            },
+            {
+                url: "../vertical/Splanting/Iwarning/product.html",
+                title: "农产品保质期预警",
+                type: "4"
+            },
+            {
+                url: "../vertical/Splanting/Iwarning/harvest.html",
+                title: "农产品采收预警",
+                type: "4"
+            },
+        ]
+    },
+
+    {
+        icon: "icon-xianshi_jinggaotianchong",
+        type: "5",
+        title: "食品经营预警信息",
+        child: [
+            {
+                url: "../vertical/Sfood/Iwarning/productpro.html",
+                title: "产品库存预警",
+                type: "5"
+            },
+            {
+                url: "../vertical/Sfood/Iwarning/probao.html",
+                title: "产品保质期预警",
+                type: "5"
             },
         ]
     },

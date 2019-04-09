@@ -161,59 +161,43 @@
             // height: 'full-20',//满高
             cols: [
                 [{
-                    title: '编号',
-                    type: 'numbers',
-                    fixed: 'left'
-                }, {
-                    type: 'checkbox',
-                    fixed: 'left'
-                }, {
                     field: 'id',
-                    title: 'ID',
-                    width: 80,
-                    sort: true,
+                    title: '产品名称',
+                    minWidth: 120,
+                    // sort: true,
                     fixed: 'left',
-                    totalRowText: '合计：'
+                    minWidth: 120,
                 }, {
                     field: 'username',
-                    title: '用户名',
-                    width: 80
+                    title: "产品批次",
+                }, {
+                    field: 'username',
+                    title: "生产日期",
                 }, {
                     field: 'experience',
-                    title: '积分',
-                    width: 90,
-                    sort: true,
+                    title: '过期日期',
+                    minWidth: 120,
+                    // sort: true,
                     totalRow: true
-                }, {
-                    field: 'sex',
-                    title: '性别',
-                    width: 80,
-                    sort: true
-                }, {
-                    field: 'score',
-                    title: '评分',
-                    width: 80,
-                    sort: true,
+                },{
+                    field: 'experience',
+                    title: '保质期',
+                    minWidth: 120,
+                    // sort: true,
                     totalRow: true
-                }, {
-                    field: 'city',
-                    title: '城市',
-                    width: 150
-                }, {
-                    field: 'sign',
-                    title: '签名',
-                    width: 200
-                }, {
-                    field: 'classify',
-                    title: '职业',
-                    width: 100
-                }, {
-                    field: 'wealth',
-                    title: '财富',
-                    width: 135,
-                    sort: true,
+                },{
+                    field: 'experience',
+                    title: '库存数量',
+                    minWidth: 120,
+                    // sort: true,
                     totalRow: true
-                }, {
+                },{
+                    field: 'experience',
+                    title: '状态',
+                    minWidth: 120,
+                    // sort: true,
+                    totalRow: true
+                },{
                     field: 'wealth',
                     width: 137,
                     title: '更多',

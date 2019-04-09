@@ -58,7 +58,7 @@
     display: flex;
     align-items: center;
     position: fixed !important;
-    top: 60px;
+    /* top: 60px; */
     left: 0;
     width: 180px !important;
     z-index: 22;

@@ -67,8 +67,8 @@
     <div class="common-padding">
         <table class="layui-hide" id="test" lay-filter="testdome"></table>
     </div>
+        
 </body>
-
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
     <div class="layui-btn-container ">
@@ -91,7 +91,6 @@
         var $ = layui.jquery,
             table = layui.table,
             laydate = layui.laydate;
-
         laydate.render({
             elem: '#date1' //指定元素 
         });
@@ -186,59 +185,37 @@
             // height: 'full-20',//满高
             cols: [
                 [{
-                    title: '编号',
-                    type: 'numbers',
-                    fixed: 'left'
-                }, {
-                    type: 'checkbox',
-                    fixed: 'left'
-                }, {
                     field: 'id',
-                    title: 'ID',
-                    width: 80,
-                    sort: true,
+                    title: '检测日期',
+                    minWidth: 120,
+                    // sort: true,
                     fixed: 'left',
-                    totalRowText: '合计：'
+                    minWidth: 120,
                 }, {
                     field: 'username',
-                    title: '用户名',
-                    width: 80
+                    title: "检测单号",
+                }, {
+                    field: 'username',
+                    title: "农产品名称",
                 }, {
                     field: 'experience',
-                    title: '积分',
-                    width: 90,
+                    title: '采收批次',
+                    minWidth: 120,
+                    // sort: true,
+                    totalRow: true
+                }, {
+                    field: 'experience',
+                    title: '检测结论',
+                    minWidth: 120,
                     sort: true,
                     totalRow: true
                 }, {
-                    field: 'sex',
-                    title: '性别',
-                    width: 80,
-                    sort: true
-                }, {
-                    field: 'score',
-                    title: '评分',
-                    width: 80,
+                    field: 'experience',
+                    title: '负责人',
+                    minWidth: 120,
                     sort: true,
                     totalRow: true
-                }, {
-                    field: 'city',
-                    title: '城市',
-                    width: 150
-                }, {
-                    field: 'sign',
-                    title: '签名',
-                    width: 200
-                }, {
-                    field: 'classify',
-                    title: '职业',
-                    width: 100
-                }, {
-                    field: 'wealth',
-                    title: '财富',
-                    width: 135,
-                    sort: true,
-                    totalRow: true
-                }, {
+                },{
                     field: 'wealth',
                     width: 137,
                     title: '更多',
@@ -251,5 +228,4 @@
         });
     })
 </script>
-
 </html>
