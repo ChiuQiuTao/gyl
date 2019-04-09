@@ -48,7 +48,7 @@
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree layui-bg-cyan two-in-menu" id="twoinmenu" lay-filter="navtest">
-                    <li class="layui-nav-item two-in-menu-one" id='tzsidewards'>
+                    <li class="layui-nav-item two-in-menu-one sssss" id='tzsidewards'>
                         <label style="cursor: pointer;">切换菜单模式</label>
                         <i class="iconfont icon-shuangjiantouyou"></i>
                     </li>
@@ -92,9 +92,9 @@
     <script src="../../js/common/api.js"></script>
 
     <script>
-        window.onresize = function(){
+        window.onresize = function() {
             getClientHeight();
-            
+
         };
         getClientHeight();
         //动态给高
@@ -112,47 +112,48 @@
         var enterpriseType;
         // 获取用户信息
         getUser();
-        function getUser(e){
+
+        function getUser(e) {
             handleAjax('user/getUser', {}, "GET").done(function(resp) {
                 console.log(resp);
                 var names = document.querySelectorAll('.realname');
-                for(var i=0;i<names.length;i++){
-                    names[i].innerHTML = resp.realName+"("+resp.username+")";
+                for (var i = 0; i < names.length; i++) {
+                    names[i].innerHTML = resp.realName + "(" + resp.username + ")";
                 }
-                enterpriseType=resp.enterpriseType;
+                enterpriseType = resp.enterpriseType;
                 this.getElement(enterpriseType);
                 return
             }).fail(function(err) {
                 console.log(err);
                 var names = document.querySelectorAll('.realname');
-                for(var i=0;i<names.length;i++){
-                    names[i].innerHTML = err.realName+"("+err.username+")";
+                for (var i = 0; i < names.length; i++) {
+                    names[i].innerHTML = err.realName + "(" + err.username + ")";
                 }
-                enterpriseType=err.enterpriseType;
+                enterpriseType = err.enterpriseType;
                 this.getElement(enterpriseType);
                 return
             });
         }
 
         //动态添加菜单
-        function getElement(enterpriseType){
+        function getElement(enterpriseType) {
             var elms = "";
-            
+
             for (var index = 0; index < menudata.length; index++) {
-                if(menudata[index].type==1){
+                if (menudata[index].type == 1) {
                     var child = "";
                     var meunchid = menudata[index].child;
                     if (meunchid) {
                         for (var i in meunchid) {
                             // console.log(meunchid[i].title)
                             // for(var enterpriseTypeIndex=0;enterpriseTypeIndex<enterpriseType.length;enterpriseTypeIndex++){
-                                if(meunchid[i].type==1){
-                                    child +=
+                            if (meunchid[i].type == 1) {
+                                child +=
                                     '<dl class="layui-nav-child">' +
                                     '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
                                     '</dl>'
-                                    console.log(meunchid[i].title);
-                                }
+                                console.log(meunchid[i].title);
+                            }
                             // }
                         }
                     }
@@ -164,21 +165,21 @@
                 }
 
 
-                for(var enterpriseTypeIndex=0;enterpriseTypeIndex<enterpriseType.length;enterpriseTypeIndex++){
+                for (var enterpriseTypeIndex = 0; enterpriseTypeIndex < enterpriseType.length; enterpriseTypeIndex++) {
                     // console.log(enterpriseTypeIndex);
-                    if(menudata[index].type==enterpriseType[enterpriseTypeIndex]){
+                    if (menudata[index].type == enterpriseType[enterpriseTypeIndex]) {
                         var child = "";
                         var meunchid = menudata[index].child;
                         if (meunchid) {
                             for (var i in meunchid) {
                                 // console.log(meunchid[i].title)
-                                if(meunchid[i].type==1||meunchid[i].type==enterpriseType[enterpriseTypeIndex]){
+                                if (meunchid[i].type == 1 || meunchid[i].type == enterpriseType[enterpriseTypeIndex]) {
                                     child +=
-                                    '<dl class="layui-nav-child">' +
-                                    '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
-                                    '</dl>'
+                                        '<dl class="layui-nav-child">' +
+                                        '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
+                                        '</dl>'
                                 }
-                                
+
                             }
                         }
                         elms += '<li class="layui-nav-item">' +
@@ -189,9 +190,9 @@
                     }
                 }
 
-                
-                
-                
+
+
+
             }
             document.querySelector("#twoinmenu").innerHTML += elms;
             document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
@@ -210,7 +211,6 @@
                 element.render('nav');
             });
         }
-        
     </script>
 
     <script>

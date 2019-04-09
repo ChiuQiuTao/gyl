@@ -140,7 +140,7 @@ var menudata = [{
                 title: "投入品不合格处理",
                 type: "4"
             },
-           
+
             {
                 url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
                 title: "农产品退货",
@@ -157,7 +157,7 @@ var menudata = [{
                 type: "4"
             }
         ]
-    }, 
+    },
     {
         icon: "icon-shu",
         type: "4",
@@ -216,7 +216,7 @@ var menudata = [{
                 url: "../vertical/Sfood/\statistics/salesreturn.html",
                 title: "销售退货统计",
                 type: "5"
-            },{
+            }, {
                 url: "../vertical/Sfood/\statistics/salesinformation.html",
                 title: "销售信息统计",
                 type: "5"
@@ -266,11 +266,11 @@ var menudata = [{
             {
                 url: "../vertical/Sfarming/Iwarning/inventory.html",
                 title: "投入品库存预警",
-                type:"4"
+                type: "4"
             }, {
                 url: "../vertical/Sfarming/Iwarning/shelflife.html",
                 title: "投入品保质期预警",
-                type:"4"
+                type: "4"
             },
             {
                 url: "../vertical/Splanting/Iwarning/proinven.html",
@@ -342,7 +342,12 @@ var menudata = [{
         child: [{
                 url: "../vertical/Sprocessing/Jbasis/supplier.html",
                 title: "供应商信息",
-                type:"2"
+                type: "2"
+            },
+            {
+                url: "../vertical/Sprocessing/Jbasis/customer.html",
+                title: "客户信息",
+                type: "2"
             },
             {
                 url: "../vertical/Sprocessing/Jbasis/enterprise.html",
@@ -355,16 +360,16 @@ var menudata = [{
                 type: "2"
             },
             {
-                url: "../vertical/Sfarming/Jbasis/inventory.html",
+                url: "../vertical/Sprocessing/Jbasis/inventory.html",
                 title: "仓库信息",
                 type: "2"
             },
             {
                 url: "../vertical/Sprocessing/Jbasis/material.html",
                 title: "原辅料信息",
-                type:"2"
+                type: "2"
             },
-            
+
         ]
     },
     {
@@ -374,11 +379,11 @@ var menudata = [{
         child: [{
                 url: "../vertical/Sfarming/Jbasis/supplier.html",
                 title: "供应商信息",
-                type:"3"
-            },{
+                type: "3"
+            }, {
                 url: "../vertical/Sfarming/Jbasis/customer.html",
                 title: "客户信息",
-                type:"3"
+                type: "3"
             },
             {
                 url: "../vertical/Sfarming/Jbasis/housing.html",
@@ -414,7 +419,7 @@ var menudata = [{
                 title: "仓库信息",
                 type: "3"
             },
-            
+
         ]
     },
     {
@@ -424,8 +429,8 @@ var menudata = [{
         child: [{
                 url: "../vertical/Splanting/Jbasis/supplier.html",
                 title: "供应商信息",
-                type:"4"
-            },{
+                type: "4"
+            }, {
                 url: "../vertical/Splanting/Jbasis/inputs.html",
                 title: "投入品信息",
                 type: "4"
@@ -435,7 +440,7 @@ var menudata = [{
                 title: "农产品信息",
                 type: "4"
             },
-           
+
             {
                 url: "../vertical/Splanting/Jbasis/base.html",
                 title: "基地信息",
@@ -446,7 +451,7 @@ var menudata = [{
                 title: "客户信息",
                 type: "4"
             },
-           
+
             {
                 url: "../vertical/Splanting/Jbasis/inventory.html",
                 title: "仓库信息",
@@ -461,11 +466,11 @@ var menudata = [{
         child: [{
                 url: "../vertical/Sfood/Jbasis/supplier.html",
                 title: "供应商信息",
-                type:"5"
-            },{
+                type: "5"
+            }, {
                 url: "../vertical/Sfarming/Jbasis/customer.html",
                 title: "客户信息",
-                type:"5"
+                type: "5"
             },
             {
                 url: "../vertical/Sfood/Jbasis/inventory.html",
@@ -477,8 +482,8 @@ var menudata = [{
                 title: "商品信息",
                 type: "5"
             },
-           
-            
+
+
         ]
     },
     {
@@ -515,64 +520,64 @@ var menudata = [{
                 type: "5"
             }
         ]
-    },{
+    }, {
         icon: "icon-ios-folder-open",
-        type:"2",
+        type: "2",
         title: "加工企业仓库管理",
         child: [{
                 url: "../vertical/Sprocessing/warehouse/examine.html",
                 title: "仓库查看",
-                type:"2"
+                type: "2"
             },
             {
                 url: "../vertical/Sprocessing/warehouse/transfers.html",
                 title: "仓库调拨",
-                type:"2"
+                type: "2"
             }
         ]
-    },{
+    }, {
         icon: "icon-ios-folder-open",
-        type:"3",
+        type: "3",
         title: "养殖企业仓库管理",
         child: [{
                 url: "../vertical/Sfarming/warehouse/examine.html",
                 title: "仓库查看",
-                type:"3"
+                type: "3"
             },
             {
                 url: "../vertical/Sfarming/warehouse/transfers.html",
                 title: "仓库调拨",
-                type:"3"
+                type: "3"
             }
         ]
-    },{
+    }, {
         icon: "icon-ios-folder-open",
-        type:"4",
+        type: "4",
         title: "种植企业仓库管理",
         child: [{
                 url: "../vertical/Splanting/warehouse/examine.html",
                 title: "仓库查看",
-                type:"4"
+                type: "4"
             },
             {
                 url: "../vertical/Splanting/warehouse/transfers.html",
                 title: "仓库调拨",
-                type:"4"
+                type: "4"
             }
         ]
-    },{
+    }, {
         icon: "icon-ios-folder-open",
-        type:"5",
+        type: "5",
         title: "食品经营仓库管理",
         child: [{
                 url: "../vertical/Sfood/warehouse/examine.html",
                 title: "仓库查看",
-                type:"5"
+                type: "5"
             },
             {
                 url: "../vertical/Sfood/warehouse/transfers.html",
                 title: "仓库调拨",
-                type:"5"
+                type: "5"
             }
         ]
     }, {
@@ -640,7 +645,7 @@ var menudata = [{
                 type: "3"
             }
         ]
-    },{
+    }, {
         icon: "icon-xiaoshouxiangqing",
         type: "2",
         title: "销售管理",
@@ -666,7 +671,7 @@ var menudata = [{
             }
         ]
     },
-   
+
     {
         icon: "",
         title: "",

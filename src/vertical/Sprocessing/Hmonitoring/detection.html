@@ -18,7 +18,6 @@
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
-
                 <div class="layui-form-item">
                     <div class="select-hand-item">
                         <div class="layui-inline">
@@ -184,54 +183,37 @@
                     type: 'numbers',
                     fixed: 'left'
                 }, {
-                    type: 'checkbox',
-                    fixed: 'left'
-                }, {
                     field: 'id',
-                    title: 'ID',
+                    title: '检测日期',
                     width: 80,
                     sort: true,
                     fixed: 'left',
-                    totalRowText: '合计：'
+                    minWidth: 120,
                 }, {
                     field: 'username',
-                    title: '用户名',
-                    width: 80
+                    title: "检测单号",
+                    // width: 80
                 }, {
                     field: 'experience',
-                    title: '积分',
-                    width: 90,
+                    title: '产品名称',
+                    minWidth: 120,
                     sort: true,
                     totalRow: true
                 }, {
                     field: 'sex',
-                    title: '性别',
-                    width: 80,
+                    title: '生产批次',
+                    minWidth: 20,
                     sort: true
                 }, {
                     field: 'score',
-                    title: '评分',
-                    width: 80,
+                    title: '检测结论',
+                    minWidth: 120,
                     sort: true,
                     totalRow: true
-                }, {
-                    field: 'city',
-                    title: '城市',
-                    width: 150
                 }, {
                     field: 'sign',
-                    title: '签名',
+                    title: '负责人',
                     width: 200
-                }, {
-                    field: 'classify',
-                    title: '职业',
-                    width: 100
-                }, {
-                    field: 'wealth',
-                    title: '财富',
-                    width: 135,
-                    sort: true,
-                    totalRow: true
                 }, {
                     field: 'wealth',
                     width: 137,
