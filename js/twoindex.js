@@ -299,9 +299,21 @@ var menudata = [{
         type: "1",
         title: "基础信息",
         child: [{
-                url: "../vertical/Scommon/Jbasis/supplier.html",
+                url: "../vertical/Sprocessing/Jbasis/supplier.html",
                 title: "供应商信息",
-                type:"1"
+                type:"2"
+            },{
+                url: "../vertical/Sfarming/Jbasis/supplier.html",
+                title: "供应商信息",
+                type:"3"
+            },{
+                url: "../vertical/Splanting/Jbasis/supplier.html",
+                title: "供应商信息",
+                type:"4"
+            },{
+                url: "../vertical/Sfood/Jbasis/supplier.html",
+                title: "供应商信息",
+                type:"5"
             },{
                 url: "../vertical/Sfarming/Jbasis/customer.html",
                 title: "客户信息",
