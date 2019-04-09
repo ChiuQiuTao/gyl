@@ -190,9 +190,6 @@
                     }
                 }
 
-
-
-
             }
             document.querySelector("#twoinmenu").innerHTML += elms;
             document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
@@ -209,25 +206,27 @@
                     }
                 });
                 element.render('nav');
+
+
+                /*切换菜单模式*/
+                $("#tzsidewards").click(function() {
+                    window.location.href = "../../index.html";
+                });
             });
         }
-    </script>
-
-    <script>
-        document.querySelector('#tzsidewards').addEventListener('click', function() {
-            window.location.href = "../../index.html";
-        })
-        document.querySelector('#hiddenmenu').addEventListener('click', function() {
-            document.querySelector('.layui-body').classList.add('two-all');
-            document.querySelector('.showmenu').style.display = 'flex';
-            // document.querySelector('#hiddenmenu').style.backgroundColor = '#fff';
-        })
-        document.querySelector('.showmenu').addEventListener('click', function() {
-            document.querySelector('.layui-body').classList.remove('two-all');
-            document.querySelector('.showmenu').style.display = 'none';
-            // document.querySelector('#hiddenmenu').style.backgroundColor = '#009688';
-        })
     </script>
 </body>
 
 </html>
+<script>
+    document.querySelector('#hiddenmenu').addEventListener('click', function() {
+        document.querySelector('.layui-body').classList.add('two-all');
+        document.querySelector('.showmenu').style.display = 'flex';
+        // document.querySelector('#hiddenmenu').style.backgroundColor = '#fff';
+    })
+    document.querySelector('.showmenu').addEventListener('click', function() {
+        document.querySelector('.layui-body').classList.remove('two-all');
+        document.querySelector('.showmenu').style.display = 'none';
+        // document.querySelector('#hiddenmenu').style.backgroundColor = '#009688';
+    })
+</script>
