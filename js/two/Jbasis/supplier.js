@@ -1,17 +1,8 @@
-layui.use(['table', "layer", "laydate", "util"], function() {
+layui.use(['table', "layer", "util"], function() {
     var $ = layui.jquery,
         table = layui.table,
         layer = layui.layer,
-        laydate = layui.laydate,
         util = layui.util;
-
-    //时间
-    laydate.render({
-        elem: '#date1' //指定元素 
-    });
-    laydate.render({
-        elem: '#date2' //指定元素
-    });
 
 
     //监听头部监听 ||新增
@@ -214,5 +205,10 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         });
     }
 
+
+    /*重置*/
+    $(".agains").click(function() {
+        window.location.reload();
+    })
 
 })
