@@ -20,7 +20,7 @@
         <div class="layui-header layui-bg-cyan">
             <div class="layui-logo two-in-logo">服务交易</div>
             <div class="layui-nav layui-layout-left two-in-title">
-                <p>欢迎<label>黄焱（1053385537）</label>用户登录供应链协同管理平台，这是您的第<span>10</span>次登录</p>
+                <p>欢迎<label class="realname">黄焱（1053385537）</label>用户登录供应链协同管理平台，这是您的第<span>10</span>次登录</p>
             </div>
 
             <div class="layui-nav layui-layout-right two-in-login">
@@ -33,7 +33,7 @@
                     <span class="layui-badge-dot"></span>
                 </a>
                 <div class="layui-nav-item two-in-data">
-                    <a href="javascript:;">
+                    <a href="javascript:;" id="" class="realname">
                         黄焱（1053385537）
                     </a>
                     <dl class="layui-nav-child">
@@ -89,7 +89,13 @@
         </div> -->
     </div>
     <script src="../../public/dist/layui.js"></script>
+    <script src="../../js/common/api.js"></script>
+
     <script>
+        window.onresize = function(){
+            getClientHeight();
+            
+        };
         getClientHeight();
         //动态给高
         function getClientHeight() {
@@ -103,50 +109,107 @@
             document.querySelector('.two-in-coms').style.height = clientHeight - 90 + 'px';
             return
         }
-
+        var enterpriseType;
+        // 获取用户信息
+        getUser();
+        function getUser(e){
+            handleAjax('user/getUser', {}, "GET").done(function(resp) {
+                console.log(resp);
+                var names = document.querySelectorAll('.realname');
+                for(var i=0;i<names.length;i++){
+                    names[i].innerHTML = resp.realName+"("+resp.username+")";
+                }
+                enterpriseType=resp.enterpriseType;
+                this.getElement(enterpriseType);
+                return
+            }).fail(function(err) {
+                console.log(err);
+                var names = document.querySelectorAll('.realname');
+                for(var i=0;i<names.length;i++){
+                    names[i].innerHTML = err.realName+"("+err.username+")";
+                }
+                enterpriseType=err.enterpriseType;
+                this.getElement(enterpriseType);
+                return
+            });
+        }
 
         //动态添加菜单
-        var elms = "";
-        for (var index = 0; index < menudata.length; index++) {
-            if (menudata[index].type == 1 || menudata[index].type == 2) {
-                var child = "";
-                var meunchid = menudata[index].child;
-                if (meunchid) {
-                    for (var i in meunchid) {
-                        // console.log(meunchid[i].title)
-                        if (meunchid[i].type == 1 || meunchid[i].type == 2) {
-                            child +=
-                                '<dl class="layui-nav-child">' +
-                                '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
-                                '</dl>'
+        function getElement(enterpriseType){
+            var elms = "";
+            
+            for (var index = 0; index < menudata.length; index++) {
+                if(menudata[index].type==1){
+                    var child = "";
+                    var meunchid = menudata[index].child;
+                    if (meunchid) {
+                        for (var i in meunchid) {
+                            // console.log(meunchid[i].title)
+                            for(var enterpriseTypeIndex=0;enterpriseTypeIndex<enterpriseType.length;enterpriseTypeIndex++){
+                                if(meunchid[i].type==1||meunchid[i].type==enterpriseType[enterpriseTypeIndex]){
+                                    child +=
+                                    '<dl class="layui-nav-child">' +
+                                    '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
+                                    '</dl>'
+                                }
+                            }
                         }
+                    }
+                    elms += '<li class="layui-nav-item">' +
+                        '<a class="" href="javascript:;">' +
+                        '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
+                        child +
+                        '</li>'
+                }
 
+
+                for(var enterpriseTypeIndex=0;enterpriseTypeIndex<enterpriseType.length;enterpriseTypeIndex++){
+                    // console.log(enterpriseTypeIndex);
+                    if(menudata[index].type==enterpriseType[enterpriseTypeIndex]){
+                        var child = "";
+                        var meunchid = menudata[index].child;
+                        if (meunchid) {
+                            for (var i in meunchid) {
+                                // console.log(meunchid[i].title)
+                                if(meunchid[i].type==1||meunchid[i].type==enterpriseType[enterpriseTypeIndex]){
+                                    child +=
+                                    '<dl class="layui-nav-child">' +
+                                    '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
+                                    '</dl>'
+                                }
+                                
+                            }
+                        }
+                        elms += '<li class="layui-nav-item">' +
+                            '<a class="" href="javascript:;">' +
+                            '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
+                            child +
+                            '</li>'
                     }
                 }
-                elms += '<li class="layui-nav-item">' +
-                    '<a class="" href="javascript:;">' +
-                    '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
-                    child +
-                    '</li>'
+
+                
+                
+                
             }
+            document.querySelector("#twoinmenu").innerHTML += elms;
+            document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
 
-        }
-        document.querySelector("#twoinmenu").innerHTML += elms;
-        document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
-
-        // 左侧菜单
-        layui.use('element', function() {
-            var $ = layui.$,
-                element = layui.element;
-            element.init();
-            element.on('nav(navtest)', function(elem) {
-                var cun = elem[0].dataset.options
-                if (cun != undefined) {
-                    $("#contentsss").attr("src", cun)
-                }
+            // 左侧菜单
+            layui.use('element', function() {
+                var $ = layui.$,
+                    element = layui.element;
+                element.init();
+                element.on('nav(navtest)', function(elem) {
+                    var cun = elem[0].dataset.options
+                    if (cun != undefined) {
+                        $("#contentsss").attr("src", cun)
+                    }
+                });
+                element.render('nav');
             });
-            element.render('nav');
-        });
+        }
+        
     </script>
 
     <script>

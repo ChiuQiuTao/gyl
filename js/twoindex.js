@@ -116,7 +116,48 @@ var menudata = [{
                 type: "3"
             },
         ]
-    },
+    }, {
+        icon: "icon-jindu",
+        type: "4",
+        title: "种植进销存管理",
+        child: [{
+                url: "../vertical/Splanting/enterssellssaves/productsales.html",
+                title: "农产品销售",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsprocurement.html",
+                title: "投入品采购",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsinventory.html",
+                title: "投入品库存",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
+                title: "投入品不合格处理",
+                type: "4"
+            },
+           
+            {
+                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
+                title: "农产品退货",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
+                title: "投入品不合格处理",
+                type: "4"
+            },
+            {
+                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
+                title: "农产品退货",
+                type: "4"
+            }
+        ]
+    }, 
     {
         icon: "icon-shu",
         type: "4",
@@ -296,36 +337,48 @@ var menudata = [{
 
     {
         icon: "icon-ios-folder-open",
-        type: "1",
-        title: "基础信息",
+        type: "2",
+        title: "加工企业基础信息",
         child: [{
                 url: "../vertical/Sprocessing/Jbasis/supplier.html",
                 title: "供应商信息",
                 type:"2"
-            },{
+            },
+            {
+                url: "../vertical/Sprocessing/Jbasis/enterprise.html",
+                title: "企业标准信息",
+                type: "2"
+            },
+            {
+                url: "../vertical/Sprocessing/Jbasis/product.html",
+                title: "产品信息",
+                type: "2"
+            },
+            {
+                url: "../vertical/Sfarming/Jbasis/inventory.html",
+                title: "仓库信息",
+                type: "2"
+            },
+            {
+                url: "../vertical/Sprocessing/Jbasis/material.html",
+                title: "原辅料信息",
+                type:"2"
+            },
+            
+        ]
+    },
+    {
+        icon: "icon-ios-folder-open",
+        type: "3",
+        title: "养殖企业基础信息",
+        child: [{
                 url: "../vertical/Sfarming/Jbasis/supplier.html",
                 title: "供应商信息",
                 type:"3"
             },{
-                url: "../vertical/Splanting/Jbasis/supplier.html",
-                title: "供应商信息",
-                type:"4"
-            },{
-                url: "../vertical/Sfood/Jbasis/supplier.html",
-                title: "供应商信息",
-                type:"5"
-            },{
                 url: "../vertical/Sfarming/Jbasis/customer.html",
                 title: "客户信息",
                 type:"3"
-            },{
-                url: "../vertical/Sfarming/Jbasis/customer.html",
-                title: "客户信息",
-                type:"5"
-            },{
-                url: "../vertical/Splanting/Jbasis/inputs.html",
-                title: "投入品信息",
-                type: "4"
             },
             {
                 url: "../vertical/Sfarming/Jbasis/housing.html",
@@ -357,25 +410,32 @@ var menudata = [{
                 type: "3"
             },
             {
-                url: "../vertical/Sprocessing/Jbasis/enterprise.html",
-                title: "企业标准信息",
-                type: "2"
+                url: "../vertical/Sfarming/Jbasis/inventory.html",
+                title: "仓库信息",
+                type: "3"
             },
-            {
-                url: "../vertical/Sprocessing/Jbasis/product.html",
-                title: "产品信息",
-                type: "2"
+            
+        ]
+    },
+    {
+        icon: "icon-ios-folder-open",
+        type: "4",
+        title: "种植企业基础信息",
+        child: [{
+                url: "../vertical/Splanting/Jbasis/supplier.html",
+                title: "供应商信息",
+                type:"4"
+            },{
+                url: "../vertical/Splanting/Jbasis/inputs.html",
+                title: "投入品信息",
+                type: "4"
             },
             {
                 url: "../vertical/Splanting/Jbasis/nonpro.html",
                 title: "农产品信息",
                 type: "4"
             },
-            {
-                url: "../vertical/Sfarming/Jbasis/inventory.html",
-                title: "仓库信息",
-                type: "2"
-            },
+           
             {
                 url: "../vertical/Splanting/Jbasis/base.html",
                 title: "基地信息",
@@ -386,15 +446,26 @@ var menudata = [{
                 title: "客户信息",
                 type: "4"
             },
-            {
-                url: "../vertical/Sfarming/Jbasis/inventory.html",
-                title: "仓库信息",
-                type: "3"
-            },
+           
             {
                 url: "../vertical/Splanting/Jbasis/inventory.html",
                 title: "仓库信息",
                 type: "4"
+            },
+        ]
+    },
+    {
+        icon: "icon-ios-folder-open",
+        type: "5",
+        title: "食品经营基础信息",
+        child: [{
+                url: "../vertical/Sfood/Jbasis/supplier.html",
+                title: "供应商信息",
+                type:"5"
+            },{
+                url: "../vertical/Sfarming/Jbasis/customer.html",
+                title: "客户信息",
+                type:"5"
             },
             {
                 url: "../vertical/Sfood/Jbasis/inventory.html",
@@ -406,14 +477,11 @@ var menudata = [{
                 title: "商品信息",
                 type: "5"
             },
-            {
-                url: "../vertical/Sprocessing/Jbasis/material.html",
-                title: "原辅料信息",
-                type:"2"
-            },
+           
             
         ]
-    }, {
+    },
+    {
         icon: "icon-ios-folder-open",
         type: "5",
         title: "商品经营",
@@ -450,7 +518,7 @@ var menudata = [{
     },{
         icon: "icon-ios-folder-open",
         type:"2",
-        title: "仓库管理",
+        title: "加工企业仓库管理",
         child: [{
                 url: "../vertical/Sprocessing/warehouse/examine.html",
                 title: "仓库查看",
@@ -465,7 +533,7 @@ var menudata = [{
     },{
         icon: "icon-ios-folder-open",
         type:"3",
-        title: "仓库管理",
+        title: "养殖企业仓库管理",
         child: [{
                 url: "../vertical/Sfarming/warehouse/examine.html",
                 title: "仓库查看",
@@ -480,7 +548,7 @@ var menudata = [{
     },{
         icon: "icon-ios-folder-open",
         type:"4",
-        title: "仓库管理",
+        title: "种植企业仓库管理",
         child: [{
                 url: "../vertical/Splanting/warehouse/examine.html",
                 title: "仓库查看",
@@ -495,7 +563,7 @@ var menudata = [{
     },{
         icon: "icon-ios-folder-open",
         type:"5",
-        title: "仓库管理",
+        title: "食品经营仓库管理",
         child: [{
                 url: "../vertical/Sfood/warehouse/examine.html",
                 title: "仓库查看",
@@ -572,48 +640,7 @@ var menudata = [{
                 type: "3"
             }
         ]
-    }, {
-        icon: "icon-jindu",
-        type: "4",
-        title: "种植进销存管理",
-        child: [{
-                url: "../vertical/Splanting/enterssellssaves/productsales.html",
-                title: "农产品销售",
-                type: "4"
-            },
-            {
-                url: "../vertical/Sfarming/enterssellssaves/inputsprocurement.html",
-                title: "投入品采购",
-                type: "4"
-            },
-            {
-                url: "../vertical/Sfarming/enterssellssaves/inputsinventory.html",
-                title: "投入品库存",
-                type: "4"
-            },
-            {
-                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
-                title: "投入品不合格处理",
-                type: "4"
-            },
-           
-            {
-                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
-                title: "农产品退货",
-                type: "4"
-            },
-            {
-                url: "../vertical/Sfarming/enterssellssaves/inputsunqualified.html",
-                title: "投入品不合格处理",
-                type: "4"
-            },
-            {
-                url: "../vertical/Sfarming/enterssellssaves/productreturn.html",
-                title: "农产品退货",
-                type: "4"
-            }
-        ]
-    }, {
+    },{
         icon: "icon-xiaoshouxiangqing",
         type: "2",
         title: "销售管理",
