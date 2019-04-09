@@ -145,14 +145,15 @@
                     if (meunchid) {
                         for (var i in meunchid) {
                             // console.log(meunchid[i].title)
-                            for(var enterpriseTypeIndex=0;enterpriseTypeIndex<enterpriseType.length;enterpriseTypeIndex++){
-                                if(meunchid[i].type==1||meunchid[i].type==enterpriseType[enterpriseTypeIndex]){
+                            // for(var enterpriseTypeIndex=0;enterpriseTypeIndex<enterpriseType.length;enterpriseTypeIndex++){
+                                if(meunchid[i].type==1){
                                     child +=
                                     '<dl class="layui-nav-child">' +
                                     '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
                                     '</dl>'
+                                    console.log(meunchid[i].title);
                                 }
-                            }
+                            // }
                         }
                     }
                     elms += '<li class="layui-nav-item">' +
