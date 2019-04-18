@@ -88,6 +88,7 @@
     text-align: center;
     line-height: 40px;
     cursor: pointer;
+    border-top: 1px solid #23262E;
 }
 
 .two-in-con {
@@ -119,3 +120,34 @@
 .showmenu i{
     color: #fff;
 }
+/* .two-in-select{
+    background-color: #009688;
+    z-index: 99999;
+    height: 40px;
+    width: 180px;
+    position: fixed;
+    bottom: 41px;
+    left: 0;
+}
+.two-in-select .layui-input{
+    background-color: #009688;
+    border: #009688;
+    color: #fff;
+    text-align: center;
+}
+.two-in-select .layui-form-select dl dd.layui-this{
+    background-color: #009688;
+}
+.two-in-select .layui-form-select dl dd{
+    color: #000;
+}
+.two-in-select .layui-form-selectup dl{
+    bottom: 39px;
+}
+.two-in-select .layui-form-select dl{
+    padding: 0;
+    border-radius: 0;
+}
+.two-in-select .layui-form-select dl dd.layui-this{
+    color: #fff;
+} */
