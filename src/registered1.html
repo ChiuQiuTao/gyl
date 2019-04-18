@@ -26,6 +26,23 @@
             </div>
             <input type="text" placeholder="请输入您的企业名称" class="layui-input enterprises">
         </div>
+
+
+        <div class="item jis">
+            <div class="item-txt">
+                企业类型:
+            </div>
+            <div class="typeof">
+                <form class="layui-form layui-form-pane   inputtype" style=" padding: 4px;">
+                    <input type="checkbox" title="养殖企业" value="3">
+                    <input type="checkbox" title="种植企业" value="4">
+                    <input type="checkbox" title="生产加工企业" value="2">
+                    <input type="checkbox" title="食品经营单位" value="5">
+                </form>
+
+            </div>
+        </div>
+
         <div class="item jis">
             <div class="item-txt">
                 统一社会信用代码:
@@ -47,7 +64,7 @@
         </div>
 
         <div class="btns">
-            <div class="btns-item determines" style="margin:0 0 0 135px;padding:4px 100px;">确定</div>
+            <div class="btns-item determines" style="margin:0 0 0 33px;padding:4px 100px;">确定</div>
         </div>
     </div>
 
@@ -66,11 +83,19 @@
 <script src="../public/dist/layui.js"></script>
 
 <script type="text/javascript">
-    layui.use("layer", function() {
+    layui.use(["layer", "form"], function() {
         var $ = layui.jquery,
-            layer = layui.layer;
+            form = layui.form,
+            layer = layui.layer,
+            enterpriseTypessting = "",
+            parameter = {},
+            enterpriseTypes = [];
+
+
 
         $(".determines").click(function() {
+            enterpriseTypes = [];
+            enterpriseTypessting = "";
             var enterpr = $(".enterprises").val(),
                 credit = $(".credit").val(),
                 rescre = /^[A-Za-z0-9]*$/,
@@ -85,6 +110,31 @@
                 $(".enterprises").val("");
                 return
             }
+
+            $(".inputtype>input").each(function(i, elem) {
+                if ($(elem)[0].checked) {
+                    enterpriseTypes.push($(elem)[0].value);
+                }
+            })
+            enterpriseTypes = uniq(enterpriseTypes);
+            if (enterpriseTypes.length == 0) {
+                layer.msg('请选择企业类型', {
+                    time: 500,
+                    offset: ['200px']
+                });
+                return
+            }
+            /*去重*/
+            function uniq(array) {
+                var temp = [];
+                for (var i = 0; i < array.length; i++) {
+                    if (temp.indexOf(array[i]) == -1) {
+                        temp.push(array[i]);
+                    }
+                }
+                return temp;
+            }
+
             if (!rescre.test(credit) || credit.length != 18) {
                 layer.msg('请正确输入统一社会信用代码', {
                     time: 500,
@@ -105,19 +155,21 @@
                     time: 500,
                     offset: ['200px']
                 });
-                $(".accounts").val("");
+                $(".password").val("");
                 return
             }
 
-
-            handleAjax('register/createRegister', {
+            parameter = {
                 username: accounts,
                 password: password,
-                enterpriseName: enterpr,
-                enterpriseType: "1",
                 telephone: "13128665471",
-                license: credit
-            }).done(function(resp) {
+                license: credit,
+                enterpriseName: enterpr,
+            }
+            enterpriseTypessting = enterpriseTypes.join();
+            parameter.enterpriseType = enterpriseTypessting;
+
+            handleAjax('register/createRegister', parameter).done(function(resp) {
                 layer.msg('注册成功', {
                     icon: 1,
                     time: 1000

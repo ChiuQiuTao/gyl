@@ -156,7 +156,15 @@ body {
     align-items: center;
 }
 
+.jis {
+    margin-left: 100px;
+}
+
 .jis .item-txt {
     width: 200px;
     text-align: right;
+}
+
+.typeof {
+    position: relative;
 }

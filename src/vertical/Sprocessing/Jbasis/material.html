@@ -94,7 +94,7 @@
                 data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 case 'add':
-                    layer.msg('添加');
+                    window.location.href = "./dialog/newmaterial.html";
                     break;
                 case 'update':
                     if (data.length === 0) {
@@ -232,9 +232,7 @@
 
         /*查询*/
         $(".checksE").click(function() {
-
             if ($(".NANES").val() == "" && $(".corosd").val() == "") {
-
                 layer.msg('请输入查询条件！', {
                     time: 1000,
                     offset: 't',
