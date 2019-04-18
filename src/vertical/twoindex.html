@@ -54,8 +54,8 @@
                         <i class="iconfont icon-shuangjiantouyou"></i>
                     </li>
                     <!--加 layui-nav-itemed 张开 -->
-                    <li class="layui-nav-item" id = 'nav-item-kong'>&nbsp;</li>
-                   
+                    <li class="layui-nav-item" id='nav-item-kong'>&nbsp;</li>
+
                     <li class="layui-nav-item">
                         <a class="" href="javascript:;">
                             <span class="iconfont">&#xe605;</span> 生产加工
@@ -89,9 +89,9 @@
                         <dl class="layui-nav-child" id='nav-food'>
                         </dl>
                     </li>
-                    
+
                 </ul>
-                
+
                 <div class="two-in-menu-bottom" id='hiddenmenu'>
                     隐藏菜单栏
                 </div>
@@ -107,18 +107,11 @@
                 <i class="layui-icon layui-icon-next"></i>
             </div>
         </div>
-        <!-- 底部固定区域 -->
-        <!-- <div class="layui-footer">01
-          
-        </div> -->
+
     </div>
     <script src="../../public/dist/layui.js"></script>
     <script src="../../js/common/api.js"></script>
-
     <script>
-        layui.use(['form'], function() {
-            
-        })
         window.onresize = function() {
             getClientHeight();
 
@@ -164,6 +157,7 @@
 
         //动态添加菜单
         var elms = "";
+
         function getElement(enterpriseType) {
 
             for (var index = 0; index < menudata.length; index++) {
@@ -182,7 +176,7 @@
                                     '<dl class="layui-nav-child">' +
                                     '<dd><a href="javascript:;" data-options="' + meunchid[i].url + '">' + meunchid[i].title + '</a></dd>' +
                                     '</dl>'
-                                console.log(meunchid[i].title);
+                                    // console.log(meunchid[i].title);
                             }
                             // }
                         }
@@ -193,13 +187,13 @@
                         child +
                         '</li>'
                 }
-               
+
                 // document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
                 // 生产加工，养殖企业，种植企业，食品经营模块
                 for (var enterpriseTypeIndex = 0; enterpriseTypeIndex < enterpriseType.length; enterpriseTypeIndex++) {
                     // console.log(enterpriseTypeIndex);
                     if (menudata[index].type == enterpriseType[enterpriseTypeIndex]) {
-                        console.log('enterpriseType[enterpriseTypeIndex]:',enterpriseType[enterpriseTypeIndex]);
+                        console.log('enterpriseType[enterpriseTypeIndex]:', enterpriseType[enterpriseTypeIndex]);
                         var child = "";
                         var meunchid = menudata[index].child;
                         if (meunchid) {
@@ -214,34 +208,34 @@
 
                             }
                         }
-                        if(enterpriseType[enterpriseTypeIndex]==2){
-                            elmsProduct+= '<dd class="layui-nav-item">' +
-                            '<a class="" href="javascript:;">' +
-                            '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
-                            child +
-                            '</dd>'
+                        if (enterpriseType[enterpriseTypeIndex] == 2) {
+                            elmsProduct += '<dd class="layui-nav-item">' +
+                                '<a class="" href="javascript:;">' +
+                                '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
+                                child +
+                                '</dd>'
                             document.querySelector("#nav-product").innerHTML += elmsProduct;
                             document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
-                        }else if(enterpriseType[enterpriseTypeIndex]==3){
-                            elmsFarm+= '<dd class="layui-nav-item">' +
-                            '<a class="" href="javascript:;">' +
-                            '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
-                            child +
-                            '</dd>'
+                        } else if (enterpriseType[enterpriseTypeIndex] == 3) {
+                            elmsFarm += '<dd class="layui-nav-item">' +
+                                '<a class="" href="javascript:;">' +
+                                '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
+                                child +
+                                '</dd>'
                             document.querySelector("#nav-farm").innerHTML += elmsFarm;
-                        }else if(enterpriseType[enterpriseTypeIndex]==4){
-                            elmsPlant+= '<dd class="layui-nav-item">' +
-                            '<a class="" href="javascript:;">' +
-                            '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
-                            child +
-                            '</dd>'
+                        } else if (enterpriseType[enterpriseTypeIndex] == 4) {
+                            elmsPlant += '<dd class="layui-nav-item">' +
+                                '<a class="" href="javascript:;">' +
+                                '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
+                                child +
+                                '</dd>'
                             document.querySelector("#nav-plant").innerHTML += elmsPlant;
-                        }else if(enterpriseType[enterpriseTypeIndex]==5){
-                            elmsFood+= '<dd class="layui-nav-item">' +
-                            '<a class="" href="javascript:;">' +
-                            '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
-                            child +
-                            '</dd>'
+                        } else if (enterpriseType[enterpriseTypeIndex] == 5) {
+                            elmsFood += '<dd class="layui-nav-item">' +
+                                '<a class="" href="javascript:;">' +
+                                '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
+                                child +
+                                '</dd>'
                             document.querySelector("#nav-food").innerHTML += elmsFood;
                         }
                         // elms += '<dd class="layui-nav-item">' +
@@ -251,16 +245,16 @@
                         //     '</dd>'
                     }
                 }
-              
+
             }
-            
+
 
             // 左侧菜单
             layui.use('element', function() {
                 var $ = layui.$,
                     element = layui.element;
                 //左侧公共
-                console.log('elms:',elms)
+                console.log('elms:', elms)
                 $("#nav-item-kong").after(elms);
                 element.init();
                 element.on('nav(navtest)', function(elem) {
@@ -271,7 +265,7 @@
                 });
                 element.render('nav');
 
-               
+
                 /*切换菜单模式*/
                 $("#tzsidewards").click(function() {
                     window.location.href = "../../index.html";
