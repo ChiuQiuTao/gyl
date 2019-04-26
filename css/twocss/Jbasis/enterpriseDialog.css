@@ -1,0 +1,10 @@
+.layui-input-block{
+    margin-left: 0;
+}
+.common .layui-inline-textarea, .layui-form-item-textarea{
+    height: auto;
+}
+.layui-textarea{
+    width: 350px;
+
+}

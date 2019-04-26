@@ -78,6 +78,19 @@
             getArea(data.value);
         });
 
+
+        // var license = document.querySelector('#license');
+        // var enterprisename = document.querySelector('#enterprisename');
+        // var state = document.querySelector('#state');
+        // var province = document.querySelector('#province');
+        // var city = document.querySelector('#city');
+        // var district = document.querySelector('#district');
+        // var address = document.querySelector('#address');
+        // var corporation = document.querySelector('#corporation');
+        // var linkman = document.querySelector('#linkman');
+        // var phone = document.querySelector('#phone');
+        // var remark = document.querySelector('#remark');
+        // var enterpriseclass = document.querySelector('#enterpriseclass');
         // license.addEventListener('click',function)
 
         var uploadInst = upload.render({
@@ -124,7 +137,7 @@
                     return $('#remark').val();
                 },
                 enterpriseclass: function() {
-                    return '2';
+                    return '3';
                 },
             },
             bindAction: '#uploadImg',
@@ -133,7 +146,7 @@
                 console.log(res);
                 layer.msg('新增成功');
                 setTimeout(function(){
-                    window.location.href = '../supplier.html'
+                    window.location.href = "../customer.html";
                 },1500)
             },
             error: function() {
@@ -145,7 +158,7 @@
 
         /*取消*/
         $(".cancels").click(function() {
-            window.location.href = "../supplier.html";
+            window.location.href = "../customer.html";
         })
     })
 

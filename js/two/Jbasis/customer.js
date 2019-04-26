@@ -4,7 +4,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
         layer = layui.layer,
         element = layui.element,
         util = layui.util,
-        form=layer.form;
+        form=layui.form;
 
     //监听头部监听 ||新增
     table.on('toolbar(testdome)', function(obj) {
@@ -12,7 +12,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             data = checkStatus.data; //获取选中的数据
         switch (obj.event) {
             case 'add':
-                window.location.href = "./dialog/supplierDialog.html";
+                window.location.href = "./dialog/customerDialog.html";
                 break;
         };
     });
@@ -24,7 +24,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             data = checkStatus.data; //获取选中的数据
         switch (obj.event) {
             case 'add':
-                window.location.href = "./dialog/supplierDialogP.html";
+                window.location.href = "./dialog/customerDialogR.html";
                 break;
         };
     });
@@ -60,7 +60,8 @@ layui.use(['form','element','table', "layer", "util"], function() {
             elem: '#testee',
             url: base + "basic/getBasEnterprise",
             method: "GET",
-            where: { enterprisename: enterprisename, license: license, enterpriseclass: '2'},
+            where: { enterprisename: enterprisename, license: license, enterpriseclass: '3'
+        ,
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
@@ -200,7 +201,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
 
         var personname = document.querySelector('#personname').value;
         var personcard = document.querySelector('#personcard').value;
-        var persontype = document.querySelector('#persontype').value;
+        // var persontype = document.querySelector('#persontype').value;
 
         var currentPage = 1;
 
@@ -209,7 +210,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             elem: '#personaltable',
             url: base + "basic/getBasPerson",
             method: "GET",
-            where: { personname: personname, personcard: personcard, persontype: persontype},
+            where: { personname: personname, personcard: personcard, persontype: '2', currentPage: currentPage },
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
@@ -326,7 +327,6 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     minWidth: 140
                 }]
             ]
-            
         });
     }
 

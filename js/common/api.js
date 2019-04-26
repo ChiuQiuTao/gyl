@@ -2,27 +2,46 @@ var base = "http://47.98.167.96:9191/";
 var jq = jQuery.noConflict();
 var sessions = sessionStorage.getItem("keyssname");
 
-function ajax(url, param, type) {
+function ajax(url, param, type,contentType) {
 
     if (sessions == "" && url != "login") {
         window.location.href = "../../src/login.html";
         return;
     }
 
+    if(contentType=='utf-8'){
+        return jq.ajax({
+            url: base + url,
+            data: param || {},
+            type: type || 'POST',
+            async: true,
+            contentType:'application/json;charset=utf-8',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
+            },
+        });
+    }else{
+        return jq.ajax({
+            url: base + url,
+            data: param || {},
+            type: type || 'POST',
+            async: true,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
+            },
+        });
+    }
+        
+
     // 利用了jquery延迟对象回调的方式对ajax封装，使用done()，fail()，always()等方法进行链式回调操作
-    return jq.ajax({
-        url: base + url,
-        data: param || {},
-        type: type || 'POST',
-        async: true,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
-        },
-    });
+   
+
+
+
 }
 
-function handleAjax(url, param, type) {
-    return ajax(url, param, type).then(function(resp) {
+function handleAjax(url, param, type,contentType) {
+    return ajax(url, param, type ,contentType).then(function(resp) {
         // 成功回调
         if (typeof resp == 'string') {
             resp = JSON.parse(resp)
@@ -78,7 +97,6 @@ function noAjax(url, param, type) {
         console.log(err); // 打印状态码
     });
 }
-
 
 /*提示*/
 function alerts(texts) {
