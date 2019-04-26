@@ -1,8 +1,7 @@
-layui.use(['table', "layer", "laydate", "util"], function() {
+layui.use(['table', "layer", "util"], function() {
     var $ = layui.jquery,
         table = layui.table,
         layer = layui.layer,
-        laydate = layui.laydate,
         util = layui.util,
         datas = {};
 
@@ -13,7 +12,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
         var tr = obj.tr; //获得当前行 tr 的DOM对象
         if (layEvent === 'detail') { //查看
-            alert()
+            layer.msg("查看");
         }
     });
 
@@ -23,7 +22,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
     var tableIns = table.render({
         elem: '#testdomess',
         url: base + "OrdProcessing/getInventoryListVo",
-        method: "get",
+        method: "GET",
         where: {},
         headers: {
             Authorization: "Bearer" + " " + sessions
@@ -33,6 +32,11 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             pageName: 'currentPage' //页码的参数名称，默认：page
                 ,
             limitName: 'pageSize' //每页数据量的参数名，默认：limit
+        },
+        done: function(res, curr, count) {
+            console.log(res);
+            console.log(curr);
+            console.log(count);
         },
         parseData: function(res) { //res 即为原始返回的数据
             console.log(res)
@@ -96,7 +100,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             }, {
                 field: 'indate',
                 title: '末次生产日期',
-                width: 120,
+                width: 130,
                 align: "center",
                 sort: true,
                 templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"
@@ -112,7 +116,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             }, {
                 field: 'outdate',
                 title: '末次销售时间',
-                width: 120,
+                width: 140,
                 align: "center",
                 sort: true,
                 templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"
@@ -133,6 +137,15 @@ layui.use(['table', "layer", "laydate", "util"], function() {
     //重置
     $(".resets").click(function() {
         $(".manes").val("");
+        tableIns.reload({
+            where: {
+                productclass: 1
+            },
+            page: {
+                curr: 1, //重新从第 1 页开始
+                layout: ['prev', 'page', 'next', 'skip', 'count']
+            },
+        })
     })
 
 
@@ -143,26 +156,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             layer.msg('请输入查询条件！', { time: 1000, offset: 't', });
             return;
         }
-        console.log(typeof $(".manes").val())
         datas.productname = $(".manes").val();
-        console.log(datas)
-            // datas = JSON.stringify(datas);
-            // $.ajax({
-            //     url: base + "OrdProcessing/getInventoryListVo",
-            //     data: datas,
-            //     type: "get",
-            //     beforeSend: function(xhr) {
-            //         xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
-            //     },
-            //     success: function(dya) {
-            //         console.log(dya)
-            //     },
-            //     error: function(ss) {
-            //         console.log(ss)
-            //     }
-
-        // })
-
 
         tableIns.reload({
             where: datas,

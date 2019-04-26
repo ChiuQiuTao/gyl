@@ -135,7 +135,7 @@
 
         function getUser(e) {
             handleAjax('user/getUser', {}, "GET").done(function(resp) {
-                console.log(resp);
+                // console.log(resp);
                 var names = document.querySelectorAll('.realname');
                 for (var i = 0; i < names.length; i++) {
                     names[i].innerHTML = resp.realName + "(" + resp.username + ")";
@@ -144,7 +144,7 @@
                 this.getElement(enterpriseType);
                 return
             }).fail(function(err) {
-                console.log(err);
+                // console.log(err);
                 var names = document.querySelectorAll('.realname');
                 for (var i = 0; i < names.length; i++) {
                     names[i].innerHTML = err.realName + "(" + err.username + ")";
@@ -193,7 +193,7 @@
                 for (var enterpriseTypeIndex = 0; enterpriseTypeIndex < enterpriseType.length; enterpriseTypeIndex++) {
                     // console.log(enterpriseTypeIndex);
                     if (menudata[index].type == enterpriseType[enterpriseTypeIndex]) {
-                        console.log('enterpriseType[enterpriseTypeIndex]:', enterpriseType[enterpriseTypeIndex]);
+                        // console.log('enterpriseType[enterpriseTypeIndex]:', enterpriseType[enterpriseTypeIndex]);
                         var child = "";
                         var meunchid = menudata[index].child;
                         if (meunchid) {
@@ -254,7 +254,7 @@
                 var $ = layui.$,
                     element = layui.element;
                 //左侧公共
-                console.log('elms:', elms)
+                // console.log('elms:', elms)
                 $("#nav-item-kong").after(elms);
                 element.init();
                 element.on('nav(navtest)', function(elem) {

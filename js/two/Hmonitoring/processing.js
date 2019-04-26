@@ -156,12 +156,11 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             }, {
                 field: 'orderCode',
                 title: '生产加工单号',
-                minWidth: 200,
+                minWidth: 160,
                 align: "center"
             }, {
                 field: 'productName',
                 title: '产品名称',
-                sort: true,
                 minWidth: 100,
                 align: "center"
             }, {
@@ -189,6 +188,7 @@ layui.use(['table', "layer", "laydate", "util"], function() {
             }, {
                 field: 'weight',
                 title: '生产重量',
+                align: "center",
                 width: 100
             }, {
                 field: 'id',
@@ -211,6 +211,15 @@ layui.use(['table', "layer", "laydate", "util"], function() {
         $(".Orders").val("");
         $(".names").val("");
         datas = {};
+
+        tableIns.reload({
+            where: {},
+            page: {
+                curr: 1, //重新从第 1 页开始
+                layout: ['prev', 'page', 'next', 'skip', 'count']
+            },
+        })
+
     })
 
 
