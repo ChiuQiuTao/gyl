@@ -61,7 +61,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             url: base + "basic/getBasEnterprise",
             method: "GET",
             where: { enterprisename: enterprisename, license: license, enterpriseclass: '3'
-        ,
+        },
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
