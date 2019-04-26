@@ -210,7 +210,7 @@
 
         //产品名称
         handleAjax('OrdProcessing/getProcessingName', {}, "GET").done(function(resp) {
-
+            console.log(resp)
             $.each(resp.list, function(index, item) {
                 $('.selectfilters').append(new Option(item.productName, item.productId)); // 下拉菜单里添加元素
             });
@@ -218,7 +218,6 @@
             return
         }).fail(function(err) {
             console.log(err)
-
         });
 
         //产品名称选中
@@ -228,6 +227,7 @@
             handleAjax('OrdProcessing/getProcessingMaterial', {
                 productid: data.value
             }, "GET").done(function(resp) {
+                console.log(resp)
                 listss = resp.list;
                 var htmls = template("ingredientsdemo", resp);
                 $(".ingredients-newp").html(htmls);
@@ -276,6 +276,7 @@
         //仓库名称
         var dataresps = null;
         handleAjax('OrdProcessing/getBasStorage', {}, "GET").done(function(resp) {
+            console.log(resp);
             dataresps = resp;
             $.each(resp.list, function(index, item) {
                 $('.warehouses').append(new Option(item.storagename, item.id));
@@ -362,20 +363,33 @@
             projectobj.weight = $(".weights").val();
             projectobj.num = $(".numsnums").val();
 
-            for (var i in listss) {
-                delete listss[i].productName;
-                delete listss[i].stockNum;
-            }
+
+
+            /*删除某个字段*/
+            // for (var i in listss) {
+            //     delete listss[i].productName;
+            //     delete listss[i].stockNum;
+            // }
 
             var userofs = document.querySelectorAll('.useof');
+            console.log(userofs);
             for (var i = 0; i < userofs.length; i++) {
                 listss[i]['num'] = userofs[i].value;
-                listss[i]['productidv'] = listss[i].productId;
-                delete listss[i].productId;
+                listss[i]['productId'] = listss[i].productId;
             }
 
             projectobj.list = listss;
+
+            //是否存在二级仓库
+            if (projectobj.areaid) {
+
+            } else {
+                projectobj.areaid = "";
+                projectobj.areaname = "";
+            }
+
             projectobj = JSON.stringify(projectobj);
+
 
             $.ajax({
                 url: base + "OrdProcessing/addOrdProcessing",
@@ -388,6 +402,7 @@
                 async: false,
                 contentType: "application/json;charset=utf-8",
                 success: function(re) {
+                    console.log(re)
                     if (re.code == 10000) {
 
                         layer.msg("添加成功", {

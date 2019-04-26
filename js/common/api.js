@@ -68,6 +68,10 @@ function handleAjax(url, param, type,contentType) {
         setTimeout(function() {
             layer.closeAll('loading');
         }, 2000);
+
+        if (err.code = "000") {
+            window.location.href = "../../src/login.html";
+        }
         console.log(err); // 打印状态码
     });
 }

@@ -23,14 +23,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label" style="width:95px;">原辅料名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input  accessories">
                         </div>
                     </div>
                 </div>
 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery   Rawquery">查询</div>
+                    <div class="layui-bg-green comquery  reset">重置</div>
                 </div>
             </div>
         </div>
@@ -38,17 +38,9 @@
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="test" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testinventory" lay-filter="testdome"></table>
     </div>
 </body>
-<!-- 头部 -->
-<script type="text/html" id="toolbarinter">
-    <div class="layui-btn-container ">
-        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
-    </div>
-</script>
 
 <!-- 里面的查看 -->
 <script type="text/html" id="More">
@@ -59,37 +51,12 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table', "laydate"], function() {
+    layui.use(['table', "laydate", "util"], function() {
         var $ = layui.jquery,
-            table = layui.table,
-            laydate = layui.laydate;
+            util = layui.util,
+            laydate = layui.laydate,
+            table = layui.table;
 
-        //监听头部监听
-        table.on('toolbar(testdome)', function(obj) {
-            var checkStatus = table.checkStatus(obj.config.id),
-                data = checkStatus.data; //获取选中的数据
-            switch (obj.event) {
-                case 'add':
-                    layer.msg('添加');
-                    break;
-                case 'update':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else if (data.length > 1) {
-                        layer.msg('只能同时编辑一个');
-                    } else {
-                        layer.alert('编辑 [id]：' + checkStatus.data[0].id);
-                    }
-                    break;
-                case 'delete':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else {
-                        layer.msg('删除');
-                    }
-                    break;
-            };
-        });
 
         //监听表格里面按钮
         table.on('tool(testdome)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
@@ -102,36 +69,36 @@
             }
         });
 
-        //获取列表
-        table.render({
-            elem: '#test',
-            url: "../../../../js/two/data.json",
+        var tableIns = table.render({
+            elem: '#testinventory',
+            url: base + "ordPurchase/getPurchaseInventory",
             method: "GET",
             where: {},
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
-            toolbar: '#toolbarinter',
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
-            },
             request: {
                 limitName: '10'
             },
+
             limits: [10, 20],
+            parseData: function(res) { //res 即为原始返回的数据
+                console.log(res)
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.message, //解析提示文本
+                    "totalNum": res.pageBean.totalNum, //解析数据长度
+                    "lists": res.pageBean.lists //解析数据列表
+                };
+            },
             response: {
                 statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
-                msgName: null, //状态信息的字段名称，默认：msg
+                statusCode: 10000, //成功的状态码，默认：0
+                msgName: "message", //状态信息的字段名称，默认：msg
                 countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'data', //数据列表的字段名称，默认：data
+                dataName: 'lists', //数据列表的字段名称，默认：data
             },
+
             cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
@@ -144,8 +111,8 @@
                     ,
                 last: true //不显示尾页
                     ,
-                prev: '下一页',
-                next: "上一页",
+                prev: "上一页",
+                next: "下一页",
                 theme: "#c81623",
             },
             // height: 'full-20',//满高
@@ -155,36 +122,42 @@
                     type: 'numbers',
                     fixed: 'left'
                 }, {
-                    field: 'id',
+                    field: 'productname',
                     title: '原辅料名称',
-                    sort: true,
                     fixed: 'left',
                     minWidth: 120,
+                    align: "center",
                 }, {
-                    field: 'username',
+                    field: 'stocknum',
                     title: '库存重量(KG)',
                     minWidth: 100,
+                    align: "center",
                 }, {
-                    field: 'experience',
+                    field: 'endinputnum',
                     title: '末次采购重量(KG)',
                     minWidth: 100,
                     sort: true,
-                    totalRow: true
+                    align: "center",
                 }, {
-                    field: 'sex',
+                    field: 'endinputdate',
                     title: '末次采购日期',
                     minWidth: 120,
-                    sort: true
+                    sort: true,
+                    align: "center",
+                    templet: "<div>{{layui.util.toDateString(d.endinputdate, 'yyyy-MM-dd')}}</div>"
                 }, {
-                    field: 'score',
+                    field: 'endoutputnum',
                     title: '末次使用重量(kG)',
                     minWidth: 120,
                     sort: true,
-                    totalRow: true
+                    align: "center",
                 }, {
-                    field: 'city',
+                    field: 'endoutputdate',
                     title: '末次使用日期',
                     minWidth: 130,
+                    sort: true,
+                    align: "center",
+                    templet: "<div>{{layui.util.toDateString(d.endoutputdate, 'yyyy-MM-dd')}}</div>"
                 }, {
                     field: 'wealth',
                     width: 137,
@@ -196,6 +169,53 @@
                 }]
             ]
         });
+
+
+
+        /*查询*/
+        $(".Rawquery").click(function() {
+            if ($(".accessories").val() == "") {
+                layer.msg('请输入查询条件！', {
+                    time: 1000,
+                    offset: 't',
+                });
+                return
+            }
+
+            var datelist = {
+                productname: $(".accessories").val()
+
+            }
+
+            tableIns.reload({
+                where: datelist,
+                request: {
+                    pageName: 'currentPage' //页码的参数名称，默认：page
+                        ,
+                    limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                },
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
+        /*重置*/
+        $(".reset").click(function() {
+
+            $(".accessories").val("");
+            tableIns.reload({
+                where: {},
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
     })
 </script>
 

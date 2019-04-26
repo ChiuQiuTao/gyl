@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>新增采购</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/H/processing.css">
+</head>
+
+<body>
+    <div class="select common">
+        <form class="layui-form" action="">
+            <div class="select-title" style="height:40px;line-height:40px;">
+                基本信息
+            </div>
+
+            <div class="basis-h">
+                <div class="mess-pronew">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">采购日期:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="temis">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">供应商类型:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="wareh" class="Suppliertype">
+                                    <option value="">---请选择---</option>
+                                    <option value="企业供应商">企业供应商</option>
+                                    <option value="个人供应商">个人供应商</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline ">
+                            <label class="layui-form-label" style="width:95px;">是否进口:</label>
+                            <div class="layui-input-inline ">
+                                <select lay-filter="selec" class="import">
+                                    <option value="">---请选择---</option>
+                                    <option value="是">是</option>
+                                    <option value="否">否</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">供应商名称:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="Level2" class="Level2warehouse">
+                                    <option value="">---请选择---</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">负责人:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="heads" class="headpeople">
+                                    <option value="">---请选择---</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">上传图片:</label>
+                            <div class="layui-input-inline" style="display: flex;align-items: center;">
+                                <button type="button" class="layui-btn  layui-btn-xs" id="test1">
+                                            <i class="layui-icon">&#xe67c;</i>选择文件
+                                 </button>
+                            </div>
+                        </div>
+                    </div>  先不做这个后面完 -->
+                </div>
+
+            </div>
+            <div class="select-title" style="height:30px;line-height:30px;margin-top: 10px;border-bottom-color:#c9c9c9;">
+                采购产品
+            </div>
+            <div class="ingredients-newp">
+                <div class="layui-btn  layui-btn-sm  Newpurchaseorder" style="margin:10px;">
+                    <i class="layui-icon">&#xe608;</i> 添加
+                </div>
+
+
+                <table class="layui-table" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>原辅料名称</th>
+                            <th>原辅料规格</th>
+                            <th>生产日期</th>
+                            <th>批次</th>
+                            <th>保质期</th>
+                            <th>仓库名称</th>
+                            <th>二级仓库名称</th>
+                            <th>重量(KG)</th>
+                            <th>单价(元)</th>
+                            <th>金额(元)</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="Procurementofproducts">
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </form>
+        <div class="layui-btn-group" style="width: 100%;display: flex;justify-content: center;margin-top: 10px;">
+            <button class="layui-btn  saves"><i class="layui-icon">&#xe674;</i>保存</button>
+            <button class="layui-btn huifan"><i class="layui-icon">&#xe65c;</i>返回</button>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="select-hand-item">
+            <div class="layui-inline">
+                <input type="text" class="layui-input" id="date1"> </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- 采购单 -->
+<script type="text/html" id="contentquery">
+    <div class="select common ">
+        <ul class="basis-h">
+            <li>
+                <label>原辅料名称:</label>
+                <p>
+                    <select class="Namerawmaterials">
+                        <option value="">---请选择---</option>
+                        <option value="是">是</option>
+                        <option value="否">否</option>
+                    </select>
+                </p>
+            </li>
+            <li>
+                <label>生产日期:</label>
+                <p>
+                    <input type="text" id="test1" placeholder="2019-01-01">
+                </p>
+            </li>
+            <li>
+                <label>原辅料规格:</label>
+                <p class="specifications"></p>
+            </li>
+            <li>
+                <label>批次:</label>
+                <p>
+                    <input type="text" class="batchstime">
+                </p>
+            </li>
+            <li>
+                <label>保质期:</label>
+                <p class="Shelflife"></p>
+            </li>
+            <li>
+                <label>重量(KG):</label>
+                <p>
+                    <input type="text" class="Theweight">
+                </p>
+
+            </li>
+            <li>
+                <label>单价(元):</label>
+                <p>
+                    <input type="text" class="Theunitprice">
+                </p>
+            </li>
+            <li>
+                <label>金额(元):</label>
+                <p class="Theamountof"></p>
+            </li>
+            <div>
+                <li>
+                    <label>仓库名称:</label>
+                    <p>
+                        <select class="warehousename">
+                                <option value="">---请选择---</option>
+                                
+                            </select>
+                    </p>
+                </li>
+                <li>
+                    <label>二级仓库名称:</label>
+                    <p>
+                        <select class="warehousename2">
+                                <option value="">---请选择---</option>
+                               
+                            </select>
+                    </p>
+                </li>
+
+
+            </div>
+            <div>
+                <li>
+                    <label></label>
+                    <!-- <label>检测报告:</label> -->
+                    <p class="empty-h">
+                        <!-- <button type="button" class="layui-btn  layui-btn-xs" id="test2">
+                                        <i class="layui-icon">&#xe67c;</i>选择文件
+                        </button> -->
+                    </p>
+                </li>
+                <li>
+                    <p class="empty-h">
+                        <button type="button" class="layui-btn  layui-btn-sm  determine">
+                                          确定
+                            </button>
+                        <button type="button" class="layui-btn  layui-btn-sm  cancels">
+                                          取消
+                            </button>
+                    </p>
+                </li>
+            </div>
+
+        </ul>
+    </div>
+
+</script>
+
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+
+</html>
+<script>
+    layui.use(['table', "layer", "form", "laydate", "util", "upload"], function() {
+        var $ = layui.jquery,
+            table = layui.table,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            form = layui.form,
+            util = layui.util,
+            projectobj = {},
+            upload = layui.upload,
+            listss = null;
+
+        //时间选择    
+        laydate.render({
+            elem: '#temis',
+            show: true,
+            done: function(value) {
+                var batch = value
+                projectobj.orderdate = batch + " " + "00:00:00";
+                // console.log(projectobj)
+            }
+        });
+
+        //是否进口
+        form.on('select(selec)', function(data) {
+            projectobj.isjk = data.value;
+            // console.log(data.value)
+            return
+        })
+
+
+        //供应商类型选择||供应商名称添加
+        form.on('select(wareh)', function(data) {
+            $('.Level2warehouse').children().remove();
+            $('.Level2warehouse').append(new Option("---请选择---", ""));
+            projectobj.supplytype = data.value;
+
+            handleAjax("ordPurchase/getSupplierPerson", {
+                supplier: data.value
+            }, "GET").done(function(resp) {
+                console.log(resp.list)
+
+                $.each(resp.list, function(index, item) {
+
+                    $('.Level2warehouse').append(new Option(item.name, item.name)); // 下拉菜单里添加元素
+                });
+
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+            });
+            return
+        })
+
+
+        //供应商名称获取
+        form.on('select(Level2)', function(data) {
+            projectobj.supplyname = data.value;
+            return
+        })
+
+
+        //负责人添加
+        noAjax('user/getUser', {}, "GET").done(function(resp) {
+            $('.headpeople').append(new Option(resp.enterpriseName, resp.enterpriseName)); // 下拉菜单里添加元素
+            layui.form.render("select");
+        }).fail(function(err) {
+            console.log(err)
+        });
+
+
+        //负责人的获取
+        form.on('select(heads)', function(data) {
+            projectobj.person = data.value;
+            // console.log(projectobj)
+            return
+        })
+
+
+
+        /*采购单||*/
+        //新增采购单
+        $(".Newpurchaseorder").click(function() {
+            layer.open({
+                type: 1,
+                title: "采购单",
+                shadeClose: true, //是否点击遮罩关闭
+                anim: 5, //弹出动画
+                scrollbar: false, //窗口外滚动条是否出现
+                skin: 'layui-layer-rim', //加上边框
+                area: ['760px', '440px'], //宽高
+                content: '<div  class="ssss">dfd</div>',
+                success: function(layero, index) {
+                    var html = template("contentquery");
+                    $(".ssss").html(html);
+
+
+                    //采购单时间选择
+                    laydate.render({
+                        elem: '#test1',
+                        done: function(value) {
+                            console.log(value);
+                            var batch = value;
+                            batch = batch.split("-");
+                            batch = batch.join("");
+                            console.log(batch)
+                                // projectobj.orderdate = batch + " " + "00:00:00";
+                            $(".batchstime").val(batch);
+                        }
+                    });
+
+                    /*采购单*/
+                    add();
+                }
+            });
+        })
+
+
+        //原辅料名称
+        function add() {
+            //原辅料名称
+            handleAjax("ordPurchase/getSourcesName", {}, "GET").done(function(resp) {
+                // console.log(resp)
+                $('.Namerawmaterials').children().remove();
+                $('.Namerawmaterials').append(new Option("---请选择---", ""));
+                $.each(resp.list, function(index, item) {
+                    $('.Namerawmaterials').append(new Option(item.name, item.id)); // 下拉菜单里添加元素          
+                });
+                return
+            }).fail(function(err) {
+                console.log(err)
+            });
+
+
+
+            /*选择原辅料名称*/
+            $('.Namerawmaterials').change(function() {
+                var accessories = $(this)[0].value;
+
+                projectobj.productid = $(this)[0].value;
+                projectobj.productname = $(".Namerawmaterials").find("option:selected").text();
+
+
+                handleAjax('ordPurchase/getSourcesName', {
+                    id: accessories
+                }, "GET").done(function(resp) {
+                    // console.log(resp)
+                    $.each(resp.list, function(index, item) {
+                        $('.specifications').text(item.specifications);
+                        $('.Shelflife').text(item.lifedate + item.lifedateunit);
+
+
+                        projectobj.lifedate = item.lifedate;
+                        projectobj.lifedateunit = item.lifedateunit;
+
+
+                    });
+                    return;
+                }).fail(function(err) {
+                    console.log(err)
+                });
+            })
+
+
+            /*重量*/
+            $(".Theweight").blur(function() {
+                var numr = $(this).val() * $(".Theunitprice").val();
+                $(".Theamountof").text(numr.toFixed(2));
+            });
+
+
+
+            /*单价*/
+            $(".Theunitprice").blur(function() {
+                var numr = $(this).val() * $(".Theweight").val();
+                $(".Theamountof").text(numr.toFixed(2));
+            });
+
+
+
+            /*仓库名称*/
+            var datawarehouse = [];
+            handleAjax('OrdProcessing/getBasStorage', {}, "GET").done(function(resp) {
+                // console.log(resp)
+                datawarehouse = resp.list;
+                $('.warehousename').children().remove();
+                $('.warehousename').append(new Option("---请选择---", ""));
+                $.each(resp.list, function(index, item) {
+                    $('.warehousename').append(new Option(item.storagename, item.id));
+                });
+                layui.form.render("select");
+                return;
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+
+
+
+            /*二级仓库名称*/
+            $(".warehousename").change(function() {
+                $('.warehousename2').children().remove();
+                $('.warehousename2').append(new Option("---请选择---", ""));
+                var ids = $(this)[0].value;
+                // console.log(ids)
+                //仓库id
+
+                projectobj.storageid = ids;
+                projectobj.storage = $(".warehousename").find("option:selected").text();
+
+                $.each(datawarehouse, function(index, item) {
+                    if (item.childNodes) {
+                        if (item.id == ids) {
+                            // console.log(item.childNodes);
+                            $.each(item.childNodes, function(index, item) {
+                                $('.warehousename2').append(new Option(item.storagename, item.id));
+                            });
+                        }
+                    }
+                });
+            });
+
+
+            /*二级仓库选择*/
+            projectobj.areaid = "";
+            projectobj.area = "";
+            $(".warehousename2").change(function() {
+                if ($(this)[0].value != "") {
+                    projectobj.areaid = $(this)[0].value;
+                    projectobj.area = $(".warehousename2").find("option:selected").text();
+                }
+                // console.log(projectobj)
+            })
+
+
+            /*取消*/
+            $(".cancels").click(function() {
+                layer.closeAll();
+            });
+
+            /*确定*/
+            $(".determine").click(function() {
+                if ($(".Namerawmaterials").val() == "") {
+                    alerts("请输选择-原辅料名称");
+                    return
+                }
+                if ($("#test1").val() == "") {
+                    alerts("请输选择-生产日期");
+                    return
+                }
+                if ($(".Theweight").val() == "") {
+                    alerts("请输入重量");
+                    return
+                }
+                if ($(".Theunitprice").val() == "") {
+                    alerts("请输入单价");
+                    return
+                }
+                if ($(".batchstime").val() == "") {
+                    alerts("请输入批次");
+                    return
+                }
+                if ($(".warehousename").val() == "") {
+                    alerts("请输选择-仓库名称");
+                    return
+                }
+                if ($(".warehousename2").val() == "") {
+                    alerts("请输选择-二级仓库名称");
+                    return
+                }
+
+                projectobj.factorydate = $("#test1").val() + " " + "00:00:00";
+                projectobj.batch = $(".batchstime").val();
+                projectobj.specifications = $(".specifications").text();
+
+                projectobj.weight = $(".Theweight").val();
+
+                projectobj.price = $(".Theunitprice").val();
+
+                projectobj.amount = $(".Theamountof").text();
+
+                // console.log(projectobj);
+
+                //操作数据
+
+                //添加采购产品
+                $(".Procurementofproducts").append(
+                    '<tr>' +
+                    '<td style="textAlign: center;">丨</td>' +
+                    '<td style="textAlign: center;">' + projectobj.productname + '</td>' +
+                    '<td style="textAlign: center;">' + projectobj.specifications + '</td>' +
+                    '<td style="textAlign: center;" class="usetexts">' + $("#test1").val() + '</td>' +
+                    '<td style="textAlign: center;"> ' + projectobj.batch + '</td>' +
+                    '<td style="textAlign: center;"> ' + $(".Shelflife").text() + '</td>' +
+                    '<td style="textAlign: center;">' + projectobj.storage + '</td>' +
+                    '<td style="textAlign: center;">' + projectobj.area + '</td>' +
+                    '<td style="textAlign: center;">' + projectobj.weight + '</td>' +
+                    '<td style="textAlign: center;">' + projectobj.price + '</td>' +
+                    '<td style="textAlign: center;">' + projectobj.amount + '</td>' +
+                    '<td style="textAlign: center;"><div class="layui-btn  layui-btn-primary  layui-btn-xs " onclick="deley(this)" >删除</div></td>' +
+                    '</tr>'
+                )
+                layer.closeAll();
+            })
+
+        }
+
+
+
+        //保存
+        $(".saves").click(function() {
+            if ($("#temis").val() == "") {
+                alerts("请输选择-生产日期");
+                return
+            }
+            if ($(".Suppliertype").val() == "") {
+                alerts("请输选择-供应商类型");
+                return
+            }
+
+            if ($(".import").val() == "") {
+                alerts("请输选择-是否进口");
+                return
+            }
+            if ($(".Level2warehouse").val() == "") {
+                alerts("请输选择-供应商名称");
+                return
+            }
+            if ($(".headpeople").val() == "") {
+                alerts("请输选择-负责人");
+                return
+            }
+            // console.log($(".Procurementofproducts").children().length)
+            if (projectobj.productname == undefined) {
+                alerts("请输添加-采购产品");
+                return
+            }
+
+
+
+            if (projectobj.supplytype == "企业供应商") {
+                projectobj.supplytype = 2;
+            }
+            if (projectobj.supplytype == "个人供应商") {
+                projectobj.supplytype = 3;
+            }
+
+
+            handleAjax('ordPurchase/addOrdPurchase', projectobj, "POST").done(function(resp) {
+
+                layer.msg(resp.message, {
+                    icon: 1,
+                    time: 1000
+                });
+
+                setTimeout(function() {
+                    window.location.href = "../procurement.html";
+                }, 1500)
+
+            }).fail(function(err) {
+                console.log(err)
+            });
+
+
+        })
+
+
+
+        //验证重量
+        $(".weights").blur(function() {
+            var reg = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|^[1-9]\d*$/;
+            if (!reg.test($(".weights").val())) {
+                alerts("请正确输入重量!");
+                $(this).val("");
+                return
+            }
+        })
+
+
+        //验证数量
+        $(".numsnums").blur(function() {
+            var reg = /^[1-9]\d*$/;
+            if (!reg.test($(".numsnums").val())) {
+                alerts("请正确输入数量!");
+                $(this).val("");
+                return
+            }
+        })
+
+        //返回
+        $(".huifan").click(function() {
+            window.location.href = "../../Dmaterials/procurement.html";
+        })
+
+    })
+</script>
+
+<script>
+    // 删除
+    function deley(ee) {
+        ee.parentNode.parentNode.parentNode.removeChild(ee.parentNode.parentNode)
+    }
+</script>
