@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>企业信息完善</title>
+    <link rel="stylesheet" href="../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../public/font/iconfont.css">
+    <link rel="stylesheet" href="../css/forget.css">
+    <link rel="stylesheet" href="../css/company.css">
+    <link rel="icon" href="../public/favicon.ico">
+</head>
+
+<body>
+    <form class="layui-form" action="">
+        <div class="logo">供应链协同管理平台</div>
+        <div class="head">
+            企业信息
+        </div>
+
+        <div class="input  jump3">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">企业名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入企业名称" id='enterprisename'>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">营业执照号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入企业营业执照号" id='license'>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">所在地区:</label>
+                    <div class="layui-inline-sel">
+                        <select name="country" lay-filter="aihao" id='state'>
+                            <option value="0086">中国</option>
+                        </select>
+
+                        <select name="province" lay-filter="province" class="province" id='province'>
+                            <option value="">省</option>
+                        </select>
+
+                        <select name="city" lay-filter="city" class="city" id='city'>
+                            <option value="">市</option>
+                        </select>
+
+                        <select name="area" lay-filter="area" class="area" id='district'>
+                            <option value="">区</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width:95px;">状态:</label>
+                    <div class="layui-input-inline">
+                        <select name="city" lay-verify="">
+                            <option value="">全部</option>
+                            <option value="010">待审批</option>
+                            <option value="021">审批通过</option>
+                            <option value="0571">审批未通过</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">详细地址:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="详细地址" id='address'>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">法定负责人:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入企业法定负责人" id='corporation'>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系人:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入联系人" id='linkman'>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">联系电话:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入联系电话" id='phone'>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">固定电话:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入固定电话" id='phone'>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">传真:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入企业传真号码">
+                    </div>
+                </div>
+            </div> -->
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">企业图片:</label>
+                    <div class="layui-input-inline">
+                        <div class="layui-upload" style="display:flex">
+                            <button type="button" class="layui-btn layui-btn-normal" id="selectImg">选择文件</button>
+                            <!-- <button type="button" class="layui-btn" id="uploadImg">开始上传</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">备注:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="输入备注" id='remark'>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">证照类型:</label>
+                    <div class="layui-inline-sel">
+                        <select name="country" lay-filter="aihao" id='enterpriseclass'>
+                            <option value="">选择</option>
+                            <option value="1">企业信息</option>
+                            <option value="2">企业供应商信息</option>
+                            <option value="3">企业客户信息</option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
+            <div class="select-btn">
+                <div class="layui-bg-green comquery " id="uploadImg">确定</div>
+                <div class="layui-bg-green comquery cancels">取消</div>
+            </div>
+            
+        </div>
+    </form>
+    
+
+
+</body>
+<script src="../js/common/jquery.min.js"></script>
+<script src="../js/common/api.js"></script>
+<script src="../public/dist/layui.js" charset="utf-8"></script>
+
+<script src="../js/company.js"></script>
+
+</html>

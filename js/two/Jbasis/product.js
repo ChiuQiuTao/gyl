@@ -21,7 +21,7 @@
                     break;
             };
         });
-        document.querySelector('.select').addEventListener('click',function(){
+        document.querySelector('#getBasProduct').addEventListener('click',function(){
             getBasProduct();
         })
        
@@ -100,12 +100,14 @@
                             // templet: function(d) {
                             //     return d.num + "(" + d.unit + ")"
                             // }
-                    }, {
-                        field: 'productcode',
-                        title: '产品编号',
-                        align: "center",
-                        minWidth: 100
-                    }, {
+                    }, 
+                    // {
+                    //     field: 'productcode',
+                    //     title: '产品编号',
+                    //     align: "center",
+                    //     minWidth: 100
+                    // }, 
+                    {
                         field: 'barcode',
                         title: '产品条码',
                         align: "center",
@@ -140,32 +142,61 @@
                         title: '保质期单位',
                         align: "center",
                         minWidth: 150
-                    }, {
-                        field: 'brand',
-                        title: '品牌',
-                        align: "center",
-                        minWidth: 150
-                    }, {
-                        field: 'enterprisecode',
-                        title: '生产企业编码',
-                        align: "center",
-                        minWidth: 150
-                    }, {
-                        field: 'isadditivetiny',
-                        title: '是否是添加剂',
-                        align: "center",
-                        minWidth: 150
-                    }, {
+                    }, 
+                    // {
+                    //     field: 'brand',
+                    //     title: '品牌',
+                    //     align: "center",
+                    //     minWidth: 150
+                    // }, {
+                    //     field: 'enterprisecode',
+                    //     title: '生产企业编码',
+                    //     align: "center",
+                    //     minWidth: 150
+                    // }, {
+                    //     field: 'isadditivetiny',
+                    //     title: '是否是添加剂',
+                    //     align: "center",
+                    //     minWidth: 150
+                    // }, 
+                    {
                         field: 'productclass',
                         title: '产品系统类别',
                         align: "center",
-                        minWidth: 150
-                    }, {
-                        field: 'productstatus',
-                        title: '状态',
-                        align: "center",
-                        minWidth: 150
-                    }, {
+                        minWidth: 150,
+                        templet: function(d) {
+                            var num = null;
+                            console.log(d.productclass)
+                            if (d.productclass == "1") {
+                                num = "原辅料"
+                                return num
+                            }
+    
+                            if (d.productclass == "2" ) {
+                                num = "产品"
+                                return num
+                            }
+                            if (d.productclass == "3" ) {
+                                num = "投入品"
+                                return num
+                            }
+                            if (d.productclass == "4" ) {
+                                num = "农产品"
+                                return num
+                            }
+                            if (d.productclass == "5" ) {
+                                num = "畜禽"
+                                return num
+                            }
+                        }
+                    }, 
+                    // {
+                    //     field: 'productstatus',
+                    //     title: '状态',
+                    //     align: "center",0
+                    //     minWidth: 150
+                    // }, 
+                    {
                         field: 'standardcode',
                         title: '执行标准编号(新)',
                         align: "center",

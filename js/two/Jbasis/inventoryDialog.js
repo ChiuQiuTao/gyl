@@ -5,7 +5,7 @@
         var one = document.querySelector('#one');
         var two = document.querySelector('#two');
         var select = 1;
-        // 选择仓库等级
+        // 选择仓库等级 
         form.on('select(storagelevel)', function(data) {
             if(data.value==1){
                 one.style.display = 'block';
@@ -22,13 +22,66 @@
             addBasStorage();
         })
 
+
+        getHrefId();
+        function getHrefId(){
+            var loc = location.href;
+            var url = loc.split("?")[1];
+            if(url && url!=''){
+                // document.querySelector('#uploadImg').style.display='none';
+                // document.querySelector('#update').style.display='block';
+                var para = url.split("&");
+                var len = para.length;
+                var res = {};
+                var arr = [];
+                for(var i=0;i<len;i++){
+                    arr = para[i].split("=");
+                    res[arr[0]] = arr[1];
+                }
+                console.log(res.id);
+                getBasStorageVo(res.id);
+                document.querySelector('#addBasStorage').style.display='none';
+                document.querySelector('#updateBasStorage').style.display='block';
+                /*更新*/
+                document.querySelector('#updateBasStorage').addEventListener('click',function(){
+                    updateBasProduct(res.id);
+                })
+            }else{
+                
+            }
+        }
+        //查看详情
+        function getBasStorageVo(delid){
+            handleAjax('basic/getBasStorageVo', { 
+                id: delid,
+            }, "GET").done(function(resp) {
+                console.log(resp);
+
+                if(resp.list[0].parentid==''){
+                    document.querySelector('#storagename1').value = resp.list[0].storagename;
+
+                }else{
+                    document.querySelector('#parentid').value = resp.list[0].parentid;
+                    document.querySelector('#storagename2').value = resp.list[0].storagename;
+
+                    one.style.display = 'none';
+                    two.style.display = 'block';
+                }
+                document.querySelector('#chargeperson').value = resp.list[0].chargeperson;
+                document.querySelector('#storagelevel').style.display = 'none'
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+                
+            });
+        }
         // 查询企业仓库
         getBasStorage();
         function getBasStorage(){
             handleAjax('basic/getBasStorage', { 
                 storagelevel: 1,
             }, "GET").done(function(resp) {
-                console.log(resp)
                 var selectList='';
                 for(var i=0;i<resp.list.length;i++){
                     selectList = selectList + '<option value="'+resp.list[i].id+'">'+resp.list[i].storagename+'</option>';
@@ -69,6 +122,7 @@
             var storagename;
             if(select ==1){
                 storagename = document.querySelector('#storagename1').value;
+                parentid=null;
             }else{
                 storagename = document.querySelector('#storagename2').value;
             }

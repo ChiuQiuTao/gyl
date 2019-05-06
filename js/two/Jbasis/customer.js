@@ -14,6 +14,30 @@ layui.use(['form','element','table', "layer", "util"], function() {
             case 'add':
                 window.location.href = "./dialog/customerDialog.html";
                 break;
+            case 'update':
+                if(data.length === 0){
+                  layer.msg('请选择一行');
+                } else if(data.length > 1){
+                  layer.msg('只能同时编辑一个');
+                } else {
+                    window.location.href = "./dialog/customerDialog.html?id="+data[0].id;
+                }
+                break;
+            case 'delete':
+                if(data.length === 0){
+                  layer.msg('请选择一行');
+                } else {
+                    console.log(data);
+                    for(var i=0;i<data.length;i++){
+                        delBasEnterpriseById(data[i].id);
+                    }
+                    // layer.msg('删除成功');
+                    setTimeout(function(){
+                        getBasEnterprise();
+
+                    },1500)
+                }
+                break;
         };
     });
 
@@ -25,6 +49,30 @@ layui.use(['form','element','table', "layer", "util"], function() {
         switch (obj.event) {
             case 'add':
                 window.location.href = "./dialog/customerDialogR.html";
+                break;
+            case 'update':
+                if(data.length === 0){
+                  layer.msg('请选择一行');
+                } else if(data.length > 1){
+                  layer.msg('只能同时编辑一个');
+                } else {
+                    window.location.href = "./dialog/customerDialogR.html?id="+data[0].id;
+                }
+                break;
+            case 'delete':
+                if(data.length === 0){
+                  layer.msg('请选择一行');
+                } else {
+                    console.log(data);
+                    for(var i=0;i<data.length;i++){
+                        delBasPersonById(data[i].id);
+                    }
+                    // layer.msg('删除成功');
+                    setTimeout(function(){
+                        getBasPerson();
+
+                    },1500)
+                }
                 break;
         };
     });
@@ -48,6 +96,36 @@ layui.use(['form','element','table', "layer", "util"], function() {
     document.querySelector('#selectperson').addEventListener('click', function() {
         getBasPerson();
     })
+    function delBasPersonById(delid){
+        handleAjax('basic/delBasPersonById',
+        {
+            id:delid
+        }, "post").done(function(resp) {
+            console.log(resp);
+            
+            layer.msg('删除成功');
+            
+               return
+           }).fail(function(err) {
+               console.log(err)
+
+        })
+    }
+    function delBasEnterpriseById(delid){
+        handleAjax('basic/delBasEnterpriseById',
+        {
+            id:delid
+        }, "post").done(function(resp) {
+            console.log(resp);
+            
+            layer.msg('删除成功');
+            
+               return
+           }).fail(function(err) {
+               console.log(err)
+
+        })
+    }
     // 企业供应商
     getBasEnterprise();
 
@@ -75,6 +153,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     // console.log(curr);
                     // //得到数据总量
                     // console.log(count);
+                showImg();
             },
             request: {
                 pageName: 'currentPage' //页码的参数名称，默认：page
@@ -115,15 +194,19 @@ layui.use(['form','element','table', "layer", "util"], function() {
             // height: 'full-20',//满高
             cols: [
                 [{
-                    title: '编号',
-                    type: 'numbers',
+                    type: 'checkbox', 
                     fixed: 'left'
-                }, {
-                    field: 'createname',
-                    title: '创建人名称',
-                    align: "center",
-                    minWidth: 100
-                }, {
+                },{
+                    title: '编号',
+                    type: 'numbers'
+                }, 
+                // {
+                //     field: 'createname',
+                //     title: '创建人名称',
+                //     align: "center",
+                //     minWidth: 100
+                // },
+                 {
                     field: 'enterprisename',
                     title: '企业名称',
                     align: "center",
@@ -147,13 +230,13 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     field: 'picturepath',
                     title: '营业执照图片地址',
                     align: "center",
-                    minWidth: 180
-                }, {
-                    field: 'enterprisecode',
-                    title: '企业编号',
-                    align: "center",
-                    minWidth: 100
-                }, {
+                    minWidth: 180,
+                    templet: function(d) {
+                        return '<img src="'+d.picturepath+'" alt="" class="licenseimg">'
+                    }
+                }, 
+               
+                {
                     field: 'corporation',
                     title: '法定负责人',
                     align: "center",
@@ -172,22 +255,41 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     field: 'auditstaus',
                     title: '审核状态',
                     align: "center",
-                    minWidth: 100
-                }, {
-                    field: 'createenterprisename',
-                    title: '创建人的企业',
-                    align: "center",
-                }, {
-                    field: 'auditdate',
-                    title: '审批日期',
-                    align: "center",
-                    minWidth: 120
-                }, {
-                    field: 'enterprisetype',
-                    title: '企业类型名称',
-                    align: "center",
-                    minWidth: 140
-                }]
+                    minWidth: 100,
+                    templet: function(d) {
+                        var num = null;
+                        console.log(d.auditstaus)
+                        if (d.auditstaus == "0") {
+                            num = "待审批"
+                            return num
+                        }
+
+                        if (d.auditstaus == "1" || d.auditstaus == "审批通过") {
+                            num = "审批通过"
+                            return num
+                        }
+                        if (d.auditstaus == "2" || d.auditstaus == "审批不通过") {
+                            num = "审批不通过"
+                            return num
+                        }
+                    }
+                }
+                // , {
+                //     field: 'createenterprisename',
+                //     title: '创建人的企业',
+                //     align: "center",
+                // }, {
+                //     field: 'auditdate',
+                //     title: '审批日期',
+                //     align: "center",
+                //     minWidth: 120
+                // }, {
+                //     field: 'enterprisetype',
+                //     title: '企业类型名称',
+                //     align: "center",
+                //     minWidth: 140
+                // }
+            ]
             ]
         });
     }
@@ -257,21 +359,25 @@ layui.use(['form','element','table', "layer", "util"], function() {
             // height: 'full-20',//满高
             cols: [
                 [{
-                    title: '编号',
-                    type: 'numbers',
+                    type: 'checkbox', 
                     fixed: 'left'
+                },{
+                    title: '编号',
+                    type: 'numbers'
                 }, {
                     field: 'createname',
                     title: '创建人名称',
                     align: "center",
                     minWidth: 100
-                }, {
-                    field: 'createondatetime',
-                    title: '创建时间',
-                    align: "center",
-                    minWidth: 100
+                },
+                //  {
+                //     field: 'createondatetime',
+                //     title: '创建时间',
+                //     align: "center",
+                //     minWidth: 100
                        
-                }, {
+                // },
+                 {
                     field: 'phone',
                     title: '联系电话',
                     align: "center",
@@ -291,12 +397,14 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     title: '身份证',
                     align: "center",
                     minWidth: 100
-                }, {
-                    field: 'createenterprise',
-                    title: '创建企业名称',
-                    align: "center",
-                    minWidth: 120
-                }, {
+                }, 
+                // {
+                //     field: 'createenterprise',
+                //     title: '创建企业名称',
+                //     align: "center",
+                //     minWidth: 120
+                // }, 
+                {
                     field: 'address',
                     title: '联系地址',
                     align: "center",
@@ -310,22 +418,41 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     field: 'auditstaus',
                     title: '审核状态',
                     align: "center",
-                    minWidth: 100
-                }, {
-                    field: 'auditdate',
-                    title: '审批时间',
-                    align: "center",
-                }, {
-                    field: 'reason',
-                    title: '修改原因',
-                    align: "center",
-                    minWidth: 120
-                }, {
-                    field: 'auditreason',
-                    title: '审核原由',
-                    align: "center",
-                    minWidth: 140
-                }]
+                    minWidth: 100,
+                    templet: function(d) {
+                        var num = null;
+                        console.log(d.auditstaus)
+                        if (d.auditstaus == "0") {
+                            num = "待审批"
+                            return num
+                        }
+
+                        if (d.auditstaus == "1" || d.auditstaus == "审批通过") {
+                            num = "审批通过"
+                            return num
+                        }
+                        if (d.auditstaus == "2" || d.auditstaus == "审批不通过") {
+                            num = "审批不通过"
+                            return num
+                        }
+                    }
+                }
+                // , {
+                //     field: 'auditdate',
+                //     title: '审批时间',
+                //     align: "center",
+                // }, {
+                //     field: 'reason',
+                //     title: '修改原因',
+                //     align: "center",
+                //     minWidth: 120
+                // }, {
+                //     field: 'auditreason',
+                //     title: '审核原由',
+                //     align: "center",
+                //     minWidth: 140
+                // }
+            ]
             ]
         });
     }
@@ -345,5 +472,32 @@ layui.use(['form','element','table', "layer", "util"], function() {
 
         layui.form.render('select');
     })
-  
+    // 展示图片
+    function showImg(){
+        var imgs = document.querySelectorAll('.licenseimg');
+        for(var i=0;i<imgs.length;i++){
+            (function(i){
+                imgs[i].addEventListener('click',function(){
+                    var photosdata = {
+                        "title": "营业执照", //相册标题
+                        "id": 123, //相册id
+                        "start": 0, //初始显示的图片序号，默认0
+                        "data": [   //相册包含的图片，数组格式
+                            {
+                            // "alt": "图片名",
+                            "pid": 666, //图片id
+                            "src": imgs[i].src, //原图地址
+                            "thumb": imgs[i].src //缩略图地址
+                            }
+                        ]
+                    }
+                    layer.photos({
+                        photos: photosdata //格式见API文档手册页
+                        ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+                    });
+                })
+                // console.log(imgs[i].src);
+            })(i)
+        }
+    }
 })

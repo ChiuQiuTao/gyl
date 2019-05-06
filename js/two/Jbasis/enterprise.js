@@ -19,15 +19,54 @@
                 case 'add':
                     window.location.href = "./dialog/enterpriseDialog.html";
                     break;
+                case 'update':
+                    if(data.length === 0){
+                      layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                      layer.msg('只能同时编辑一个');
+                    } else {
+                        window.location.href = "./dialog/enterpriseDialog.html?id="+data[0].id;
+                    }
+                    break;
+                case 'delete':
+                    if(data.length === 0){
+                      layer.msg('请选择一行');
+                    } else {
+                        console.log(data);
+                        for(var i=0;i<data.length;i++){
+                            delBasStandard(data[i].id);
+                        }
+                        // layer.msg('删除成功');
+                        setTimeout(function(){
+                            getBasStandard();
+    
+                        },1500)
+                    }
+                    break;
             };
         });
-        document.querySelector('.select').addEventListener('click',function(){
+        document.querySelector('#getBasStandard').addEventListener('click',function(e){
             getBasStandard();
         })
        /*重置*/
         $(".agains").click(function() {
             window.location.reload();
         })
+        function delBasStandard(delid){
+            handleAjax('basic/delBasStandard',
+            {
+                id:delid
+            }, "post").done(function(resp) {
+                console.log(resp);
+                
+                layer.msg('删除成功');
+                
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            })
+        }
         getBasStandard();
         function getBasStandard(){
             var standardcode = document.querySelector('#standardcode').value;
@@ -88,9 +127,11 @@
                 // height: 'full-20',//满高
                 cols: [
                     [{
-                        title: '编号',
-                        type: 'numbers',
+                        type: 'checkbox', 
                         fixed: 'left'
+                    },{
+                        title: '编号',
+                        type: 'numbers'
                     }, {
                         field: 'createname',
                         title: '创建人名称',
@@ -100,8 +141,8 @@
                         field: 'createon',
                         title: '创建人时间',
                         align: "center",
-                        minWidth: 150
-                            
+                        minWidth: 150,
+                        templet: "<div>{{layui.util.toDateString(d.createon, 'yyyy-MM-dd')}}</div>"
                     }, {
                         field: 'standardname',
                         title: '标准名称',
@@ -122,22 +163,26 @@
                         title: '标准级别',
                         align: "center",
                         minWidth: 200
-                    }, {
-                        field: 'standardcountry',
-                        title: '归属国',
-                        align: "center",
-                        minWidth: 120
-                    }, {
+                    }, 
+                    // {
+                    //     field: 'standardcountry',
+                    //     title: '归属国',
+                    //     align: "center",
+                    //     minWidth: 120
+                    // }, 
+                    {
                         field: 'implementdate',
                         title: '实施日期',
                         align: "center",
                         minWidth: 130
-                    }, {
-                        field: 'auditdate',
-                        title: '批准日期',
-                        align: "center",
-                        minWidth: 150
-                    }, {
+                    }, 
+                    // {
+                    //     field: 'auditdate',
+                    //     title: '批准日期',
+                    //     align: "center",
+                    //     minWidth: 150
+                    // },
+                     {
                         field: 'content',
                         title: '正文内容',
                         align: "center",

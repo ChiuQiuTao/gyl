@@ -124,9 +124,12 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">企业图片:</label>
                         <div class="layui-input-inline">
-                            <div class="layui-upload" style="display:flex">
+                            <div class="layui-upload" style="display:flex;align-items: center;">
                                 <button type="button" class="layui-btn layui-btn-normal" id="selectImg">选择文件</button>
                                 <!-- <button type="button" class="layui-btn" id="uploadImg">开始上传</button> -->
+                                <div class="layui-upload-list">
+                                    <img class="layui-upload-img" id="showimg" style="width:80px;height:38px;margin-left: 15px;border: 1px solid #fff;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,6 +158,8 @@
                 </div> -->
                 <div class="select-btn">
                     <div class="layui-bg-green comquery " id="uploadImg">确定</div>
+                    <div class="layui-bg-green comquery" id="update" style="display:none">确定</div>
+                    <div class="layui-bg-green comquery" id="updateImg" style="display:none">确定</div>
                     <div class="layui-bg-green comquery cancels">取消</div>
                 </div>
             </div>
