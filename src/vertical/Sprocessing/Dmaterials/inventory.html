@@ -157,7 +157,15 @@
                     minWidth: 130,
                     sort: true,
                     align: "center",
-                    templet: "<div>{{layui.util.toDateString(d.endoutputdate, 'yyyy-MM-dd')}}</div>"
+                    templet: function(d) {
+                        var numv = null;
+                        if (d.endoutputdate == "" || d.endoutputdate == null) {
+                            numv = " ";
+                        } else {
+                            numv = d.endoutputdate = layui.util.toDateString(d.endoutputdate, 'yyyy-MM-dd');
+                        }
+                        return numv
+                    },
                 }, {
                     field: 'wealth',
                     width: 137,

@@ -172,9 +172,10 @@
 <script src="../../../../js/common/template-web.js"></script>
 
 <script>
-    layui.use(['table', "laydate"], function() {
+    layui.use(['table', "laydate", "util"], function() {
         var $ = layui.jquery,
             table = layui.table,
+            util = layui.util,
             laydate = layui.laydate;
 
         laydate.render({
@@ -271,7 +272,15 @@
                     sort: true,
                     align: "center",
                     fixed: 'left',
-                    templet: "<div>{{layui.util.toDateString(d.orderdate, 'yyyy-MM-dd')}}</div>"
+                    templet: function(d) {
+                        var numv = null;
+                        if (d.orderdate == "" || d.orderdate == null) {
+                            numv = " ";
+                        } else {
+                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                        }
+                        return numv
+                    },
                 }, {
                     field: 'ordercode',
                     title: '检测单号',

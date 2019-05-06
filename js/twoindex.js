@@ -110,7 +110,7 @@ var menudata = [{
             },
             {
                 url: "../vertical/Sprocessing/Hmonitoring/nopass.html",
-                title: "产品不及格处理",
+                title: "产品不合格处理",
                 type: "2"
             },
 
@@ -120,8 +120,7 @@ var menudata = [{
         icon: "icon-xiaoshouxiangqing",
         type: "2",
         title: "销售管理",
-        child: [
-            {
+        child: [{
                 url: "../vertical/Sprocessing/sales/productsales.html",
                 title: "产品销售",
                 type: "2"
@@ -153,8 +152,7 @@ var menudata = [{
         icon: "icon-xianshi_jinggaotianchong",
         type: "2",
         title: "加工企业预警信息",
-        child: [
-            {
+        child: [{
                 url: "../vertical/Sprocessing/Iwarning/rawmaterialsinven.html",
                 title: "原辅料库存预警",
                 type: "2"
@@ -174,7 +172,7 @@ var menudata = [{
                 title: "产品保质期预警",
                 type: "2"
             },
-           
+
         ]
     },
     {
@@ -351,7 +349,7 @@ var menudata = [{
 
         ]
     },
-    
+
     {
         icon: "icon-xiaoshouxiangqing",
         type: "3",
@@ -366,7 +364,7 @@ var menudata = [{
                 title: "养殖投入品采购",
                 type: "3"
             },
-           
+
         ]
     },
     {
@@ -403,7 +401,7 @@ var menudata = [{
                 type: "5"
             }
         ]
-    },  {
+    }, {
         icon: "icon-jindu",
         type: "3",
         title: "养殖进销存管理",
@@ -448,8 +446,8 @@ var menudata = [{
                 type: "3"
             }
         ]
-    }, 
-     {
+    },
+    {
         icon: "icon-ios-folder-open",
         type: "3",
         title: "养殖企业仓库管理",
@@ -495,7 +493,7 @@ var menudata = [{
             }
         ]
     },
-    
+
 
     {
         icon: "icon-xianshi_jinggaotianchong",
@@ -532,8 +530,7 @@ var menudata = [{
         icon: "icon-xianshi_jinggaotianchong",
         type: "4",
         title: "种植企业预警信息",
-        child: [
-            {
+        child: [{
                 url: "../vertical/Splanting/Iwarning/inventory.html",
                 title: "投入品库存预警",
                 type: "4"
@@ -564,8 +561,7 @@ var menudata = [{
         icon: "icon-xianshi_jinggaotianchong",
         type: "5",
         title: "食品经营预警信息",
-        child: [
-            {
+        child: [{
                 url: "../vertical/Sfood/Iwarning/productpro.html",
                 title: "产品库存预警",
                 type: "5"
@@ -577,7 +573,7 @@ var menudata = [{
             },
         ]
     },
-    
+
     {
         icon: "icon-ios-folder-open",
         type: "3",
@@ -697,7 +693,7 @@ var menudata = [{
 
         ]
     },
-    
+
 
     {
         icon: "",

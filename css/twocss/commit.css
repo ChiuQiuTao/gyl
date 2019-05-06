@@ -244,3 +244,17 @@ input {
     cursor: pointer;
     margin: 0 auto;
 }
+
+.names {
+    width: 270px;
+}
+
+.Selectsales tr th {
+    text-align: center;
+}
+
+.salesbtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}

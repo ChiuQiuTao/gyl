@@ -267,7 +267,15 @@
                     fixed: 'left',
                     minWidth: 120,
                     align: "center",
-                    templet: "<div>{{layui.util.toDateString(d.orderdate, 'yyyy-MM-dd')}}</div>"
+                    templet: function(d) {
+                        var numv = null;
+                        if (d.orderdate == "" || d.orderdate == null) {
+                            numv = " ";
+                        } else {
+                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                        }
+                        return numv
+                    },
                 }, {
                     field: 'ordercode',
                     align: "center",
