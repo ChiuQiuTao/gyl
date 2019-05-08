@@ -71,18 +71,21 @@
             return;
         });
         function getUser(){
-            handleAjax('user/getUser', {
-            }).done(function(resp) {
+            
+            handleAjax('user/getUser', {}, "GET").done(function(resp) {
                 console.log(resp)
-                window.location.href = "./company.html";
-
-            }).fail(function(err) {
-                console.log(err)
-                if (err.status == "400") {
-                    layer.msg('账号与密码不正确', {
-                        icon: 5,
-                        time: 2000
-                    });
+                if(resp.enterpriseId&&resp.enterpriseId!=''){
+                    window.location.href = "./company.html";
+                }else{
+                    window.location.href = "../index.html";
+                }
+                return
+                }).fail(function(err) {
+                console.log(err);
+                if(err.enterpriseId&&err.enterpriseId!=''){
+                    window.location.href = "./company.html";
+                }else{
+                    window.location.href = "../index.html";
                 }
             });
         }
@@ -107,8 +110,8 @@
                             password: $(".login-pass").val()
                         }).done(function(resp) {
                             console.log(resp)
-                            window.location.href = "./company.html";
-
+                            // window.location.href = "./company.html";
+                            getUser();
                         }).fail(function(err) {
                             console.log(err)
                             if (err.status == "400") {
