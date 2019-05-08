@@ -1,6 +1,11 @@
 var base = "http://47.98.167.96:9191/";
 var jq = jQuery.noConflict();
 var sessions = sessionStorage.getItem("keyssname");
+// sessions='';
+// if (sessions == "" && url != "login") {
+//     window.location.href = "../../src/login.html";
+//     return;
+// }
 
 function ajax(url, param, type,contentType) {
 

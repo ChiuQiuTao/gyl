@@ -97,9 +97,7 @@
                         minWidth: 100
                             // sort: true,
                             // width: 100,
-                            // templet: function(d) {
-                            //     return d.num + "(" + d.unit + ")"
-                            // }
+                           
                     }, 
                     // {
                     //     field: 'productcode',

@@ -70,7 +70,22 @@
             };
             return;
         });
+        function getUser(){
+            handleAjax('user/getUser', {
+            }).done(function(resp) {
+                console.log(resp)
+                window.location.href = "./company.html";
 
+            }).fail(function(err) {
+                console.log(err)
+                if (err.status == "400") {
+                    layer.msg('账号与密码不正确', {
+                        icon: 5,
+                        time: 2000
+                    });
+                }
+            });
+        }
         /*事件*/
         function events() {
             if (verify($(".login-use"), "请输入用户名!")) {

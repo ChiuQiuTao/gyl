@@ -19,13 +19,12 @@
 <body class="layui-layout-body">
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header layui-bg-cyan">
-            <div class="layui-logo two-in-logo">服务交易</div>
+            <div class="layui-logo two-in-logo">供应链管理平台</div>
             <div class="layui-nav layui-layout-left two-in-title">
-                <p>欢迎<label class="realname">黄焱（1053385537）</label>用户登录供应链协同管理平台，这是您的第<span>10</span>次登录</p>
+                <p>欢迎<label class="realname">xxx</label>用户登录供应链协同管理平台</p>
             </div>
 
             <div class="layui-nav layui-layout-right two-in-login">
-                <div class="two-in-top-approve">认证状态：<span>（未录入）</span></div>
                 <a href="javascript:;" class="exits">
                     <i class="iconfont  icon-tuichu" style="font-size:30px;color:#6F6C6C;"></i>
                 </a>
@@ -35,7 +34,7 @@
                 </a>
                 <div class="layui-nav-item two-in-data">
                     <a href="javascript:;" id="" class="realname" style="margin-right: 11px;">
-                        黄焱（1053385537）
+                        暂未登录
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="">基本资料</a></dd>
@@ -112,6 +111,11 @@
     <script src="../../public/dist/layui.js"></script>
     <script src="../../js/common/api.js"></script>
     <script>
+        var sessions = sessionStorage.getItem("keyssname");
+        // sessions=''
+        if (sessions == "") {
+            window.location.href = "../login.html";
+        }
         window.onresize = function() {
             getClientHeight();
 
@@ -136,7 +140,7 @@
         function getUser(e) {
             handleAjax('user/getUser', {}, "GET").done(function(resp) {
                 // console.log(resp);
-                var names = document.querySelectorAll('.realname');
+                var names = document.querySelectorAll('.r.ealname');
                 for (var i = 0; i < names.length; i++) {
                     names[i].innerHTML = resp.realName + "(" + resp.username + ")";
                 }

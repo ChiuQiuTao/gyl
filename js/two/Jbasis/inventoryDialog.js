@@ -44,15 +44,38 @@
                 document.querySelector('#updateBasStorage').style.display='block';
                 /*更新*/
                 document.querySelector('#updateBasStorage').addEventListener('click',function(){
-                    updateBasProduct(res.id);
+                    updateBasStorage(res.id);
                 })
             }else{
                 
             }
         }
+        // 更新
+        function updateBasStorage(id){
+            var storagename = document.querySelector('#storagename1').value;
+            var chargeperson = document.querySelector('#chargeperson').value;
+            var remarks = document.querySelector('#remarks').value;
+            handleAjax('basic/updateBasStorage', { 
+                id:id,
+                storagename:storagename,
+                chargeperson:chargeperson,
+                remarks:remarks,
+            }, "POST").done(function(resp) {
+                console.log(resp);
+                layer.msg('更新成功');
+                setTimeout(function(){
+                    window.location.href = '../inventory.html'
+                },1500)
+                return
+            }).fail(function(err) {
+                console.log(err)
+                layui.form.render("select");
+
+            });
+        }
         //查看详情
         function getBasStorageVo(delid){
-            handleAjax('basic/getBasStorageVo', { 
+            handleAjax('basic/getBasStorageOneVo', { 
                 id: delid,
             }, "GET").done(function(resp) {
                 console.log(resp);
@@ -68,6 +91,7 @@
                     two.style.display = 'block';
                 }
                 document.querySelector('#chargeperson').value = resp.list[0].chargeperson;
+                document.querySelector('#remarks').value = resp.list[0].remarks;
                 document.querySelector('#storagelevel').style.display = 'none'
                 layui.form.render("select");
                 return

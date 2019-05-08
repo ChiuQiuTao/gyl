@@ -78,7 +78,7 @@
         function getBasStorage(){
             var storagename = document.querySelector('#storagename').value;
             var storagelevel = document.querySelector('#storagelevel').value;
-
+           
             //获取列表
             table.render({
                 elem: '#testee',
@@ -100,35 +100,34 @@
                         // //得到数据总量
                         // console.log(count);
                 },
-                request: {
-                    // pageName: 'currentPage' //页码的参数名称，默认：page
-                    //     ,
-                    // limitName: 'pageSize' //每页数据量的参数名，默认：limit
-                },
+                // request: {
+                //     // pageName: 'currentPage' //页码的参数名称，默认：page
+                //     //     ,
+                //     // limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                // },
                 parseData: function(res) { //res 即为原始返回的数据
                     console.log(res);
-                    var dataList = [];
-                    for (var i=0;i<res.list.length;i++){
-                        if(res.list[i].childNodes.length!=0 &&res.list[i].childNodes){
-                            for (var j=0;j<res.list[i].childNodes.length;j++){
-                                res.list[i].childNodes[j].parentName=res.list[i].storagename
-                                dataList.push(res.list[i].childNodes[j]);
-                            }
-                        }
-                        else{
-                            res.list[i].parentName=res.list[i].storagename;
-                            res.list[i].storagename='暂无';
-                            dataList.push(res.list[i]);
-                        }
-                    }
+                    // var dataList = [];
+                    // for (var i=0;i<res.list.length;i++){
+                    //     if(res.list[i].childNodes.length!=0 &&res.list[i].childNodes){
+                    //         for (var j=0;j<res.list[i].childNodes.length;j++){
+                    //             res.list[i].childNodes[j].parentName=res.list[i].storagename
+                    //             dataList.push(res.list[i].childNodes[j]);
+                    //         }
+                    //     }
+                    //     else{
+                    //         res.list[i].parentName=res.list[i].storagename;
+                    //         res.list[i].storagename='暂无';
+                    //         dataList.push(res.list[i]);
+                    //     }
+                    // }
              
-                    console.log("dataList");
-                    console.log(dataList);
+                   
                     return {
                         "code": res.code, //解析接口状态
                         "msg": res.message, //解析提示文本
-                        "totalNum": dataList.length, //解析数据长度
-                        "lists":dataList //解析数据列表
+                        "totalNum": res.list.length, //解析数据长度
+                        "lists":res.list //解析数据列表
                     };
                 },
                 response: {
@@ -165,37 +164,26 @@
                     },
                     
                     {
-                        field: 'parentName',
+                        field: 'storagename',
                         title: '仓库名称',
                         align: "center",
                         minWidth: 120
                     }, 
-                    // {
-                    //     field: 'storagelevel',
-                    //     title: '级别',
-                    //     align: "center",
-                    //     minWidth: 180,
-                    //     templet: function(d) {
-                    //         var num = null;
-                    //         console.log(d.storagelevel)
-                    //         if (d.storagelevel == "1") {
-                    //             num = "一级仓库 "
-                    //             return num
-                    //         }
-    
-                    //         if (d.storagelevel == "2") {
-                    //             num = "二级仓库"
-                    //             return num
-                    //         }
-                           
-                    //     }
-                    // }, 
                     {
-                        field: 'storagename',
-                        title: '二级仓库名称',
+                        field: 'storagelevel',
+                        title: '仓库名称',
                         align: "center",
-                        minWidth: 120
-                    }, {
+                        minWidth: 120,
+                        templet: function(d) {
+                            if(d.parentid==''){
+                                return '一级仓库'
+                            }else{
+                                return '二级仓库'
+                            }
+                        }
+                    }, 
+                    
+                    {
                         field: 'chargeperson',
                         title: '仓库负责人',
                         align: "center",

@@ -10,7 +10,13 @@ layui.use(['form','element','table', "layer", "util"], function() {
     table.on('toolbar(testdome)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id),
             data = checkStatus.data; //获取选中的数据
+        if(obj.event === 'showImg'){
+            console.log('12313')
+        }
         switch (obj.event) {
+            // case 'showImg':
+            //     console.log('12313')
+            //     break;
             case 'add':
                 window.location.href = "./dialog/supplierDialog.html";
                 break;
@@ -43,9 +49,10 @@ layui.use(['form','element','table', "layer", "util"], function() {
 
 
     //监听头部监听 ||新增
-    table.on('toolbar(personalfilter)', function(obj) {
+    table.on('toolbar(testdome)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id),
             data = checkStatus.data; //获取选中的数据
+            
         switch (obj.event) {
             case 'add':
                 window.location.href = "./dialog/supplierDialogP.html";
@@ -82,10 +89,26 @@ layui.use(['form','element','table', "layer", "util"], function() {
     table.on('tool(testdome)', function(obj) {
         var data = obj.data; //获得当前行数据
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-        var tr = obj.tr; //获得当前行 tr 的DOM对象
-        if (layEvent === 'detail') { //查看
-            details(data.id);
-        }
+        if(obj.event === 'showImg'){
+            console.log(data);
+            var photosdata = {
+            "title": "营业执照", //相册标题
+            "id": 123, //相册id
+            "start": 0, //初始显示的图片序号，默认0
+            "data": [   //相册包含的图片，数组格式
+                {
+                // "alt": "图片名",
+                "pid": 666, //图片id
+                "src": data.picturepath, //原图地址
+                "thumb": data.picturepath //缩略图地址
+                }
+            ]
+            }
+            layer.photos({
+                photos: photosdata //格式见API文档手册页
+                ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+                });
+            }
     });
 
     
@@ -229,9 +252,10 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     title: '营业执照图片地址',
                     align: "center",
                     minWidth: 180,
+                    event: 'showImg', 
                     templet: function(d) {
-                    return '<img src="'+d.picturepath+'" alt="" class="licenseimg">'
-                }
+                        return '<img src="'+d.picturepath+'" alt="" class="licenseimg">'
+                    }
                 }, 
                 // {
                 //     field: 'enterprisecode',
@@ -277,21 +301,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
                         }
                     }
                 }
-                // , {
-                //     field: 'createenterprisename',
-                //     title: '创建人的企业',
-                //     align: "center",
-                // }, {
-                //     field: 'auditdate',
-                //     title: '审批日期',
-                //     align: "center",
-                //     minWidth: 120,
-                // }, {
-                //     field: 'enterprisetype',
-                //     title: '企业类型名称',
-                //     align: "center",
-                //     minWidth: 140
-                // }
+               
             ]
 
             ]
@@ -323,7 +333,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             toolbar: '#toolbarinterP',
             done: function(res, curr, count) {
                 console.log(res)
-                showImg();
+                // showImg();
             },
             request: {
                 pageName: 'currentPage' //页码的参数名称，默认：page
@@ -482,31 +492,31 @@ layui.use(['form','element','table', "layer", "util"], function() {
     })
     
     // 展示图片
-    function showImg(){
-        var imgs = document.querySelectorAll('.licenseimg');
-        for(var i=0;i<imgs.length;i++){
-            (function(i){
-                imgs[i].addEventListener('click',function(){
-                    var photosdata = {
-                        "title": "营业执照", //相册标题
-                        "id": 123, //相册id
-                        "start": 0, //初始显示的图片序号，默认0
-                        "data": [   //相册包含的图片，数组格式
-                            {
-                            // "alt": "图片名",
-                            "pid": 666, //图片id
-                            "src": imgs[i].src, //原图地址
-                            "thumb": imgs[i].src //缩略图地址
-                            }
-                        ]
-                    }
-                    layer.photos({
-                        photos: photosdata //格式见API文档手册页
-                        ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
-                      });
-                })
-                // console.log(imgs[i].src);
-            })(i)
-        }
-    }
+    // function showImg(){
+    //     var imgs = document.querySelectorAll('.licenseimg');
+    //     for(var i=0;i<imgs.length;i++){
+    //         (function(i){
+    //             imgs[i].addEventListener('click',function(){
+    //                 var photosdata = {
+    //                     "title": "营业执照", //相册标题
+    //                     "id": 123, //相册id
+    //                     "start": 0, //初始显示的图片序号，默认0
+    //                     "data": [   //相册包含的图片，数组格式
+    //                         {
+    //                         // "alt": "图片名",
+    //                         "pid": 666, //图片id
+    //                         "src": imgs[i].src, //原图地址
+    //                         "thumb": imgs[i].src //缩略图地址
+    //                         }
+    //                     ]
+    //                 }
+    //                 layer.photos({
+    //                     photos: photosdata //格式见API文档手册页
+    //                     ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+    //                   });
+    //             })
+    //             // console.log(imgs[i].src);
+    //         })(i)
+    //     }
+    // }
 })
