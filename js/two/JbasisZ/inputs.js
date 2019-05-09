@@ -19,12 +19,12 @@ layui.use(['form','table', "laydate"], function() {
                 window.location.href = "./dialog/inputsDialog.html";
                 break;
             case 'update':
-                if (data.length === 0) {
+                if(data.length === 0){
                     layer.msg('请选择一行');
-                } else if (data.length > 1) {
+                } else if(data.length > 1){
                     layer.msg('只能同时编辑一个');
                 } else {
-                    layer.alert('编辑 [id]：' + checkStatus.data[0].id);
+                    window.location.href = "./dialog/inputsDialog.html?id="+data[0].id;
                 }
                 break;
             case 'delete':

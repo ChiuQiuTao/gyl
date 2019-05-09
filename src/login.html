@@ -74,18 +74,22 @@
             
             handleAjax('user/getUser', {}, "GET").done(function(resp) {
                 console.log(resp)
+                localStorage.setItem("enterpriseId", resp.enterpriseId);
                 if(resp.enterpriseId&&resp.enterpriseId!=''){
-                    window.location.href = "./company.html";
-                }else{
                     window.location.href = "../index.html";
+                }else{
+                    window.location.href = "./company.html";
                 }
                 return
                 }).fail(function(err) {
                 console.log(err);
+                localStorage.setItem("enterpriseId", err.enterpriseId);
+                
+                console.log(localStorage.getItem("enterpriseId"));
                 if(err.enterpriseId&&err.enterpriseId!=''){
-                    window.location.href = "./company.html";
-                }else{
                     window.location.href = "../index.html";
+                }else{
+                    window.location.href = "./company.html";
                 }
             });
         }
