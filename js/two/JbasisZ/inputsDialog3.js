@@ -12,20 +12,20 @@
         var producttypeid=null;//种类
         var earlywarning=false;//是否预警
         // 选择框选择显示
-        function showSelect(){
-            form.on('select(producttypeid)', function(data){
-                console.log(data);
-                var index = data.elem.selectedIndex;
-                index = index-1;
-                var ctypelist = document.querySelectorAll('.inline-ctype');
-                for(var i=0;i<ctypelist.length;i++){
-                    ctypelist[i].style.display='none';
-                }
-                ctypelist[index].style.display='block';
-            });    
-        }
+        // function showSelect(){
+        //     form.on('select(producttypeid)', function(data){
+        //         console.log(data);
+        //         var index = data.elem.selectedIndex;
+        //         index = index-1;
+        //         var ctypelist = document.querySelectorAll('.inline-ctype');
+        //         for(var i=0;i<ctypelist.length;i++){
+        //             ctypelist[i].style.display='none';
+        //         }
+        //         ctypelist[index].style.display='block';
+        //     });    
+        // }
         //
-        form.on('select(ctype)', function(data){
+        form.on('select(producttypeid)', function(data){
             console.log(data);
             producttypeid=data.value;
         });    
@@ -37,7 +37,6 @@
 
 
         // 获取id
-        getHrefId();
         function getHrefId(){
             var loc = location.href;
             var url = loc.split("?")[1];
@@ -92,7 +91,7 @@
                         var putseed ={
                             'id':id,
                             'putseedname': $('#putseedname').val(),
-                            'producttypeid':producttypeid,
+                            'producttypeid':$('#producttypeid').val(),
                             'specifications':$('#specifications').val(),
                             'unit': $('#unit').val(),
                             'registrationmark':$('#registrationmark').val(),
@@ -133,6 +132,7 @@
             }, "GET").done(function(resp) {
                 console.log(resp);
                 document.querySelector('#putseedname').value=resp.list[0].putseedname
+                document.querySelector('#producttypeid').value=resp.list[0].producttypeid
                 document.querySelector('#specifications').value=resp.list[0].specifications
                 document.querySelector('#unit').value=resp.list[0].unit
                 document.querySelector('#registrationmark').value=resp.list[0].registrationmark
@@ -148,8 +148,8 @@
                 if(resp.list[0].earlywarning==1){
                     console.log(123123)
                     $('#earlywarning').attr('checked', true);
-                    layui.form.render();
                 }
+                layui.form.render();
                 // earlywarning
                 return
             }).fail(function(err) {
@@ -160,22 +160,20 @@
         // 种类
         getBasProducttype();
         function getBasProducttype(){
-            handleAjax('PlantBasPutseed/getBasProducttype', {
-                parentid:'0000000000003'
+            var listVo={
+                'pid':'0000000000002',
+                'pname':'肥料'
+            }
+            var listVo = JSON.stringify(listVo);
+            handleAjax('PlantBasPutseed/getTypegetParentidByCaregoryName', {
+                listVo:listVo
             }, "GET").done(function(resp) {
                 console.log(resp);
-    
                 for(var i=0;i<resp.list.length;i++){
-                    document.querySelector('#producttypeid').innerHTML=document.querySelector('#producttypeid').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
-                    document.querySelector('#inline-type').innerHTML=document.querySelector('#inline-type').innerHTML
-                    +'<div class="layui-input-inline inline-ctype" style="display:none;"><select name="ctype" lay-filter="ctype" class="ctype"><option value="">请选择</option></select></div>'
-                    var ctypelist = document.querySelectorAll('.ctype');
-                    for(var j=0;j<resp.list[i].viList.length;j++){
-                        ctypelist[i].innerHTML=ctypelist[i].innerHTML+'<option value="'+resp.list[i].viList[j].pid+'">'+resp.list[i].viList[j].pname+'</option>'
-                    }
+                    document.querySelector('#producttypeid').innerHTML = document.querySelector('#producttypeid').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
                 }
                 layui.form.render("select");
-                showSelect();
+        getHrefId();
                 return
             }).fail(function(err) {
                 console.log(err);
@@ -207,7 +205,7 @@
                 data: {
                     putseed:function(){
                         var putseed ={
-                            'putseedclass':'1',
+                            'putseedclass':'3',
                             'enterpriseid':localStorage.getItem("enterpriseId"),
                             'enterprisename':localStorage.getItem("enterprisename"),
                             'putseedname': $('#putseedname').val(),

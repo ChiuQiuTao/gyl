@@ -75,6 +75,7 @@
             handleAjax('user/getUser', {}, "GET").done(function(resp) {
                 console.log(resp)
                 localStorage.setItem("enterpriseId", resp.enterpriseId);
+                localStorage.setItem("enterprisename", err.enterprisename);
                 if(resp.enterpriseId&&resp.enterpriseId!=''){
                     window.location.href = "../index.html";
                 }else{
@@ -84,6 +85,7 @@
                 }).fail(function(err) {
                 console.log(err);
                 localStorage.setItem("enterpriseId", err.enterpriseId);
+                localStorage.setItem("enterprisename", err.enterprisename);
                 
                 console.log(localStorage.getItem("enterpriseId"));
                 if(err.enterpriseId&&err.enterpriseId!=''){

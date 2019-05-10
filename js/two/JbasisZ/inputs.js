@@ -10,13 +10,50 @@ layui.use(['form','table', "laydate"], function() {
     laydate.render({
         elem: '#date2' //指定元素
     });
+    // 切换tab
+    var tabItemId='1';
+    var enterpriseid='';
+    tabItems = document.querySelectorAll('.select-tab>.item');
+    for(var i=0;i<tabItems.length;i++){
+        (function(i){
+            tabItems[i].addEventListener('click',function(){
+                var tabItemThis = document.querySelector('.select-tab>.item-this');
+                tabItemThis.classList.remove('item-this');
+                tabItems[i].classList.add('item-this');
+                tabItemId = tabItems[i].getAttribute("data-id");
+                console.log(tabItemId);
+                findBasPutseedList(enterpriseid);
+                if(i==0){
+                    document.querySelector('#item-type1').style.display='block';
+                    document.querySelector('#item-type2').style.display='none';
+                    document.querySelector('#item-type3').style.display='none';
+
+                }else if(i==1||i==3){
+                    document.querySelector('#item-type1').style.display='none';
+                    document.querySelector('#item-type2').style.display='block';
+                    document.querySelector('#item-type3').style.display='none';
+                }else if(i==2){
+                    document.querySelector('#item-type1').style.display='none';
+                    document.querySelector('#item-type2').style.display='none';
+                    document.querySelector('#item-type3').style.display='block';
+                }
+            })
+        })(i)
+        
+    }
     //监听头部监听
     table.on('toolbar(testdome)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id),
             data = checkStatus.data; //获取选中的数据
         switch (obj.event) {
             case 'add':
-                window.location.href = "./dialog/inputsDialog.html";
+                if(tabItemId==1){
+                    window.location.href = "./dialog/inputsDialog.html";
+                }else if(tabItemId==2||tabItemId==4){
+                    window.location.href = "./dialog/inputsDialog2.html";
+                }else if(tabItemId==3){
+                    window.location.href = "./dialog/inputsDialog3.html";
+                }
                 break;
             case 'update':
                 if(data.length === 0){
@@ -24,7 +61,13 @@ layui.use(['form','table', "laydate"], function() {
                 } else if(data.length > 1){
                     layer.msg('只能同时编辑一个');
                 } else {
-                    window.location.href = "./dialog/inputsDialog.html?id="+data[0].id;
+                    if(tabItemId==1){
+                        window.location.href = "./dialog/inputsDialog.html?id="+data[0].id;
+                    }else if(tabItemId==2||tabItemId==4){
+                        window.location.href = "./dialog/inputsDialog2.html?id="+data[0].id;
+                    }else if(tabItemId==3){
+                        window.location.href = "./dialog/inputsDialog3.html?id="+data[0].id;
+                    }
                 }
                 break;
             case 'delete':
@@ -59,23 +102,7 @@ layui.use(['form','table', "laydate"], function() {
         console.log(data);
         producttypeid=data.value;
     });    
-    // 切换tab
-    var tabItemId='1';
-    var enterpriseid='';
-    tabItems = document.querySelectorAll('.select-tab>.item');
-    for(var i=0;i<tabItems.length;i++){
-        (function(i){
-            tabItems[i].addEventListener('click',function(){
-                var tabItemThis = document.querySelector('.select-tab>.item-this');
-                tabItemThis.classList.remove('item-this');
-                tabItems[i].classList.add('item-this');
-                tabItemId = tabItems[i].getAttribute("data-id");
-                console.log(tabItemId);
-                findBasPutseedList(enterpriseid);
-            })
-        })(i)
-        
-    }
+    
 
 
     // 获取用户信息
@@ -93,8 +120,9 @@ layui.use(['form','table', "laydate"], function() {
             return
         });
     }
-    //种类
     getBasProducttype();
+    getTypeParentidByName();
+    //种子种类查询
     function getBasProducttype(){
         handleAjax('PlantBasPutseed/getBasProducttype', {
             parentid:'0000000000003'
@@ -112,6 +140,51 @@ layui.use(['form','table', "laydate"], function() {
             }
             layui.form.render("select");
             showSelect();
+            return
+        }).fail(function(err) {
+            console.log(err);
+            return
+        });
+    }
+    // 农药/其它投入品种别查询
+    function getTypeParentidByName(){
+        var listVo={
+            'pid':'0000000000002',
+            'pname':'农药/其他投入品'
+        }
+        var listVo = JSON.stringify(listVo);
+        handleAjax('PlantBasPutseed/getTypeParentidByName', {
+            listVo:listVo
+        }, "GET").done(function(resp) {
+            console.log(resp);
+
+            for(var i=0;i<resp.list.length;i++){
+                document.querySelector('#typefarm').innerHTML = document.querySelector('#typefarm').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
+            }
+            layui.form.render("select");
+            // showSelect();
+            return
+        }).fail(function(err) {
+            console.log(err);
+            return
+        });
+    }
+    // 肥料投入品种别查询
+    getTypegetParentidByCaregoryName();
+    function getTypegetParentidByCaregoryName(){
+        var listVo={
+            'pid':'0000000000002',
+            'pname':'肥料'
+        }
+        var listVo = JSON.stringify(listVo);
+        handleAjax('PlantBasPutseed/getTypegetParentidByCaregoryName', {
+            listVo:listVo
+        }, "GET").done(function(resp) {
+            console.log(resp);
+            for(var i=0;i<resp.list.length;i++){
+                document.querySelector('#typefertilizer').innerHTML = document.querySelector('#typefertilizer').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
+            }
+            layui.form.render("select");
             return
         }).fail(function(err) {
             console.log(err);
