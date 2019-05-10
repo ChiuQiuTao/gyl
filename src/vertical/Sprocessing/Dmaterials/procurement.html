@@ -74,9 +74,97 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
 
+
+<!-- 查看的内容 -->
+<script type="text/html" id="contentquery">
+    <div class="select common">
+
+        <div class="select-title" style="border-bottom:0px;background-color: #f3f3f3;">
+            基本信息
+        </div>
+        {{each list}}
+        <ul class="basis-h">
+
+            <li>
+                <label>录入日期:</label>
+                <p>{{$value.createon}}</p>
+            </li>
+            <li>
+                <label>供应商名称:</label>
+                <p>{{$value.supplyname}}</p>
+            </li>
+            <li>
+                <label>采购日期:</label>
+                <p>{{$value.orderdate}}</p>
+            </li>
+            <li>
+                <label>供应商类型:</label> {{if $value.supplytype=="2"}}
+                <p>企业供应商</p>
+                {{else}}
+                <p>个人供应商</p>
+                {{/if}}
+            </li>
+            <li>
+                <label>负责人:</label>
+                <p>{{$value.person}}</p>
+            </li>
+            <li>
+                <label>是否进口:</label>
+                <p>{{$value.isjk}}</p>
+            </li>
+            <li>
+                <label>采购单号:</label>
+                <p style="width: 190px;">{{$value.ordercode}} </p>
+            </li>
+
+        </ul>
+        <div style="padding:10px  0  0 10px;">采购产品</div>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>原辅料类别</th>
+                    <th>原辅料名称</th>
+                    <th>原辅料规格</th>
+                    <th>生产日期</th>
+                    <th>批次</th>
+                    <th>保质期</th>
+                    <th>仓库名称</th>
+                    <th>二级仓库名称</th>
+                    <th>重量(KG)</th>
+                    <th>单价(元)</th>
+                    <th>金额(元)</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{each $value.listss}}
+                <tr>
+                    <td style="text-align: center;">{{$index}}</td>
+                    <td style="text-align: center;">{{$value.producttype}}</td>
+                    <td style="text-align: center;">{{$value.productname}}</td>
+                    <td style="text-align: center;">{{$value.specifications}}</td>
+                    <td style="text-align: center;">{{$value.factorydate}}</td>
+                    <td style="text-align: center;">{{$value.batch}}</td>
+                    <td style="text-align: center;">{{$value.lifedate}}/{{$value.lifedateunit}}</td>
+                    <td style="text-align: center;">{{$value.storage}}</td>
+                    <td style="text-align: center;">{{$value.area}}</td>
+                    <td style="text-align: center;">{{$value.weight}}</td>
+                    <td style="text-align: center;">{{$value.price}}</td>
+                    <td style="text-align: center;">{{$value.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{/each}}
+    </div>
+
+</script>
+
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../js/common/template-web.js"></script>
 <script>
     layui.use(['table', "layer", "laydate", "util"], function() {
         var $ = layui.jquery,
@@ -114,16 +202,59 @@
         });
 
         //监听表格里面按钮
-        table.on('tool(testdome)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        table.on('tool(testdome)', function(obj) {
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
             if (layEvent === 'detail') { //查看
-                //do somehing
-                layer.msg('查看');
+                procurement(data.id);
             }
         });
 
+
+        /*查看*/
+        function procurement(tt) {
+            layer.open({
+                type: 1,
+                title: "查看",
+                shadeClose: true, //是否点击遮罩关闭
+                anim: 5, //弹出动画
+                scrollbar: false, //窗口外滚动条是否出现
+                skin: 'layui-layer-rim', //加上边框
+                area: ['1100px', '440px'], //宽高
+                content: '<div class="ssss"></div>',
+                success: function(layero, index) {
+
+                    noAjax('ordPurchase/getPurchaseOneVo', {
+                        id: tt
+                    }, "GET").done(function(resp) {
+                        console.log(resp);
+
+                        var objs = resp.list[0];
+                        var listss = [];
+                        listss.push(objs.purchaseProductVos);
+                        objs.listss = listss;
+                        delete objs.purchaseProductVos;
+                        objs.createon = times(objs.createon);
+                        objs.orderdate = times(objs.orderdate);
+
+                        $.each(objs.listss, function(index, item) {
+                            item.factorydate = times(item.factorydate);
+                        });
+
+                        var html = template("contentquery", resp);
+                        $(".ssss").html(html);
+
+                    }).fail(function(err) {
+                        console.log(err)
+
+                    });
+                }
+            });
+        }
+
+        function times(t) {
+            return t = t.split("T")[0];
+        }
 
         //获取列表
         var tableIns = table.render({
@@ -136,7 +267,8 @@
             },
             toolbar: '#toolbarinter',
             request: {
-                limitName: '10'
+                pageName: 'currentPage',
+                limitName: 'pageSize'
             },
             limits: [10, 20],
             parseData: function(res) { //res 即为原始返回的数据
@@ -168,8 +300,8 @@
                     ,
                 last: true //不显示尾页
                     ,
-                prev: '下一页',
-                next: "上一页",
+                next: "下一页",
+                prev: '上一页',
                 theme: "#c81623",
             },
             // height: 'full-20',//满高
@@ -206,10 +338,10 @@
                     align: "center",
                     templet: function(d) {
                         var num = null;
-                        if (d.supplytype = 2) {
+                        if (d.supplytype == 2) {
                             num = "企业供应商"
                         }
-                        if (d.supplytype = 3) {
+                        if (d.supplytype == 3) {
                             num = "个人供应商"
                         }
                         return num

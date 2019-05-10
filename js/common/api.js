@@ -7,25 +7,25 @@ var sessions = sessionStorage.getItem("keyssname");
 //     return;
 // }
 
-function ajax(url, param, type,contentType) {
+function ajax(url, param, type, contentType) {
 
     if (sessions == "" && url != "login") {
         window.location.href = "../../src/login.html";
         return;
     }
 
-    if(contentType=='utf-8'){
+    if (contentType == 'utf-8') {
         return jq.ajax({
             url: base + url,
             data: param || {},
             type: type || 'POST',
             async: true,
-            contentType:'application/json;charset=utf-8',
+            contentType: 'application/json;charset=utf-8',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
             },
         });
-    }else{
+    } else {
         return jq.ajax({
             url: base + url,
             data: param || {},
@@ -36,17 +36,12 @@ function ajax(url, param, type,contentType) {
             },
         });
     }
-        
-
-    // 利用了jquery延迟对象回调的方式对ajax封装，使用done()，fail()，always()等方法进行链式回调操作
-   
-
-
-
 }
 
-function handleAjax(url, param, type,contentType) {
-    return ajax(url, param, type ,contentType).then(function(resp) {
+
+
+function handleAjax(url, param, type, contentType) {
+    return ajax(url, param, type, contentType).then(function(resp) {
         // 成功回调
         if (typeof resp == 'string') {
             resp = JSON.parse(resp)
@@ -67,17 +62,11 @@ function handleAjax(url, param, type,contentType) {
         }
     }, function(err) {
         // 失败回调    
-
         layer.load();
         //此处演示关闭
         setTimeout(function() {
             layer.closeAll('loading');
         }, 2000);
-
-        if (err.code = "000") {
-            window.location.href = "../../src/login.html";
-        }
-        console.log(err); // 打印状态码
     });
 }
 
@@ -89,7 +78,6 @@ function noAjax(url, param, type) {
         if (typeof resp == 'string') {
             resp = JSON.parse(resp)
         }
-
         if (resp) {
             return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
         } else {
