@@ -71,27 +71,21 @@
             return;
         });
 
+        /*是否存在企业id*/
         function getUser() {
-
             noAjax('user/getUser', {}, "GET").done(function(resp) {
 
-                localStorage.setItem("enterpriseId", resp.enterpriseId);
                 if (resp.enterpriseId && resp.enterpriseId != "") {
                     window.location.href = "../index.html";
+                    var idss = resp.enterpriseId;
+                    localStorage.setItem("enterpriseId", idss);
                 } else {
                     window.location.href = "./company.html";
                 }
                 return
             }).fail(function(err) {
-
-                localStorage.setItem("enterpriseId", err.enterpriseId);
-
-                console.log(localStorage.getItem("enterpriseId"));
-                if (err.enterpriseId && err.enterpriseId != '') {
-                    window.location.href = "../index.html";
-                } else {
-                    window.location.href = "./company.html";
-                }
+                console.log(err, "dsd");
+                return
             });
         }
         /*事件*/
@@ -114,8 +108,8 @@
                             username: $(".login-use").val(),
                             password: $(".login-pass").val()
                         }).done(function(resp) {
-                            console.log(resp)
-                                // window.location.href = "./company.html";
+                            console.log(resp);
+                            // window.location.href = "./company.html";
                             getUser();
                         }).fail(function(err) {
                             console.log(err)

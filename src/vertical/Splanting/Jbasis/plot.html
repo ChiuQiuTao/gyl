@@ -5,42 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>基地信息</title>
+    <title>地块信息</title>
     <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../../public/font/iconfont.css">
     <link rel="stylesheet" href="../../../../css/twocss/commit.css">
-
 </head>
 
 <body>
     <form class="layui-form" action="">
-
         <div class="select common">
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
-
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">基地块名称:</label>
+                        <label class="layui-form-label" style="width:80px;">地块名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input  stated">
                         </div>
                     </div>
                 </div>
 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery  Rawquery">查询</div>
+                    <div class="layui-bg-green comquery  reset">重置</div>
                 </div>
             </div>
         </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="test" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testplot" lay-filter="testdome"></table>
     </div>
 </body>
 <!-- 头部 -->
@@ -61,17 +56,10 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table', "laydate"], function() {
+    layui.use(['table', ], function() {
         var $ = layui.jquery,
-            table = layui.table,
-            laydate = layui.laydate;
-
-        laydate.render({
-            elem: '#date1' //指定元素 
-        });
-        laydate.render({
-            elem: '#date2' //指定元素
-        });
+            object = {},
+            table = layui.table;
 
         //监听头部监听
         table.on('toolbar(testdome)', function(obj) {
@@ -111,35 +99,48 @@
             }
         });
 
+
+        object = {
+            enterpriseid: localStorage.getItem("enterpriseId"),
+            // enterpriseid: "f451d43cbbd848508ada54b65ea2cc25",
+            landlevel: "2",
+            landtype: "1"
+        }
+
+        object = JSON.stringify(object);
+
         //获取列表
-        table.render({
-            elem: '#test',
-            url: "../../../../js/two/data.json",
+        var tableIns = table.render({
+            elem: '#testplot',
+            url: base + "PlantBasLand/getBasLandList",
             method: "GET",
-            where: {},
+            where: {
+                basLand: object
+            },
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
             toolbar: '#toolbarinter',
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
-            },
             request: {
-                limitName: '10'
+                pageName: 'currentPage',
+                limitName: 'pageSize'
             },
             limits: [10, 20],
+            parseData: function(res) { //res 即为原始返回的数据
+                console.log(res)
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.message, //解析提示文本
+                    "totalNum": res.pageBean.totalNum, //解析数据长度
+                    "lists": res.pageBean.lists //解析数据列表
+                };
+            },
             response: {
                 statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
-                msgName: null, //状态信息的字段名称，默认：msg
+                statusCode: 10000, //成功的状态码，默认：0
+                msgName: "message", //状态信息的字段名称，默认：msg
                 countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'data', //数据列表的字段名称，默认：data
+                dataName: 'lists', //数据列表的字段名称，默认：data
             },
             cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,
@@ -153,26 +154,35 @@
                     ,
                 last: true //不显示尾页
                     ,
-                prev: '下一页',
-                next: "上一页",
+                prev: '上一页',
+                next: "下一页",
                 theme: "#c81623",
             },
             // height: 'full-20',//满高
             cols: [
                 [{
-                    field: 'id',
-                    title: '地块名称',
-                    minWidth: 120,
-                    // sort: true,
-                    fixed: 'left',
-                    minWidth: 120,
+                    type: 'checkbox',
+                    align: "center",
+                    fixed: 'left'
                 }, {
-                    field: 'username',
+                    field: 'landname',
+                    align: "center",
+                    title: '地块名称',
+                    minWidth: 180,
+                }, {
+                    field: 'parentid',
+                    align: "center",
                     title: "基地名称",
+                    minWidth: 190,
+                }, {
+                    field: 'floorarea',
+                    align: "center",
+                    title: "面积（㎡）",
+                    minWidth: 100,
                 }, {
                     field: 'wealth',
                     width: 137,
-                    title: '面积(m2)',
+                    title: '更多',
                     minWidth: 20,
                     align: "center",
                     fixed: 'right',
@@ -180,6 +190,56 @@
                 }]
             ]
         });
+
+
+
+        /*查询*/
+        $(".Rawquery").click(function() {
+            if ($(".stated").val() == "") {
+                layer.msg('请输入查询条件！', {
+                    time: 1000,
+                    offset: 't',
+                });
+                return
+            }
+            console.log($(".stated").val());
+
+            var big = {
+                enterpriseid: localStorage.getItem("enterpriseId"),
+                // enterpriseid: "f451d43cbbd848508ada54b65ea2cc25",
+                landlevel: "2",
+                landtype: "1",
+                landname: $(".stated").val()
+            }
+
+            big = JSON.stringify(big);
+
+            tableIns.reload({
+                where: {
+                    basLand: big
+                },
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+        /*重置*/
+        $(".reset").click(function() {
+
+            $(".stated").val("");
+            tableIns.reload({
+                where: {
+                    basLand: object
+                },
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
     })
 </script>
 
