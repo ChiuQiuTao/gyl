@@ -1,17 +1,17 @@
-(function(){
-    layui.use(['upload','form'], function() {
+(function() {
+    layui.use(['upload', 'form'], function() {
         var $ = layui.jquery,
             layer = layui.layer,
             form = layui.form,
-            upload = layui.upload; 
+            upload = layui.upload;
 
 
 
         getProvince();
         //选择框列表加载
         function getProvince(e) {
-            handleAjax('enterprise/getProvincecity', {parentid: e }, "GET").done(function(resp) {
-                console.log(resp)
+            handleAjax('enterprise/getProvincecity', { parentid: e }, "GET").done(function(resp) {
+                // console.log(resp)
 
                 $.each(resp.list, function(index, item) {
                     $('.province').append(new Option(item.fullName, item.code)); // 下拉菜单里添加元素
@@ -119,7 +119,7 @@
                 //上传完毕回调
                 console.log(res);
                 layer.msg('新增成功');
-               
+
             },
             error: function(res) {
                 //请求异常回调

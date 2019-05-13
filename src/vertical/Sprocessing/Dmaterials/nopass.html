@@ -60,20 +60,16 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="select-btn">
                     <div class="layui-bg-green comquery ">查询</div>
                     <div class="layui-bg-green comquery ">重置</div>
                 </div>
             </div>
         </div>
-
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="test" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testinventory" lay-filter="testdome"></table>
     </div>
 </body>
 <!-- 头部 -->
@@ -98,7 +94,6 @@
         var $ = layui.jquery,
             table = layui.table,
             laydate = layui.laydate;
-
 
         laydate.render({
             elem: '#date1' //指定元素 
@@ -146,35 +141,38 @@
         });
 
         //获取列表
-        table.render({
-            elem: '#test',
-            url: "../../../../js/two/data.json",
+        var tableIns = table.render({
+            elem: '#testinventory',
+            url: base + "ordPurchase/getOrdTestResult",
             method: "GET",
-            where: {},
+            where: {
+                productclass: 1
+            },
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
-            toolbar: '#toolbarinter',
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
-            },
             request: {
-                limitName: '10'
+                pageName: 'currentPage',
+                limitName: 'pageSize'
             },
             limits: [10, 20],
+            parseData: function(res) { //res 即为原始返回的数据
+                console.log(res)
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.message, //解析提示文本
+                    "totalNum": res.pageBean.totalNum, //解析数据长度
+                    "lists": res.pageBean.lists //解析数据列表
+                };
+            },
             response: {
                 statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
-                msgName: null, //状态信息的字段名称，默认：msg
+                statusCode: 10000, //成功的状态码，默认：0
+                msgName: "message", //状态信息的字段名称，默认：msg
                 countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'data', //数据列表的字段名称，默认：data
+                dataName: 'lists', //数据列表的字段名称，默认：data
             },
+
             cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
@@ -196,35 +194,39 @@
                 [{
                     title: '编号',
                     type: 'numbers',
+                    align: "center",
                     fixed: 'left'
                 }, {
-                    field: 'id',
-                    title: '预计处理日期',
-                    minWidth: 120,
-                    sort: true,
-                    fixed: 'left',
-                    totalRowText: '合计：'
-                }, {
+                    align: "center",
                     field: 'username',
                     title: '处理日期',
                     minWidth: 120,
-                }, {
-                    field: 'experience',
-                    title: '处理单号',
-
                     sort: true,
-                    totalRow: true
+                    templet: function(d) {
+                        var numv = null;
+                        if (d.orderdate == "" || d.orderdate == null) {
+                            numv = " ";
+                        } else {
+                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                        }
+                        return numv
+                    },
                 }, {
-                    field: 'sex',
+                    field: 'ordercode',
+                    title: '处理单号',
+                    align: "center",
+                    minWidth: 200,
+                }, {
+                    field: 'productname',
                     title: '原辅料名称',
                     minWidth: 120,
-                    sort: true
+                    align: "center",
                 }, {
-                    field: 'score',
+                    field: 'testweight',
                     title: '处理重量(KG)',
-                    minWidth: 100,
+                    minWidth: 130,
+                    align: "center",
                     sort: true,
-                    totalRow: true
                 }, {
                     field: 'city',
                     title: '处理方式',

@@ -19,6 +19,30 @@
                 case 'add':
                     window.location.href = "./dialog/productDialog.html";
                     break;
+                    case 'update':
+                    if(data.length === 0){
+                      layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                      layer.msg('只能同时编辑一个');
+                    } else {
+                        window.location.href = "./dialog/productDialog.html?id="+data[0].id;
+                    }
+                    break;
+                case 'delete':
+                    if(data.length === 0){
+                      layer.msg('请选择一行');
+                    } else {
+                        console.log(data);
+                        for(var i=0;i<data.length;i++){
+                            delProductById(data[i].id);
+                        }
+                        // layer.msg('删除成功');
+                        setTimeout(function(){
+                            getBasProduct();
+    
+                        },1500)
+                    }
+                    break;
             };
         });
         document.querySelector('#getBasProduct').addEventListener('click',function(){
@@ -82,6 +106,9 @@
                 // height: 'full-20',//满高
                 cols: [
                     [{
+                        type: 'checkbox', 
+                        fixed: 'left'
+                        },{
                         title: '编号',
                         type: 'numbers',
                         fixed: 'left'

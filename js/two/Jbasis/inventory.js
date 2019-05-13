@@ -171,11 +171,11 @@
                     }, 
                     {
                         field: 'storagelevel',
-                        title: '仓库名称',
+                        title: '仓库等级',
                         align: "center",
                         minWidth: 120,
                         templet: function(d) {
-                            if(d.parentid==''){
+                            if(d.parentid==null){
                                 return '一级仓库'
                             }else{
                                 return '二级仓库'

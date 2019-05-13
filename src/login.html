@@ -70,27 +70,25 @@
             };
             return;
         });
-        function getUser(){
-            
-            handleAjax('user/getUser', {}, "GET").done(function(resp) {
-                console.log(resp)
+
+        function getUser() {
+
+            noAjax('user/getUser', {}, "GET").done(function(resp) {
+
                 localStorage.setItem("enterpriseId", resp.enterpriseId);
-                localStorage.setItem("enterprisename", err.enterprisename);
-                if(resp.enterpriseId&&resp.enterpriseId!=''){
+                if (resp.enterpriseId && resp.enterpriseId != "") {
                     window.location.href = "../index.html";
-                }else{
+                } else {
                     window.location.href = "./company.html";
                 }
                 return
-                }).fail(function(err) {
-                console.log(err);
+            }).fail(function(err) {
+
                 localStorage.setItem("enterpriseId", err.enterpriseId);
-                localStorage.setItem("enterprisename", err.enterprisename);
-                
                 console.log(localStorage.getItem("enterpriseId"));
-                if(err.enterpriseId&&err.enterpriseId!=''){
+                if (err.enterpriseId && err.enterpriseId != '') {
                     window.location.href = "../index.html";
-                }else{
+                } else {
                     window.location.href = "./company.html";
                 }
             });
@@ -116,7 +114,7 @@
                             password: $(".login-pass").val()
                         }).done(function(resp) {
                             console.log(resp)
-                            // window.location.href = "./company.html";
+                                // window.location.href = "./company.html";
                             getUser();
                         }).fail(function(err) {
                             console.log(err)

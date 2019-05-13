@@ -30,9 +30,9 @@
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">客户名称:</label>
+                        <label class="layui-form-label" style="width: 130px;">客户名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input  Suppliername">
                         </div>
                     </div>
                 </div>
@@ -40,14 +40,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">销售单号:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input  Purchaseorder">
                         </div>
                     </div>
                 </div>
 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery   Rawquery ">查询</div>
+                    <div class="layui-bg-green comquery  reset ">重置</div>
                 </div>
             </div>
 
@@ -64,8 +64,6 @@
 <script type="text/html" id="toolbarinter">
     <div class="layui-btn-container ">
         <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
     </div>
 </script>
 
@@ -86,6 +84,7 @@
             table = layui.table,
             layer = layui.layer,
             util = layui.util,
+            datelist = {},
             laydate = layui.laydate;
 
         laydate.render({
@@ -170,55 +169,89 @@
                     ,
                 last: true //不显示尾页
                     ,
-                prev: '下一页',
-                next: "上一页",
+                prev: '上一页',
+                next: "下一页",
                 theme: "#c81623",
             },
             // height: 'full-20',//满高
             cols: [
                 [{
-                    field: 'id',
+                    title: '编号',
+                    type: 'numbers',
+                    align: "center",
+                    fixed: 'left'
+                }, {
+                    field: 'orderdate',
                     title: '销售日期',
-                    minWidth: 120,
-                    // sort: true,
+                    align: "center",
                     fixed: 'left',
+                    sort: true,
                     minWidth: 120,
+                    templet: function(d) {
+                        var numv = null;
+                        if (d.orderdate == "" || d.orderdate == null) {
+                            numv = " ";
+                        } else {
+                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                        }
+                        return numv
+                    },
                 }, {
-                    field: 'username',
+                    field: 'ordercode',
                     title: "销售单号",
+                    align: "center",
+                    minWidth: 180,
                 }, {
-                    field: 'username',
+                    field: 'customertype',
                     title: "客户类型",
+                    align: "center",
+                    minWidth: 120,
+                    templet: function(d) {
+                        var num = null;
+                        console.log(d.customertype)
+                        if (d.customertype == "1") {
+                            num = "企业客户"
+
+                        }
+                        if (d.customertype == "2") {
+                            num = "个人客户"
+                        }
+                        return num
+                    }
                 }, {
-                    field: 'experience',
+                    field: 'customername',
                     title: '客户名称',
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
+                    align: "center",
                 }, {
-                    field: 'experience',
+                    field: 'person',
                     title: '负责人',
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
+                    align: "center",
                 }, {
-                    field: 'experience',
-                    title: '录入人',
-                    minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                }, {
-                    field: 'experience',
+                    field: 'createon',
                     title: '录入日期',
+                    align: "center",
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
+                    sort: true,
+                    templet: function(d) {
+                        var nume = null;
+                        if (d.createon == "" || d.createon == null) {
+                            nume = " ";
+                        } else {
+                            nume = d.createon = layui.util.toDateString(d.createon, 'yyyy-MM-dd');
+                        }
+                        return nume
+                    },
                 }, {
-                    field: 'experience',
+                    field: 'amount',
                     title: '总金额',
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
+                    align: "center",
+                    sort: true,
+                    templet: function(d) {
+                        return '<i>' + d.amount + "(元)" + '</i>'
+                    }
                 }, {
                     field: 'wealth',
                     width: 137,
@@ -230,6 +263,71 @@
                 }]
             ]
         });
+
+
+
+
+        /*查询*/
+        $(".Rawquery").click(function() {
+            if ($("#date1").val() == "" && $("#date2").val() == "" && $(".Suppliername").val() == "" && $(".Purchaseorder").val() == "") {
+                layer.msg('请输入查询条件！', {
+                    time: 1000,
+                    offset: 't',
+                });
+                return
+            }
+            if ($("#date1").val() != "") {
+                if ($("#date2").val() == "") {
+                    layer.msg('请选择时间段！', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+            }
+
+            if ($("#date2").val() != "") {
+                if ($("#date1").val() == "") {
+                    layer.msg('请选择时间段！', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+            }
+            datelist = {
+                orderdateq: $("#date1").val() + " " + "00:00:00",
+                orderdateh: $("#date2").val() + " " + "00:00:00",
+                customername: $(".Suppliername").val(),
+                ordercode: $(".Purchaseorder").val()
+            }
+
+            tableIns.reload({
+                where: datelist,
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
+        /*重置*/
+        $(".reset").click(function() {
+            $("#date1").val("");
+            $("#date2").val("");
+            $(".Suppliername").val("");
+            $(".Purchaseorder").val("");
+            tableIns.reload({
+                where: {},
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
     })
 </script>
 

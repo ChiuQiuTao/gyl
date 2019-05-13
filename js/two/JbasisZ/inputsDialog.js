@@ -24,7 +24,6 @@
                 ctypelist[index].style.display='block';
             });    
         }
-        //
         form.on('select(ctype)', function(data){
             console.log(data);
             producttypeid=data.value;

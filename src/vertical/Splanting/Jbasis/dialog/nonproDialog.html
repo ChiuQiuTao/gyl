@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>种子信息</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../public/font/iconfont.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/productDialog.css">
+</head>
+
+<body>
+    
+    
+    <!-- 企业供应商 -->
+    <form class="layui-form" action="">
+        <div class="select common">
+            <div class="select-title">农产品信息</div>
+            <div class="select-con">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">农产品名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="" id='productname'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" id='inline-type'>
+                        <label class="layui-form-label">种类:</label>
+                        <div class="layui-input-inline">
+                            <select name="producttypeid" lay-verify="" lay-filter="producttypeid" id='producttypeid'>
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline" id='inline-type'>
+                        <label class="layui-form-label">种子名称:</label>
+                        <div class="layui-input-inline">
+                            <select name="producttype" lay-verify="" lay-filter="producttype" id='producttype'>
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">生长周期:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='cycle'>
+                        </div>
+                        <div class="layui-inline-sel">
+                            <select name="cycleunit" lay-filter="cycleunit" id='cycleunit' lay-verify="required" style="width: 100px;">
+                                <option value="年">年</option>
+                                <option value="月">月</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">保质期:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='lifedate'>
+                        </div>
+                        <div class="layui-inline-sel">
+                            <select name="country" lay-filter="storagelevel" id='lifedateunit' lay-verify="required" style="width: 100px;">
+                                <option value="年">年</option>
+                                <option value="月">月</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">销售价:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='sellingprice'>
+                        </div>
+                        元
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">单位:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="" id='unit'>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">预警信息:</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" lay-skin="primary" title="是否预警"  lay-filter="earlywarning" id='earlywarning'>
+                        </div>
+                    </div>
+                </div>
+
+
+       
+        
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">备注:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="" id='remarks'>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">农产品图片:</label>
+                        <div class="layui-input-inline">
+                            <div class="layui-upload" style="display:flex">
+                                <button type="button" class="layui-btn layui-btn-normal selectImg" style="margin-right:10px;">选择文件</button>
+                                <!-- <button type="button" class="layui-btn layui-btn-normal selectImg" style="margin-right:10px;">选择文件</button>
+                                <button type="button" class="layui-btn layui-btn-normal selectImg">选择文件</button> -->
+                            </div>
+                        </div>
+                        <div>
+                            <img src="" alt="" id="showimg" style="width:100px;height:40px;">
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="select-btn">
+                    <div class="layui-bg-green comquery " id="uploadImg">确定</div>
+                    <div class="layui-bg-green comquery " id="updateImg" style="display:none">确定</div>
+                    <div class="layui-bg-green comquery ">取消</div>
+                </div>
+            </div>
+        </div>
+    </form>
+                
+                    
+</body>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+<script src="../../../../../js/two/Jbasisz/nonproDialog.js"></script>
+</html>

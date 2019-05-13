@@ -80,7 +80,7 @@ var menudata = [{
             },
             {
                 url: "../vertical/Sprocessing/Dmaterials/nopass.html",
-                title: "原辅料不及格处理",
+                title: "原辅料不合格处理",
                 type: "2"
             },
             {
