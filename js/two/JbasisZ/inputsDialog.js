@@ -30,8 +30,18 @@
         });    
         // 是否预警
         form.on('checkbox(earlywarning)', function(data){
-            console.log(data.elem.checked); //开关是否开启，true或者false
-            earlywarning=data.elem.checked
+            earlywarning=data.elem.checked;
+            var stock = document.querySelectorAll('.stock');
+            if(data.elem.checked){
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='block'
+                }
+            }else{
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='none'
+                }
+            }
+            
         }); 
 
 
@@ -103,6 +113,9 @@
                             'suitablearea':$('#suitablearea').val(),
                             'purchaseprice':$('#purchaseprice').val(),
                             'remarks':$('#remarks').val(),
+                            'minstock':$('#minstock').val(),
+                            'maxstock':$('#maxstock').val(),
+
                             'earlywarning':earlywarning
                         }
                         putseed = JSON.stringify(putseed);
@@ -143,6 +156,9 @@
                 document.querySelector('#suitablearea').value=resp.list[0].suitablearea
                 document.querySelector('#purchaseprice').value=resp.list[0].purchaseprice
                 document.querySelector('#remarks').value=resp.list[0].remarks
+                document.querySelector('#minstock').value=resp.list[0].minstock
+                document.querySelector('#maxstock').value=resp.list[0].maxstock
+
                 // $('#showimg').attr('src', resp.list[0].remarks); 
                 if(resp.list[0].earlywarning==1){
                     console.log(123123)

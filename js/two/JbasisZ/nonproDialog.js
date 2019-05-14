@@ -94,8 +94,18 @@
         });    
         // 是否预警
         form.on('checkbox(earlywarning)', function(data){
-            console.log(data.elem.checked); //开关是否开启，true或者false
-            earlywarning=data.elem.checked
+            earlywarning=data.elem.checked;
+            var stock = document.querySelectorAll('.stock');
+            if(data.elem.checked){
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='block'
+                }
+            }else{
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='none'
+                }
+            }
+            
         }); 
 
 
@@ -220,6 +230,12 @@
                     earlywarning: function() {
                         return earlywarning;
                     },
+                    minstock: function() {
+                        return $('#minstock').val();
+                    },
+                    maxstock: function() {
+                        return $('#maxstock').val();
+                    },
                     // 'productname':$('#productname').val(),
                     // 'recordenterpriseid':localStorage.getItem("enterpriseId"),
                     // 'producttype': $('#producttype').val(),
@@ -325,6 +341,12 @@
                     },
                     earlywarning: function() {
                         return earlywarning;
+                    },
+                    minstock: function() {
+                        return $('#minstock').val();
+                    },
+                    maxstock: function() {
+                        return $('#maxstock').val();
                     },
                     // 'productname':$('#productname').val(),
                     // 'recordenterpriseid':localStorage.getItem("enterpriseId"),

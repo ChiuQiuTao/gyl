@@ -184,6 +184,15 @@
                     },
                 },
                 bindAction: '#uploadImg',
+                choose: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    console.log(obj)
+                    obj.preview(function(index, file, result){
+                        console.log(result);
+                        
+                        $('#showimg').attr('src', result); //图片链接（base64）
+                    });
+                }    ,
                 done: function(res) {
                     //上传完毕回调
                     console.log(res);

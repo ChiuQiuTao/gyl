@@ -149,10 +149,22 @@
                 </div>
 
                 <div class="layui-form-item">
-                    <div class="layui-inline">
+                    <div class="layui-inline" style="min-width:160px;">
                         <label class="layui-form-label">预警信息:</label>
-                        <div class="layui-input-block">
+                        <div class="layui-input-block" style="margin-left:0;">
                             <input type="checkbox" lay-skin="primary" title="是否预警"  lay-filter="earlywarning" id='earlywarning'>
+                        </div>
+                    </div>
+                    <div class="layui-inline stock" style="min-width:210px;display: none;">
+                        <label class="layui-form-label" style="width:60px;">最小库存:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='minstock'>
+                        </div>
+                    </div>
+                    <div class="layui-inline stock" style="min-width:210px;display: none;">
+                        <label class="layui-form-label" style="width:60px;">最大库存:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='maxstock'>
                         </div>
                     </div>
                 </div>

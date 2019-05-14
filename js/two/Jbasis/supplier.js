@@ -49,7 +49,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
 
 
     //监听头部监听 ||新增
-    table.on('toolbar(testdome)', function(obj) {
+    table.on('toolbar(personalfilter)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id),
             data = checkStatus.data; //获取选中的数据
             

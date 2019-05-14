@@ -1,17 +1,11 @@
 var base = "http://47.98.167.96:9191/";
 var jq = jQuery.noConflict();
-var sessions = sessionStorage.getItem("keyssname");
-// sessions='';
-// if (sessions == "" && url != "login") {
-//     window.location.href = "../../src/login.html";
-//     return;
-// }
+var sessions = sessionStorage.getItem('keyssname');
 
 function ajax(url, param, type, contentType) {
 
     if (sessions == "" && url != "login") {
         window.location.href = "../../src/login.html";
-        return;
     }
 
     if (contentType == 'utf-8') {
@@ -32,6 +26,7 @@ function ajax(url, param, type, contentType) {
             type: type || 'POST',
             async: true,
             beforeSend: function(xhr) {
+                console.log(sessions)
                 xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
             },
         });
@@ -39,8 +34,8 @@ function ajax(url, param, type, contentType) {
 }
 
 
-
 function handleAjax(url, param, type, contentType) {
+
     return ajax(url, param, type, contentType).then(function(resp) {
         // 成功回调
         if (typeof resp == 'string') {
@@ -48,8 +43,8 @@ function handleAjax(url, param, type, contentType) {
         }
         if (resp.status == 200) {
 
-            // setCookie('token', resp.jwtToken);
             sessionStorage.setItem("keyssname", resp.jwtToken);
+            sessions = sessionStorage.getItem('keyssname');
             return resp;
         }
 
@@ -57,7 +52,6 @@ function handleAjax(url, param, type, contentType) {
             return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
 
         } else {
-
             return jq.Deferred().reject(resp); // 返回一个失败状态的deferred对象，把错误代码作为默认参数传入之后fail()方法的回调
         }
     }, function(err) {
@@ -81,7 +75,6 @@ function noAjax(url, param, type) {
         if (resp) {
             return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
         } else {
-
             return jq.Deferred().reject(resp); // 返回一个失败状态的deferred对象，把错误代码作为默认参数传入之后fail()方法的回调
         }
     }, function(err) {
