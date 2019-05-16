@@ -29,14 +29,8 @@ layui.use(['table', "layer", "util"], function() {
         },
         toolbar: '#toolbarinter',
         request: {
-            pageName: 'currentPage' //页码的参数名称，默认：page
-                ,
-            limitName: 'pageSize' //每页数据量的参数名，默认：limit
-        },
-        done: function(res, curr, count) {
-            console.log(res);
-            console.log(curr);
-            console.log(count);
+            pageName: 'currentPage',
+            limitName: 'pageSize'
         },
         parseData: function(res) { //res 即为原始返回的数据
             console.log(res)
@@ -78,48 +72,62 @@ layui.use(['table', "layer", "util"], function() {
             }, {
                 field: 'productname',
                 title: '产品名称',
-                minWidth: 170,
+                minWidth: 130,
                 align: "center"
             }, {
                 field: 'stocknum',
                 title: '库存数量',
                 sort: true,
-
                 align: "center",
-                templet: function(d) {
-                    return d.stocknum + "(" + d.unit + ")"
-                }
+                minWidth: 120,
             }, {
-                field: 'batch',
+                field: 'innum',
                 title: '末次生产数量',
                 align: " center",
                 sort: true,
-                templet: function(d) {
-                    return d.innum + "(" + d.unit + ")"
-                }
+                minWidth: 120,
+                // templet: function(d) {
+                //     return d.innum + "(" + d.unit + ")"
+                // }
             }, {
                 field: 'indate',
                 title: '末次生产日期',
-                width: 130,
                 align: "center",
                 sort: true,
-                templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"
+                minWidth: 120,
+                templet: function(d) {
+                    var numv = null;
+                    if (d.indate == "" || d.indate == null) {
+                        numv = " ";
+                    } else {
+                        numv = d.indate = layui.util.toDateString(d.indate, 'yyyy-MM-dd');
+                    }
+                    return numv
+                },
             }, {
                 field: 'outnum',
                 title: '末次销售数量',
                 align: "center",
                 sort: true,
-                width: 130,
-                templet: function(d) {
-                    return d.outnum + "(" + d.unit + ")"
-                }
+                minWidth: 120,
+                // templet: function(d) {
+                //     return d.outnum + "(" + d.unit + ")"
+                // }
             }, {
                 field: 'outdate',
                 title: '末次销售时间',
-                width: 140,
+                minWidth: 120,
                 align: "center",
                 sort: true,
-                templet: "<div>{{layui.util.toDateString(d.createTime, 'yyyy-MM-dd')}}</div>"
+                templet: function(d) {
+                    var numv = null;
+                    if (d.outdate == "" || d.outdate == null) {
+                        numv = " ";
+                    } else {
+                        numv = d.outdate = layui.util.toDateString(d.outdate, 'yyyy-MM-dd');
+                    }
+                    return numv
+                },
             }, {
                 field: 'id',
                 width: 137,

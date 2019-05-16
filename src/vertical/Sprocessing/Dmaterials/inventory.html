@@ -67,74 +67,65 @@
                 <p>{{$value.batch}}</p>
             </li>
             <li>
-                <label>原辅料种类:</label>
-                <p>{{$value.producttype}}</p>
-            </li>
-            <li>
-                <label>原辅料种类:</label>
-                <p>{{$value.producttype}}</p>
-            </li>
-            <li>
-                <label>原辅料种类:</label>
-                <p>{{$value.producttype}}</p>
-            </li>
-            <li>
-                <label>供应商类型:</label> {{if $value.supplytype=="2"}}
-                <p>企业供应商</p>
+                <label>库存重量:</label> {{if $value.stocknum!= ""}}
+                <p>{{$value.stocknum}}/KG</p>
                 {{else}}
-                <p>个人供应商</p>
+                <p></p>
                 {{/if}}
             </li>
             <li>
-                <label>负责人:</label>
-                <p>{{$value.person}}</p>
+                <label>末次入库数:</label> {{if $value.endinputnum!= ""}}
+                <p>{{$value.endinputnum}}/KG</p>
+                {{else}}
+                <p></p>
+                {{/if}}
             </li>
             <li>
-                <label>是否进口:</label>
-                <p>{{$value.isjk}}</p>
+                <label>末次入库时间:</label>
+                <p>{{$value.endinputdate}}</p>
             </li>
             <li>
-                <label>采购单号:</label>
-                <p style="width: 190px;">{{$value.ordercode}} </p>
+                <label>末次出库数:</label> {{if $value.endoutputnum!= ""}}
+                <p>{{$value.endoutputnum}}/KG</p>
+                {{else}}
+                <p></p>
+                {{/if}}
+            </li>
+            <li>
+                <label>末次出库时间:</label>
+                <p>{{$value.endoutputdate}}</p>
+            </li>
+            <li>
+                <label></label>
+                <p class="empty-h"></p>
             </li>
 
         </ul>
-        <div style="padding:10px  0  0 10px;">采购产品</div>
+        <div style="padding:10px  0  0 10px;"></div>
         <table class="layui-table">
             <thead>
                 <tr>
                     <th></th>
-                    <th>原辅料类别</th>
-                    <th>原辅料名称</th>
-                    <th>原辅料规格</th>
-                    <th>生产日期</th>
-                    <th>批次</th>
-                    <th>保质期</th>
-                    <th>仓库名称</th>
-                    <th>二级仓库名称</th>
-                    <th>重量(KG)</th>
-                    <th>单价(元)</th>
-                    <th>金额(元)</th>
+                    <th style="text-align: center;">仓库名称</th>
+                    <th style="text-align: center;">二级仓库名称</th>
+                    <th style="text-align: center;">重量</th>
+                    <th style="text-align: center;">生产日期</th>
+                    <th style="text-align: center;">保质期</th>
+                    <th style="text-align: center;">有效期至</th>
+                    <th style="text-align: center;">状态</th>
                 </tr>
             </thead>
             <tbody>
-
-                {{each $value.listss}}
                 <tr>
                     <td style="text-align: center;">{{$index}}</td>
-                    <td style="text-align: center;">{{$value.producttype}}</td>
-                    <td style="text-align: center;">{{$value.productname}}</td>
-                    <td style="text-align: center;">{{$value.specifications}}</td>
+                    <td style="text-align: center;">{{$value.storagename}}</td>
+                    <td style="text-align: center;">{{$value.areaname}}</td>
+                    <td style="text-align: center;">{{$value.weight}}/kg</td>
                     <td style="text-align: center;">{{$value.factorydate}}</td>
-                    <td style="text-align: center;">{{$value.batch}}</td>
-                    <td style="text-align: center;">{{$value.lifedate}}/{{$value.lifedateunit}}</td>
-                    <td style="text-align: center;">{{$value.storage}}</td>
-                    <td style="text-align: center;">{{$value.area}}</td>
-                    <td style="text-align: center;">{{$value.weight}}</td>
-                    <td style="text-align: center;">{{$value.price}}</td>
-                    <td style="text-align: center;">{{$value.amount}}</td>
+                    <td style="text-align: center;">{{$value.lifedate}}{{$value.lifedateunit}}</td>
+                    <td style="text-align: center;">{{$value.effective}}</td>
+                    <td style="text-align: center;">{{$value.stats}}</td>
                 </tr>
-                {{/each}}
             </tbody>
         </table>
         {{/each}}
@@ -183,6 +174,7 @@
                         id: vv
                     }, "GET").done(function(resp) {
 
+
                         $.each(resp.list, function(index, item) {
                             if (item.endinputdate == null || item.endinputdate == "") {
                                 item.endinputdate = "";
@@ -196,10 +188,96 @@
                                 item.endoutputdate = times(item.endoutputdate);
                             }
 
+
+                            if (item.factorydate == null || item.factorydate == "") {
+                                item.factorydate = "";
+                            } else {
+                                item.factorydate = times(item.factorydate);
+                            }
+
+                            if (item.endinputnum == null || item.endinputnum == "") {
+                                item.endinputnum = "";
+                            } else {
+                                item.endinputnum = Number(item.endinputnum).toFixed(2);
+                            }
+
+                            if (item.endoutputnum == null || item.endoutputnum == "") {
+                                item.endoutputnum = "";
+                            } else {
+                                item.endoutputnum = Number(item.endoutputnum).toFixed(2);
+                            }
+
+                            if (item.weight == null || item.weight == "") {
+                                item.weight = "";
+                            } else {
+                                item.weight = Number(item.weight).toFixed(2);
+                            }
+
+
+                            if (item.lifedateunit == null || item.lifedateunit == "") {
+                                item.stats = "";
+                                item.effective = "";
+                            } else if (item.lifedateunit == "天") {
+                                /*当前时间*/
+                                var newDay = new Date().getTime();
+                                var oldday = new Date(item.factorydate).getTime();
+                                var da = item.lifedate * 24 * 60 * 60 * 1000 + oldday;
+                                var nid = newDay - oldday;
+                                da = new Date(da);  
+                                nid = new Date(nid);  
+                                var year = da.getFullYear();  
+                                var month = da.getMonth() + 1;  
+                                var date = da.getDate();  
+
+                                if (item.lifedate - nid.getDate() >= 0) {
+
+                                    item.stats = "有效期还有" + (item.lifedate - nid.getDate()) + "天";
+                                } else {
+                                    item.stats = "已超过效期" + (nid.getDate() - item.lifedate) + "天";
+                                }
+
+                                item.effective = [year, month, date].join('-');
+                                return
+                            } else if (item.lifedateunit == "月") {
+                                var nus = item.factorydate.split("-");
+                                var sss = Number(nus[1]) + Number(item.lifedate);
+                                var nian = parseInt(sss / 12);
+                                var yue = sss % 12;
+                                nus[0] = Number(nus[0]) + nian;
+                                nus[1] = yue;
+                                var ste = nus.join("-");
+                                item.effective = ste;
+                                var newyue = new Date().getTime();
+                                var oldyue = new Date(ste).getTime();
+                                if (oldyue - newyue > 0) {
+                                    var nday = oldyue - newyue;
+                                    item.stats = "有效期还有" + parseInt(nday / 86400 / 1000) + "天";
+                                } else {
+                                    var ndays = -(oldyue - newyue);
+                                    item.stats = "已超过效期" + parseInt(ndays / 86400 / 1000) + "天";
+                                }
+
+
+                            } else if (item.lifedateunit == "年") {
+
+                                var nuse = item.factorydate.split("-");
+                                nuse[0] = Number(nuse[0]) + Number(item.lifedate);
+                                var stes = nuse.join("-");
+                                item.effective = stes;
+                                var newnian = new Date().getTime();
+                                var oldnian = new Date(stes).getTime();
+                                var dae = oldnian - newnian;
+                                if (dae > 0) {
+                                    item.stats = "有效期还有" + parseInt(dae / 86400 / 1000) + "天";
+                                } else {
+                                    dae = -(dae);
+                                    item.stats = "已超过效期" + parseInt(dae / 86400 / 1000) + "天";
+                                }
+                            }
+
                         });
 
                         console.log(resp)
-
                         var html = template("contentquery", resp);
                         $(".ssss").html(html);
 
@@ -214,7 +292,6 @@
         function times(t) {
             return t = t.split("T")[0];
         }
-
 
 
         var tableIns = table.render({
@@ -274,17 +351,17 @@
                     field: 'productname',
                     title: '原辅料名称',
                     fixed: 'left',
-                    minWidth: 120,
+                    minWidth: 110,
                     align: "center",
                 }, {
                     field: 'stocknum',
                     title: '库存重量(KG)',
-                    minWidth: 100,
+                    minWidth: 80,
                     align: "center",
                 }, {
                     field: 'endinputnum',
                     title: '末次采购重量(KG)',
-                    minWidth: 100,
+                    minWidth: 180,
                     sort: true,
                     align: "center",
                 }, {
@@ -297,7 +374,7 @@
                 }, {
                     field: 'endoutputnum',
                     title: '末次使用重量(kG)',
-                    minWidth: 120,
+                    minWidth: 180,
                     sort: true,
                     align: "center",
                 }, {

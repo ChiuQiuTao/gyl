@@ -264,7 +264,7 @@
         //负责人
         noAjax('user/getUser', {}, "GET").done(function(resp) {
 
-            $('.headpeople').append(new Option(resp.enterpriseName, resp.enterpriseId)); // 下拉菜单里添加元素
+            $('.headpeople').append(new Option(resp.realName, resp.realName)); // 下拉菜单里添加元素
             layui.form.render("select");
 
         }).fail(function(err) {

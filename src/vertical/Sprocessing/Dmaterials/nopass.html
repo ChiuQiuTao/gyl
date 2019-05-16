@@ -25,44 +25,26 @@
             <div class="select-con">
 
                 <div class="layui-form-item">
-                    <div class="select-hand-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label" style="width:105px;">不及格处理日期:</label>
-                            <input type="text" class="layui-input" id="date1">
-                            <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label" style="width:95px;">状态:</label>
-                        <div class="layui-input-inline">
-                            <select name="city" lay-verify="">
-                                <option value="">请选择</option>
-                                <option value="010">北京</option>
-                                <option value="021">上海</option>
-                                <option value="0571">杭州</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label" style="width:105px;">处理方式:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input  Suppliername">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:105px;">处理单号:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input   Purchaseorder">
                         </div>
                     </div>
                 </div>
 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery   Rawquery">查询</div>
+                    <div class="layui-bg-green comquery   reset">重置</div>
                 </div>
             </div>
         </div>
@@ -76,8 +58,6 @@
 <script type="text/html" id="toolbarinter">
     <div class="layui-btn-container ">
         <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
     </div>
 </script>
 
@@ -90,17 +70,9 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table', "laydate"], function() {
+    layui.use(['table'], function() {
         var $ = layui.jquery,
-            table = layui.table,
-            laydate = layui.laydate;
-
-        laydate.render({
-            elem: '#date1' //指定元素 
-        });
-        laydate.render({
-            elem: '#date2' //指定元素
-        });
+            table = layui.table;
 
         //监听头部监听
         table.on('toolbar(testdome)', function(obj) {
@@ -108,23 +80,7 @@
                 data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 case 'add':
-                    layer.msg('添加');
-                    break;
-                case 'update':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else if (data.length > 1) {
-                        layer.msg('只能同时编辑一个');
-                    } else {
-                        layer.alert('编辑 [id]：' + checkStatus.data[0].id);
-                    }
-                    break;
-                case 'delete':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else {
-                        layer.msg('删除');
-                    }
+                    window.location.href = "./newpagecai/newnopass.html";
                     break;
             };
         });
@@ -143,11 +99,9 @@
         //获取列表
         var tableIns = table.render({
             elem: '#testinventory',
-            url: base + "ordPurchase/getOrdTestResult",
+            url: base + "ordPurchase/getOrdDisposeVo",
             method: "GET",
-            where: {
-                productclass: 1
-            },
+            where: {},
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
@@ -155,9 +109,10 @@
                 pageName: 'currentPage',
                 limitName: 'pageSize'
             },
+            toolbar: '#toolbarinter',
             limits: [10, 20],
             parseData: function(res) { //res 即为原始返回的数据
-                console.log(res)
+                console.log(res);
                 return {
                     "code": res.code, //解析接口状态
                     "msg": res.message, //解析提示文本
@@ -172,24 +127,16 @@
                 countName: 'totalNum', //数据总数的字段名称，默认：count
                 dataName: 'lists', //数据列表的字段名称，默认：data
             },
-
-            cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                ,
-            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['prev', 'page', 'next', 'skip', 'count'] //自定义分页布局
-                    //,curr: 5 //设定初始在第 5 页
-                    ,
-                groups: 5 //只显示 1 个连续页码
-                    ,
-                first: true //不显示首页
-                    ,
-                last: true //不显示尾页
-                    ,
+            cellMinWidth: 80,
+            page: {
+                layout: ['prev', 'page', 'next', 'skip', 'count'],
+                groups: 5,
+                first: true,
+                last: true,
                 prev: '下一页',
                 next: "上一页",
                 theme: "#c81623",
             },
-            // height: 'full-20',//满高
             cols: [
                 [{
                     title: '编号',
@@ -198,47 +145,36 @@
                     fixed: 'left'
                 }, {
                     align: "center",
-                    field: 'username',
-                    title: '处理日期',
-                    minWidth: 120,
-                    sort: true,
-                    templet: function(d) {
-                        var numv = null;
-                        if (d.orderdate == "" || d.orderdate == null) {
-                            numv = " ";
-                        } else {
-                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
-                        }
-                        return numv
-                    },
-                }, {
-                    field: 'ordercode',
-                    title: '处理单号',
-                    align: "center",
-                    minWidth: 200,
-                }, {
                     field: 'productname',
                     title: '原辅料名称',
                     minWidth: 120,
-                    align: "center",
+
                 }, {
-                    field: 'testweight',
-                    title: '处理重量(KG)',
-                    minWidth: 130,
+                    field: 'batch',
+                    title: '批次',
+                    align: "center",
+                    minWidth: 100,
+                }, {
+                    field: 'ordercode',
+                    title: '处理单号',
+                    minWidth: 160,
                     align: "center",
                     sort: true,
                 }, {
-                    field: 'city',
+                    field: 'measure',
                     title: '处理方式',
-                    minWidth: 120,
-                }, {
-                    field: 'sign',
-                    title: '监管处理意见',
                     minWidth: 140,
+                    align: "center",
                 }, {
-                    field: 'classify',
-                    title: '状态',
-                    minWidth: 100,
+                    field: 'measureaddr',
+                    title: '处理地址',
+                    minWidth: 180,
+                    align: "center",
+                }, {
+                    field: 'reason',
+                    title: '处理理由',
+                    minWidth: 180,
+                    align: "center",
                 }, {
                     field: 'wealth',
                     width: 137,
@@ -250,6 +186,47 @@
                 }]
             ]
         });
+
+
+        /*查询*/
+        $(".Rawquery").click(function() {
+            if ($(".Suppliername").val() == "" && $(".Purchaseorder").val() == "") {
+                layer.msg('请输入查询条件！', {
+                    time: 1000,
+                    offset: 't',
+                });
+                return
+            }
+
+            datelist = {
+                measure: $(".Suppliername").val(),
+                aordercode: $(".Purchaseorder").val()
+            }
+            tableIns.reload({
+                where: datelist,
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
+        /*重置*/
+        $(".reset").click(function() {
+            $(".Suppliername").val("");
+            $(".Purchaseorder").val("");
+            tableIns.reload({
+                where: {},
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
+
     })
 </script>
 

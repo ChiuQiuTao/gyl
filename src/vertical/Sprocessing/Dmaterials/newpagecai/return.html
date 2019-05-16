@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>新增退货单</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/H/processing.css">
+</head>
+
+<body>
+    <div class="select common">
+        <form class="layui-form" action="">
+            <div class="select-title" style="height:40px;line-height:40px;">
+                基本信息
+            </div>
+            <div class="basis-h">
+                <div class="mess-pronew">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">退货日期:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="temis">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline ">
+                            <label class="layui-form-label" style="width:95px;">退货原因:</label>
+                            <div class="layui-input-inline ">
+                                <input type="text" class="layui-input  whys ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">退货重量(kg):</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input   weight">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">负责人:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="heads" class="headpeople">
+                                    <option value="">---请选择---</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="select-title" style="height:30px;line-height:30px;margin-top: 10px;border-bottom-color:#c9c9c9;">
+                退货原辅料
+            </div>
+        </form>
+
+
+
+        <table class="layui-hide" id="testretrue" lay-filter="testdome"></table>
+
+
+        <div class="layui-btn-group" style="width: 100%;display: flex;justify-content: center;margin-top: 10px;">
+            <button class="layui-btn  saves"><i class="layui-icon">&#xe674;</i>保存</button>
+            <button class="layui-btn huifan"><i class="layui-icon">&#xe65c;</i>返回</button>
+        </div>
+    </div>
+
+</body>
+
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+
+</html>
+<script>
+    layui.use(['table', "layer", "form", "laydate", "util"], function() {
+        var $ = layui.jquery,
+            table = layui.table,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            form = layui.form,
+            projectobj = {},
+            util = layui.util;
+
+
+        //时间选择    
+        laydate.render({
+            elem: '#temis',
+            show: true,
+            done: function(value) {
+                var batch = value
+                projectobj.orderdate = batch + " " + "00:00:00";
+            }
+        });
+
+
+        //负责人添加
+        noAjax('user/getUser', {}, "GET").done(function(resp) {
+            $('.headpeople').append(new Option(resp.realName, resp.realName)); // 下拉菜单里添加元素
+            layui.form.render("select");
+        }).fail(function(err) {
+            console.log(err)
+        });
+
+
+        //负责人的获取
+        form.on('select(heads)', function(data) {
+            projectobj.person = data.value;
+            return
+        })
+
+
+        var tableIns = table.render({
+            elem: '#testretrue',
+            url: base + "ordPurchase/getReturnPurchaseVo",
+            method: "GET",
+            where: {},
+            headers: {
+                Authorization: "Bearer" + " " + sessions
+            },
+            request: {
+                pageName: 'currentPage',
+                limitName: 'pageSize'
+            },
+
+            limits: [10, 20],
+            parseData: function(res) { //res 即为原始返回的数据
+                console.log(res)
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.message, //解析提示文本
+                    "totalNum": res.pageBean.totalNum, //解析数据长度
+                    "lists": res.pageBean.lists //解析数据列表
+                };
+            },
+            response: {
+                statusName: 'code', //数据状态的字段名称，默认：code
+                statusCode: 10000, //成功的状态码，默认：0
+                msgName: "message", //状态信息的字段名称，默认：msg
+                countName: 'totalNum', //数据总数的字段名称，默认：count
+                dataName: 'lists', //数据列表的字段名称，默认：data
+            },
+            cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                ,
+            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ['prev', 'page', 'next', 'skip', 'count'] //自定义分页布局
+                    //,curr: 5 //设定初始在第 5 页
+                    ,
+                groups: 5 //只显示 1 个连续页码
+                    ,
+                first: true //不显示首页
+                    ,
+                last: true //不显示尾页
+                    ,
+                prev: "上一页",
+                next: "下一页",
+                theme: "#c81623",
+            },
+            // height: 'full-20',//满高
+            cols: [
+                [{
+                    type: 'radio',
+                    fixed: 'left'
+                }, {
+                    field: 'supplyname',
+                    title: '供应商',
+                    minWidth: 110,
+                    align: "center",
+                }, {
+                    field: 'supplytype',
+                    title: '库存重量(KG)',
+                    minWidth: 80,
+                    align: "center",
+                    templet: function(d) {
+                        var num = null;
+                        if (d.supplytype == 2) {
+                            num = "企业供应商"
+                        }
+                        if (d.supplytype == 3) {
+                            num = "个人供应商"
+                        }
+                        return num
+                    }
+                }, {
+                    field: 'productname',
+                    title: '原辅料名',
+                    minWidth: 180,
+                    sort: true,
+                    align: "center",
+                }, {
+                    field: 'batch',
+                    title: '批次',
+                    minWidth: 110,
+                    sort: true,
+                    align: "center",
+                }, {
+                    field: 'storage',
+                    title: '一级仓库',
+                    minWidth: 130,
+                    sort: true,
+                    align: "center",
+                }, {
+                    field: 'area',
+                    title: '二级仓库',
+                    minWidth: 130,
+                    sort: true,
+                    align: "center",
+                }, {
+                    field: 'stocknum',
+                    title: '库存',
+                    minWidth: 130,
+                    sort: true,
+                    align: "center",
+                }]
+            ]
+        });
+
+        //验证重量
+        $(".weight").blur(function() {
+            var reg = /^([0-9][1-9]*)+(.[0-9]{1,})?$/;
+            if (!reg.test($(".weight").val())) {
+                alerts("请正确输入重量!");
+                $(this).val("");
+                return
+            }
+        })
+
+
+
+        $(".saves").click(function() {
+            if ($("#temis").val() == "") {
+                alerts("请选择时间！")
+                return
+            }
+            if ($(".whys").val() == "") {
+                alerts("请输入退货原因！")
+                return
+            }
+            if ($(".weight").val() == "") {
+                alerts("请输退货重量！")
+                return
+            }
+            if ($(".headpeople").val() == "") {
+                alerts("请选择负责人！")
+                return
+            }
+
+            var checkStatus = table.checkStatus('testretrue');
+            var date = checkStatus.data;
+            if (date.length <= 0) {
+                alerts("请选择退货原辅料！")
+                return
+            }
+            $.each(date, function(index, item) {
+                projectobj.sid = item.sid;
+                projectobj.supplytype = item.supplytype;
+                projectobj.supplyname = item.supplyname;
+                projectobj.productname = item.productname;
+                projectobj.storage = item.storage;
+                projectobj.area = item.area;
+                projectobj.batch = item.batch;
+                projectobj.stocknum = item.stocknum;
+            });
+            projectobj.orderdate = $("#temis").val() + " " + "00:00:00";
+            projectobj.reason = $(".whys").val();
+            projectobj.weight = $(".weight").val();
+
+            handleAjax("ordPurchase/addOrdReturn", projectobj, "POST").done(function(resp) {
+                layer.msg('操作成功', {
+                    icon: 1,
+                    time: 1000
+                });
+                setTimeout(function() {
+                    window.location.href = "../returngoods.html";
+                }, 1500)
+                return
+            }).fail(function(err) {
+                console.log(err)
+            });
+            return
+        })
+
+
+
+        //返回
+        $(".huifan").click(function() {
+            window.location.href = "../returngoods.html";
+        })
+
+    })
+</script>

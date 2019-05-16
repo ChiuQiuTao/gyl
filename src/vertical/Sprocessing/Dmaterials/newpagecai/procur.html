@@ -319,7 +319,7 @@
 
         //负责人添加
         noAjax('user/getUser', {}, "GET").done(function(resp) {
-            $('.headpeople').append(new Option(resp.enterpriseName, resp.enterpriseName)); // 下拉菜单里添加元素
+            $('.headpeople').append(new Option(resp.realName, resp.realName)); // 下拉菜单里添加元素
             layui.form.render("select");
         }).fail(function(err) {
             console.log(err)
@@ -397,19 +397,17 @@
                 projectobj.productid = $(this)[0].value;
                 projectobj.productname = $(".Namerawmaterials").find("option:selected").text();
 
-
+                console.log(accessories);
                 handleAjax('ordPurchase/getSourcesName', {
                     id: accessories
                 }, "GET").done(function(resp) {
-                    // console.log(resp)
+                    console.log(resp)
                     $.each(resp.list, function(index, item) {
                         $('.specifications').text(item.specifications);
                         $('.Shelflife').text(item.lifedate + item.lifedateunit);
 
-
                         projectobj.lifedate = item.lifedate;
                         projectobj.lifedateunit = item.lifedateunit;
-
 
                     });
                     return;

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>新增采购</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/H/processing.css">
+</head>
+
+<body>
+    <div class="select common">
+        <form class="layui-form" action="">
+            <div class="select-title" style="height:40px;line-height:40px;">
+                基本信息
+            </div>
+
+            <div class="basis-h">
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">处理方式:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input  ways">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">销毁地点:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input  placed">
+                                <!-- <textarea class="layui-input" style="height:50px;"></textarea> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline ">
+                            <label class="layui-form-label" style="width:95px;">处理重量:</label>
+                            <div class="layui-input-inline" style="display:flex;align-items: center;">
+                                <input type="text" class="layui-input  weightd" style="width: 160px;">/KG
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">处理原因:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input  why">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="select-title" style="height:30px;line-height:30px;margin-top: 10px;border-bottom-color:#c9c9c9;">
+                不合格原辅料
+            </div>
+            <div class="ingredients-newp">
+
+                <table class="layui-table" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="text-align: center;">编号</th>
+                            <th style="text-align: center;">原辅料名称</th>
+                            <th style="text-align: center;">检测日期</th>
+                            <th style="text-align: center;">负责人</th>
+                            <th style="text-align: center;">批次</th>
+                            <th style="text-align: center;">库存重量(KG)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="Procurementofproducts">
+
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <div class="layui-btn-group" style="width: 100%;display: flex;justify-content: center;margin-top: 10px;">
+            <button class="layui-btn  saves"><i class="layui-icon">&#xe674;</i>保存</button>
+            <button class="layui-btn huifan"><i class="layui-icon">&#xe65c;</i>返回</button>
+        </div>
+    </div>
+</body>
+
+<script type="text/html" id="contentquery">
+    {{each lists}}
+    <tr>
+        <td class="checks"><input type="checkbox" style="display:block;"></td>
+        <td style="text-align: center;display:none;">{{$value.id}}</td>
+        <td style="text-align: center;">{{$index}}</td>
+        <td style="text-align: center;">{{$value.productname}}</td>
+        <td style="text-align: center;">{{$value.orderdate}}</td>
+        <td style="text-align: center;">{{$value.person}}</td>
+        <td style="text-align: center;">{{$value.batch}}</td>
+        <td style="text-align: center;">{{$value.testweight}}</td>
+    </tr>
+    {{/each}}
+</script>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+
+</html>
+<script>
+    layui.use(['table', "layer", "form", "util"], function() {
+        var $ = layui.jquery,
+            table = layui.table,
+            layer = layui.layer,
+            form = layui.form,
+            util = layui.util,
+            projectobj = {};
+
+
+        /*不合格原辅料*/
+        handleAjax('ordPurchase/getOrdTestResult', {
+            productclass: 1
+        }, "GET").done(function(resp) {
+
+            $.each(resp.pageBean.lists, function(index, ites) {
+                if (ites.orderdate != "" || ites.orderdate != null) {
+                    ites.orderdate = times(ites.orderdate);
+                }
+            })
+
+            var html = template("contentquery", resp.pageBean);
+            $(".Procurementofproducts").html(html);
+        }).fail(function(err) {
+            console.log(err)
+        });
+
+        function times(t) {
+            return t = t.split("T")[0];
+        }
+
+
+
+        //保存
+        $(".saves").click(function() {
+
+            if ($(".ways").val() == "") {
+                alertt("请输入处理方式");
+                return
+            }
+            if ($(".placed").val() == "") {
+                alertt("请输入销毁地点");
+                return
+            }
+            if ($(".weightd").val() == "") {
+                alertt("请输入处理重量");
+                return
+            }
+            if ($(".why").val() == "") {
+                alertt("请输入处理原因");
+                return
+            }
+
+            var nuls = 0;
+            var nulss = 0;
+            var idss = "";
+            $.each($(".checks>input"), function(i, items) {
+                if (items.checked) {
+                    nulss++;
+                    // console.log($(items).parent().next().text())
+                    idss = $(items).parent().next().text();
+                } else {
+                    nuls++;
+                }
+            })
+            if ($(".Procurementofproducts").children().length == nuls) {
+                alertt("请选择一个");
+                return
+            }
+            if (nulss != 1) {
+                alertt("请选择一个");
+                return
+            }
+
+            handleAjax("ordPurchase/addOrdDispose", {
+                id: idss,
+                weight: $(".weightd").val(),
+                measure: $(".ways").val(),
+                measureaddr: $(".placed").val(),
+                reason: $(".why").val()
+            }, "POST").done(function(resp) {
+                console.log(resp);
+                layer.msg('操作成功', {
+                    icon: 1,
+                    time: 1000
+                });
+                setTimeout(function() {
+                    window.location.href = "../nopass.html";
+                }, 1500)
+                return
+            }).fail(function(err) {
+                console.log(err)
+            });
+
+        })
+
+        function alertt(rr) {
+            layer.msg(rr, {
+                time: 1000,
+                offset: 't',
+            })
+        }
+
+
+        /*返回*/
+        $(".huifan").click(function() {
+            window.location.href = "../nopass.html";
+        })
+
+        //验证重量
+        $(".weightd").blur(function() {
+            var reg = /^([0-9][1-9]*)+(.[0-9]{1,})?$/;
+            if (!reg.test($(".weightd").val())) {
+                alertt("请正确输入重量!");
+                $(this).val("");
+                return
+            }
+        })
+
+    })
+</script>

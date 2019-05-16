@@ -26,7 +26,7 @@ function ajax(url, param, type, contentType) {
             type: type || 'POST',
             async: true,
             beforeSend: function(xhr) {
-                console.log(sessions)
+                // console.log(sessions)
                 xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
             },
         });
