@@ -135,3 +135,28 @@ input {
 .layui-inline-sel .layui-form-select{
     margin-right: 10px;
 }
+.row{
+    display: flex;
+    width: 700px;
+}
+.row .layui-form-item{
+    width: 300px;
+}
+.detection{
+    border: 1px solid #c9c9c9;
+    padding: 10px 0;
+    margin: 10px;
+    padding-top: 15px;
+}
+.detection-btn-add{
+    width: 28px;
+    margin-left: 130px;
+}
+.btns-del{
+    height: 38px;
+    margin-left: 30px;
+    padding: 0 15px;
+    white-space:normal;
+    line-height: 38px;
+    margin-top: 6px;
+}

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>原辅料检测</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../public/font/iconfont.css">
+    <!-- <link rel="stylesheet" href="../../../../../css/twocss/commit.css"> -->
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
+</head>
+
+<body>
+    <form class="layui-form" action="">
+        <div class="select common">
+            <div class="select-title">企业信息</div>
+            <div class="select-con">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">检测日期:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入检测日期" id='test1'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">检测重量(KG):</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入检测重量(KG)" id='Theweight'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">检测地点:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入检测地点" id='places'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">检测机构:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入检测机构" id='institutions'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">检测依据:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入检测依据" id='Onthebasisof'>
+                        </div>
+                    </div>
+                </div>
+                <div class="detection">
+                    <div class="layui-bg-green comquery detection-btn-add">添加</div>
+                    <div class="row">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">检测项目:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input project" placeholder="输入检测项目" id='project'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">检测结果:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input Theresultsof" placeholder="输入检测结果" id='Theresultsof'>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="layui-bg-green comquery btns-del">删除</div> -->
+                    </div>
+                </div>
+                    
+                
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">检测结论:</label>
+                        <div class="layui-input-inline" id="personinline">
+                            <select name="Namerawmaterials" lay-verify="" lay-filter='Namerawmaterials' id="Namerawmaterials">
+                                <option value="">---请选择---</option>
+                                <option value="2" class="persontypeitem">合格</option>
+                                <option value="3" class="persontypeitem">不合格</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="select-btn">
+                    <div class="layui-bg-green comquery determine">确定</div>
+                    <div class="layui-bg-green comquery cancels">取消</div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+
+
+</body>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+
+<script>
+    layui.use(['table', "laydate", "util", "layer"], function() {
+        var $ = layui.jquery,
+            table = layui.table,
+            util = layui.util,
+            layer = layui.layer,
+            laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#test1' //指定元素 
+        });
+
+        var dels;
+        if(document.querySelector('.btns-del')){
+            dels=document.querySelectorAll('.btns-del');
+        }
+        $(".detection-btn-add").click(function(){
+            $(".detection").append('<div class="row"><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">检测项目:</label><div class="layui-input-inline"><input type="text" class="layui-input project" placeholder="输入检测项目"></div></div></div><div class="layui-form-item"><div class="layui-inline"><label class="layui-form-label">检测结果:</label> <div class="layui-input-inline"><input type="text" class="layui-input Theresultsof" placeholder="输入检测结果"></div></div></div><div class="layui-bg-green comquery btns-del">删除</div></div>')
+            dels=document.querySelectorAll('.btns-del');
+            for(var i=0;i<dels.length;i++){
+                (function(i){
+                    dels[i].addEventListener('click',function(){
+                        if(dels[i].parentNode.parentNode){
+                            dels[i].parentNode.parentNode.removeChild(dels[i].parentNode);
+                        }
+                    })
+                })(i)
+            }
+        })
+
+        
+        getHrefId();
+        function getHrefId(){
+            var loc = location.href;
+            var url = loc.split("?")[1];
+            if(url && url!=''){
+                var para = url.split("&");
+                var len = para.length;
+                var res = {};
+                var arr = [];
+                for(var i=0;i<len;i++){
+                    arr = para[i].split("=");
+                    res[arr[0]] = arr[1];
+                }
+                single(res.id);
+               
+            }else{
+                
+            }
+            
+        }
+
+
+
+        function single(e) {
+            //取消
+            $(".cancels").click(function() {
+                layer.closeAll();
+            })
+
+            //确定
+            $(".determine").click(function() {
+
+                if ($("#test1").val() == "") {
+                    layer.msg('选择检测日期', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+                if ($(".Theweight").val() == "") {
+                    layer.msg('请输入检测重量', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+                if ($(".places").val() == "") {
+                    layer.msg('请输入检测地点', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+                if ($(".institutions").val() == "") {
+                    layer.msg('请输入检测机构', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+                if ($(".Onthebasisof").val() == "") {
+                    layer.msg('请输入检测依据', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+
+                if ($(".project").val() == "") {
+                    layer.msg('请输入检测项目', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+                if ($(".Theresultsof").val() == "") {
+                    layer.msg('请输入检测结果', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+
+                if ($(".Namerawmaterials").val() == "") {
+                    layer.msg('请选择检测结论', {
+                        time: 1000,
+                        offset: 't',
+                    });
+                    return
+                }
+                var projects = document.querySelectorAll('.project');
+                var theresultsofs = document.querySelectorAll('.Theresultsof');
+                var projectList = [];
+                var theresultsofList=[];
+                for(var i=0;i<projects.length;i++){
+                    projectList.push(projects[i].value);
+                }
+                for(var i=0;i<theresultsofs.length;i++){
+                    theresultsofList.push(theresultsofs[i].value);
+                }
+                var projectList = JSON.stringify(projectList);
+                var theresultsofList = JSON.stringify(theresultsofList);
+                console.log(projectList);
+                console.log(theresultsofList);
+
+                // return;
+                var Detectionsingle = {
+                    id: e,
+                    orderdate: $("#test1").val() + " " + "00:00:00",
+                    testweight: $("#Theweight").val(),
+                    testlocation: $("#places").val(),
+                    testorgnazation: $("#institutions").val(),
+                    testbasic: $("#Onthebasisof").val(),
+                    testname: projectList,
+                    result: theresultsofList,
+                    testresult: $("#Namerawmaterials").val()
+                }
+
+                console.log(Detectionsingle);
+                // return
+                handleAjax("ordPurchase/updateOrdTest", Detectionsingle, "POST").done(function(resp) {
+                    console.log(resp)
+                    layer.msg("检测成功", {
+                        icon: 1,
+                        time: 1000,
+                    });
+                    setTimeout(function() {
+                        layer.closeAll();
+                    }, 1500)
+                    // window.location.reload();
+                window.location.href = "../detection.html";
+                }).fail(function(err) {
+                    console.log(err)
+                });
+            })
+        }
+
+        
+    });
+        
+</script>
+</html>

@@ -199,6 +199,14 @@
                 <label>检测机构:</label>
                 <p>{{$value.testorgnazation}}</p>
             </li>
+            <li>
+                <label>抽样基数(KG):</label>
+                <p>{{$value.testnum}}</p>
+            </li>
+            <li>
+                <label>检测重量(KG):</label>
+                <p>{{$value.testweight}}</p>
+            </li>
             <li style="margin-left: 25px;">
                 <label>检测依据:</label>
                 <p>{{$value.testbasic}}</p>
@@ -207,31 +215,35 @@
                 <label>采购单号:</label>
                 <p style="width: 190px;">{{$value.ordercode}} </p>
             </li>
-
+            <li>
+                <label>检测结论:</label>
+                {{if $value.testresult == "1"}}
+                <p style="text-align: center;">待检测</p>
+                {{else if $value.testresult == "2" }}
+                <p style="text-align: center;">检测合格</p>
+                {{else}}
+                <p style="text-align: center;">不合格</p>
+                {{/if}}
+            </li>
         </ul>
         <div style="padding:10px  0  0 10px;">检测信息</div>
         <table class="layui-table">
             <thead>
                 <tr>
-                    <th>抽样基数(KG)</th>
-                    <th>检测重量(KG)</th>
-                    <th>检测结论</th>
+                    <!-- <th>抽样基数(KG)</th>
+                    <th>检测重量(KG)</th> -->
+                    <th>检测项目</th>
                     <th>检测结果</th>
+                    <!-- <th>检测结论</th> -->
                 </tr>
             </thead>
             <tbody>
+                {{each list[0].prolist}}
                 <tr>
-                    <td style="text-align: center;">{{$value.testnum}}</td>
-                    <td style="text-align: center;">{{$value.testweight}}</td>
-                    {{if $value.testresult == "1"}}
-                    <td style="text-align: center;">待检测</td>
-                    {{else if $value.testresult == "2" }}
-                    <td style="text-align: center;">检测合格</td>
-                    {{else}}
-                    <td style="text-align: center;">不合格</td>
-                    {{/if}}
-                    <td style="text-align: center;">{{$value.result}}</td>
+                    <td style="text-align: center;">{{$value.testnamelist}}</td>
+                    <td style="text-align: center;">{{$value.resultlist}}</td>
                 </tr>
+                {{/each}}
             </tbody>
         </table>
         {{/each}}
@@ -265,7 +277,8 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             if (layEvent === 'detection') {
-                Detectionsinglesingle(data.id);
+                // Detectionsinglesingle(data.id);
+                window.location.href = "./newpagecai/detectionNew.html?id="+data.id;
                 return
             }
             if (layEvent === 'detail') {
@@ -303,7 +316,25 @@
                             }
                         });
 
-                        // console.log(resp)
+                        var resultlist=[];
+                        var testnamelist=[];
+                        var prolist=[];
+                        // 判断是不是数组
+                        if(resp.list[0].result.indexOf("[")==0){
+                            resultlist = JSON.parse(resp.list[0].result);
+                        }else{
+                            resultlist.push(resp.list[0].result);
+                        }
+                        if(resp.list[0].testname.indexOf("[")==0){
+                            testnamelist = JSON.parse(resp.list[0].testname);
+                        }else{
+                            testnamelist.push(resp.list[0].testname);
+                        }
+                        for(var i=0;i<resultlist.length;i++){
+                            prolist.push({'resultlist':resultlist[i],'testnamelist':testnamelist[i]})
+                        }
+                        resp.list[0].prolist=prolist;
+                        console.log(resp);
 
                         var html = template("contentquery", resp);
                         $(".ssss").html(html);
@@ -434,12 +465,14 @@
                             return num
                         }
                     }
-                }, {
-                    field: 'result',
-                    title: '检测结果',
-                    minWidth: 100,
-                    align: "center",
-                }, {
+                }, 
+                // {
+                //     field: 'result',
+                //     title: '检测结果',
+                //     minWidth: 100,
+                //     align: "center",
+                // },
+                {
                     field: 'wealth',
                     width: 137,
                     title: '操作',
