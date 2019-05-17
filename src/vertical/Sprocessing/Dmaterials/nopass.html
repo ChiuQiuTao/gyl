@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>原辅料不及格处理</title>
-    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css" />
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css" />
+    <link rel="stylesheet" href="../../../../css/twocss/commit.css" />
 </head>
 <style>
     .select-hand-txt {
@@ -18,216 +18,297 @@
 
 <body>
     <form class="layui-form" action="">
-
         <div class="select common">
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label" style="width:105px;">处理方式:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input  Suppliername">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label" style="width:105px;">处理单号:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input   Purchaseorder">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery   Rawquery">查询</div>
-                    <div class="layui-bg-green comquery   reset">重置</div>
-                </div>
+                        <label class="layui-form-label" style="width:105px;">处理方式:</label
+              >
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input  Suppliername" />
+              </div>
             </div>
+          </div>
+
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label" style="width:105px;"
+                >处理单号:</label
+              >
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input   Purchaseorder" />
+              </div>
+            </div>
+          </div>
+
+          <div class="select-btn">
+            <div class="layui-bg-green comquery   Rawquery">查询</div>
+            <div class="layui-bg-green comquery   reset">重置</div>
+          </div>
         </div>
+      </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testinventory" lay-filter="testdome"></table>
+      <table
+        class="layui-hide"
+        id="testinventory"
+        lay-filter="testdome"
+      ></table>
     </div>
-</body>
-<!-- 头部 -->
-<script type="text/html" id="toolbarinter">
+  </body>
+  <!-- 头部 -->
+  <script type="text/html" id="toolbarinter">
     <div class="layui-btn-container ">
         <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
     </div>
-</script>
+  </script>
 
-<!-- 里面的查看 -->
-<script type="text/html" id="More">
+  <!-- 里面的查看 -->
+  <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-</script>
+  </script>
 
-<script src="../../../../js/common/jquery.min.js"></script>
-<script src="../../../../js/common/api.js"></script>
-<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script>
-    layui.use(['table'], function() {
-        var $ = layui.jquery,
-            table = layui.table;
+  <!-- 查看的内容 -->
+  <script type="text/html" id="contentquery">
+    <div class="select common">
 
-        //监听头部监听
-        table.on('toolbar(testdome)', function(obj) {
-            var checkStatus = table.checkStatus(obj.config.id),
-                data = checkStatus.data; //获取选中的数据
-            switch (obj.event) {
-                case 'add':
-                    window.location.href = "./newpagecai/newnopass.html";
-                    break;
-            };
-        });
+        <div class="select-title" style="border-bottom:0px;background-color: #f3f3f3;">
+            基本信息
+        </div>
+        {{each lists}}
+        <ul class="basis-h">
 
-        //监听表格里面按钮
-        table.on('tool(testdome)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
-            if (layEvent === 'detail') { //查看
-                //do somehing
-                layer.msg('查看');
-            }
-        });
+            <li>
+                <label>原辅料名称:</label>
+                        <p>{{$value.productname}}</p>
+                        </li>
+                        <li>
+                            <label>批次:</label>
+                            <p>{{$value.batch}}</p>
+                        </li>
+                        <li>
+                            <label>处理方式:</label> 
+                            <p>{{$value.measure}}</p>
+                        </li>
+                        <li>
+                            <label>销毁地点:</label>
+                            <p>{{$value.measureaddr}}</p>
+                        </li>
+                        <li>
+                            <label>处理理由:</label>
+                            <p>{{$value.reason}}</p>
+                        </li>
 
-        //获取列表
-        var tableIns = table.render({
-            elem: '#testinventory',
-            url: base + "ordPurchase/getOrdDisposeVo",
-            method: "GET",
-            where: {},
-            headers: {
-                Authorization: "Bearer" + " " + sessions
-            },
-            request: {
-                pageName: 'currentPage',
-                limitName: 'pageSize'
-            },
-            toolbar: '#toolbarinter',
-            limits: [10, 20],
-            parseData: function(res) { //res 即为原始返回的数据
-                console.log(res);
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.message, //解析提示文本
-                    "totalNum": res.pageBean.totalNum, //解析数据长度
-                    "lists": res.pageBean.lists //解析数据列表
-                };
-            },
-            response: {
-                statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 10000, //成功的状态码，默认：0
-                msgName: "message", //状态信息的字段名称，默认：msg
-                countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'lists', //数据列表的字段名称，默认：data
-            },
-            cellMinWidth: 80,
-            page: {
-                layout: ['prev', 'page', 'next', 'skip', 'count'],
-                groups: 5,
-                first: true,
-                last: true,
-                prev: '下一页',
-                next: "上一页",
-                theme: "#c81623",
-            },
-            cols: [
-                [{
-                    title: '编号',
-                    type: 'numbers',
-                    align: "center",
-                    fixed: 'left'
-                }, {
-                    align: "center",
-                    field: 'productname',
-                    title: '原辅料名称',
-                    minWidth: 120,
+                        <li>
+                            <label></label>
+                            <p class="empty-h"></p>
+                        </li>
+                        <li>
+                            <label>处理单号:</label> 
+                            <p  style="width:200px;">{{$value.ordercode}}</p>
+                        </li>
+                       
 
-                }, {
-                    field: 'batch',
-                    title: '批次',
-                    align: "center",
-                    minWidth: 100,
-                }, {
-                    field: 'ordercode',
-                    title: '处理单号',
-                    minWidth: 160,
-                    align: "center",
-                    sort: true,
-                }, {
-                    field: 'measure',
-                    title: '处理方式',
-                    minWidth: 140,
-                    align: "center",
-                }, {
-                    field: 'measureaddr',
-                    title: '处理地址',
-                    minWidth: 180,
-                    align: "center",
-                }, {
-                    field: 'reason',
-                    title: '处理理由',
-                    minWidth: 180,
-                    align: "center",
-                }, {
-                    field: 'wealth',
-                    width: 137,
-                    title: '更多',
-                    minWidth: 20,
-                    align: "center",
-                    fixed: 'right',
-                    toolbar: '#More',
-                }]
-            ]
-        });
+                        </ul>
+                        <div style="padding:10px  0  0 10px;"></div>
+                       
+                        {{/each}}
+                    </div>
+                    </script>
 
+                    <script src="../../../../js/common/jquery.min.js"></script>
+                    <script src="../../../../js/common/api.js"></script>
+                    <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+                    <script src="../../../../js/common/template-web.js"></script>
+                    <script>
+                        layui.use(["table"], function() {
+                            var $ = layui.jquery,
+                                table = layui.table;
 
-        /*查询*/
-        $(".Rawquery").click(function() {
-            if ($(".Suppliername").val() == "" && $(".Purchaseorder").val() == "") {
-                layer.msg('请输入查询条件！', {
-                    time: 1000,
-                    offset: 't',
-                });
-                return
-            }
+                            //监听头部监听
+                            table.on("toolbar(testdome)", function(obj) {
+                                var checkStatus = table.checkStatus(obj.config.id),
+                                    data = checkStatus.data; //获取选中的数据
+                                switch (obj.event) {
+                                    case "add":
+                                        window.location.href = "./newpagecai/newnopass.html";
+                                        break;
+                                }
+                            });
 
-            datelist = {
-                measure: $(".Suppliername").val(),
-                aordercode: $(".Purchaseorder").val()
-            }
-            tableIns.reload({
-                where: datelist,
-                page: {
-                    curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-        })
+                            //监听表格里面按钮
+                            table.on("tool(testdome)", function(obj) {
+                                //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                                var data = obj.data; //获得当前行数据
+                                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                                if (layEvent === "detail") {
+                                    var aordercode = data.ordercode;
+                                    unqualified(aordercode);
+                                    return;
+                                }
+                            });
 
+                            function unqualified(t) {
+                                 
+                                   layer.open({
+                                    type: 1,
+                                    title: "查看",
+                                    shadeClose: true, //是否点击遮罩关闭
+                                    anim: 5, //弹出动画
+                                    scrollbar: false, //窗口外滚动条是否出现
+                                    skin: 'layui-layer-rim', //加上边框
+                                    area: ['760px', '380px'], //宽高
+                                    content: '<div class="ssss"></div>',
+                                    success: function (layero, index) {
 
-        /*重置*/
-        $(".reset").click(function() {
-            $(".Suppliername").val("");
-            $(".Purchaseorder").val("");
-            tableIns.reload({
-                where: {},
-                page: {
-                    curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-        })
+                                        noAjax('ordPurchase/getOrdDisposeVo', {
+                                            aordercode: t
+                                        }, "GET").done(function (resp) {
+                                           resp  =  resp.pageBean;
+                                           console.log(resp)
+                                            var html = template("contentquery", resp);
+                                            $(".ssss").html(html);
 
+                                        }).fail(function (err) {
+                                            console.log(err)
+                                        });
+                                    }
+                                });
 
+                            }
 
-    })
-</script>
+                            //获取列表
+                            var tableIns = table.render({
+                                elem: "#testinventory",
+                                url: base + "ordPurchase/getOrdDisposeVo",
+                                method: "GET",
+                                where: {
+                                    productclass: "1"
+                                },
+                                headers: {
+                                    Authorization: "Bearer" + " " + sessions
+                                },
+                                request: {
+                                    pageName: "currentPage",
+                                    limitName: "pageSize"
+                                },
+                                toolbar: "#toolbarinter",
+                                limits: [10, 20],
+                                parseData: function(res) {
+                                    //res 即为原始返回的数据
+                                    console.log(res);
+                                    return {
+                                        code: res.code, //解析接口状态
+                                        msg: res.message, //解析提示文本
+                                        totalNum: res.pageBean.totalNum, //解析数据长度
+                                        lists: res.pageBean.lists //解析数据列表
+                                    };
+                                },
+                                response: {
+                                    statusName: "code", //数据状态的字段名称，默认：code
+                                    statusCode: 10000, //成功的状态码，默认：0
+                                    msgName: "message", //状态信息的字段名称，默认：msg
+                                    countName: "totalNum", //数据总数的字段名称，默认：count
+                                    dataName: "lists" //数据列表的字段名称，默认：data
+                                },
+                                cellMinWidth: 80,
+                                page: {
+                                    layout: ["prev", "page", "next", "skip", "count"],
+                                    groups: 5,
+                                    first: true,
+                                    last: true,
+                                    prev: "下一页",
+                                    next: "上一页",
+                                    theme: "#c81623"
+                                },
+                                cols: [
+                                    [{
+                                        title: "编号",
+                                        type: "numbers",
+                                        align: "center",
+                                        fixed: "left"
+                                    }, {
+                                        align: "center",
+                                        field: "productname",
+                                        title: "原辅料名称",
+                                        minWidth: 120
+                                    }, {
+                                        field: "batch",
+                                        title: "批次",
+                                        align: "center",
+                                        minWidth: 100
+                                    }, {
+                                        field: "ordercode",
+                                        title: "处理单号",
+                                        minWidth: 160,
+                                        align: "center",
+                                        sort: true
+                                    }, {
+                                        field: "measure",
+                                        title: "处理方式",
+                                        minWidth: 140,
+                                        align: "center"
+                                    }, {
+                                        field: "measureaddr",
+                                        title: "处理地址",
+                                        minWidth: 180,
+                                        align: "center"
+                                    }, {
+                                        field: "reason",
+                                        title: "处理理由",
+                                        minWidth: 180,
+                                        align: "center"
+                                    }, {
+                                        field: "wealth",
+                                        width: 137,
+                                        title: "更多",
+                                        minWidth: 20,
+                                        align: "center",
+                                        fixed: "right",
+                                        toolbar: "#More"
+                                    }]
+                                ]
+                            });
+
+                            /*查询*/
+                            $(".Rawquery").click(function() {
+                                if ($(".Suppliername").val() == "" && $(".Purchaseorder").val() == "") {
+                                    layer.msg("请输入查询条件！", {
+                                        time: 1000,
+                                        offset: "t"
+                                    });
+                                    return;
+                                }
+
+                                datelist = {
+                                    measure: $(".Suppliername").val(),
+                                    aordercode: $(".Purchaseorder").val()
+                                };
+                                tableIns.reload({
+                                    where: datelist,
+                                    page: {
+                                        curr: 1, //重新从第 1 页开始
+                                        layout: ["prev", "page", "next", "skip", "count"]
+                                    }
+                                });
+                            });
+
+                            /*重置*/
+                            $(".reset").click(function() {
+                                $(".Suppliername").val("");
+                                $(".Purchaseorder").val("");
+                                tableIns.reload({
+                                    where: {},
+                                    page: {
+                                        curr: 1, //重新从第 1 页开始
+                                        layout: ["prev", "page", "next", "skip", "count"]
+                                    }
+                                });
+                            });
+                        });
+                    </script>
 
 </html>

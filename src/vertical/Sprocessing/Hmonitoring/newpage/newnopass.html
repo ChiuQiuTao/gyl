@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>新增不合格单</title>
+    <title>新增产品不合格单</title>
     <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../../../css/twocss/commit.css">
     <link rel="stylesheet" href="../../../../../css/twocss/H/processing.css">
@@ -63,7 +63,7 @@
 
             </div>
             <div class="select-title" style="height:30px;line-height:30px;margin-top: 10px;border-bottom-color:#c9c9c9;">
-                不合格原辅料
+                不合格产品
             </div>
             <div class="ingredients-newp">
 
@@ -125,7 +125,7 @@
 
         /*不合格原辅料*/
         handleAjax('ordPurchase/getOrdTestResult', {
-            productclass: 1
+            productclass: 2
         }, "GET").done(function(resp) {
 
             $.each(resp.pageBean.lists, function(index, ites) {
@@ -193,9 +193,11 @@
                 measure: $(".ways").val(),
                 measureaddr: $(".placed").val(),
                 reason: $(".why").val(),
-                productclass: "1"
+                productclass: "2"
             }, "POST").done(function(resp) {
                 console.log(resp);
+
+                return
                 layer.msg('操作成功', {
                     icon: 1,
                     time: 1000

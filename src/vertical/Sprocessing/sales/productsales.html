@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>产品销售</title>
-    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css" />
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css" />
+    <link rel="stylesheet" href="../../../../css/twocss/commit.css" />
 </head>
 
 <body>
@@ -21,26 +21,27 @@
                     <div class="select-hand-item">
                         <div class="layui-inline">
                             <label class="layui-form-label">销售日期:</label>
-                            <input type="text" class="layui-input" id="date1">
+                            <input type="text" class="layui-input" id="date1" />
                             <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2">
+                            <input type="text" class="layui-input" id="date2" />
                         </div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label" style="width: 130px;">客户名称:</label>
+                        <label class="layui-form-label" style="width: 130px;">客户名称:</label
+              >
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input  Suppliername" />
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label">销售单号:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input  Suppliername">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">销售单号:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input  Purchaseorder">
+                            <input type="text" class="layui-input  Purchaseorder" />
                         </div>
                     </div>
                 </div>
@@ -50,14 +51,12 @@
                     <div class="layui-bg-green comquery  reset ">重置</div>
                 </div>
             </div>
-
         </div>
     </form>
 
     <div class="common-padding">
         <table class="layui-hide" id="testsales" lay-filter="testdome"></table>
     </div>
-
 </body>
 
 <!-- 头部 -->
@@ -72,14 +71,84 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
 
+<!-- 查看的内容 -->
+<script type="text/html" id="contentquery">
+    <div class="select common">
+
+        <div class="select-title" style="border-bottom:0px;background-color: #f3f3f3;">
+            基本信息
+        </div>
+        {{each list}}
+        <ul class="basis-h">
+            <li>
+                <label>录入人:</label>
+                <p>{{$value.createname}}</p>
+            </li>
+            <li>
+                <label>录入日期:</label>
+                <p>{{$value.createon}}</p>
+            </li>
+            <li>
+                <label>客户名称:</label>
+                <p>{{$value.customername}}</p>
+            </li>
+            <li>
+                <label>销售时间:</label>
+                <p>{{$value.orderdate}}</p>
+            </li>
+
+            <li>
+                <label>负责人:</label>
+                <p>{{$value.person}}</p>
+            </li>
+
+            <li>
+                <label>销售单号:</label>
+                <p style="width: 190px;">{{$value.ordercode}} </p>
+            </li>
+
+        </ul>
+        <div style="padding:10px  0  0 10px;">采购产品</div>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th style="text-align: center;">商品名称</th>
+                    <th style="text-align: center;">一级仓库</th>
+                    <th style="text-align: center;">二级仓库</th>
+                    <th style="text-align: center;">批次</th>
+                    <th style="text-align: center;">数量</th>
+                    <th style="text-align: center;">单价(元)</th>
+                    <th style="text-align: center;">金额(元)</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {{each $value.saleOnesVos}}
+                <tr>
+                    <td style="text-align: center;">{{$index}}</td>
+                    <td style="text-align: center;">{{$value.productname}}</td>
+                    <td style="text-align: center;">{{$value.storage}}</td>
+                    <td style="text-align: center;">{{$value.area}}</td>
+                    <td style="text-align: center;">{{$value.batch}}</td>
+                    <td style="text-align: center;">{{$value.num}}</td>
+                    <td style="text-align: center;">{{$value.price}}</td>
+                    <td style="text-align: center;">{{$value.amount}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{/each}}
+    </div>
+</script>
 
 <script src="../../../../js/two/jinputs.js"></script>
-
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../js/common/template-web.js"></script>
 <script>
-    layui.use(['table', "laydate", "layer", "util"], function() {
+    layui.use(["table", "laydate", "layer", "util"], function() {
         var $ = layui.jquery,
             table = layui.table,
             layer = layui.layer,
@@ -88,44 +157,85 @@
             laydate = layui.laydate;
 
         laydate.render({
-            elem: '#date1' //指定元素 
+            elem: "#date1" //指定元素
         });
         laydate.render({
-            elem: '#date2' //指定元素
+            elem: "#date2" //指定元素
         });
 
-
-
         //监听头部监听
-        table.on('toolbar(testdome)', function(obj) {
+        table.on("toolbar(testdome)", function(obj) {
             var checkStatus = table.checkStatus(obj.config.id),
                 data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
-                case 'add':
+                case "add":
                     window.location.href = "./newpage/prosales.html";
                     break;
-            };
-        });
-
-
-
-
-        //监听表格里面按钮
-        table.on('tool(testdome)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
-            if (layEvent === 'detail') { //查看
-                //do somehing
-                layer.msg('查看');
             }
         });
 
+        //监听表格里面按钮
+        table.on("tool(testdome)", function(obj) {
+            //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            if (layEvent === "detail") {
+                //查看
+                repertory(data.id);
+                return;
+            }
+        });
 
+        function repertory(tt) {
+            layer.open({
+                type: 1,
+                title: "查看",
+                shadeClose: true, //是否点击遮罩关闭
+                anim: 5, //弹出动画
+                scrollbar: false, //窗口外滚动条是否出现
+                skin: "layui-layer-rim", //加上边框
+                area: ["900px", "440px"], //宽高
+                content: '<div class="ssss"></div>',
+                success: function(layero, index) {
+                    noAjax(
+                            "ordSale/getSaleOneVo", {
+                                id: tt
+                            },
+                            "GET"
+                        )
+                        .done(function(resp) {
+                            console.log(resp);
+                            $.each(resp.list, function(index, item) {
+                                if (item.createon == null || item.createon == "") {
+                                    item.createon = "";
+                                } else {
+                                    item.createon = times(item.createon);
+                                }
+
+                                if (item.orderdate == null || item.orderdate == "") {
+                                    item.orderdate = "";
+                                } else {
+                                    item.orderdate = times(item.orderdate);
+                                }
+                            });
+
+                            var html = template("contentquery", resp);
+                            $(".ssss").html(html);
+                        })
+                        .fail(function(err) {
+                            console.log(err);
+                        });
+                }
+            });
+        }
+
+        function times(t) {
+            return (t = t.split("T")[0]);
+        }
 
         //获取列表
         var tableIns = table.render({
-            elem: '#testsales',
+            elem: "#testsales",
             url: base + "ordSale/getSaleProductListVo",
             method: "GET",
             where: {},
@@ -133,58 +243,55 @@
                 Authorization: "Bearer" + " " + sessions
             },
             request: {
-                limitName: '10'
+                limitName: "10"
             },
-            toolbar: '#toolbarinter',
+            toolbar: "#toolbarinter",
             limits: [10, 20],
-            parseData: function(res) { //res 即为原始返回的数据
-                console.log(res)
+            parseData: function(res) {
+                //res 即为原始返回的数据
+                console.log(res);
                 return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.message, //解析提示文本
-                    "totalNum": res.pageBean.totalNum, //解析数据长度
-                    "lists": res.pageBean.lists //解析数据列表
+                    code: res.code, //解析接口状态
+                    msg: res.message, //解析提示文本
+                    totalNum: res.pageBean.totalNum, //解析数据长度
+                    lists: res.pageBean.lists //解析数据列表
                 };
             },
             request: {
-                pageName: 'currentPage',
-                limitName: 'pageSize'
+                pageName: "currentPage",
+                limitName: "pageSize"
             },
             response: {
-                statusName: 'code', //数据状态的字段名称，默认：code
+                statusName: "code", //数据状态的字段名称，默认：code
                 statusCode: 10000, //成功的状态码，默认：0
                 msgName: null, //状态信息的字段名称，默认：msg
-                countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'lists', //数据列表的字段名称，默认：data
+                countName: "totalNum", //数据总数的字段名称，默认：count
+                dataName: "lists" //数据列表的字段名称，默认：data
             },
-            cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                ,
-            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['prev', 'page', 'next', 'skip', 'count'] //自定义分页布局
-                    //,curr: 5 //设定初始在第 5 页
-                    ,
-                groups: 5 //只显示 1 个连续页码
-                    ,
-                first: true //不显示首页
-                    ,
-                last: true //不显示尾页
-                    ,
-                prev: '上一页',
+            cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            page: {
+                //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                layout: ["prev", "page", "next", "skip", "count"], //自定义分页布局
+                //,curr: 5 //设定初始在第 5 页
+                groups: 5, //只显示 1 个连续页码
+                first: true, //不显示首页
+                last: true, //不显示尾页
+                prev: "上一页",
                 next: "下一页",
-                theme: "#c81623",
+                theme: "#c81623"
             },
             // height: 'full-20',//满高
             cols: [
                 [{
-                    title: '编号',
-                    type: 'numbers',
+                    title: "编号",
+                    type: "numbers",
                     align: "center",
-                    fixed: 'left'
+                    fixed: "left"
                 }, {
-                    field: 'orderdate',
-                    title: '销售日期',
+                    field: "orderdate",
+                    title: "销售日期",
                     align: "center",
-                    fixed: 'left',
+                    fixed: "left",
                     sort: true,
                     minWidth: 120,
                     templet: function(d) {
@@ -192,45 +299,47 @@
                         if (d.orderdate == "" || d.orderdate == null) {
                             numv = " ";
                         } else {
-                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                            numv = d.orderdate = layui.util.toDateString(
+                                d.orderdate,
+                                "yyyy-MM-dd"
+                            );
                         }
-                        return numv
-                    },
+                        return numv;
+                    }
                 }, {
-                    field: 'ordercode',
+                    field: "ordercode",
                     title: "销售单号",
                     align: "center",
-                    minWidth: 180,
+                    minWidth: 180
                 }, {
-                    field: 'customertype',
+                    field: "customertype",
                     title: "客户类型",
                     align: "center",
                     minWidth: 120,
                     templet: function(d) {
                         var num = null;
-                        console.log(d.customertype)
+                        console.log(d.customertype);
                         if (d.customertype == "1") {
-                            num = "企业客户"
-
+                            num = "企业客户";
                         }
                         if (d.customertype == "2") {
-                            num = "个人客户"
+                            num = "个人客户";
                         }
-                        return num
+                        return num;
                     }
                 }, {
-                    field: 'customername',
-                    title: '客户名称',
+                    field: "customername",
+                    title: "客户名称",
                     minWidth: 120,
-                    align: "center",
+                    align: "center"
                 }, {
-                    field: 'person',
-                    title: '负责人',
+                    field: "person",
+                    title: "负责人",
                     minWidth: 120,
-                    align: "center",
+                    align: "center"
                 }, {
-                    field: 'createon',
-                    title: '录入日期',
+                    field: "createon",
+                    title: "录入日期",
                     align: "center",
                     minWidth: 120,
                     sort: true,
@@ -239,60 +348,65 @@
                         if (d.createon == "" || d.createon == null) {
                             nume = " ";
                         } else {
-                            nume = d.createon = layui.util.toDateString(d.createon, 'yyyy-MM-dd');
+                            nume = d.createon = layui.util.toDateString(
+                                d.createon,
+                                "yyyy-MM-dd"
+                            );
                         }
-                        return nume
-                    },
+                        return nume;
+                    }
                 }, {
-                    field: 'amount',
-                    title: '总金额',
+                    field: "amount",
+                    title: "总金额",
                     minWidth: 120,
                     align: "center",
                     sort: true,
                     templet: function(d) {
-                        return '<i>' + d.amount + "(元)" + '</i>'
+                        return "<i>" + d.amount + "(元)" + "</i>";
                     }
                 }, {
-                    field: 'wealth',
+                    field: "wealth",
                     width: 137,
-                    title: '更多',
+                    title: "更多",
                     minWidth: 20,
                     align: "center",
-                    fixed: 'right',
-                    toolbar: '#More',
+                    fixed: "right",
+                    toolbar: "#More"
                 }]
             ]
         });
 
-
-
-
         /*查询*/
         $(".Rawquery").click(function() {
-            if ($("#date1").val() == "" && $("#date2").val() == "" && $(".Suppliername").val() == "" && $(".Purchaseorder").val() == "") {
-                layer.msg('请输入查询条件！', {
+            if (
+                $("#date1").val() == "" &&
+                $("#date2").val() == "" &&
+                $(".Suppliername").val() == "" &&
+                $(".Purchaseorder").val() == ""
+            ) {
+                layer.msg("请输入查询条件！", {
                     time: 1000,
-                    offset: 't',
+                    offset: "t"
                 });
-                return
+                return;
             }
             if ($("#date1").val() != "") {
                 if ($("#date2").val() == "") {
-                    layer.msg('请选择时间段！', {
+                    layer.msg("请选择时间段！", {
                         time: 1000,
-                        offset: 't',
+                        offset: "t"
                     });
-                    return
+                    return;
                 }
             }
 
             if ($("#date2").val() != "") {
                 if ($("#date1").val() == "") {
-                    layer.msg('请选择时间段！', {
+                    layer.msg("请选择时间段！", {
                         time: 1000,
-                        offset: 't',
+                        offset: "t"
                     });
-                    return
+                    return;
                 }
             }
             datelist = {
@@ -300,17 +414,16 @@
                 orderdateh: $("#date2").val() + " " + "00:00:00",
                 customername: $(".Suppliername").val(),
                 ordercode: $(".Purchaseorder").val()
-            }
+            };
 
             tableIns.reload({
                 where: datelist,
                 page: {
                     curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-        })
-
+                    layout: ["prev", "page", "next", "skip", "count"]
+                }
+            });
+        });
 
         /*重置*/
         $(".reset").click(function() {
@@ -322,13 +435,11 @@
                 where: {},
                 page: {
                     curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-        })
-
-
-    })
+                    layout: ["prev", "page", "next", "skip", "count"]
+                }
+            });
+        });
+    });
 </script>
 
 </html>
