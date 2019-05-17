@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../../public/font/iconfont.css">
     <link rel="stylesheet" href="../../../../css/twocss/commit.css">
-
+  
 </head>
 
 <body>
@@ -41,7 +41,13 @@
     <div class="common-padding">
         <table class="layui-hide" id="test" lay-filter="testdome"></table>
     </div>
+
+
+    
 </body>
+
+
+
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
     <div class="layui-btn-container ">
@@ -55,6 +61,8 @@
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
+
+
 
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
@@ -78,7 +86,18 @@
                 data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 case 'add':
-                    layer.msg('添加');
+                    
+                layer.open({
+                    title: '添加',
+                    type: 2, 
+                    offset: '100px',
+                    area: ['800px', '500px'],
+                    content: "./dialog/housingAaddDialog.html",
+                });     
+                    
+
+
+
                     break;
                 case 'update':
                     if (data.length === 0) {
@@ -110,12 +129,16 @@
             }
         });
 
+
+
         //获取列表
         table.render({
             elem: '#test',
-            url: "../../../../js/two/data.json",
+            url: baseaip + "breed/qsxxs",
             method: "GET",
-            where: {},
+            where: {
+                landName:""
+            },
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
@@ -130,15 +153,16 @@
                 console.log(count);
             },
             request: {
-                limitName: '10'
+                pageName: 'page' //页码的参数名称，默认：page
+                ,limitName: 'limit' //每页数据量的参数名，默认：limit
             },
             limits: [10, 20],
             response: {
                 statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
+                statusCode: 200, //成功的状态码，默认：200
                 msgName: null, //状态信息的字段名称，默认：msg
                 countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'data', //数据列表的字段名称，默认：data
+                dataName: 'totalPages', //数据列表的字段名称，默认：data
             },
             cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,
@@ -221,8 +245,12 @@
                     toolbar: '#More',
                 }]
             ]
-        });
-    })
+            });
+        })
+
+
+
+        
 </script>
 
 </html>

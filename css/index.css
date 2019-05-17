@@ -237,10 +237,10 @@ iframe{
 }
 .tzvertical{
     position: fixed;
-    left: 0;
+    right: 30px;
     top: 30%;
     width: 27px;
-    height: 120px;
+    height: 206px;
     display: flex;
     text-align: center;
     align-items: center;
