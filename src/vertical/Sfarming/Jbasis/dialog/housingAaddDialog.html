@@ -9,9 +9,24 @@
     <link rel="stylesheet" href="../../../../../public/dist/css/layui.css" />
     <link rel="stylesheet" href="../../../../../public/font/iconfont.css" />
     <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css" />
+
     <style>
         .add-inputs {
             padding: 30px;
+        }
+        
+        .updataList {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-left: 36px;
+            padding-top: 30px;
+        }
+        
+        .save-btnform {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -43,8 +58,24 @@
             <div class="layui-form-item layui-form-text " style="margin-top: 70px;">
                 <label class="layui-form-label">备注</label>
                 <div class="layui-input-block" style="width:100%;">
-                    <textarea name="desc" placeholder="请输入备注" class="layui-textarea"></textarea>
+                    <textarea name="desc" placeholder="请输入备注" lay-verify="required" class="layui-textarea"></textarea>
                 </div>
+            </div>
+            <div class="layui-form-item layui-form-text  updataList" style="margin-top: 70px;">
+                <button type="button" class="layui-btn" id="test1">
+            <i class="layui-icon">&#xe67c;</i>上传图片
+          </button>
+
+                <button type="button" class="layui-btn" id="test2">
+            <i class="layui-icon">&#xe67c;</i>上传图片
+          </button>
+
+                <button type="button" class="layui-btn" id="test3">
+            <i class="layui-icon">&#xe67c;</i>上传图片
+          </button>
+            </div>
+            <div class="save-btnform">
+                <button class="layui-btn" type="button">保存</button>
             </div>
         </form>
     </div>
@@ -54,5 +85,67 @@
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../../js/common/template-web.js"></script>
 <script src="../../../../../js/two/Jbasis/supplierDialog.js"></script>
+
+<script>
+    layui.use("upload", function() {
+        var updataList = [];
+        var upload = layui.upload;
+        //执行实例
+        upload.render({
+            elem: "#test1", //绑定元素
+            url: baseaip + "uploadFile",
+            field: "file",
+            accept: "images",
+            multiple: false,
+            done: function(res) {
+                console.log(res);
+            },
+
+            error: function() {
+                layer.msg("上传异常，请联系管理员");
+            }
+        });
+
+        //执行实例
+        upload.render({
+            elem: "#test2", //绑定元素
+            url: baseaip + "uploadFile",
+            field: "file",
+            accept: "images",
+            multiple: false,
+            done: function(res) {},
+
+            error: function() {
+                layer.msg("上传异常，请联系管理员");
+            }
+        });
+
+        //执行实例
+        upload.render({
+            elem: "#test3", //绑定元素
+            url: baseaip + "uploadFile",
+            field: "file",
+            accept: "images",
+            multiple: false,
+            done: function(res) {},
+
+            error: function() {
+                layer.msg("上传异常，请联系管理员");
+            }
+        });
+
+        var button = document.querySelector(".save-btnform .layui-btn");
+
+        button.addEventListener("click", function() {
+            var options = {
+                landname: "", //基地名称
+                landlevel: "2", //级别 1代基地；2代表圈舍、地块
+                floorarea: "", //占地面积(m2) 基地的占地面积及圈舍、地块的面积
+                remarks: "", //简介/备注
+                pathname: ""
+            };
+        });
+    });
+</script>
 
 </html>
