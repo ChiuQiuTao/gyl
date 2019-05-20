@@ -272,7 +272,7 @@ var menudata = [{
                 type: "4"
             },
             {
-                url: "../vertical/Splanting/enterssellssaves/inputsunqualified.html",
+                url: "../vertical/Splanting/enterssellssaves/productunqualified.html",
                 title: "农产品不合格处理",
                 type: "4"
             },

@@ -2,54 +2,55 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>原辅料库存</title>
-    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css" />
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css" />
+    <link rel="stylesheet" href="../../../../css/twocss/commit.css" />
 </head>
 
 <body>
     <form class="layui-form" action="">
-
         <div class="select common">
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label" style="width:95px;">原辅料名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input  accessories">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery   Rawquery">查询</div>
-                    <div class="layui-bg-green comquery  reset">重置</div>
-                </div>
+                        <label class="layui-form-label" style="width:95px;">原辅料名称:</label
+              >
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input  accessories" />
+              </div>
             </div>
-        </div>
+          </div>
 
+          <div class="select-btn">
+            <div class="layui-bg-green comquery   Rawquery">查询</div>
+            <div class="layui-bg-green comquery  reset">重置</div>
+          </div>
+        </div>
+      </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testinventory" lay-filter="testdome"></table>
+      <table
+        class="layui-hide"
+        id="testinventory"
+        lay-filter="testdome"
+      ></table>
     </div>
-</body>
+  </body>
 
-<!-- 里面的查看 -->
-<script type="text/html" id="More">
+  <!-- 里面的查看 -->
+  <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-</script>
+  </script>
 
-
-<!-- 查看的内容 -->
-<script type="text/html" id="contentquery">
+  <!-- 查看的内容 -->
+  <script type="text/html" id="contentquery">
     <div class="select common">
 
         <div class="select-title" style="border-bottom:0px;background-color: #f3f3f3;">
@@ -60,397 +61,395 @@
 
             <li>
                 <label>原辅料名称:</label>
-                <p>{{$value.productname}}</p>
-            </li>
-            <li>
-                <label>批次:</label>
-                <p>{{$value.batch}}</p>
-            </li>
-            <li>
-                <label>库存重量:</label> {{if $value.stocknum!= ""}}
-                <p>{{$value.stocknum}}/KG</p>
-                {{else}}
-                <p></p>
-                {{/if}}
-            </li>
-            <li>
-                <label>末次入库数:</label> {{if $value.endinputnum!= ""}}
-                <p>{{$value.endinputnum}}/KG</p>
-                {{else}}
-                <p></p>
-                {{/if}}
-            </li>
-            <li>
-                <label>末次入库时间:</label>
-                <p>{{$value.endinputdate}}</p>
-            </li>
-            <li>
-                <label>末次出库数:</label> {{if $value.endoutputnum!= ""}}
-                <p>{{$value.endoutputnum}}/KG</p>
-                {{else}}
-                <p></p>
-                {{/if}}
-            </li>
-            <li>
-                <label>末次出库时间:</label>
-                <p>{{$value.endoutputdate}}</p>
-            </li>
-            <li>
-                <label></label>
-                <p class="empty-h"></p>
-            </li>
+                        <p>{{$value.productname}}</p>
+                        </li>
+                        <li>
+                            <label>批次:</label>
+                            <p>{{$value.batch}}</p>
+                        </li>
+                        <li>
+                            <label>库存重量:</label> {{if $value.stocknum!= ""}}
+                            <p>{{$value.stocknum}}/KG</p>
+                            {{else}}
+                            <p></p>
+                            {{/if}}
+                        </li>
+                        <li>
+                            <label>末次入库数:</label> {{if $value.endinputnum!= ""}}
+                            <p>{{$value.endinputnum}}/KG</p>
+                            {{else}}
+                            <p></p>
+                            {{/if}}
+                        </li>
+                        <li>
+                            <label>末次入库时间:</label>
+                            <p>{{$value.endinputdate}}</p>
+                        </li>
+                        <li>
+                            <label>末次出库数:</label> {{if $value.endoutputnum!= ""}}
+                            <p>{{$value.endoutputnum}}/KG</p>
+                            {{else}}
+                            <p></p>
+                            {{/if}}
+                        </li>
+                        <li>
+                            <label>末次出库时间:</label>
+                            <p>{{$value.endoutputdate}}</p>
+                        </li>
+                        <li>
+                            <label></label>
+                            <p class="empty-h"></p>
+                        </li>
 
-        </ul>
-        <div style="padding:10px  0  0 10px;"></div>
-        <table class="layui-table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th style="text-align: center;">仓库名称</th>
-                    <th style="text-align: center;">二级仓库名称</th>
-                    <th style="text-align: center;">重量</th>
-                    <th style="text-align: center;">生产日期</th>
-                    <th style="text-align: center;">保质期</th>
-                    <th style="text-align: center;">有效期至</th>
-                    <th style="text-align: center;">状态</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="text-align: center;">{{$index}}</td>
-                    <td style="text-align: center;">{{$value.storagename}}</td>
-                    <td style="text-align: center;">{{$value.areaname}}</td>
-                    <td style="text-align: center;">{{$value.weight}}/kg</td>
-                    <td style="text-align: center;">{{$value.factorydate}}</td>
-                    <td style="text-align: center;">{{$value.lifedate}}{{$value.lifedateunit}}</td>
-                    <td style="text-align: center;">{{$value.effective}}</td>
-                    <td style="text-align: center;">{{$value.stats}}</td>
-                </tr>
-            </tbody>
-        </table>
-        {{/each}}
-    </div>
+                        </ul>
+                        <div style="padding:10px  0  0 10px;"></div>
+                        <table class="layui-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="text-align: center;">仓库名称</th>
+                                    <th style="text-align: center;">二级仓库名称</th>
+                                    <th style="text-align: center;">重量</th>
+                                    <th style="text-align: center;">生产日期</th>
+                                    <th style="text-align: center;">保质期</th>
+                                    <th style="text-align: center;">有效期至</th>
+                                    <th style="text-align: center;">状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;">{{$index}}</td>
+                                    <td style="text-align: center;">{{$value.storagename}}</td>
+                                    <td style="text-align: center;">{{$value.areaname}}</td>
+                                    <td style="text-align: center;">{{$value.weight}}/kg</td>
+                                    <td style="text-align: center;">{{$value.factorydate}}</td>
+                                    <td style="text-align: center;">{{$value.lifedate}}{{$value.lifedateunit}}</td>
+                                    <td style="text-align: center;">{{$value.effective}}</td>
+                                    <td style="text-align: center;">{{$value.stats}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {{/each}}
+                    </div>
+                    </script>
 
-</script>
+                    <script src="../../../../js/common/jquery.min.js"></script>
+                    <script src="../../../../js/common/api.js"></script>
+                    <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+                    <script src="../../../../js/common/template-web.js"></script>
+                    <script>
+                        layui.use(["table", "laydate", "util"], function() {
+                            var $ = layui.jquery,
+                                util = layui.util,
+                                laydate = layui.laydate,
+                                table = layui.table;
 
+                            //监听表格里面按钮
+                            table.on("tool(testdome)", function(obj) {
+                                var data = obj.data; //获得当前行数据
+                                var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+                                if (layEvent === "detail") {
+                                    //查看
 
-<script src="../../../../js/common/jquery.min.js"></script>
-<script src="../../../../js/common/api.js"></script>
-<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/common/template-web.js"></script>
-<script>
-    layui.use(['table', "laydate", "util"], function() {
-        var $ = layui.jquery,
-            util = layui.util,
-            laydate = layui.laydate,
-            table = layui.table;
+                                    Toview(data.id);
+                                }
+                            });
 
+                            /*查看*/
+                            function Toview(vv) {
+                                layer.open({
+                                    type: 1,
+                                    title: "查看",
+                                    shadeClose: true, //是否点击遮罩关闭
+                                    anim: 5, //弹出动画
+                                    scrollbar: false, //窗口外滚动条是否出现
+                                    skin: "layui-layer-rim", //加上边框
+                                    area: ["900px", "440px"], //宽高
+                                    content: '<div class="ssss"></div>',
+                                    success: function(layero, index) {
+                                        noAjax(
+                                                "ordPurchase/getPurchaseInventoryOne", {
+                                                    id: vv
+                                                },
+                                                "GET"
+                                            )
+                                            .done(function(resp) {
+                                                $.each(resp.list, function(index, item) {
+                                                    if (item.endinputdate == null || item.endinputdate == "") {
+                                                        item.endinputdate = "";
+                                                    } else {
+                                                        item.endinputdate = times(item.endinputdate);
+                                                    }
 
-        //监听表格里面按钮
-        table.on('tool(testdome)', function(obj) {
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            if (layEvent === 'detail') { //查看
+                                                    if (item.endoutputdate == null || item.endoutputdate == "") {
+                                                        item.endoutputdate = "";
+                                                    } else {
+                                                        item.endoutputdate = times(item.endoutputdate);
+                                                    }
 
-                Toview(data.id);
-            }
-        });
+                                                    if (item.factorydate == null || item.factorydate == "") {
+                                                        item.factorydate = "";
+                                                    } else {
+                                                        item.factorydate = times(item.factorydate);
+                                                    }
 
+                                                    if (item.endinputnum == null || item.endinputnum == "") {
+                                                        item.endinputnum = "";
+                                                    } else {
+                                                        item.endinputnum = Number(item.endinputnum).toFixed(2);
+                                                    }
 
-        /*查看*/
-        function Toview(vv) {
-            layer.open({
-                type: 1,
-                title: "查看",
-                shadeClose: true, //是否点击遮罩关闭
-                anim: 5, //弹出动画
-                scrollbar: false, //窗口外滚动条是否出现
-                skin: 'layui-layer-rim', //加上边框
-                area: ['900px', '440px'], //宽高
-                content: '<div class="ssss"></div>',
-                success: function(layero, index) {
+                                                    if (item.endoutputnum == null || item.endoutputnum == "") {
+                                                        item.endoutputnum = "";
+                                                    } else {
+                                                        item.endoutputnum = Number(item.endoutputnum).toFixed(2);
+                                                    }
 
-                    noAjax('ordPurchase/getPurchaseInventoryOne', {
-                        id: vv
-                    }, "GET").done(function(resp) {
+                                                    if (item.weight == null || item.weight == "") {
+                                                        item.weight = "";
+                                                    } else {
+                                                        item.weight = Number(item.weight).toFixed(2);
+                                                    }
 
+                                                    if (item.lifedateunit == null || item.lifedateunit == "") {
+                                                        item.stats = "";
+                                                        item.effective = "";
+                                                    } else if (item.lifedateunit == "天") {
+                                                        /*当前时间*/
+                                                        var newDay = new Date().getTime();
+                                                        var oldday = new Date(item.factorydate).getTime();
+                                                        var da = item.lifedate * 24 * 60 * 60 * 1000 + oldday;
+                                                        var nid = newDay - oldday;
+                                                        da = new Date(da);
+                                                        nid = new Date(nid);
+                                                        var year = da.getFullYear();
+                                                        var month = da.getMonth() + 1;
+                                                        var date = da.getDate();
+                                                        if (item.lifedate - nid.getDate() >= 0) {
+                                                            item.stats =
+                                                                "有效期还有" + (item.lifedate - nid.getDate()) + "天";
+                                                        } else {
+                                                            item.stats =
+                                                                "已超过效期" + (nid.getDate() - item.lifedate) + "天";
+                                                        }
 
-                        $.each(resp.list, function(index, item) {
-                            if (item.endinputdate == null || item.endinputdate == "") {
-                                item.endinputdate = "";
-                            } else {
-                                item.endinputdate = times(item.endinputdate);
+                                                        item.effective = [year, month, date].join("-");
+                                                        return;
+                                                    } else if (item.lifedateunit == "月") {
+                                                        var nus = item.factorydate.split("-");
+                                                        var sss = Number(nus[1]) + Number(item.lifedate);
+                                                        var nian = parseInt(sss / 12);
+                                                        var yue = sss % 12;
+                                                        nus[0] = Number(nus[0]) + nian;
+                                                        nus[1] = yue;
+                                                        var ste = nus.join("-");
+                                                        item.effective = ste;
+                                                        var newyue = new Date().getTime();
+                                                        var oldyue = new Date(ste).getTime();
+                                                        if (oldyue - newyue > 0) {
+                                                            var nday = oldyue - newyue;
+                                                            item.stats =
+                                                                "有效期还有" + parseInt(nday / 86400 / 1000) + "天";
+                                                        } else {
+                                                            var ndays = -(oldyue - newyue);
+                                                            item.stats =
+                                                                "已超过效期" + parseInt(ndays / 86400 / 1000) + "天";
+                                                        }
+                                                    } else if (item.lifedateunit == "年") {
+                                                        var nuse = item.factorydate.split("-");
+                                                        nuse[0] = Number(nuse[0]) + Number(item.lifedate);
+                                                        var stes = nuse.join("-");
+                                                        item.effective = stes;
+                                                        var newnian = new Date().getTime();
+                                                        var oldnian = new Date(stes).getTime();
+                                                        var dae = oldnian - newnian;
+                                                        if (dae > 0) {
+                                                            item.stats =
+                                                                "有效期还有" + parseInt(dae / 86400 / 1000) + "天";
+                                                        } else {
+                                                            dae = -dae;
+                                                            item.stats =
+                                                                "已超过效期" + parseInt(dae / 86400 / 1000) + "天";
+                                                        }
+                                                    }
+                                                });
+
+                                                console.log(resp);
+                                                var html = template("contentquery", resp);
+                                                $(".ssss").html(html);
+                                            })
+                                            .fail(function(err) {
+                                                console.log(err);
+                                            });
+                                    }
+                                });
                             }
 
-                            if (item.endoutputdate == null || item.endoutputdate == "") {
-                                item.endoutputdate = "";
-                            } else {
-                                item.endoutputdate = times(item.endoutputdate);
+                            function times(t) {
+                                return (t = t.split("T")[0]);
                             }
 
+                            var tableIns = table.render({
+                                elem: "#testinventory",
+                                url: base + "ordPurchase/getPurchaseInventory",
+                                method: "GET",
+                                where: {},
+                                headers: {
+                                    Authorization: "Bearer" + " " + sessions
+                                },
+                                request: {
+                                    pageName: "currentPage",
+                                    limitName: "pageSize"
+                                },
 
-                            if (item.factorydate == null || item.factorydate == "") {
-                                item.factorydate = "";
-                            } else {
-                                item.factorydate = times(item.factorydate);
-                            }
+                                limits: [10, 20],
+                                parseData: function(res) {
+                                    //res 即为原始返回的数据
+                                    console.log(res);
+                                    return {
+                                        code: res.code, //解析接口状态
+                                        msg: res.message, //解析提示文本
+                                        totalNum: res.pageBean.totalNum, //解析数据长度
+                                        lists: res.pageBean.lists //解析数据列表
+                                    };
+                                },
+                                response: {
+                                    statusName: "code", //数据状态的字段名称，默认：code
+                                    statusCode: 10000, //成功的状态码，默认：0
+                                    msgName: "message", //状态信息的字段名称，默认：msg
+                                    countName: "totalNum", //数据总数的字段名称，默认：count
+                                    dataName: "lists" //数据列表的字段名称，默认：data
+                                },
 
-                            if (item.endinputnum == null || item.endinputnum == "") {
-                                item.endinputnum = "";
-                            } else {
-                                item.endinputnum = Number(item.endinputnum).toFixed(2);
-                            }
+                                cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                                page: {
+                                    //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                                    layout: ["prev", "page", "next", "skip", "count"], //自定义分页布局
+                                    //,curr: 5 //设定初始在第 5 页
+                                    groups: 5, //只显示 1 个连续页码
+                                    first: true, //不显示首页
+                                    last: true, //不显示尾页
+                                    prev: "上一页",
+                                    next: "下一页",
+                                    theme: "#c81623"
+                                },
+                                // height: 'full-20',//满高
+                                cols: [
+                                    [{
+                                        title: "编号",
+                                        type: "numbers",
+                                        fixed: "left"
+                                    }, {
+                                        field: "productname",
+                                        title: "原辅料名称",
+                                        fixed: "left",
+                                        minWidth: 110,
+                                        align: "center"
+                                    }, {
+                                        field: "stocknum",
+                                        title: "库存重量(KG)",
+                                        minWidth: 80,
+                                        align: "center"
+                                    }, {
+                                        field: "endinputnum",
+                                        title: "末次采购重量(KG)",
+                                        minWidth: 180,
+                                        sort: true,
+                                        align: "center"
+                                    }, {
+                                        field: "endinputdate",
+                                        title: "末次采购日期",
+                                        minWidth: 120,
+                                        sort: true,
+                                        align: "center",
 
-                            if (item.endoutputnum == null || item.endoutputnum == "") {
-                                item.endoutputnum = "";
-                            } else {
-                                item.endoutputnum = Number(item.endoutputnum).toFixed(2);
-                            }
+                                        templet: function(d) {
+                                            var numv = null;
+                                            if (d.endinputdate == "" || d.endinputdate == null) {
+                                                numv = " ";
+                                            } else {
+                                                numv = d.endinputdate = layui.util.toDateString(
+                                                    d.endinputdate,
+                                                    "yyyy-MM-dd"
+                                                );
+                                            }
+                                            return numv;
+                                        }
+                                    }, {
+                                        field: "endoutputnum",
+                                        title: "末次使用重量(kG)",
+                                        minWidth: 180,
+                                        sort: true,
+                                        align: "center"
+                                    }, {
+                                        field: "endoutputdate",
+                                        title: "末次使用日期",
+                                        minWidth: 130,
+                                        sort: true,
+                                        align: "center",
+                                        templet: function(d) {
+                                            var numv = null;
+                                            if (d.endoutputdate == "" || d.endoutputdate == null) {
+                                                numv = " ";
+                                            } else {
+                                                numv = d.endoutputdate = layui.util.toDateString(
+                                                    d.endoutputdate,
+                                                    "yyyy-MM-dd"
+                                                );
+                                            }
+                                            return numv;
+                                        }
+                                    }, {
+                                        field: "wealth",
+                                        width: 137,
+                                        title: "更多",
+                                        minWidth: 20,
+                                        align: "center",
+                                        fixed: "right",
+                                        toolbar: "#More"
+                                    }]
+                                ]
+                            });
 
-                            if (item.weight == null || item.weight == "") {
-                                item.weight = "";
-                            } else {
-                                item.weight = Number(item.weight).toFixed(2);
-                            }
-
-
-                            if (item.lifedateunit == null || item.lifedateunit == "") {
-                                item.stats = "";
-                                item.effective = "";
-                            } else if (item.lifedateunit == "天") {
-                                /*当前时间*/
-                                var newDay = new Date().getTime();
-                                var oldday = new Date(item.factorydate).getTime();
-                                var da = item.lifedate * 24 * 60 * 60 * 1000 + oldday;
-                                var nid = newDay - oldday;
-                                da = new Date(da);  
-                                nid = new Date(nid);  
-                                var year = da.getFullYear();  
-                                var month = da.getMonth() + 1;  
-                                var date = da.getDate();  
-
-                                if (item.lifedate - nid.getDate() >= 0) {
-
-                                    item.stats = "有效期还有" + (item.lifedate - nid.getDate()) + "天";
-                                } else {
-                                    item.stats = "已超过效期" + (nid.getDate() - item.lifedate) + "天";
+                            /*查询*/
+                            $(".Rawquery").click(function() {
+                                if ($(".accessories").val() == "") {
+                                    layer.msg("请输入查询条件！", {
+                                        time: 1000,
+                                        offset: "t"
+                                    });
+                                    return;
                                 }
 
-                                item.effective = [year, month, date].join('-');
-                                return
-                            } else if (item.lifedateunit == "月") {
-                                var nus = item.factorydate.split("-");
-                                var sss = Number(nus[1]) + Number(item.lifedate);
-                                var nian = parseInt(sss / 12);
-                                var yue = sss % 12;
-                                nus[0] = Number(nus[0]) + nian;
-                                nus[1] = yue;
-                                var ste = nus.join("-");
-                                item.effective = ste;
-                                var newyue = new Date().getTime();
-                                var oldyue = new Date(ste).getTime();
-                                if (oldyue - newyue > 0) {
-                                    var nday = oldyue - newyue;
-                                    item.stats = "有效期还有" + parseInt(nday / 86400 / 1000) + "天";
-                                } else {
-                                    var ndays = -(oldyue - newyue);
-                                    item.stats = "已超过效期" + parseInt(ndays / 86400 / 1000) + "天";
-                                }
+                                var datelist = {
+                                    productname: $(".accessories").val()
+                                };
 
+                                tableIns.reload({
+                                    where: datelist,
+                                    request: {
+                                        pageName: "currentPage", //页码的参数名称，默认：page
+                                        limitName: "pageSize" //每页数据量的参数名，默认：limit
+                                    },
+                                    page: {
+                                        curr: 1, //重新从第 1 页开始
+                                        layout: ["prev", "page", "next", "skip", "count"]
+                                    }
+                                });
+                            });
 
-                            } else if (item.lifedateunit == "年") {
-
-                                var nuse = item.factorydate.split("-");
-                                nuse[0] = Number(nuse[0]) + Number(item.lifedate);
-                                var stes = nuse.join("-");
-                                item.effective = stes;
-                                var newnian = new Date().getTime();
-                                var oldnian = new Date(stes).getTime();
-                                var dae = oldnian - newnian;
-                                if (dae > 0) {
-                                    item.stats = "有效期还有" + parseInt(dae / 86400 / 1000) + "天";
-                                } else {
-                                    dae = -(dae);
-                                    item.stats = "已超过效期" + parseInt(dae / 86400 / 1000) + "天";
-                                }
-                            }
-
+                            /*重置*/
+                            $(".reset").click(function() {
+                                $(".accessories").val("");
+                                tableIns.reload({
+                                    where: {},
+                                    page: {
+                                        curr: 1, //重新从第 1 页开始
+                                        layout: ["prev", "page", "next", "skip", "count"]
+                                    }
+                                });
+                            });
                         });
-
-                        console.log(resp)
-                        var html = template("contentquery", resp);
-                        $(".ssss").html(html);
-
-                    }).fail(function(err) {
-                        console.log(err)
-                    });
-                }
-            });
-
-        }
-
-        function times(t) {
-            return t = t.split("T")[0];
-        }
-
-
-        var tableIns = table.render({
-            elem: '#testinventory',
-            url: base + "ordPurchase/getPurchaseInventory",
-            method: "GET",
-            where: {},
-            headers: {
-                Authorization: "Bearer" + " " + sessions
-            },
-            request: {
-                pageName: 'currentPage',
-                limitName: 'pageSize'
-            },
-
-            limits: [10, 20],
-            parseData: function(res) { //res 即为原始返回的数据
-                console.log(res)
-                return {
-                    "code": res.code, //解析接口状态
-                    "msg": res.message, //解析提示文本
-                    "totalNum": res.pageBean.totalNum, //解析数据长度
-                    "lists": res.pageBean.lists //解析数据列表
-                };
-            },
-            response: {
-                statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 10000, //成功的状态码，默认：0
-                msgName: "message", //状态信息的字段名称，默认：msg
-                countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'lists', //数据列表的字段名称，默认：data
-            },
-
-            cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                ,
-            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['prev', 'page', 'next', 'skip', 'count'] //自定义分页布局
-                    //,curr: 5 //设定初始在第 5 页
-                    ,
-                groups: 5 //只显示 1 个连续页码
-                    ,
-                first: true //不显示首页
-                    ,
-                last: true //不显示尾页
-                    ,
-                prev: "上一页",
-                next: "下一页",
-                theme: "#c81623",
-            },
-            // height: 'full-20',//满高
-            cols: [
-                [{
-                    title: '编号',
-                    type: 'numbers',
-                    fixed: 'left'
-                }, {
-                    field: 'productname',
-                    title: '原辅料名称',
-                    fixed: 'left',
-                    minWidth: 110,
-                    align: "center",
-                }, {
-                    field: 'stocknum',
-                    title: '库存重量(KG)',
-                    minWidth: 80,
-                    align: "center",
-                }, {
-                    field: 'endinputnum',
-                    title: '末次采购重量(KG)',
-                    minWidth: 180,
-                    sort: true,
-                    align: "center",
-                }, {
-                    field: 'endinputdate',
-                    title: '末次采购日期',
-                    minWidth: 120,
-                    sort: true,
-                    align: "center",
-                    templet: "<div>{{layui.util.toDateString(d.endinputdate, 'yyyy-MM-dd')}}</div>"
-                }, {
-                    field: 'endoutputnum',
-                    title: '末次使用重量(kG)',
-                    minWidth: 180,
-                    sort: true,
-                    align: "center",
-                }, {
-                    field: 'endoutputdate',
-                    title: '末次使用日期',
-                    minWidth: 130,
-                    sort: true,
-                    align: "center",
-                    templet: function(d) {
-                        var numv = null;
-                        if (d.endoutputdate == "" || d.endoutputdate == null) {
-                            numv = " ";
-                        } else {
-                            numv = d.endoutputdate = layui.util.toDateString(d.endoutputdate, 'yyyy-MM-dd');
-                        }
-                        return numv
-                    },
-                }, {
-                    field: 'wealth',
-                    width: 137,
-                    title: '更多',
-                    minWidth: 20,
-                    align: "center",
-                    fixed: 'right',
-                    toolbar: '#More',
-                }]
-            ]
-        });
-
-
-
-        /*查询*/
-        $(".Rawquery").click(function() {
-            if ($(".accessories").val() == "") {
-                layer.msg('请输入查询条件！', {
-                    time: 1000,
-                    offset: 't',
-                });
-                return
-            }
-
-            var datelist = {
-                productname: $(".accessories").val()
-
-            }
-
-            tableIns.reload({
-                where: datelist,
-                request: {
-                    pageName: 'currentPage' //页码的参数名称，默认：page
-                        ,
-                    limitName: 'pageSize' //每页数据量的参数名，默认：limit
-                },
-                page: {
-                    curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-        })
-
-
-        /*重置*/
-        $(".reset").click(function() {
-
-            $(".accessories").val("");
-            tableIns.reload({
-                where: {},
-                page: {
-                    curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-        })
-
-
-    })
-</script>
+                    </script>
 
 </html>

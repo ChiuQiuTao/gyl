@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>新增农产品销售</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/H/processing.css">
+</head>
+
+<body>
+    <div class="select common">
+        <form class="layui-form" action="">
+            <div class="select-title" style="height:40px;line-height:40px;">
+                基本信息
+            </div>
+
+            <div class="basis-h">
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">销售日期:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="temis">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">客户类型:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="wareh" class="Suppliertype">
+                                    <option value="">---请选择---</option>
+                                    <option value="企业客户">企业客户</option>
+                                    <option value="个人客户">个人客户</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mess-pronew">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">负责人:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="heads" class="headpeople">
+                                    <option value="">---请选择---</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">客户名称:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="Level2" class="Level2warehouse">
+                                    <option value="">---请选择---</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="select-title"
+                style="height:30px;line-height:30px;margin-top: 10px;border-bottom-color:#c9c9c9;">
+                销售产品
+            </div>
+            <div class="ingredients-newp">
+                <div class="layui-btn  layui-btn-sm  Newpurchaseorder" style="margin:10px;">
+                    <i class="layui-icon">&#xe608;</i> 添加
+                </div>
+
+
+                <table class="layui-table" style="margin: 0;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>产品名称</th>
+                            <th>仓库名称</th>
+                            <th>二级仓库名称</th>
+                            <th>生产批次</th>
+                            <th>库存数量</th>
+                            <th>销售数量</th>
+                            <th>销售单元（元）</th>
+                            <th>金额（元）</th>
+                            <th>单位</th>
+                        </tr>
+                    </thead>
+                    <tbody class="Procurementofproducts">
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </form>
+        <div class="layui-btn-group" style="width: 100%;display: flex;justify-content: center;margin-top: 10px;">
+            <button class="layui-btn  saves"><i class="layui-icon">&#xe674;</i>保存</button>
+            <button class="layui-btn huifan"><i class="layui-icon">&#xe65c;</i>返回</button>
+        </div>
+    </div>
+
+
+</body>
+
+<!-- 销售产品 -->
+<script type="text/html" id="contentquery">
+    <div class="select common ">
+        <ul class="basis-h" style="flex-wrap: nowrap;">
+
+            <li>
+                <label style="width:60px;">产品名称:</label>
+                <p>
+                    <input type="text" class="batchstime" style="padding-left: 6px;">
+                </p>
+            </li>
+
+            <li>
+                <label style="width:60px;">仓库名称:</label>
+                <p>
+                    <select class="warehousename">
+                                <option value="">---请选择---</option>
+                                
+                            </select>
+                </p>
+            </li>
+            <li>
+                <label style="width:90px;">二级仓库名称:</label>
+                <p>
+                    <select class="warehousename2">
+                                <option value="">---请选择---</option>
+                               
+                            </select>
+                </p>
+            </li>
+
+
+            <li class="names">
+                <p class="empty-h">
+                    <button type="button" class="layui-btn  layui-btn-sm  determine">
+                                           查询
+                            </button>
+                    <button type="button" class="layui-btn  layui-btn-sm  cancels">
+                                           重置
+                            </button>
+                </p>
+            </li>
+
+        </ul>
+    </div>
+
+    <!-- 选择销售产品 -->
+    <div class="Sellingproducts"></div>
+
+    <!-- 按钮 -->
+    <div class="salesbtn">
+        <button type="button" class="layui-btn  layui-btn-sm  saledetermine" style="width:80px;">
+                     确定
+     </button>
+        <button type="button" class="layui-btn  layui-btn-sm  salecancel" style="width:80px;">
+                    取消
+     </button>
+    </div>
+</script>
+
+
+
+<!-- 选择销售产品 -->
+<script type="text/html" id="ingredientsdemo">
+    <table class="layui-table   Selectsales" style="margin: 0;">
+        <thead>
+            <tr>
+                <th></th>
+                <th><input type="checkbox" class="choosd" onclick="dsdsf(this)"></th>
+                <th style="width: 70px;">产品名称</th>
+                <th style="width: 70px;">仓库名称</th>
+                <th>二级仓库名称</th>
+                <th>生产批次</th>
+                <th>库存数量</th>
+                <th>销售数量</th>
+                <th>单价(元)</th>
+                <th>单位</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each list}}
+            <tr>
+                <td style="text-align: center;">{{$index}}</td>
+                <td style="display:none;" class="idun">{{$value.id}}</td>
+                <td><input type="checkbox" class="choosecheck"></td>
+                <td>{{$value.productname}}</td>
+                <td>{{$value.storagename}}</td>
+                <td style="width:130px;">{{$value.areaname}}</td>
+                <td>{{$value.batch}}</td>
+                {{set temp = $value.stocknum}}
+                <td class="numd" style="width:100px;text-align: center;">{{ temp}}</td>
+                <td class="numbers"> <input type="text" class="layui-input "></td>
+                <td class="unitprice"> <input type="text" class="layui-input "></td>
+                <td>{{$value.unit}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+
+
+
+<!-- 展示销售产品||/子 -->
+<script type="text/html" id="Salessubproject">
+    {{each result}}
+    <tr>
+        <td style="text-align: center;">{{$index}}</td>
+        <td style="text-align: center;">{{$value.productname}}</td>
+        <td style="text-align: center;">{{$value.storage}}</td>
+        <td style="text-align: center;">{{$value.area}}</td>
+        <td style="text-align: center;">{{$value.batch}}</td>
+        <td style="text-align: center;">{{$value.stocknum}}</td>
+        <td style="text-align: center;">{{$value.num}}</td>
+        <td style="text-align: center;">{{$value.price}}</td>
+        <td style="text-align: center;">{{$value.num*$value.price}}</td>
+        <td style="text-align: center;">{{$value.unit}}</td>
+    </tr>
+    {{/each}}
+
+</script>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+
+</html>
+<script>
+    layui.use(['table', "layer", "form", "laydate", "util", "upload"], function () {
+        var $ = layui.jquery,
+            table = layui.table,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            form = layui.form,
+            util = layui.util,
+            projectobj = {},
+            upload = layui.upload,
+            datss = null,
+            listss = null;
+
+        //时间选择    
+        laydate.render({
+            elem: '#temis',
+            show: true,
+            done: function (value) {
+                var batch = value
+                projectobj.orderdate = batch + " " + "00:00:00";
+                // console.log(projectobj)
+            }
+        });
+
+
+        //客户类型||客户名称添加
+        form.on('select(wareh)', function (data) {
+            $('.Level2warehouse').children().remove();
+            $('.Level2warehouse').append(new Option("---请选择---", ""));
+            // console.log(data)
+
+            if (data.value == "企业客户") {
+                projectobj.customertype = "1";
+            }
+            if (data.value == "个人客户") {
+                projectobj.customertype = "2";
+            }
+
+            handleAjax("ordSale/getCustomerPerson", {
+                customer: data.value
+            }, "GET").done(function (resp) {
+                // console.log(resp.list)
+
+                $.each(resp.list, function (index, item) {
+                    $('.Level2warehouse').append(new Option(item.name, item.id)); // 下拉菜单里添加元素
+                });
+
+                layui.form.render("select");
+                return
+            }).fail(function (err) {
+                console.log(err)
+            });
+            return
+        })
+
+
+        //供应商名称获取
+        form.on('select(Level2)', function (data) {
+            projectobj.customername = $(".Level2warehouse").find("option:selected").text();
+            projectobj.customerid = data.value;
+            return
+        })
+
+
+        //负责人添加
+        noAjax('user/getUser', {}, "GET").done(function (resp) {
+            // console.log(resp)
+            $('.headpeople').append(new Option(resp.realName, resp.realName)); // 下拉菜单里添加元素
+            layui.form.render("select");
+        }).fail(function (err) {
+            console.log(err)
+        });
+
+
+        //负责人的获取
+        form.on('select(heads)', function (data) {
+            projectobj.person = data.value;
+            // console.log(projectobj)
+            return
+        })
+
+
+
+        //新增销售产品
+        $(".Newpurchaseorder").click(function () {
+            layer.open({
+                type: 1,
+                title: "销售产品",
+                shadeClose: true, //是否点击遮罩关闭
+                anim: 5, //弹出动画
+                scrollbar: false, //窗口外滚动条是否出现
+                skin: 'layui-layer-rim', //加上边框
+                area: ['990px', '500px'], //宽高
+                content: '<div  class="ssss">dfd</div>',
+                success: function (layero, index) {
+                    var html = template("contentquery");
+                    $(".ssss").html(html);
+
+                    //采购单时间选择
+                    laydate.render({
+                        elem: '#test1',
+                        done: function (value) {
+                            console.log(value);
+                            var batch = value;
+                            batch = batch.split("-");
+                            batch = batch.join("");
+                            console.log(batch)
+                            // projectobj.orderdate = batch + " " + "00:00:00";
+                            $(".batchstime").val(batch);
+                        }
+                    });
+
+                    // 销售产品
+                    add();
+                }
+            });
+        })
+
+
+        //销售产品
+        function add() {
+
+            /*仓库名称*/
+            var datawarehouse = [];
+            cycles();
+
+
+
+            //弹框的查询
+            $(".determine").click(function () {
+                if ($(".batchstime").val() == "" && $(".warehousename").val() == "" && $(".warehousename2").val() == "") {
+                    layer.msg('请输入查询条件！', {
+                        time: 1000,
+                    });
+                    return
+                }
+
+                var namessta = $(".warehousename").find("option:selected").text();
+                var namearea = $(".warehousename2").find("option:selected").text();
+                if (namessta == "---请选择---") {
+                    namessta = null;
+                }
+                if (namearea == "---请选择---") {
+                    namearea = null;
+                }
+
+                handleAjax('ordSale/getSaleListVo', {
+                    productname: $(".batchstime").val(),
+                    storagename: namessta,
+                    areaname: namearea
+                }, "GET").done(function (resp) {
+                    // console.log(resp)
+                    listss = resp.list;
+                    var htmls = template("ingredientsdemo", resp);
+                    $(".Sellingproducts").html(htmls);
+
+                    $.each($(".numd"), function (index, item) {
+                        $(this).text($(item).text().substr(0, $(item).text().indexOf(".") + 3))
+                    })
+
+                    /*库存数量||销售数量//的规则*/
+                    umberrules()
+                }).fail(function (err) {
+                    console.log(err)
+                });
+
+            })
+
+
+            /*重置*/
+            $(".cancels").click(function () {
+                $(".batchstime").val("");
+                //仓库名称
+                cycles();
+            });
+
+            function cycles() {
+                $('.warehousename').children().remove();
+                $('.warehousename').append(new Option("---请选择---", ""));
+                //二级仓库清空
+                $('.warehousename2').children().remove();
+                $('.warehousename2').append(new Option("---请选择---", ""));
+                handleAjax('OrdProcessing/getBasStorage', {}, "GET").done(function (resp) {
+                    // console.log(resp)
+                    datawarehouse = resp.list;
+                    $('.warehousename').children().remove();
+                    $('.warehousename').append(new Option("---请选择---", ""));
+                    $.each(resp.list, function (index, item) {
+                        $('.warehousename').append(new Option(item.storagename, item.id));
+                    });
+                    layui.form.render("select");
+                    return;
+                }).fail(function (err) {
+                    console.log(err)
+                });
+
+
+                /*二级仓库名称*/
+                $(".warehousename").change(function () {
+                    $('.warehousename2').children().remove();
+                    $('.warehousename2').append(new Option("---请选择---", ""));
+                    var ids = $(this)[0].value;
+                    // console.log(ids)
+                    //仓库id
+
+                    // projectobj.storageid = ids;
+                    // projectobj.storage = $(".warehousename").find("option:selected").text();
+
+                    $.each(datawarehouse, function (index, item) {
+                        if (item.childNodes) {
+                            if (item.id == ids) {
+                                // console.log(item.childNodes);
+                                $.each(item.childNodes, function (index, item) {
+                                    $('.warehousename2').append(new Option(item.storagename, item.id));
+                                });
+                            }
+                        }
+                    });
+                });
+
+
+                /*产品信息*/
+                handleAjax('ordSale/getSaleListVo', {}, "GET").done(function (resp) {
+                    // console.log(resp)
+                    listss = resp.list;
+
+                    console.log(listss)
+                    var htmls = template("ingredientsdemo", resp);
+                    $(".Sellingproducts").html(htmls);
+
+                    $.each($(".numd"), function (index, item) {
+                        $(this).text($(item).text().substr(0, $(item).text().indexOf(".") + 3));
+                    })
+
+                    if (datss != null) {
+                        $.each(datss, function (i, its) {
+                            $.each($(".idun"), function (u, ut) {
+                                if (its.productid == $(ut).text()) {
+                                    $(ut).siblings().children(".choosecheck")[0].checked = true;
+                                    $(ut).siblings(".numbers").children().val(its.num);
+                                    $(ut).siblings(".unitprice").children().val(its.price);
+                                }
+                            })
+                        })
+                    }
+
+                    /*库存数量||销售数量//的规则*/
+                    umberrules()
+                }).fail(function (err) {
+                    console.log(err)
+                });
+            }
+
+
+
+            /*库存数量||销售数量//的规则*/
+            function umberrules() {
+                $(".numbers>input").blur(function () {
+
+                    if (Number($(this).val()) > Number($(this).parent().siblings(".numd").text())) {
+                        layer.msg('库存数量不足！', {
+                            time: 1000,
+                        });
+                        $(this).val("");
+                        return;
+                    }
+
+                    var reg = /^[0-9]\d*\.\d*|0\.\d*[0-9]\d*|^[0-9]\d*$/;
+                    if (!reg.test($(this).val())) {
+                        layer.msg('请正确输入销售数量', {
+                            time: 1000,
+                        });
+                        $(this).val("");
+                        return
+                    }
+                })
+
+                $(".unitprice>input").blur(function () {
+                    var reg = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*|^[1-9]\d*$/;
+                    if (!reg.test($(this).val())) {
+                        layer.msg('请正确输入单价!', {
+                            time: 1000,
+                        });
+                        $(this).val("");
+                        return
+                    }
+                })
+            }
+
+
+            /*确定*/
+            $(".saledetermine").click(function () {
+                var indexnum = true;
+                var listnum = [];
+                $.each($(".choosecheck"), function (index, item) {
+
+                    if ($(this)[0].checked) {
+                        // console.log(index);
+                        indexnum = false;
+                        var uu = $(this).parent().parent().children(".numbers").children().val();
+                        var pri = $(this).parent().parent().children(".unitprice").children().val();
+
+                        if (uu == "") {
+                            layer.msg('输入销售数量', {
+                                time: 1000,
+                            });
+                            return
+                        }
+
+                        if (pri == "") {
+                            layer.msg('输入单价', {
+                                time: 1000,
+                            });
+                            return
+                        }
+
+                        $.each(listss, function (i, it) {
+                            // console.log(it)
+                            if (it.id == $(item).parent().prev().text()) {
+                                it.num = uu;
+                                it.price = pri;
+                            }
+                            if (it.num || it.price) {
+                                // console.log(it)
+                                listnum.push(it);
+                            }
+                        })
+                    }
+                })
+
+                if (indexnum) {
+                    layer.msg('请选择销售产品', {
+                        time: 1000,
+                    });
+                    return
+                }
+
+                /*去重*/
+                var result = [];
+                var obj = {};
+                for (var i = 0; i < listnum.length; i++) {
+                    if (!obj[listnum[i].id]) {
+                        result.push(listnum[i]);
+                        obj[listnum[i].id] = true;
+                    }
+                }
+
+                $.each(result, function (u, us) {
+                    us.productid = us.id;
+                    us.storage = us.storagename;
+                    us.area = us.areaname;
+                    us.stocknum = Number(us.stocknum).toFixed(2);
+                    delete us.id;
+                    delete us.storagename;
+                    delete us.areaname;
+                })
+
+                var lisst = {};
+                lisst.result = result;
+                // console.log(lisst);
+                projectobj.productVos = result;
+                datss = result;
+                var htmldan = template("Salessubproject", lisst);
+                $(".Procurementofproducts").html(htmldan);
+                layer.closeAll();
+
+            })
+
+
+            /*取消*/
+            $(".salecancel").click(function () {
+                layer.closeAll();
+            })
+
+        }
+
+        /*保存*/
+        $(".saves").click(function () {
+            if ($("#temis").val() == "") {
+                layer.msg('请选择销售日期', {
+                    time: 1000,
+                });
+                return
+            }
+            if ($(".headpeople").val() == "") {
+                layer.msg('请选择负责人', {
+                    time: 1000,
+                });
+                return
+            }
+
+            if ($(".Suppliertype").val() == "") {
+                layer.msg('请选择客户类型', {
+                    time: 1000,
+                });
+                return
+            }
+            if ($(".Level2warehouse").val() == "") {
+                layer.msg('请选择客户名称', {
+                    time: 1000,
+                });
+                return
+            }
+            if ($(".Procurementofproducts").children().length < 1) {
+                layer.msg('请添加销售产品', {
+                    time: 1000,
+                });
+                return
+            }
+
+            var parsse = JSON.stringify(projectobj);
+            handleAjax('ordSale/saleProduct', parsse, "POST", "utf-8").done(function (resp) {
+                console.log(resp)
+                layer.msg('操作成功', {
+                    time: 1000,
+                    icon: 1
+                });
+                setTimeout(() => {
+                    window.location.href = "../../sales/productsales.html";
+                }, 1500);
+            }).fail(function (err) {
+                console.log(err)
+            });
+
+        })
+
+        //返回
+        $(".huifan").click(function () {
+            window.location.href = "../../sales/productsales.html";
+        })
+
+    })
+</script>
+
+<script>
+    function dsdsf(tt) {
+
+        /*销售产品||全选择*/
+        if (tt.checked) {
+
+            for (var i = 0; i < document.querySelectorAll(".choosecheck").length > length; i++) {
+                document.querySelectorAll(".choosecheck")[i].checked = true;
+            }
+        } else {
+
+            for (var i = 0; i < document.querySelectorAll(".choosecheck").length > length; i++) {
+                document.querySelectorAll(".choosecheck")[i].checked = false;
+            }
+        }
+
+    }
+
+    // 删除
+    function deley(ee) {
+        ee.parentNode.parentNode.parentNode.removeChild(ee.parentNode.parentNode)
+    }
+</script>
