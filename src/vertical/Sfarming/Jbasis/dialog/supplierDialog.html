@@ -10,14 +10,11 @@
     <link rel="stylesheet" href="../../../../../public/font/iconfont.css">
     <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
 </head>
-
 <body>
-    
-    
     <!-- 企业供应商 -->
     <form class="layui-form" action="">
         <div class="select common">
-            <div class="select-title">企业信息</div>
+            <div class="select-title">供应商信息</div>
             <div class="select-con">
                 <div class="layui-form-item">
                     <div class="layui-inline">
@@ -43,15 +40,15 @@
                             <select name="country" lay-filter="aihao" id='state'>
                                 <option value="0086">中国</option>
                             </select>
-                        
+
                             <select name="province" lay-filter="province" class="province" id='province'>
                                 <option value="">省</option>
                             </select>
-                        
+
                             <select name="city" lay-filter="city" class="city" id='city'>
                                 <option value="">市</option>
                             </select>
-                        
+
                             <select name="area" lay-filter="area" class="area" id='district'>
                                 <option value="">区</option>
                             </select>
@@ -87,22 +84,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <!-- <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">联系人:</label>
                         <div class="layui-input-inline">
                             <input type="text" class="layui-input input-d" placeholder="输入联系人" id='linkman'>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
+                </div> -->
+                <!-- <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">联系电话:</label>
                         <div class="layui-input-inline">
                             <input type="text" class="layui-input input-d" placeholder="输入联系电话" id='phone'>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- <div class="layui-form-item">
                     <div class="layui-inline">
@@ -121,27 +118,29 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="layui-form-item">
+                <!-- <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">企业图片:</label>
                         <div class="layui-input-inline">
-                            <div class="layui-upload" style="display:flex">
+                            <div class="layui-upload" style="display:flex;align-items: center;">
                                 <button type="button" class="layui-btn layui-btn-normal" id="selectImg">选择文件</button>
-                                <!-- <button type="button" class="layui-btn" id="uploadImg">开始上传</button> -->
+                                <div class="layui-upload-list">
+                                    <img class="layui-upload-img" id="showimg" style="width:80px;height:38px;margin-left: 15px;border: 1px solid #fff;">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
+                </div> -->
+                <!-- <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">备注:</label>
                         <div class="layui-input-inline">
                             <input type="text" class="layui-input input-d" placeholder="输入备注" id='remark'>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="layui-form-item">
+                <!-- <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">证照类型:</label>
                         <div class="layui-inline-sel">
@@ -153,21 +152,24 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="select-btn">
                     <div class="layui-bg-green comquery " id="uploadImg">确定</div>
-                    <div class="layui-bg-green comquery ">取消</div>
+                    <div class="layui-bg-green comquery" id="update" style="display:none">确定</div>
+                    <!-- <div class="layui-bg-green comquery" id="updateImg" style="display:none">确定</div> -->
+                    <div class="layui-bg-green comquery cancels">取消</div>
                 </div>
             </div>
         </div>
     </form>
-                
-                    
+
+
 </body>
 
 <script src="../../../../../js/common/jquery.min.js"></script>
 <script src="../../../../../js/common/api.js"></script>
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../../js/common/template-web.js"></script>
-<script src="../../../../../js/two/Jbasis/supplierDialog.js"></script>
+<script src="../../../../../js/two/JbasisY/supplierDialog.js"></script>
+
 </html>

@@ -67,7 +67,6 @@ layui.use(['form','element','table', "layer", "util"], function() {
                     for(var i=0;i<data.length;i++){
                         delBasPersonById(data[i].id);
                     }
-                    // layer.msg('删除成功');
                     setTimeout(function(){
                         getBasPerson();
 

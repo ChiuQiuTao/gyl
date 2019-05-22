@@ -79,14 +79,7 @@
             handleAjax('basic/getBasStandardById', 
             { id: id },
              "GET").done(function(resp) {
-                // document.querySelector('#standardcode').value=resp.list[0].standardcode;
-                // document.querySelector('#standardname').value=resp.list[0].standardname;
-                // document.querySelector('#standardtype').value=resp.list[0].standardtype;
-                // document.querySelector('#standardlevel').value=resp.list[0].standardlevel;
-                // document.querySelector('#implementdate').value=resp.list[0].implementdate;
-                // document.querySelector('#auditdate').value=resp.list[0].auditdate;
-                // document.querySelector('#content').value=resp.list[0].content;
-                // layui.form.render("select");
+               
                 setTimeout(function(){
                     document.querySelector('#standardcode').value=resp.list[0].standardcode;
                     document.querySelector('#standardname').value=resp.list[0].standardname;

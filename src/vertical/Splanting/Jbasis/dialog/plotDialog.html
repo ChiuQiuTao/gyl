@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>企业信息</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../public/font/iconfont.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/enterpriseDialog.css">
+
+</head>
+
+<body>
+
+    <!-- 企业供应商 -->
+    <form class="layui-form" action="">
+        <div class="select common">
+            <div class="select-title">地块信息</div>
+            <div class="select-con">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">地块名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入基地名称" id='landname'>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">基地名称:</label>
+                        <div class="layui-input-inline">
+                            <select name="standardtype" lay-verify="" lay-filter='persontype' id="landnameP">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">面积（m2）:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" id="floorarea">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item layui-form-item-textarea">
+                    <div class="layui-inline layui-inline-textarea">
+                        <label class="layui-form-label">备注:</label>
+                        <div class="layui-input-block">
+                            <textarea name="desc" placeholder="请输入内容" class="layui-textarea" id="remarks"></textarea>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="select-btn">
+                    <div class="layui-bg-green comquery " id="addBasStandard">确定</div>
+                    <div class="layui-bg-green comquery " id="updateBasStandard" style="display:none">确定</div>
+                    <div class="layui-bg-green comquery cancels">取消</div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</body>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+<script src="../../../../../js/two/JbasisZ/plotDialog.js"></script>
+
+</html>

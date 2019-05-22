@@ -9,66 +9,155 @@
     <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../../public/font/iconfont.css">
     <link rel="stylesheet" href="../../../../css/twocss/commit.css">
+    <link rel="stylesheet" href="../../../../css/twocss/Jbasis/supplier.css">
+
 </head>
 
 <body>
-    <form class="layui-form" action="">
-        <div class="select common">
-            <div class="select-title">查询条件</div>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">企业客户</li>
+            <li>个人客户</li>
+        </ul>
+        <div class="layui-tab-content" style="padding:0">
+            <div class="layui-tab-item layui-show">
+                <!-- 企业供应商 -->
+                <form class="layui-form" action="">
+                    <div class="select common">
+                        <div class="select-title">查询条件</div>
 
-            <div class="select-con">
+                        <div class="select-con">
 
 
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">企业名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">企业名称:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="enterprisename">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:100px;">营业执照号:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="license">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" id="item-type1">
+                                <div class="layui-inline" id='inline-type'>
+                                    <label class="layui-form-label">状态:</label>
+                                    <div class="layui-input-inline">
+                                        <select name="type" lay-verify="" id='auditStaus' lay-filter="type">
+                                            <option value="0">全部</option>
+                                            <option value="1">待审核</option>
+                                            <option value="2">审核通过</option>
+                                            <option value="3">审核未通过</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+            
+
+                            <div class="select-btn">
+                                <div class="layui-bg-green comquery" id='selectcondition'>查询</div>
+                                <div class="layui-bg-green comquery  agains">重置</div>
+                            </div>
                         </div>
                     </div>
+                </form>
+
+                <div class="common-padding">
+                    <table class="layui-hide" id="testee" lay-filter="testdome"></table>
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">营业执照号:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                <!-- 头部 -->
+                <script type="text/html" id="toolbarinter">
+                    <div class="layui-btn-container ">
+                        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
+                        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
+                        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
+                    </div>
+                </script>
+            </div>
+            <div class="layui-tab-item">
+                <!-- 企业供应商 -->
+                <form class="layui-form" action="">
+                    <div class="select common">
+                        <div class="select-title">查询条件</div>
+
+                        <div class="select-con">
+
+
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">姓名:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="personname">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:100px;">身份证号:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" id="personcard">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" id="item-type1">
+                                <div class="layui-inline" id='inline-type'>
+                                    <label class="layui-form-label">状态:</label>
+                                    <div class="layui-input-inline">
+                                        <select name="type" lay-verify="" id='auditStaus2' lay-filter="type">
+                                            <option value="0">全部</option>
+                                            <option value="1">待审核</option>
+                                            <option value="2">审核通过</option>
+                                            <option value="3">审核未通过</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:95px;">状态:</label>
+                                    <div class="layui-input-inline" id="personinline">
+                                        <select name="persontype" lay-verify="" lay-filter='persontype' id="persontype">
+                                            <option value="1" class="persontypeitem" selected="selected">供应商</option>
+                                            <option value="2" class="persontypeitem">客户</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="select-btn">
+                                <div class="layui-bg-green comquery" id='selectperson'>查询</div>
+                                <div class="layui-bg-green comquery  againsperson">重置</div>
+                            </div>
                         </div>
                     </div>
+                </form>
+
+                <div class="common-padding">
+                    <table class="layui-hide" id="personaltable" lay-filter="personalfilter"></table>
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label" style="width:95px;">状态:</label>
-                        <div class="layui-input-inline">
-                            <select name="city" lay-verify="">
-                                <option value="">全部</option>
-                                <option value="010">待审批</option>
-                                <option value="021">审批通过</option>
-                                <option value="0571">审批未通过</option>
-                            </select>
-                        </div>
+                <!-- 头部 -->
+                <script type="text/html" id="toolbarinterP">
+                    <div class="layui-btn-container">
+                        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
+                        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
+                        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
                     </div>
-                </div>
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
-                </div>
+                </script>
             </div>
         </div>
-    </form>
-
-    <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
     </div>
+
 
 </body>
-<!-- 头部 -->
-<script type="text/html" id="toolbarinter">
-    <div class="layui-btn-container ">
-        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
-    </div>
-</script>
+
 
 <!-- 里面的查看 -->
 <script type="text/html" id="More">
@@ -78,5 +167,6 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
+<script src="../../../../js/two/JbasisY/customer.js"></script>
+
 </html>
