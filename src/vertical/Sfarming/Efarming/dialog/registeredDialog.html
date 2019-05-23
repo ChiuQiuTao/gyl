@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>畜禽产品</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css" />
+    <link rel="stylesheet" href="../../../../../public/font/iconfont.css" />
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/productDialog.css">
+</head>
+
+<body>
+    
+    <form class="layui-form" action="">
+            <div class="select common">
+                <div class="select-title">入栏信息</div>
+                <div class="select-con">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">种苗名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入种苗名称" id='seedname'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">入栏日期:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入入栏日期" id='orderdate'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">入栏单号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入入栏单号" id='ordercode'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">供应商类型:</label>
+                            <div class="layui-input-inline">
+                                <select name="supplytype" lay-verify="" id='supplytype' lay-filter="supplytype">
+                                    <option value="">请选择</option>
+                                    <option value="1">企业供应商</option>
+                                    <option value="2">个人供应商</option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">供应商名称:</label>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="" id='supplyname'>
+                                    <option value="">请选择</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">种苗名称:</label>
+                            <div class="layui-input-inline">
+                                <select name="city" lay-verify="" id='seedname'>
+                                    <option value="0">请选择</option>
+                                    <option value="1">待审批</option>
+                                    <option value="2">审批通过</option>
+                                    <option value="3">审批未通过</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> -->
+    
+    
+    
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">负责人:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" id="person">
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="select-btn">
+                        <div class="layui-bg-green comquery " id="addNewProduct">确定</div>
+                        <!-- <div class="layui-bg-green comquery cancels" style="display:none">确定</div> -->
+                        <div class="layui-bg-green comquery cancels">返回</div>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+</body>
+<!-- 头部 -->
+<script type="text/html" id="toolbarinter">
+    <div class="layui-btn-container ">
+        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
+        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
+        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
+    </div>
+</script>
+
+<!-- 里面的查看 -->
+<script type="text/html" id="More">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+</script>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script>
+(function() {
+    layui.use(['upload', 'form', 'element', 'table', "layer", "laydate", "util"], function() {
+        var $ = layui.jquery,
+            table = layui.table,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            util = layui.util,
+            form = layui.form,
+            element = layui.element,
+            upload = layui.upload;
+
+            laydate.render({ 
+                elem: '#orderdate' //或 elem: document.getElementById('test')、elem: lay('#test') 等
+            });
+       
+        getHrefId();
+        function getHrefId(){
+            var loc = location.href;
+            var url = loc.split("?")[1];
+            if(url && url!=''){
+                document.querySelector('#addNewProduct').style.display='none';
+                var para = url.split("&");
+                var len = para.length;
+                var res = {};
+                var arr = [];
+                for(var i=0;i<len;i++){
+                    arr = para[i].split("=");
+                    res[arr[0]] = arr[1];
+                }
+                getEnterpriseById(res.id);
+                // updateImg(res.id);
+                // document.querySelector('#updateProduct').addEventListener('click',function(){
+                //     updateInfo(res.id);
+                // })
+            }else{
+            }
+            
+        }
+        form.on('select(supplytype)', function(data) {
+            console.log(data.value); //得到被选中的值
+            if(data.value==1){
+                getSupplier();
+            }else{
+                getPerson();
+            }
+        });
+        // 个人供应商
+        function getPerson(){
+            Theoldcuiway('plant/gysxxs', 
+            { 
+                sysType: 2,
+                userName: '',
+                idCard: '',
+                auditStaus:0,
+            },
+             "GET").done(function(resp) {
+                console.log(resp);
+                document.querySelector('#supplyname').innerHTML='';
+                $.each(resp.data.content, function(index, item) {
+                    $('#supplyname').append(new Option(item.enterprisename, item.enterprisename)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+        // 企业供应商
+        function getSupplier(){
+            Theoldcuiway('plant/gysxxs', 
+            { 
+                sysType: 2,
+                enterprisename: '',
+                license: '',
+                auditStaus:0,
+            },
+             "GET").done(function(resp) {
+                console.log(resp);
+                document.querySelector('#supplyname').innerHTML='';
+                $.each(resp.data.content, function(index, item) {
+                    $('#supplyname').append(new Option(item.enterprisename, item.enterprisename)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+        function getEnterpriseById(id){
+            console.log(id)
+            Theoldcuiway('breed/rldj', 
+            { id: id },
+             "GET").done(function(resp) {
+                console.log(resp)
+                document.querySelector('#orderdate').value = resp.data.ordLairage.orderdate;
+                document.querySelector('#ordercode').value = resp.data.ordLairage.ordercode;
+                document.querySelector('#supplytype').value = resp.data.ordLairage.supplytype;
+                if(resp.data.ordLairage.supplytype==1){
+                    getSupplier();
+                }else{
+                    getPerson();
+
+                }
+                document.querySelector('#seedname').value = resp.data.ordLairage.seedname;
+                document.querySelector('#person').value = resp.data.ordLairage.person;
+                setTimeout(function(){
+                document.querySelector('#supplyname').value = resp.data.ordLairage.supplyname;
+                },500)
+                layui.form.render();
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+
+        document.querySelector('#addNewProduct').addEventListener('click',function(){
+            uploadImg();
+        })
+        //新增
+        function uploadImg(){
+            // var antiepidemicdate=new Date($('#antiepidemicdate').val());
+            Theoldcuiway(
+                "breed/saverldj", {
+                    // systype:2,
+                    // productclass:2,
+                    ordercode:$('#ordercode').val(),
+                    orderdate:new Date($('#orderdate').val()),
+                    supplytype:$('#supplytype').val(),
+                    supplyname:$('#supplyname').val(),
+                    seedname:$('#seedname').val(),
+                    person:$('#person').val(),
+                    
+                },
+                "POST"
+            )
+            .done(function(resp) {
+                console.log(resp);
+                layer.msg('新增成功');
+                setTimeout(function(){
+                    window.location.href = '../registered.html'
+                },1500)
+                return;
+            })
+            .fail(function(err) {
+                console.log(err);
+            });
+        }
+
+        
+        //更新
+        function updateInfo(id){
+            Theoldcuiway('breed/saverldj', { 
+                id:id,
+                orderdate:new Date($('#orderdate').val()),
+                supplytype:$('#supplytype').val(),
+                supplyname:$('#supplyname').val(),
+                seedname:$('#seedname').val(),
+                person:$('#person').val(),
+            }, "POST").done(function(resp) {
+                layer.msg('更新成功');
+                setTimeout(function(){
+                    window.location.href = '../registered.html'
+                },1500)
+                return;
+            }).fail(function(err) {
+                console.log(err)
+               
+            });
+        }
+
+
+        /*取消*/
+        $(".cancels").click(function() {
+            window.location.href = "../registered.html";
+        })
+    })
+
+
+})()
+</script>
+
+</html>

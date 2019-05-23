@@ -33,7 +33,7 @@
             function deleteId(id){
                 Theoldcuiway(
                     "plant/deleteNcpxx", {
-                        jdxxId:id,
+                        ncpxxId:id,
                     },
                     "POST"
                 )

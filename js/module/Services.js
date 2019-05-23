@@ -23,7 +23,7 @@ layui.define(['table', 'form','serviceTools','layer'], function (exports) {
             Object.assign(defaultServicesConfig, option);
             init();
         }
-        var tableService = {};
+        var tableService = table.render({});
         //初始化数据
         function init() {
             tableService = table.render({
@@ -62,17 +62,19 @@ layui.define(['table', 'form','serviceTools','layer'], function (exports) {
                  window.location.href = defaultServicesConfig.saveUrl;
             })
             $("[lay-event='update']").unbind("click").on("click" ,function () {
-                var data = tableService.checkStatus(defaultServicesConfig.tableId);
+                // console.log(tableService);
+                // console.log(tableService.checkStatus);
+                var data = table.checkStatus(defaultServicesConfig.tableId);
                 data.data.length === 1 ?(function () {
                     window.location.href = defaultServicesConfig.saveUrl+"?id"+data.data[0].id;
                 })():alerts("请选择一条数据");
             })
             $("[lay-event='delete']").unbind("click").on("click" ,function () {
-                var data = tableService.checkStatus(defaultServicesConfig.tableId);
+                var data = table.checkStatus(defaultServicesConfig.tableId);
                 data.data.length === 1 ?(function () {
                     tools.EditOrSaveOrDelete({
-                        parame:{[defaultServicesConfig.deleteField]:data.data.id},
-                        url:defaultServicesConfig.delUrl,
+                        parame:{[defaultServicesConfig.deleteField]:data.data[0].id},
+                        url: defaultServicesConfig.baseURL+defaultServicesConfig.delUrl,
                     })
                 })():alerts("请选择一条数据");
             })

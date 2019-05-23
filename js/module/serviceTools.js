@@ -1,4 +1,5 @@
 layui.define(function (exports) {
+    var $ = layui.jquery;
     var serviceTools = {
         uuid : function(){
             return 'Cxxxxxxxx-Uxxxx-Ixxx-Sxxxx-Mxxxx-Bxxxx-Lyxxx-Oyxxx-Gxxxxxxxxxxxx'.replace(/[xy]/g,function(c){

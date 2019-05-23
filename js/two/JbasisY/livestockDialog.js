@@ -60,11 +60,12 @@
                 console.log(resp)
                 var stock = document.querySelectorAll('.stock');
                 document.querySelector('#productname').value = resp.data.productname;
-                document.querySelector('#barcode').value = resp.data.barcode;
                 document.querySelector('#specifications').value = resp.data.specifications;
+                document.querySelector('#sellingprice').value = resp.data.sellingprice;
+
                 document.querySelector('#unit').value = resp.data.unit;
-                document.querySelector('#lifedate').value = resp.data.lifedate;
-                document.querySelector('#lifedateunit').value = resp.data.lifedateunit;
+                document.querySelector('#cycle').value = resp.data.cycle;
+                document.querySelector('#cycleunit').value = resp.data.cycleunit;
                 document.querySelector('#remarks').value = resp.data.remarks;
                 document.querySelector('#earlywarning').value = earlywarning;
                 document.querySelector('#minstock').value = resp.data.minstock;
@@ -94,17 +95,18 @@
             Theoldcuiway(
                 "plant/saveNcpxx", {
                     systype:2,
-                    productclass:3,
+                    productclass:2,
                     productname:$('#productname').val(),
-                    barcode:$('#barcode').val(),
                     specifications:$('#specifications').val(),
                     unit:$('#unit').val(),
-                    lifedate:$('#lifedate').val(),
-                    lifedateunit:$('#lifedateunit').val(),
+                    cycle:$('#cycle').val(),
+                    cycleunit:$('#cycleunit').val(),
                     remarks:$('#remarks').val(),
                     earlywarning:earlywarning,
                     minstock:$('#minstock').val(),
                     maxstock:$('#maxstock').val(),
+                sellingprice:$('#sellingprice').val(),
+                    barcode:''
                 },
                 "POST"
             )
@@ -128,18 +130,18 @@
             Theoldcuiway('plant/updateNcpxx', { 
                 id:id,
                 systype:2,
-                productclass:3,
+                productclass:2,
                 productname:$('#productname').val(),
-                barcode:$('#barcode').val(),
                 specifications:$('#specifications').val(),
                 unit:$('#unit').val(),
-                lifedate:$('#lifedate').val(),
-                lifedateunit:$('#lifedateunit').val(),
+                cycle:$('#cycle').val(),
+                cycleunit:$('#cycleunit').val(),
                 remarks:$('#remarks').val(),
                 earlywarning:earlywarning,
                 minstock:$('#minstock').val(),
                 maxstock:$('#maxstock').val(),
-
+                sellingprice:$('#sellingprice').val(),
+                barcode:''
             }, "POST").done(function(resp) {
                 layer.msg('更新成功');
                 setTimeout(function(){
