@@ -73,7 +73,9 @@
     </div>
     </form>
 
-    <table class="layui-hide" id="testretrue" lay-filter="testdome"></table>
+    <div class="transfers"> </div>
+
+
 
     <div class="layui-btn-group" style="width: 100%;display: flex;justify-content: center;margin-top: 10px;">
         <button class="layui-btn  saves">
@@ -93,9 +95,42 @@
 
 </html>
 
+<!-- 查看的内容 -->
+<script type="text/html" id="contentquery">
+
+    <table lay-filter="demo" class="layui-table">
+
+        <thead>
+            <tr>
+                <th></th>
+                <th>名称</th>
+                <th>批次</th>
+                <th>库存数量</th>
+                <th>调入仓库</th>
+                <th>调入二级仓库</th>
+                <th>调出数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each content}}
+            <tr>
+                <td> <input type="radio" name="sex"></td>
+                <td>{{$value.productname}}</td>
+                <td>{{$value.batchcode}}</td>
+                <td>{{$value.weight}}</td>
+                <td><select class="yiji" style="width:100px;height:20px;"><option>请选择</option></select></td>
+                <td><select class="erjis" style="width:100px;height:20px;"><option>请选择</option></select></td>
+                <td><input type="text" style="width:100px;height:20px;"></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</script>
+
 <!-- 里面下列 -->
 <script type="text/html" id="More">
-    <select lay-ignore class="dd" lay-event="detail" style="width: 100px;height: 25px !important;"> <option value="">请选择</option></select>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">添加</a>
 </script>
 
 <script>
@@ -112,11 +147,7 @@
         //时间选择
         laydate.render({
             elem: "#temis",
-            show: true,
-            done: function(value) {
-                var batch = value;
-                projectobj.orderdate = batch + "T00: 00: 00.000 + 0000";
-            }
+            show: true
         });
 
         //负责人添加
@@ -135,7 +166,8 @@
 
         //负责人的获取
         form.on("select(heads)", function(data) {
-            projectobj.person = data.value;
+            projectobj.createid = data.value;
+            projectobj.createname = $(".headpeople").find("option:selected").text();
             return;
         });
 
@@ -185,179 +217,117 @@
         var tts = "";
         form.on("select(shas)", function(data) {
             tts = data.value;
+            tiaoyong(tts);
             return;
         });
 
-
-
-        var tableIns = table.render({
-            elem: "#testretrue",
-            url: baseaip + "plant/ckgl/ckdb/getdbp",
-            method: "GET",
-            where: {
-                sysType: "1",
-                outareaid: tts,
-            },
-            headers: {
-                Authorization: "Bearer" + " " + sessions
-            },
-            request: {
-                pageName: "page",
-                limitName: "limit"
-            },
-            limits: [10, 20],
-            parseData: function(res) {
-                //res 即为原始返回的数据
-                console.log(res);
-                return {
-                    code: res.code, //解析接口状态
-                    msg: res.msg, //解析提示文本
-                    totalNum: res.data.totalElements, //解析数据长度
-                    lists: res.data.content //解析数据列表
-                };
-            },
-
-            response: {
-                statusName: "code", //数据状态的字段名称，默认：code
-                statusCode: 200, //成功的状态码，默认：0
-                msgName: "msg", //状态信息的字段名称，默认：msg
-                countName: "totalNum", //数据总数的字段名称，默认：count
-                dataName: "lists" //数据列表的字段名称，默认：data
-            },
-            cellMinWidth: 80,
-            page: {
-                //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ["prev", "page", "next", "skip", "count"], //自定义分页布局
-                //,curr: 5 //设定初始在第 5 页
-                groups: 5, //只显示 1 个连续页码
-                first: true, //不显示首页
-                last: true, //不显示尾页
-                prev: "上一页",
-                next: "下一页",
-                theme: "#c81623"
-            },
-            // height: 'full-20',//满高
-            cols: [
-                [{
-                    type: "radio",
-                    fixed: "left"
-                }, {
-                    field: "productname",
-                    title: "名称",
-                    minWidth: 110,
-                    align: "center"
-                }, {
-                    field: "batchcode",
-                    title: "批次",
-                    minWidth: 120,
-                    sort: true,
-                    align: "center"
-                }, {
-                    field: "weight",
-                    title: "库存数量",
-                    minWidth: 110,
-                    sort: true,
-                    align: "center",
-                    templet: function(d) {
-                        return d.weight + "/" + "袋"
-                    }
-                }, {
-                    field: "storage",
-                    title: "调入仓库",
-                    minWidth: 130,
-                    sort: true,
-                    align: "center",
-                    toolbar: "#More"
-                        // templet: function(d) {
-                        //     return '<select  lay-ignore  class="dd";  style="width: 100px;height: 25px !important;"> <option value="">请选择</option></select>'
-                        // }
-                }, {
-                    field: "area",
-                    title: "调入二级仓库",
-                    minWidth: 130,
-                    sort: true,
-                    align: "center",
-                    templet: function(d) {
-                        return '<select   lay-ignore  class="dds"  style="width: 100px;height: 25px !important;"> <option value="">请选择</option></select>'
-                    }
-                }, {
-                    field: "stocknum",
-                    title: "调出数量(袋)",
-                    minWidth: 130,
-                    sort: true,
-                    align: "center",
-                    templet: function(d) {
-                        return '<input type="text"  style="width: 100px;height: 25px !important;" />'
-                    }
-                }]
-            ]
-        });
-
-
-        //获取二级仓库id
-        form.on("select(shas)", function(data) {
-            tableIns.reload({
-                where: {
+        function tiaoyong(tts) {
+            Theoldcuiway("plant/ckgl/ckdb/getdbp", {
                     sysType: "1",
-                    outareaid: data.value,
-                },
-                page: {
-                    curr: 1, //重新从第 1 页开始
-                    layout: ['prev', 'page', 'next', 'skip', 'count']
-                },
-            })
-            return;
-        });
+                    outareaid: tts,
+                }, "GET").done(function(resp) {
 
+                    var html = template("contentquery", resp.data);
+                    $(".transfers").html(html);
 
-        var numsss = 0;
-        table.on("tool(testdome)", function(obj) {
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
+                    console.log($(".yiji"))
+                    tianjia();
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+        }
 
-            if (layEvent === "detail") {
-                var msr = this;
-                console.log(msr)
-                numsss++;
-                // if (numsss == 1) {
-                console.log(msr)
-                Theoldcuiway("plant/getyjck", {
-                        repositorytype: 1
+        function tianjia() {
+            //一级仓库
+            Theoldcuiway("plant/getyjck", {
+                    repositorytype: 1
+                }, "GET").done(function(resp) {
+                    $(".yiji").children().remove();
+                    $(".yiji").append(new Option("请选择", ""));
+                    $.each(resp.data, function(index, item) {
+                        $(".yiji").append(new Option(item.storagename, item.id));
+                    });
+                    layui.form.render("select");
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+
+            $(".yiji").change(function() {
+                projectobj.outstorageid = $(this).val();
+                projectobj.outstorehouse = $(this).find("option:selected").text();
+                var dds = $(this).val();
+                var thisss = $(this);
+                $(this).parent().next().children().children().remove();
+                $(this).parent().next().children().append(new Option("请选择", ""));
+                projectobj.batchcode = $(this).parent().prev().prev().text();
+                projectobj.num = $(this).parent().prev().text();
+                Theoldcuiway("plant/getejck", {
+                        storageId: dds
                     }, "GET").done(function(resp) {
-                        console.log(resp);
-                        $(msr).children().remove();
-                        $(msr).append(new Option("请选择", ""));
                         $.each(resp.data, function(index, item) {
-                            $(msr).append(new Option(item.storagename, item.id));
+                            thisss.parent().next().children().append(new Option(item.storagename, item.id));
                         });
-
-                        $(msr).change(function(event) {
-                            event.stopPropagation();
-                            event.preventDefault();
-                        })
-
+                        layui.form.render("select");
                         return;
                     })
                     .fail(function(err) {
                         console.log(err);
                     });
-                // }
+            })
+        }
+
+
+        //上传
+        $(".saves").click(function() {
+
+            if ($("#temis").val() == "") {
+                alerts("请选择时间");
                 return
             }
-        });
+            if ($(".Namerawmaterials").val() == "") {
+                alerts("请选择仓库");
+                return
+            }
+
+            if ($(".erji").val() == "") {
+                alerts("请选择二级仓库");
+                return
+            }
+
+            if ($(".headpeople").val() == "") {
+                alerts("请选择负责人");
+                return
+            }
+
+            projectobj.transferdate = $("#temis").val();
+            projectobj.enterprisename = "名称一";
+            projectobj.systype = "1";
+            // projectobj.weight = "5"
+            Theoldcuiway("plant/ckgl/ckdb/saveckdb", projectobj, "post").done(function(resp) {
+
+                    layer.msg("操作成功", {
+                        icon: 1,
+                        time: 1000
+                    });
+                    setTimeout(function() {
+                        window.location.href = "../transfers.html";
+                    }, 1500);
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+        })
 
 
 
 
-        //  layer.msg("操作成功", {
-        //                         icon: 1,
-        //                         time: 1000
-        //                     });
-        //                     setTimeout(function() {
-        //                         window.location.href = "../returngoods.html";
-        //                     }, 1500);
-        //                     return;
+
+
 
 
 
