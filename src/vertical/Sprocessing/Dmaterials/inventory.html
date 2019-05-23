@@ -218,6 +218,7 @@
                                                         /*当前时间*/
                                                         var newDay = new Date().getTime();
                                                         var oldday = new Date(item.factorydate).getTime();
+
                                                         var da = item.lifedate * 24 * 60 * 60 * 1000 + oldday;
                                                         var nid = newDay - oldday;
                                                         da = new Date(da);

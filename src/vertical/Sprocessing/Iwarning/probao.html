@@ -27,14 +27,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">产品名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input  Purchaseorder">
                         </div>
                     </div>
                 </div>
 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery   Rawqquery">查询</div>
+                    <div class="layui-bg-green comquery   reset">重置</div>
                 </div>
             </div>
         </div>
@@ -44,106 +44,51 @@
         <table class="layui-hide" id="test" lay-filter="testdome"></table>
     </div>
 </body>
-<!-- 头部 -->
-<script type="text/html" id="toolbarinter">
-    <div class="layui-btn-container ">
-        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
-    </div>
-</script>
-
-<!-- 里面的查看 -->
-<script type="text/html" id="More">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-</script>
 
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['table', "laydate"], function() {
+    layui.use(['table', ], function() {
         var $ = layui.jquery,
-            table = layui.table,
-            laydate = layui.laydate;
+            table = layui.table;
 
-        laydate.render({
-            elem: '#date1' //指定元素 
-        });
-        laydate.render({
-            elem: '#date2' //指定元素
-        });
-
-        //监听头部监听
-        table.on('toolbar(testdome)', function(obj) {
-            var checkStatus = table.checkStatus(obj.config.id),
-                data = checkStatus.data; //获取选中的数据
-            switch (obj.event) {
-                case 'add':
-                    layer.msg('添加');
-                    break;
-                case 'update':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else if (data.length > 1) {
-                        layer.msg('只能同时编辑一个');
-                    } else {
-                        layer.alert('编辑 [id]：' + checkStatus.data[0].id);
-                    }
-                    break;
-                case 'delete':
-                    if (data.length === 0) {
-                        layer.msg('请选择一行');
-                    } else {
-                        layer.msg('删除');
-                    }
-                    break;
-            };
-        });
-
-        //监听表格里面按钮
-        table.on('tool(testdome)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
-            if (layEvent === 'detail') { //查看
-                //do somehing
-                layer.msg('查看');
-            }
-        });
 
         //获取列表
-        table.render({
+        var tableIns = table.render({
             elem: '#test',
-            url: "../../../../js/two/data.json",
+            url: base + "OrdProcessing/getProductWarningVo",
             method: "GET",
             where: {},
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
-            toolbar: '#toolbarinter',
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
-            },
             request: {
-                limitName: '10'
+                pageName: 'currentPage',
+                limitName: 'pageSize'
             },
             limits: [10, 20],
+            parseData: function(res) { //res 即为原始返回的数据
+                console.log(res)
+                return {
+                    "code": res.code, //解析接口状态
+                    "msg": res.message, //解析提示文本
+                    "totalNum": res.pageBean.totalNum, //解析数据长度
+                    "lists": res.pageBean.lists //解析数据列表
+                };
+            },
+            request: {
+                pageName: 'currentPage',
+                limitName: 'pageSize'
+            },
             response: {
                 statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
-                msgName: null, //状态信息的字段名称，默认：msg
+                statusCode: 10000, //成功的状态码，默认：0
+                msgName: "msg", //状态信息的字段名称，默认：msg
                 countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'data', //数据列表的字段名称，默认：data
+                dataName: 'lists', //数据列表的字段名称，默认：data
             },
-            cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                ,
+            cellMinWidth: 80,
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['prev', 'page', 'next', 'skip', 'count'] //自定义分页布局
                     //,curr: 5 //设定初始在第 5 页
@@ -161,53 +106,203 @@
             // height: 'full-20',//满高
             cols: [
                 [{
-                    field: 'id',
-                    title: '产品名称',
-                    minWidth: 120,
-                    // sort: true,
-                    fixed: 'left',
+                    title: '编号',
+                    type: 'numbers',
+                    fixed: 'left'
+                }, {
+                    field: 'productname',
+                    title: '原辅料名称',
+                    align: "center",
                     minWidth: 120,
                 }, {
-                    field: 'username',
-                    title: "产品批次",
+                    field: 'batch',
+                    title: "原辅料批次",
+                    align: "center",
+                    minWidth: 120,
                 }, {
-                    field: 'username',
+                    field: 'orderdate',
                     title: "生产日期",
+                    align: "center",
+                    minWidth: 120,
+                    templet: function(d) {
+                        var numv = null;
+                        if (d.orderdate == "" || d.orderdate == null) {
+                            numv = " ";
+                        } else {
+                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                        }
+                        return numv
+                    },
                 }, {
                     field: 'experience',
                     title: '过期日期',
+                    align: "center",
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                },{
+                    templet: function(d) {
+
+                        if (d.lifedateunit == "天") {
+                            /*当前时间*/
+                            var newDay = new Date().getTime();
+                            var oldday = new Date(d.orderdate).getTime();
+                            var da = d.lifedate * 24 * 60 * 60 * 1000 + oldday;
+                            var nid = newDay - oldday;
+                            da = new Date(da);
+                            nid = new Date(nid);
+                            var year = da.getFullYear();
+                            var month = da.getMonth() + 1;
+                            var date = da.getDate();
+                            var ss = [year, month, date].join("-");
+                            return ss
+                        } else if (d.lifedateunit == "月") {
+                            var nus = d.orderdate.split("-");
+                            var sss = Number(nus[1]) + Number(d.lifedate);
+                            var nian = parseInt(sss / 12);
+                            var yue = sss % 12;
+                            nus[0] = Number(nus[0]) + nian;
+                            nus[1] = yue;
+                            var ste = nus.join("-");
+                            var se = ste.split("T");
+                            return se[0];
+                        } else if (d.lifedateunit == "年") {
+                            var nuse = d.orderdate.split("-");
+                            nuse[0] = Number(nuse[0]) + Number(d.lifedate);
+                            var stes = nuse.join("-");
+                            return stes
+                        } else {
+                            return ""
+                        }
+
+                    },
+                }, {
                     field: 'experience',
                     title: '保质期',
+                    align: "center",
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                },{
-                    field: 'experience',
+                    templet: function(d) {
+                        var dd = "";
+                        if (d.lifedate == null) {
+                            return dd
+                        } else {
+                            return d.lifedate + "/" + d.lifedateunit
+                        }
+                    },
+                }, {
+                    field: 'stocknum',
                     title: '库存数量',
+                    align: "center",
                     minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                },{
+                    templet: function(d) {
+                        return Number(d.stocknum).toFixed(2);
+                    },
+                }, {
                     field: 'experience',
                     title: '状态',
-                    minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                },{
-                    field: 'wealth',
-                    width: 137,
-                    title: '更多',
-                    minWidth: 20,
                     align: "center",
-                    fixed: 'right',
-                    toolbar: '#More',
+                    minWidth: 180,
+                    templet: function(d) {
+                        if (d.lifedateunit == "天") {
+                            var newDay = new Date().getTime();
+                            // 2019-05-21T00:00:00.000+0000
+                            // 2020-7-03T00:00:00.000+0000
+                            var oldday = new Date(d.orderdate).getTime();
+                            // alert(oldday)
+                            var nid = newDay - oldday;
+                            nid = new Date(nid);
+                            var stats = "";
+                            if (d.lifedate - nid.getDate() >= 0) {
+                                stats =
+                                    "有效期还有" + (d.lifedate - nid.getDate()) + "天";
+                            } else {
+                                stats =
+                                    "已超过效期" + (nid.getDate() - d.lifedate) + "天";
+                            }
+                            return stats;
+                        } else if (d.lifedateunit == "月") {
+                            var nus = d.orderdate.split("-");
+                            var sss = Number(nus[1]) + Number(d.lifedate);
+                            var nian = parseInt(sss / 12);
+                            var yue = sss % 12;
+                            nus[0] = Number(nus[0]) + nian;
+                            nus[1] = yue;
+                            var ste = nus.join("-");
+                            var dds = ste.split("T");
+                            var newyue = new Date().getTime();
+                            var oldyue = new Date(dds[0]).getTime();
+                            var stas = "";
+                            if (oldyue - newyue > 0) {
+                                var nday = oldyue - newyue;
+                                stas =
+                                    "有效期还有" + parseInt(nday / 86400 / 1000) + "天";
+                            } else {
+                                var ndays = -(oldyue - newyue);
+                                stas =
+                                    "已超过效期" + parseInt(ndays / 86400 / 1000) + "天";
+                            }
+                            return stas
+                        } else if (d.lifedateunit == "年") {
+                            var nuse = d.orderdate.split("-");
+                            nuse[0] = Number(nuse[0]) + Number(d.lifedate);
+                            var stes = nuse.join("-");
+                            var newnian = new Date().getTime();
+                            var oldnian = new Date(stes).getTime();
+                            var dae = oldnian - newnian;
+                            var staw = "";
+                            if (dae > 0) {
+                                staw =
+                                    "有效期还有" + parseInt(dae / 86400 / 1000) + "天";
+                            } else {
+                                dae = -dae;
+                                staw =
+                                    "已超过效期" + parseInt(dae / 86400 / 1000) + "天";
+                            }
+                            return staw
+                        } else {
+                            return ""
+                        }
+                    },
                 }]
             ]
         });
+
+
+
+        /*查询*/
+        $(".Rawqquery").click(function() {
+            if ($(".Purchaseorder").val() == "") {
+                layer.msg('请输入查询条件！', {
+                    time: 1000,
+                    offset: 't',
+                });
+                return
+            }
+
+            var datelist = {
+                productname: $(".Purchaseorder").val()
+            }
+            tableIns.reload({
+                where: datelist,
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
+        /*重置*/
+        $(".reset").click(function() {
+            $(".Purchaseorder").val("");
+            tableIns.reload({
+                where: {},
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ['prev', 'page', 'next', 'skip', 'count']
+                },
+            })
+        })
+
+
+
     })
 </script>
 
