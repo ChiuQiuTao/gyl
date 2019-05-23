@@ -22,14 +22,14 @@
                         <label class="layui-form-label" style="width:95px;">投入产品名称:</label
               >
               <div class="layui-input-inline">
-                <input type="text" class="layui-input" />
+                <input type="text" class="layui-input  accessories" />
               </div>
             </div>
           </div>
 
           <div class="select-btn">
-            <div class="layui-bg-green comquery ">查询</div>
-            <div class="layui-bg-green comquery ">重置</div>
+            <div class="layui-bg-green comquery  Rawquery">查询</div>
+            <div class="layui-bg-green comquery  reset">重置</div>
           </div>
         </div>
       </div>
@@ -60,7 +60,8 @@
         method: "GET",
         where: {
           sysType: "1",
-          productclass: "3"
+          productclass: "3",
+          productName:""
         },
         headers: {
           Authorization: "Bearer" + " " + sessions
@@ -110,59 +111,127 @@
               fixed: "left"
             },
             {
-              field: "id",
+              field: "productname",
               title: "投入品名称",
               minWidth: 120,
               align: "center"
             },
             {
-              field: "username",
+              field: "batch",
               title: "投入品批次",
               minWidth: 120,
               align: "center"
             },
             {
-              field: "username",
+              field: "createdate",
               title: "生产日期",
               minWidth: 120,
-              align: "center"
+              align: "center",
+              templet: function(d) {
+                                            var numv = null;
+                                            if (d.createdate == "" || d.createdate == null) {
+                                                numv = " ";
+                                            } else {
+                                                numv = d.createdate = layui.util.toDateString(
+                                                    d.createdate,
+                                                    "yyyy-MM-dd"
+                                                );
+                                            }
+                                            return numv;
+                                        }
             },
             {
-              field: "experience",
+              field: "overdue",
               title: "过期日期",
               minWidth: 120,
-              align: "center"
+              align: "center",
+              templet: function(d) {
+                                            var numv = null;
+                                            if (d.overdue == "" || d.overdue == null) {
+                                                numv = " ";
+                                            } else {
+                                                numv = d.overdue = layui.util.toDateString(
+                                                    d.overdue,
+                                                    "yyyy-MM-dd"
+                                                );
+                                            }
+                                            return numv;
+                                        }
             },
             {
-              field: "experience",
+              field: "shelfdateunit",
               title: "保质期",
               minWidth: 120,
-              align: "center"
+              align: "center",
+              templet: function(d) {
+                return  d.shelfdateunit+"/天"
+              }
             },
             {
-              field: "experience",
+              field: "weight",
               title: "库存数量",
               minWidth: 120,
               align: "center"
             },
             {
-              field: "experience",
+              field: "status",
               title: "状态",
               minWidth: 100,
               align: "center"
             },
-            {
-              field: "wealth",
-              width: 137,
-              title: "更多",
-              minWidth: 20,
-              align: "center",
-              fixed: "right",
-              toolbar: "#More"
-            }
+            
           ]
         ]
       });
+    
+      
+       /*查询*/
+       $(".Rawquery").click(function() {
+            if ($(".accessories").val() == "") {
+                layer.msg("请输入查询条件！", {
+                    time: 1000,
+                    offset: "t"
+                });
+                return;
+            }
+
+            var datelist = {
+                sysType: "1",
+                productclass: "3",
+                productName: $(".accessories").val()
+            };
+
+            tableIns.reload({
+                where: datelist,
+                request: {
+                    pageName: "page",
+                    limitName: "limit"
+                },
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ["prev", "page", "next", "skip", "count"]
+                }
+            });
+        });
+
+        /*重置*/
+        $(".reset").click(function() {
+            $(".accessories").val("");
+            tableIns.reload({
+                where: {
+                    sysType: "1",
+                    productclass: "3",
+                    productName: ""
+                },
+                page: {
+                    curr: 1, //重新从第 1 页开始
+                    layout: ["prev", "page", "next", "skip", "count"]
+                }
+            });
+        });
+
+
+
     });
   </script>
 </html>

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
     <title>田间管理</title>
     <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../../public/font/iconfont.css">
@@ -18,6 +16,18 @@
         <div class="select common">
             <div class="select-title">查询条件</div>
             <div class="select-con">
+
+                <div class="layui-form-item">
+                    <div class="select-hand-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">管理日期:</label>
+                            <input type="text" class="layui-input" id="date1">
+                            <div style="margin:0 10px;">至</div>
+                            <input type="text" class="layui-input" id="date2">
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="layui-form-item">
                     <div class="layui-inline">
@@ -69,7 +79,7 @@
     <div class="common-padding">
         <table class="layui-hide" id="test" lay-filter="testdome"></table>
     </div>
-        
+
 </body>
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
@@ -139,37 +149,38 @@
         });
 
         //获取列表
-        table.render({
+        var tableIns = table.render({
             elem: '#test',
-            url: "../../../../js/two/data.json",
+            url: baseaip + "plant/zzgl/tjgls",
             method: "GET",
             where: {},
             headers: {
                 Authorization: "Bearer" + " " + sessions
             },
-            toolbar: '#toolbarinter',
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
-            },
             request: {
-                limitName: '10'
+                pageName: "page",
+                limitName: "limit"
             },
             limits: [10, 20],
-            response: {
-                statusName: 'code', //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
-                msgName: null, //状态信息的字段名称，默认：msg
-                countName: 'totalNum', //数据总数的字段名称，默认：count
-                dataName: 'data', //数据列表的字段名称，默认：data
+            parseData: function(res) {
+                //res 即为原始返回的数据
+                console.log(res);
+                return {
+                    code: res.code, //解析接口状态
+                    msg: res.msg, //解析提示文本
+                    totalNum: res.data.totalElements, //解析数据长度
+                    lists: res.data.content //解析数据列表
+                };
             },
-            cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                ,
+            toolbar: "#toolbarinter",
+            response: {
+                statusName: "code", //数据状态的字段名称，默认：code
+                statusCode: 200, //成功的状态码，默认：0
+                msgName: "msg", //状态信息的字段名称，默认：msg
+                countName: "totalNum", //数据总数的字段名称，默认：count
+                dataName: "lists" //数据列表的字段名称，默认：data
+            },
+            cellMinWidth: 80,
             page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 layout: ['prev', 'page', 'next', 'skip', 'count'] //自定义分页布局
                     //,curr: 5 //设定初始在第 5 页
@@ -229,7 +240,7 @@
                     minWidth: 120,
                     sort: true,
                     totalRow: true
-                },{
+                }, {
                     field: 'wealth',
                     width: 137,
                     title: '更多',
@@ -242,4 +253,5 @@
         });
     })
 </script>
+
 </html>

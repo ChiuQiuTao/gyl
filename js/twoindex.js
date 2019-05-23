@@ -251,6 +251,21 @@ var menudata = [{
                 type: "4"
             },
             {
+                url: "../vertical/Splanting/enterssellssaves/productinventory.html",
+                title: "农产品库存",
+                type: "4"
+            },
+            {
+                url: "../vertical/Splanting/enterssellssaves/productreturn.html",
+                title: "农产品退货",
+                type: "4"
+            },
+            {
+                url: "../vertical/Splanting/enterssellssaves/productunqualified.html",
+                title: "农产品不合格处理",
+                type: "4"
+            },
+            {
                 url: "../vertical/Splanting/enterssellssaves/inputsprocurement.html",
                 title: "投入品采购",
                 type: "4"
@@ -266,21 +281,6 @@ var menudata = [{
                 type: "4"
             },
 
-            {
-                url: "../vertical/Splanting/enterssellssaves/productreturn.html",
-                title: "农产品退货",
-                type: "4"
-            },
-            {
-                url: "../vertical/Splanting/enterssellssaves/productunqualified.html",
-                title: "农产品不合格处理",
-                type: "4"
-            },
-            {
-                url: "../vertical/Splanting/enterssellssaves/productinventory.html",
-                title: "农产品库存",
-                type: "4"
-            }
         ]
     },
     {
@@ -318,6 +318,14 @@ var menudata = [{
         type: "4",
         title: "环境监控",
         child: [{
+                url: "../vertical/Splanting/Genvironment/manual.html",
+                title: "手工数据采集",
+                type: "4"
+            }, {
+                url: "../vertical/Splanting/Genvironment/thesensing.html",
+                title: "传感器管理",
+                type: "4"
+            }, {
                 url: "../vertical/Splanting/Genvironment/data.html",
                 title: "环境数据查询",
                 type: "4"

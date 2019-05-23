@@ -100,22 +100,15 @@
 
         function nas() {
             //一级仓库
-            Theoldcuiway(
-                    "plant/getyjck", {
-                        repositorytype: 1
-                    },
-                    "GET"
-                )
-                .done(function(resp) {
-                    $(".Namerawmaterials")
-                        .children()
-                        .remove();
+            Theoldcuiway("plant/getyjck", {
+                    repositorytype: 1
+                }, "GET").done(function(resp) {
+                    console.log(resp)
+                    $(".Namerawmaterials").children().remove();
                     $(".Namerawmaterials").append(new Option("---请选择---", ""));
-
-                    console.log(resp);
                     $.each(resp.data, function(index, item) {
                         $(".Namerawmaterials").append(
-                            new Option(item.address, item.parentid)
+                            new Option(item.storagename, item.id)
                         ); // 下拉菜单里添加元素
                     });
                     layui.form.render("select");
@@ -127,26 +120,29 @@
 
             //一级仓库选择出二级仓库
             form.on("select(TMADE)", function(data) {
-                Theoldcuiway(
-                        "plant/getejck", {
+                console.log(data.value)
+                if (data.value != "") {
+                    Theoldcuiway("plant/getejck", {
                             storageId: data.value
-                        },
-                        "GET"
-                    )
-                    .done(function(resp) {
-                        $(".erji")
-                            .children()
-                            .remove();
-                        $(".erji").append(new Option("---请选择---", ""));
-                        $.each(resp.data, function(index, item) {
-                            $(".erji").append(new Option(item.storagename, item.id)); // 下拉菜单里添加元素
+                        }, "GET").done(function(resp) {
+                            console.log(resp)
+                            $(".erji").children().remove();
+                            $(".erji").append(new Option("---请选择---", ""));
+                            $.each(resp.data, function(index, item) {
+                                $(".erji").append(new Option(item.storagename, item.parentid)); // 下拉菜单里添加元素
+                            });
+                            layui.form.render("select");
+                            return;
+                        })
+                        .fail(function(err) {
+                            console.log(err);
                         });
-                        layui.form.render("select");
-                        return;
-                    })
-                    .fail(function(err) {
-                        console.log(err);
-                    });
+                } else {
+                    $(".erji").children().remove();
+                    $(".erji").append(new Option("---请选择---", ""));
+                    layui.form.render("select");
+                }
+
                 return;
             });
         }
@@ -220,6 +216,7 @@
                 limitName: "limit"
             },
             limits: [10, 20],
+            toolbar: "#toolbarinter",
             parseData: function(res) {
                 //res 即为原始返回的数据
                 console.log(res);
@@ -230,7 +227,6 @@
                     lists: res.data.content //解析数据列表
                 };
             },
-            toolbar: "#toolbarinter",
             response: {
                 statusName: "code", //数据状态的字段名称，默认：code
                 statusCode: 200, //成功的状态码，默认：0
@@ -258,7 +254,7 @@
                     align: "center",
                     fixed: "left"
                 }, {
-                    field: "address",
+                    field: "parentname",
                     title: "仓库",
                     minWidth: 120,
                     align: "center"
