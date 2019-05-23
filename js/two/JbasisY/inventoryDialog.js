@@ -66,7 +66,7 @@
                 storagename: storagename,
                 chargeperson: chargeperson,
                 remarks: remarks,
-                repositorytype:1
+                repositorytype:2
             }, "POST").done(function(resp) {
                 console.log(resp);
                 layer.msg('更新成功');
@@ -108,7 +108,7 @@
         getBasStorage();
         function getBasStorage(){
             Theoldcuiway('plant/getyjck', { 
-                repositorytype:1,
+                repositorytype: 2,
             }, "GET").done(function(resp) {
                 var selectList='';
                 for(var i=0;i<resp.data.length;i++){
@@ -166,7 +166,7 @@
                 storagename: storagename,
                 chargeperson: chargeperson,
                 remarks: remarks,
-                repositorytype:1
+                repositorytype:2
             }, "POST").done(function(resp) {
                 console.log(resp)
                 
