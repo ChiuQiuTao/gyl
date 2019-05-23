@@ -158,7 +158,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             url: baseaip + "plant/qykhxxs",
             method: "GET",
             where: {
-            sysType: 1,
+            sysType: 2,
             enterprisename: enterprisename,
             license: license,
             enterprisename: enterprisename,
@@ -253,7 +253,7 @@ layui.use(['form','element','table', "layer", "util"], function() {
             url: baseaip + "plant/grkhxxs",
             method: "GET",
             where: {
-            sysType: 1,
+            sysType: 2,
             userName: userName,
             idCard: idCard,
             auditStaus:auditStaus,

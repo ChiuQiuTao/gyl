@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>产品信息</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../../public/font/iconfont.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
+    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/productDialog.css">
+</head>
+
+<body>
+
+    <!-- 企业供应商 -->
+    <form class="layui-form" action="">
+        <div class="select common">
+            <div class="select-title">产品信息</div>
+            <div class="select-con">
+              
+                <div class="layui-inline">
+                    <label class="layui-form-label">畜禽产品名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="请输入产品名称" id='productname'>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品条码:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="请输入条形码" id='barcode'>
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品类别:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="请输入商品类型" id='specifications'>
+                    </div>
+                </div>
+
+
+              
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品单位:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input input-d" placeholder="请输入产品单位" id='unit'>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-inline">
+                    <label class="layui-form-label">保质期:</label>
+                    
+                    <div class="layui-inline-sel layui-inline-selnum">
+                            <input type="text" class="layui-input" placeholder="请输入保质期" id='lifedate'>
+                    </div>
+
+                    <div class="layui-inline-sel">
+                        <select name="country" lay-filter="storagelevel" id='lifedateunit' lay-verify="required">
+                            <option value="年">年</option>
+                            <option value="月">月</option>
+                            <option value="天">天</option>
+                        </select>
+                    </div>
+                </div>
+
+           
+                
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">备注:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input input-d" placeholder="输入备注" id='remarks'>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline" style="min-width:160px;">
+                        <label class="layui-form-label">预警信息:</label>
+                        <div class="layui-input-block" style="margin-left:0;">
+                            <input type="checkbox" lay-skin="primary" title="是否预警"  lay-filter="earlywarning" id='earlywarning'>
+                        </div>
+                    </div>
+                    <div class="layui-inline stock" style="min-width:210px;display: none;">
+                        <label class="layui-form-label" style="width:60px;">最小库存:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='minstock'>
+                        </div>
+                    </div>
+                    <div class="layui-inline stock" style="min-width:210px;display: none;">
+                        <label class="layui-form-label" style="width:60px;">最大库存:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='maxstock'>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="select-btn">
+                    <div class="layui-bg-green comquery " id="addNewProduct">确定</div>
+                    <div class="layui-bg-green comquery " id="updateProduct" style="display: none;">确定</div>
+                    <div class="layui-bg-green comquery cancels">取消</div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</body>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+<script src="../../../../../js/two/JbasisY/livestockproductDialog.js"></script>
+
+</html>

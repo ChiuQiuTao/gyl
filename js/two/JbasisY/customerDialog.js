@@ -136,7 +136,7 @@
         function uploadImg(){
             Theoldcuiway(
                 "plant/saveQykhxx", {
-                    systype:1,
+                    systype:2,
                     license:$('#license').val(),
                     enterprisename:$('#enterprisename').val(),
                     state:$('#state').val(),
@@ -167,7 +167,7 @@
         function updateInfo(id){
             Theoldcuiway('plant/updateQykhxx', { 
                 id:id,
-                systype:1,
+                systype:2,
                 license:$('#license').val(),
                 enterprisename:$('#enterprisename').val(),
                 state:$('#state').val(),
