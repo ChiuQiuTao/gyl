@@ -13,13 +13,13 @@
 <blockquote class="layui-elem-quote layui-text">
     商品信息
 </blockquote>
-<form class="layui-form" action="" lay-filter="example">
+<form class="layui-form" action="" lay-filter="example" id="example">
 
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">商品名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="foodcreate_name"  class="layui-input">
+                <input type="text" name="productname"  class="layui-input" id="productname">
             </div>
         </div>
         <div class="layui-inline">
@@ -52,13 +52,13 @@
         <div class="layui-inline">
             <label class="layui-form-label">保质期</label>
             <div class="layui-input-inline" style="width: 80px;">
-                <input type="number" name="specifications" class="layui-input">
+                <input type="number" name="lifedate" class="layui-input">
             </div>
             <div class="layui-input-inline" style="width: 100px;">
                 <select name="lifedateunit" width="100">
-                    <option value="4">年</option>
-                    <option value="3">月</option>
-                    <option value="2">日</option>
+                    <option value="年">年</option>
+                    <option value="月">月</option>
+                    <option value="日">日</option>
                 </select>
             </div>
         </div>
@@ -108,7 +108,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">企业名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="createenterpriseid"  class="layui-input">
+                <input type="text" name="foodcreate_name"  class="layui-input">
             </div>
         </div>
     </div>
@@ -127,29 +127,75 @@
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../../js/common/api.js"></script>
 <script type="text/javascript">
+    var dataId = null; 
     layui.config({
         base: '../../../../../js/module/'
-    }).use(['Tool','form', 'layedit', 'laydate'],function () {
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
         layui.Tool.init();
         var form = layui.form
             ,layer = layui.layer
             ,layedit = layui.layedit
-            ,laydate = layui.laydate;
+            ,laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
         //监听提交
         form.on('submit(demo1)', function(data){
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
+            var type = localStorage.getItem("type");
+            if ( type === null ){
+                alert("数据类型不能为空")
+            }else{
+                var zd = { id:dataId === null ? "" : dataId,
+                type:type,
+                context:JSON.stringify(data.field),
+                    keyword:data.field.productname+"|"+data.field.barcode
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame:zd,
+                    url:baseaip+"dictionaries/saveOrUpdate",
+                    callback:(function(){
+                            window.history.back(-2);
+                    })()
+                })
+
+            }
             return false;
         });
 
-        console.info(location.href.split("?")[1])
+        // console.info(location.href.split("?")[1])
+        getHrefId();
 
     });
-
+    function getHrefId(){
+        var loc = location.href;
+        console.log(loc);
+        var url = loc.split("?")[1];
+        console.log(url);
+        if(url && url!=''){
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function(){
+                data  = JSON.parse(dataJson);
+                setForm(data);
+            })():"";
+            
+        }else{
+            
+        }
+        
+    }
     function setForm(data){
         layui.use(['form'], function () {
-            layui.form.val('example', data);
+            console.log(data);
+            console.log('data');
+
+            layui.form.val('example', JSON.parse(data.context));
         })
     }
 

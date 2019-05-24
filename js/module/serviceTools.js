@@ -25,6 +25,7 @@ layui.define(function (exports) {
                 url: parameter.url,
                 data:parameter.data === undefined ? {} : parameter.data,
                 dataType: parameter.dataType === undefined ? "JSON" : parameter.dataType,
+                async: false,
                 beforeSend:function(xhr) {
                     xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
                 },
@@ -52,6 +53,7 @@ layui.define(function (exports) {
                         layer.msg(data.msg,{time : 2000,end:function () {
                                 typeof parameter.callback === "function" ? parameter.callback() : ""
                         }});
+
                     }else{
                         layer.msg(data.msg,{time : 2000});
                     }
