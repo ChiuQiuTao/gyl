@@ -19,22 +19,10 @@
             <div class="select-con">
 
                 <div class="layui-form-item">
-                    <div class="select-hand-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">销售日期:</label>
-                            <input type="text" class="layui-input" id="date1">
-                            <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">客户名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input" id="khmc" search-type="khmc">
                         </div>
                     </div>
                 </div>
@@ -43,24 +31,21 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">销售单号:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input" id="xsdh" search-type="xsdh">
                         </div>
                     </div>
                 </div>
 
-
-
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery " lay-event="search">查询</div>
+                    <div class="layui-bg-green comquery " lay-event="reset">重置</div>
                 </div>
             </div>
-
         </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
+        <table class="layui-hide" id="spspxs" lay-filter="spspxs"></table>
     </div>
 
 </body>
@@ -77,9 +62,62 @@
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
+
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
+
+<script>
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Services','jquery'],function () {
+        var $  = layui.jquery;
+
+        var dataType = "spspxs";
+        var services = new layui.Services({
+            baseURL:baseaip,
+            tableId:"spspxs",
+            toolbar:"#toolbarinter",
+            serachUrl:"dictionaries/query",
+            getUrl:"dictionaries/get",
+            delUrl:"dictionaries/delete",
+            updUrl:"plant/updateNcpxx",
+            saveUrl:"./dialog/addFoodssales.html",
+            deleteField:"id",
+            dataType:dataType,
+            parameter:{
+                keyword:'',
+                type:dataType
+            },
+            cols:[[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'xsrq', sort: true, title: '销售日期',templet:function (data) {
+                        return (JSON.parse(data.context)).xsrq
+                    }},
+                {field: 'xsdh', sort: true, title: '销售单号',templet:function (data) {
+                        return (JSON.parse(data.context)).xsdh
+                    }},
+                {field: 'khlx', sort: true, title: '客户类型',templet:function (data) {
+                        return (JSON.parse(data.context)).khlx
+                    }},
+
+                {field: 'khmc', sort: true, title: '客户名称',templet:function (data) {
+                        return (JSON.parse(data.context)).khmc
+                    }},
+                {field: 'fzr', sort: true, title: '负责人',templet:function (data) {
+                        return (JSON.parse(data.context)).fzr
+                    }},
+                {field: 'lrr', sort: true, title: '录入人',templet:function (data) {
+                        return (JSON.parse(data.context)).lrr
+                    }},
+                {field: 'lrrq', sort: true, title: '录入日期',templet:function (data) {
+                        return (JSON.parse(data.context)).lrrq
+                    }},
+                {field: 'zje', sort: true, title: '总金额（元）',templet:function (data) {
+                        return (JSON.parse(data.context)).zje
+                    }},
+            ]],
+        });
+    });
+</script>
 </html>

@@ -17,24 +17,11 @@
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
-
-                <div class="layui-form-item">
-                    <div class="select-hand-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">退货日期:</label>
-                            <input type="text" class="layui-input" id="date1">
-                            <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2">
-                        </div>
-                    </div>
-                </div>
-
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
-                        <label class="layui-form-label">供应商名称:</label>
+                        <label class="layui-form-label" style="width:80px">供应商名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input" id="gysmc" search-type="gysmc">
                         </div>
                     </div>
                 </div>
@@ -43,16 +30,14 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">退货单号:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input" id="thdh" search-type="thdh">
                         </div>
                     </div>
                 </div>
 
-
-
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
+                    <div class="layui-bg-green comquery " lay-event="search">查询</div>
+                    <div class="layui-bg-green comquery " lay-event="reset">重置</div>
                 </div>
             </div>
 
@@ -60,7 +45,7 @@
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
+        <table class="layui-hide" id="spspreturn" lay-filter="spspreturn"></table>
     </div>
 
 </body>
@@ -77,9 +62,50 @@
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
+
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
+
+<script>
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Services','jquery'],function () {
+        var $  = layui.jquery;
+
+        var dataType = "spspreturn";
+        var services = new layui.Services({
+            baseURL:baseaip,
+            tableId:"spspreturn",
+            toolbar:"#toolbarinter",
+            serachUrl:"dictionaries/query",
+            getUrl:"dictionaries/get",
+            delUrl:"dictionaries/delete",
+            updUrl:"plant/updateNcpxx",
+            saveUrl:"./dialog/addReturn.html",
+            deleteField:"id",
+            dataType:dataType,
+            parameter:{
+                keyword:'',
+                type:dataType
+            },
+            cols:[[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'thrq', sort: true, title: '退货日期',templet:function (data) {
+                        return (JSON.parse(data.context)).thrq
+                    }},
+                {field: 'thdh', sort: true, title: '退货单号',templet:function (data) {
+                        return (JSON.parse(data.context)).thdh
+                    }},
+                {field: 'gyslx', sort: true, title: '供应商类型',templet:function (data) {
+                        return (JSON.parse(data.context)).gyslx
+                    }},
+
+                {field: 'gysmc', sort: true, title: '供应商名称',templet:function (data) {
+                        return (JSON.parse(data.context)).gysmc
+                    }},
+            ]],
+        });
+    });
+</script>
 </html>
