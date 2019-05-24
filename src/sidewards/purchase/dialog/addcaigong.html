@@ -5,123 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>商品信息</title>
+    <title>采购新增</title>
     <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
 </head>
 
 <body>
 
     <blockquote class="layui-elem-quote layui-text">
-        商品信息
+        采购订单详情
     </blockquote>
     <form class="layui-form" action="" lay-filter="example" id="example">
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">商品名称</label>
+                <label class="layui-form-label">采购单号</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="productname" class="layui-input" id="productname">
+                    <input type="text" name="code" class="layui-input  codes" disabled=true>
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">商品条码</label>
+                <label class="layui-form-label">采购日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="barcode" class="layui-input">
+                    <input type="text" name="time" class="layui-input" id="test1">
                 </div>
             </div>
         </div>
+
+
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">商品类别</label>
+                <label class="layui-form-label">付款方式</label>
                 <div class="layui-input-inline">
-                    <select name="productclass">
-                    <option value="4">商品信息</option>
-                    <option value="3">畜禽产品 </option>
-                    <option value="2">畜禽</option>
-                    <option value="1">农产品</option>
+                    <select name="way">
+                    <option value="4">借记卡分期</option>
+                    <option value="3">信用卡分期</option>
+                    <option value="2">担保交易</option>
+                    <option value="1">现金交易</option>
                 </select>
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">规格型号</label>
+                <label class="layui-form-label">付款状态</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="specifications" class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">保质期</label>
-                <div class="layui-input-inline" style="width: 80px;">
-                    <input type="number" name="lifedate" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width: 100px;">
-                    <select name="lifedateunit" width="100">
-                    <option value="年">年</option>
-                    <option value="月">月</option>
-                    <option value="日">日</option>
+                    <select name="states">
+                    <option value="完成">完成</option>
+                    <option value="未完成">未完成</option>
                 </select>
                 </div>
             </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">单位</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="unit" class="layui-input">
-                </div>
-            </div>
         </div>
+
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">商品重量</label>
-                <div class="layui-input-inline" style="width: 162px;">
-                    <input type="text" name="weight" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">KG</div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">采购价</label>
+                <label class="layui-form-label">供应商名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="purchaseprice" class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">销售价</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="sellingprice" class="layui-input">
+                    <input type="text" name="supplier" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">产地</label>
+                <label class="layui-form-label">预交日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="foodaddress" class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">许可证号</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="foodcode" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">企业名称</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="foodcreate_name" class="layui-input">
+                    <input type="text" name="jiaotime" class="layui-input" id="test2">
                 </div>
             </div>
         </div>
 
-
-
         <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                <button type="reset" class="layui-btn cancels">取消</button>
+            <div class="layui-inline">
+                <label class="layui-form-label">制表人名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="lister" class="layui-input">
+                </div>
             </div>
-        </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">批准</label>
+                <div class="layui-input-inline">
+                    <select name="approval">
+                    <option value="已批准">通过</option>
+                    <option value="未批准">不通过</option>
+                </select>
+                </div>
+            </div>
+
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-bg-black" lay-submit="" lay-filter="demo1">立即提交</button>
+                    <button type="reset" class="layui-btn cancels  layui-bg-black">取消</button>
+                </div>
+            </div>
     </form>
 </body>
 <script src="../../../../../js/module/jquery-3.4.1.min.js"></script>
@@ -139,6 +111,24 @@
             laydate = layui.laydate,
             serviceTools = layui.serviceTools;
         //监听提交
+
+        //时间
+        laydate.render({
+            elem: '#test1',
+            done: function(value, date) {
+                var ss = new Date().getMilliseconds();
+                var s = new Date().getMinutes();
+                var an = value.split("-");
+                var tou = an.join("");
+                $(".codes").val(tou + ss); //添加单号
+            }
+        });
+
+        //时间2
+        laydate.render({
+            elem: '#test2',
+        });
+
         form.on('submit(demo1)', function(data) {
             var type = localStorage.getItem("type");
             if (type === null) {
@@ -148,7 +138,7 @@
                     id: dataId === null ? "" : dataId,
                     type: type,
                     context: JSON.stringify(data.field),
-                    keyword: data.field.productname + "|" + data.field.barcode
+                    keyword: data.field.supplier + "|" + data.field.code + "|" + data.field.way
                 }
                 serviceTools.EditOrSaveOrDelete({
                     parame: zd,

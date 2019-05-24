@@ -18,13 +18,11 @@
             <div class="select-title">查询条件</div>
 
             <div class="select-con">
-
-
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">产品名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="productName" search-type="productName" >
+                            <input type="text" class="layui-input" id="productName" search-type="productName">
                         </div>
                     </div>
                 </div>
@@ -34,7 +32,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">产品条码:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="barcode"  search-type="barcode">
+                            <input type="text" class="layui-input" id="barcode" search-type="barcode">
                         </div>
                     </div>
                 </div>
@@ -72,61 +70,96 @@
 <script>
     layui.config({
         base: '../../../../js/module/'
-    }).use(['Services','jquery'],function () {
-        var $  = layui.jquery;
+    }).use(['Services', 'jquery'], function() {
+        var $ = layui.jquery;
 
         var dataType = 1;
         var services = new layui.Services({
-            baseURL:baseaip,
-            tableId:"testdome",
-            toolbar:"#toolbarinter",
-            serachUrl:"dictionaries/query",
-            getUrl:"dictionaries/get",
-            delUrl:"dictionaries/delete",
-            updUrl:"plant/updateNcpxx",
-            saveUrl:"./dialog/addProduct.html",
-            deleteField:"id",
-            dataType:dataType,
-            parameter:{
-                keyword:'',
-                type:dataType
+            baseURL: baseaip,
+            tableId: "testdome",
+            toolbar: "#toolbarinter",
+            serachUrl: "dictionaries/query",
+            getUrl: "dictionaries/get",
+            delUrl: "dictionaries/delete",
+            updUrl: "plant/updateNcpxx",
+            saveUrl: "./dialog/addProduct.html",
+            deleteField: "id",
+            dataType: dataType,
+            parameter: {
+                keyword: '',
+                type: dataType
             },
-            cols:[[
-                {type: 'checkbox', fixed: 'left'},
-                {field: 'productname', sort: true, title: '商品名称',templet:function (data) {
+            cols: [
+                [{
+                    type: 'checkbox',
+                    fixed: 'left'
+                }, {
+                    field: 'productname',
+                    sort: true,
+                    title: '商品名称',
+                    templet: function(data) {
 
                         return (JSON.parse(data.context)).productname
-                 }},
-                {field: 'barcode', sort: true, title: '商品条码',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).barcode
-                }},
-                {field: 'productclass', sort: true, title: '类别',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).productclass
-                }},
-                {field: 'approval', sort: true, title: '审批状态',templet:function (data) {
-                    var d = JSON.parse(data.context);
-                    d.approval = d.approval === undefined || d.approval === null ? 1 :d.approval;
-                        return (d.approval === 1 ? "未审核":d.approval === 2 ? "审核通过":d.approval === 3 ? "审核未通过":"")
-                }},
-                {field: 'specifications', sort: true, title: '规格型号',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).specifications
-                }},
-                {field: 'unit', sort: true, title: '单位',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).unit
-                }},
-                {field: 'foodcreate_name', sort: true, title: '生产企业名称',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).foodcreate_name
-                }},
-                {field: 'foodcode', sort: true, title: '生产许可证号',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).foodcode
-                }},
-            ]],
+                    }
+                }, {
+                    field: 'barcode',
+                    sort: true,
+                    title: '商品条码',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).barcode
+                    }
+                }, {
+                    field: 'productclass',
+                    sort: true,
+                    title: '类别',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).productclass
+                    }
+                }, {
+                    field: 'approval',
+                    sort: true,
+                    title: '审批状态',
+                    templet: function(data) {
+                        var d = JSON.parse(data.context);
+                        d.approval = d.approval === undefined || d.approval === null ? 1 : d.approval;
+                        return (d.approval === 1 ? "未审核" : d.approval === 2 ? "审核通过" : d.approval === 3 ? "审核未通过" : "")
+                    }
+                }, {
+                    field: 'specifications',
+                    sort: true,
+                    title: '规格型号',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).specifications
+                    }
+                }, {
+                    field: 'unit',
+                    sort: true,
+                    title: '单位',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).unit
+                    }
+                }, {
+                    field: 'foodcreate_name',
+                    sort: true,
+                    title: '生产企业名称',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).foodcreate_name
+                    }
+                }, {
+                    field: 'foodcode',
+                    sort: true,
+                    title: '生产许可证号',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).foodcode
+                    }
+                }, ]
+            ],
         });
     });
 </script>
