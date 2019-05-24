@@ -1,6 +1,9 @@
 var base = "http://47.98.167.96:9191/";
-// var baseaip = "http://47.98.167.96:9527/api/";
-var baseaip = "http://192.168.1.111:9527/api/";
+var baseaip = "http://47.98.167.96:9527/api/";
+//var baseaip = "http://192.168.1.111:9527/api/";//JIANG
+
+// var baseaip = "http://192.168.1.107:9527/api/";//CUI
+
 var jq = jQuery.noConflict();
 var sessions = sessionStorage.getItem("keyssname");
 
