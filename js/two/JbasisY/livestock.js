@@ -33,7 +33,7 @@
             function deleteId(id){
                 Theoldcuiway(
                     "plant/deleteNcpxx", {
-                        jdxxId:id,
+                        ncpxxId:id,
                     },
                     "POST"
                 )
@@ -66,6 +66,7 @@
                     productclass: "2",
                     productName: productName,
                     auditStaus: auditStaus,
+                    barcode:'',
                 },
                 headers: {
                 Authorization: "Bearer" + " " + sessions
@@ -122,12 +123,7 @@
                     minWidth: 120,
                     align: "center"
                     },
-                    {
-                    field: "barcode",
-                    title: "产品条码",
-                    minWidth: 120,
-                    align: "center"
-                    },
+                   
                     {
                     field: "specifications",
                     title: "规格",
@@ -141,13 +137,13 @@
                     align: "center"
                     },
                     {
-                    field: "lifedate",
+                    field: "cycle",
                     title: "保质期",
                     minWidth: 120,
                     align: "center"
                     },
                     {
-                    field: "lifedateunit",
+                    field: "cycleunit",
                     title: "保质期单位",
                     minWidth: 50,
                     align: "center"
