@@ -62,6 +62,7 @@ layui.define(['table', 'form','serviceTools','layer'], function (exports) {
         function bindEvent(){
             localStorage.removeItem("type");
             localStorage.setItem("type",defaultServicesConfig.dataType);
+
             $("[lay-event='add']").unbind("click").on("click" ,function () {
                  window.location.href = defaultServicesConfig.saveUrl;
             })
@@ -90,15 +91,19 @@ layui.define(['table', 'form','serviceTools','layer'], function (exports) {
                 defaultServicesConfig.parameter.keyword = "";
                 tableService.reload({where:defaultServicesConfig.parameter,page:{curr: 1}})
             })
-
             $("[lay-event='search']").unbind("click").on("click" ,function () {
                 var val = "";
                 $("input[search-type]").each(function(){
                     val += $(this).val()+"|";
                 });
-                
                 defaultServicesConfig.parameter.keyword = val.substring(0,val.length - 1);
                 tableService.reload({where:defaultServicesConfig.parameter,page:{curr: 1}})
+            })
+            $("[lay-event='get']").unbind("click").on("click" ,function () {
+                var data = table.checkStatus(defaultServicesConfig.tableId);
+                data.data.length === 1 ?(function () {
+                    alert(11)
+                })():alerts("请选择一条数据");
             })
         }
         Services.prototype = {
