@@ -11,54 +11,37 @@
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
-    个人供应商
+    仓库
 </blockquote>
 <form class="layui-form" action="" lay-filter="example" id="example">
 
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">身份证号</label>
+            <label class="layui-form-label">仓库名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="sfzh"  class="layui-input" id="cgrq">
+                <input type="text" name="ckmc"  class="layui-input" id="cgrq">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">二级仓库</label>
             <div class="layui-input-inline">
-                <input type="text" name="xm"  class="layui-input">
+                <input type="text" name="rjck"  class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">详细地址</label>
+            <label class="layui-form-label">仓库负责人</label>
             <div class="layui-input-inline">
-                <input type="text" name="xxdz"  class="layui-input" >
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">联系电话</label>
-            <div class="layui-input-inline">
-                <input type="text" name="lxdh"  class="layui-input">
+                <input type="text" name="ckfzr"  class="layui-input" >
             </div>
         </div>
     </div>
-
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">备注</label>
-            <div class="layui-input-inline">
-                <input type="text" name="bz"  class="layui-input" >
-            </div>
-        </div>
-
-    </div>
-
 
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button class="layui-btn layui-hide" lay-submit="" lay-filter="demo1">立即提交</button>
             <button type="reset" class="layui-btn cancels">取消</button>
         </div>
     </div>
@@ -87,7 +70,7 @@
                 var zd = { id:dataId === null ? "" : dataId,
                     type:type,
                     context:JSON.stringify(data.field),
-                    keyword:data.field.xm+"|"+data.field.sfzh
+                    keyword:data.field.ckmc+"|"+data.field.rjck
                 }
                 serviceTools.EditOrSaveOrDelete({
                     parame:zd,

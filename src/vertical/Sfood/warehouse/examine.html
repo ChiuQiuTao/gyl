@@ -5,69 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>商品销售</title>
-    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../../../css/twocss/commit.css">
+    <title>产品信息</title>
 </head>
-
 <body>
-    <form class="layui-form" action="">
-        <div class="select common">
-            <div class="select-title">查询条件</div>
+<form class="layui-form" action="">
 
-            <div class="select-con">
+    <div class="select common">
+        <div class="select-title">查询条件</div>
 
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">仓库:</label>
-                        <div class="layui-input-inline">
-                            <select name="city" lay-verify="">
-                                <option value="">请选择</option>
-                                <option value="010">北京</option>
-                                <option value="021">上海</option>
-                                <option value="0571">杭州</option>
-                            </select>
-                        </div>
+        <div class="select-con">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">仓库:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="productName" search-type="productName">
                     </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">二级仓库:</label>
-                        <div class="layui-input-inline">
-                            <select name="city" lay-verify="">
-                                <option value="">请选择</option>
-                                <option value="010">北京</option>
-                                <option value="021">上海</option>
-                                <option value="0571">杭州</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
                 </div>
             </div>
 
+
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">二级仓库:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="barcode" search-type="barcode">
+                    </div>
+                </div>
+            </div>
+
+            <div class="select-btn">
+                <div class="layui-bg-green comquery " lay-event="search">查询</div>
+                <div class="layui-bg-green comquery " lay-event="reset">重置</div>
+            </div>
         </div>
-    </form>
-
-    <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
     </div>
+</form>
 
+<div class="common-padding">
+    <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
+</div>
 </body>
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
     <div class="layui-btn-container ">
-        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
+        <button class="layui-btn  layui-btn-sm colors layui-hide" lay-event="add"><i class="layui-icon"></i></i>查看</button>
+        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>查看</button>
+        <button class="layui-btn  layui-btn-sm colors layui-hide" lay-event="delete"><i class="layui-icon"></i>删除</button>
     </div>
 </script>
 
@@ -75,9 +58,52 @@
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
-<script src="../../../../js/common/jquery.min.js"></script>
-<script src="../../../../js/common/api.js"></script>
-<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
+<script src="../../../../js/module/jquery-3.4.1.min.js"></script>
+<script>
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Services', 'jquery'], function() {
+        var $ = layui.jquery;
+
+        var dataType = "ckmc_111";
+        var services = new layui.Services({
+            baseURL: baseaip,
+            tableId: "testdome",
+            toolbar: "#toolbarinter",
+            serachUrl: "dictionaries/query",
+            getUrl: "dictionaries/get",
+            delUrl: "dictionaries/delete",
+            updUrl: "plant/updateNcpxx",
+            saveUrl: "./dialog/getexamine.html",
+            deleteField: "id",
+            dataType: dataType,
+            parameter: {
+                keyword: '',
+                type: dataType
+            },
+            cols: [
+                [{
+                    type: 'checkbox',
+                    fixed: 'left'
+                }, {
+                    field: 'productname',
+                    sort: true,
+                    title: '仓库',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).ckmc
+                    }
+                }, {
+                    field: 'barcode',
+                    sort: true,
+                    title: '二级仓库',
+                    templet: function(data) {
+                        return (JSON.parse(data.context)).rjck
+                    }
+                }]
+            ],
+        });
+    });
+</script>
+
 </html>

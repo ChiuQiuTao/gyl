@@ -5,54 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>商品采购</title>
+    <title>防疫提醒</title>
     <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
 </head>
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
-    个人供应商
+    信息
 </blockquote>
 <form class="layui-form" action="" lay-filter="example" id="example">
 
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">身份证号</label>
+            <label class="layui-form-label">基地</label>
             <div class="layui-input-inline">
-                <input type="text" name="sfzh"  class="layui-input" id="cgrq">
+                <input type="text" name="s1"  class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">圈舍</label>
             <div class="layui-input-inline">
-                <input type="text" name="xm"  class="layui-input">
+                <input type="text" name="s2"  class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">详细地址</label>
+            <label class="layui-form-label">畜禽名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="xxdz"  class="layui-input" >
+                    <input type="text" name="s3"  class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">联系电话</label>
+            <label class="layui-form-label">防疫项名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="lxdh"  class="layui-input">
+                <input type="text" name="s4"  class="layui-input">
             </div>
         </div>
     </div>
-
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">备注</label>
+            <label class="layui-form-label">出生日期</label>
             <div class="layui-input-inline">
-                <input type="text" name="bz"  class="layui-input" >
+                <input type="text" name="s5" class="layui-input" id="date">
+            </div>
+            
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">预计防疫日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="s6"  class="layui-input" id="date2">
             </div>
         </div>
-
     </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">数量</label>
+            <div class="layui-input-inline" style="">
+                <input type="text" name="s7"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">防疫时机</label>
+            <div class="layui-input-inline">
+                <input type="text" name="s8"  class="layui-input">
+            </div>
+        </div>
+    </div>
+  
+  
+    
 
 
 
@@ -64,14 +86,23 @@
     </div>
 </form>
 </body>
+
 <script src="../../../../../js/module/jquery-3.4.1.min.js"></script>
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../../js/common/api.js"></script>
 <script type="text/javascript">
-    var dataId = null;
+    var dataId = null; 
     layui.config({
         base: '../../../../../js/module/'
     }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+        var laydate = layui.laydate;
+  
+        laydate.render({
+            elem: '#date' //指定元素
+        });
+        laydate.render({
+            elem: '#date2' //指定元素
+        });
         layui.Tool.init();
         var form = layui.form
             ,layer = layui.layer
@@ -85,15 +116,16 @@
                 alert("数据类型不能为空")
             }else{
                 var zd = { id:dataId === null ? "" : dataId,
-                    type:type,
-                    context:JSON.stringify(data.field),
-                    keyword:data.field.xm+"|"+data.field.sfzh
+                type:type,
+                context:JSON.stringify(data.field),
+                    // keyword:data.field.farmName+"|"+data.field.detectionOrderNo
+                    keyword:data.field.farmName+"|"+data.field.s4
                 }
                 serviceTools.EditOrSaveOrDelete({
                     parame:zd,
                     url:baseaip+"dictionaries/saveOrUpdate",
                     callback:(function(){
-                        window.history.back(-2);
+                            window.history.back(-2);
                     })()
                 })
 
@@ -125,11 +157,11 @@
                 data  = JSON.parse(dataJson);
                 setForm(data);
             })():"";
-
+            
         }else{
-
+            
         }
-
+        
     }
     function setForm(data){
         layui.use(['form'], function () {

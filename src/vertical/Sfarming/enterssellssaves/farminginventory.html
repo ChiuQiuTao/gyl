@@ -24,7 +24,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">投入品名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input" search-type="inputsname" id="inputsname">
                         </div>
                     </div>
                 </div>
@@ -34,27 +34,29 @@
                         <label class="layui-form-label" style="width:80px;">投入品类别:</label>
                         <div class="layui-input-inline">
 
-                            <select name="city" lay-verify="">
-                              <option value="">请选择</option>
-                              <option value="010">北京</option>
-                              <option value="021">上海</option>
-                              <option value="0571">杭州</option>
+                            <select name="inputstype" lay-verify="" id='inputstype' search-type="inputstype">
+                                <option value="">请选择</option>
+                                <option value="兽药">兽药</option>
+                                <option value="饲料">饲料</option>
+                                <option value="饲料添加剂">饲料添加剂</option>
+                                <option value="其他投入品">其他投入品</option>
+
                             </select>
                         </div>
                     </div>
                 </div>
                 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
-                </div>
+                        <div class="layui-bg-green comquery" lay-event="search">查询</div>
+                        <div class="layui-bg-green comquery" lay-event="reset">重置</div>
+                    </div>
             </div>
 
         </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
     </div>
 
 </body>
@@ -75,5 +77,61 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
+<script>
+        layui.config({
+            base: '../../../../js/module/'
+        }).use(['Services','jquery'],function () {
+            var $  = layui.jquery;
+           
+            var dataType = 'enterinventory';
+            var services = new layui.Services({
+                baseURL:baseaip,
+                tableId:"testdome",
+                toolbar:"#toolbarinter",
+                serachUrl:"dictionaries/query",
+                getUrl:"dictionaries/get",
+                delUrl:"dictionaries/delete",
+                updUrl:"plant/updateNcpxx",
+                saveUrl:"./dialog/farminginventoryDialog.html",
+                deleteField:"id",
+                dataType:dataType,
+                parameter:{
+                    keyword:'',
+                    type:dataType
+                },
+                cols:[[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 'inputstype', sort: true, title: '投入品类别',templet:function (data) {
+    
+                        return (JSON.parse(data.context)).inputstype
+                    }},
+                    {field: 'inputsname', sort: true, title: '投入品名称',templet:function (data) {
+    
+                            return (JSON.parse(data.context)).inputsname
+                     }},
+                    {field: 'inventnumber', sort: true, title: '库存数量',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).inventnumber
+                    }},
+                    {field: 'date', sort: true, title: '末次采购日期',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).date
+                    }},
+                    {field: 'pronumber', sort: true, title: '末次采购数量',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).pronumber
+                    }},
+                    {field: 'inputnumber', sort: true, title: '末次投放数量',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).inputnumber
+                    }},
+                    {field: 'date2', sort: true, title: '末次投放日期',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).date2
+                    }},
+                   
+                ]],
+            });
+        });
+    </script>
 </html>

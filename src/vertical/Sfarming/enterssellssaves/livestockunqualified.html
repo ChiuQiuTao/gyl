@@ -19,25 +19,18 @@
             <div class="select-con">
 
 
-                <div class="layui-form-item">
-                    <div class="select-hand-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">不合格处理日期:</label>
-                            <input type="text" class="layui-input" id="date1">
-                            <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2">
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label" style="width:80px;">状态:</label>
                         <div class="layui-input-inline">
-                            <select name="city" lay-verify="">
+                            <select name="type" lay-verify="" search-type="type" id="type">
                               <option value="">请选择</option>
-                              <option value="010">北京</option>
-                              <option value="021">上海</option>
-                              <option value="0571">杭州</option>
+                              <option value="未处理">未处理</option>
+                              <option value="处理中">处理中</option>
+                              <option value="延期">延期</option>
+                              <option value="取消">取消</option>
+                              <option value="已处理">已处理</option>
                             </select>
                         </div>
                     </div>
@@ -46,30 +39,22 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">处理方式:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">处理单号:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                            <input type="text" class="layui-input" search-type="search3" id="search3">
                         </div>
                     </div>
                 </div>
                 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
-                </div>
+                        <div class="layui-bg-green comquery" lay-event="search">查询</div>
+                        <div class="layui-bg-green comquery" lay-event="reset">重置</div>
+                    </div>
             </div>
 
         </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
     </div>
 
 </body>
@@ -87,8 +72,56 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
 <script src="../../../../js/common/jquery.min.js"></script>
-<script src="../../../../js/common/api.js"></script>
-<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
-</html>
+    <script src="../../../../js/common/api.js"></script>
+    <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+    <script src="../../../../js/common/template-web.js"></script>
+    <script>
+            layui.config({
+                base: '../../../../js/module/'
+            }).use(['Services','jquery'],function () {
+                var $  = layui.jquery;
+               
+                var dataType = 'q3';
+                var services = new layui.Services({
+                    baseURL:baseaip,
+                    tableId:"testdome",
+                    toolbar:"#toolbarinter",
+                    serachUrl:"dictionaries/query",
+                    getUrl:"dictionaries/get",
+                    delUrl:"dictionaries/delete",
+                    updUrl:"plant/updateNcpxx",
+                    saveUrl:"./dialog/livestockunqualifiedDialog.html",
+                    deleteField:"id",
+                    dataType:dataType,
+                    parameter:{
+                        keyword:'',
+                        type:dataType
+                    },
+                    cols:[[
+                        {type: 'checkbox', fixed: 'left'},
+                        {field: 'search1', sort: true, title: ' 预计处理日期 ',templet:function (data) {
+        
+                            return (JSON.parse(data.context)).search1
+                        }},
+                        {field: 'search4', sort: true, title: '畜禽名称',templet:function (data) {
+        
+                                return (JSON.parse(data.context)).search4
+                         }},
+                        {field: 'search11', sort: true, title: '处理数量',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).search11
+                        }},
+                        {field: 'search3', sort: true, title: '处理方式',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).search3
+                        }},
+                        
+                        {field: 'type', sort: true, title: '状态',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).type
+                        }}
+                    ]],
+                });
+            });
+        </script>
+    </html>

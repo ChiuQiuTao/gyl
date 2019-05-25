@@ -5,57 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>商品采购</title>
+    <title>商品信息</title>
     <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
 </head>
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
-    个人供应商
+    商品信息
 </blockquote>
 <form class="layui-form" action="" lay-filter="example" id="example">
-
+  
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">身份证号</label>
+            <label class="layui-form-label">投入品类别</label>
             <div class="layui-input-inline">
-                <input type="text" name="sfzh"  class="layui-input" id="cgrq">
+                <select name="inputstype" lay-verify="" id='inputstype' search-type="inputstype">
+                    <option value="">请选择</option>
+                    <option value="兽药">兽药</option>
+                    <option value="饲料">饲料</option>
+                    <option value="饲料添加剂">饲料添加剂</option>
+                    <option value="其他投入品">其他投入品</option>
+
+                </select>
             </div>
+            
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">姓名</label>
+            <label class="layui-form-label">投入品名称</label>
             <div class="layui-input-inline">
-                <input type="text" name="xm"  class="layui-input">
+                <input type="text" name="inputsname"  class="layui-input">
+            </div>
+            <!-- <div class="layui-form-mid layui-word-aux">KG</div> -->
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">库存数量</label>
+            <div class="layui-input-inline">
+                <input type="text" name="inventnumber"  class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">详细地址</label>
+            <label class="layui-form-label">末次采购日期</label>
             <div class="layui-input-inline">
-                <input type="text" name="xxdz"  class="layui-input" >
+                <input type="text" name="date"  class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">联系电话</label>
+            <label class="layui-form-label">末次采购数量</label>
             <div class="layui-input-inline">
-                <input type="text" name="lxdh"  class="layui-input">
+                <input type="text" name="pronumber"  class="layui-input">
             </div>
         </div>
     </div>
-
     <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">末次投放数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="inputnumber"  class="layui-input">
+                </div>
+            </div>
         <div class="layui-inline">
-            <label class="layui-form-label">备注</label>
+            <label class="layui-form-label">末次投放日期</label>
             <div class="layui-input-inline">
-                <input type="text" name="bz"  class="layui-input" >
+                <input type="text" name="date2"  class="layui-input">
             </div>
         </div>
-
     </div>
-
-
-
+    
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
@@ -68,10 +87,15 @@
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../../js/common/api.js"></script>
 <script type="text/javascript">
-    var dataId = null;
+    var dataId = null; 
     layui.config({
         base: '../../../../../js/module/'
     }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+        var laydate = layui.laydate;
+  
+        laydate.render({
+            elem: '#date' //指定元素
+        });
         layui.Tool.init();
         var form = layui.form
             ,layer = layui.layer
@@ -85,15 +109,16 @@
                 alert("数据类型不能为空")
             }else{
                 var zd = { id:dataId === null ? "" : dataId,
-                    type:type,
-                    context:JSON.stringify(data.field),
-                    keyword:data.field.xm+"|"+data.field.sfzh
+                type:type,
+                context:JSON.stringify(data.field),
+                    // keyword:data.field.farmName+"|"+data.field.detectionOrderNo
+                    keyword:data.field.inputsname+"|"+data.field.inputstype
                 }
                 serviceTools.EditOrSaveOrDelete({
                     parame:zd,
                     url:baseaip+"dictionaries/saveOrUpdate",
                     callback:(function(){
-                        window.history.back(-2);
+                            window.history.back(-2);
                     })()
                 })
 
@@ -125,17 +150,16 @@
                 data  = JSON.parse(dataJson);
                 setForm(data);
             })():"";
-
+            
         }else{
-
+            
         }
-
+        
     }
     function setForm(data){
         layui.use(['form'], function () {
             console.log(data);
             console.log('data');
-
             layui.form.val('example', JSON.parse(data.context));
         })
     }

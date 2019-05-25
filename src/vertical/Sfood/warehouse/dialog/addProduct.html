@@ -12,7 +12,7 @@
 <body>
 
     <blockquote class="layui-elem-quote layui-text">
-        商品信息
+        商品信息222
     </blockquote>
     <form class="layui-form" action="" lay-filter="example" id="example">
 
@@ -20,51 +20,39 @@
             <div class="layui-inline">
                 <label class="layui-form-label">商品名称</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="productname" class="layui-input" id="productname">
+                    <input type="text" name="spmc" class="layui-input" id="productname">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">商品条码</label>
+                <label class="layui-form-label">批次</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="barcode" class="layui-input">
+                    <input type="number" name="pc" class="layui-input">
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">商品类别</label>
+                <label class="layui-form-label">库存数量</label>
                 <div class="layui-input-inline">
-                    <select name="productclass">
-                    <option value="4">商品信息</option>
-                    <option value="3">畜禽产品 </option>
-                    <option value="2">畜禽</option>
-                    <option value="1">农产品</option>
-                </select>
+                    <input type="number" name="kcsl" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">规格型号</label>
+                <label class="layui-form-label">库存重量</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="specifications" class="layui-input">
+                    <input type="number" name="kczl" class="layui-input">
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">保质期</label>
-                <div class="layui-input-inline" style="width: 80px;">
-                    <input type="number" name="lifedate" class="layui-input">
-                </div>
-                <div class="layui-input-inline" style="width: 100px;">
-                    <select name="lifedateunit" width="100">
-                    <option value="年">年</option>
-                    <option value="月">月</option>
-                    <option value="日">日</option>
-                </select>
+                <label class="layui-form-label">调入仓库</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="drck" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">单位</label>
+                <label class="layui-form-label">调入二级仓库</label>
                 <div class="layui-input-inline">
                     <input type="text" name="unit" class="layui-input">
                 </div>
@@ -72,81 +60,34 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">商品重量</label>
-                <div class="layui-input-inline" style="width: 162px;">
-                    <input type="text" name="weight" class="layui-input">
-                </div>
-                <div class="layui-form-mid layui-word-aux">KG</div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">采购价</label>
+                <label class="layui-form-label">调出数量</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="purchaseprice" class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">销售价</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="sellingprice" class="layui-input">
+                    <input type="number" name="dcsl" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">产地</label>
+                <label class="layui-form-label">调出重量</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="foodaddress" class="layui-input">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">许可证号</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="foodcode" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">企业名称</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="foodcreate_name" class="layui-input">
+                    <input type="number" name="dczl" class="layui-input">
                 </div>
             </div>
         </div>
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">生产日期</label>
+                <label class="layui-form-label">调拨日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="scrq" class="layui-input">
+                    <input type="text" name="dprq" class="layui-input">
                 </div>
             </div>
             <div class="layui-inline">
-                <label class="layui-form-label">过期日期</label>
+                <label class="layui-form-label">负责人</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="gqrq" class="layui-input">
-                </div>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">库存数量</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="kcsl" class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-inline">
-                <label class="layui-form-label">保质期</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="bzq" class="layui-input">
+                    <input type="text" name="fzr" class="layui-input">
                 </div>
             </div>
 
         </div>
-
-
 
         <div class="layui-form-item">
             <div class="layui-input-block">
@@ -180,7 +121,7 @@
                     id: dataId === null ? "" : dataId,
                     type: type,
                     context: JSON.stringify(data.field),
-                    keyword: data.field.productname + "|" + data.field.barcode
+                    keyword: data.field.dprq + "|" + data.field.fzr
                 }
                 serviceTools.EditOrSaveOrDelete({
                     parame: zd,
