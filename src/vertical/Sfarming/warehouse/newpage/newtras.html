@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>新增仓库调拔</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css" />
+    <link rel="stylesheet" href="../../../../../css/twocss/commit.css" />
+    <link rel="stylesheet" href="../../../../../css/twocss/H/processing.css" />
+</head>
+
+<body>
+    <div class="select common">
+        <form class="layui-form" action="">
+            <div class="select-title" style="height:40px;line-height:40px;">
+                基本信息
+            </div>
+            <div class="basis-h">
+                <div class="mess-pronew">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">调拨日期:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="temis" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">仓库:</label >
+                            <div class="layui-input-inline">
+                                  <select class="Namerawmaterials" lay-filter="TMADE">
+                                    <option value="">请选择</option>
+                                  </select>
+                            </div>
+                      </div>
+                    </div>
+                  </div>
+          
+
+                  <div class="mess-pronew">
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label" style="width:95px;" >二级仓库:</label >
+                        <div class="layui-input-inline">
+                              <select class="erji" lay-filter="shas">
+                                  <option value="">请选择</option>
+                              </select>
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="layui-form-item">
+                    <div class="layui-inline">
+                      <label class="layui-form-label" style="width:95px;" >负责人:</label>
+                            <div class="layui-input-inline">
+                                <select lay-filter="heads" class="headpeople">
+                                  <option value="">---请选择---</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+    </div>
+    <div class="select-title" style="height:30px;line-height:30px;margin-top: 10px;border-bottom-color:#c9c9c9;">
+        仓库调拨
+    </div>
+    </form>
+
+    <div class="transfers"> </div>
+
+
+
+    <div class="layui-btn-group" style="width: 100%;display: flex;justify-content: center;margin-top: 10px;">
+        <button class="layui-btn  saves">
+          <i class="layui-icon">&#xe674;</i>保存
+        </button>
+        <button class="layui-btn huifan">
+          <i class="layui-icon">&#xe65c;</i>返回
+        </button>
+    </div>
+    </div>
+</body>
+
+<script src="../../../../../js/common/jquery.min.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/template-web.js"></script>
+
+</html>
+
+<!-- 查看的内容 -->
+<script type="text/html" id="contentquery">
+
+    <table lay-filter="demo" class="layui-table">
+
+        <thead>
+            <tr>
+                <th></th>
+                <th>名称</th>
+                <th>批次</th>
+                <th>库存数量</th>
+                <th>调入仓库</th>
+                <th>调入二级仓库</th>
+                <th>调出数量</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each content}}
+            <tr>
+                <td> <input type="radio" name="sex"></td>
+                <td>{{$value.productname}}</td>
+                <td>{{$value.batchcode}}</td>
+                <td>{{$value.weight}}</td>
+                <td><select class="yiji" style="width:100px;height:20px;"><option>请选择</option></select></td>
+                <td><select class="erjis" style="width:100px;height:20px;"><option>请选择</option></select></td>
+                <td><input type="text" style="width:100px;height:20px;"></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</script>
+
+<!-- 里面下列 -->
+<script type="text/html" id="More">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">添加</a>
+</script>
+
+<script>
+    layui.use(["table", "layer", "form", "laydate", "util"], function() {
+        var $ = layui.jquery,
+            table = layui.table,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            form = layui.form,
+            projectobj = {},
+            transfers = {},
+            util = layui.util;
+
+        //时间选择
+        laydate.render({
+            elem: "#temis",
+            show: true
+        });
+
+        //负责人添加
+        Theoldcuiway("plant/getckrzr", {}, "GET")
+            .done(function(resp) {
+                console.log(resp);
+                $.each(resp.data, function(v, item) {
+                    $(".headpeople").append(new Option(item.createname, item.createid));
+                });
+                layui.form.render("select");
+                return;
+            })
+            .fail(function(err) {
+                console.log(err);
+            });
+
+        //负责人的获取
+        form.on("select(heads)", function(data) {
+            projectobj.createid = data.value;
+            projectobj.createname = $(".headpeople").find("option:selected").text();
+            return;
+        });
+
+
+        //一级仓库
+        Theoldcuiway("plant/getyjck", {
+                repositorytype: 2
+            }, "GET").done(function(resp) {
+                $(".Namerawmaterials").children().remove();
+                $(".Namerawmaterials").append(new Option("---请选择---", ""));
+                $.each(resp.data, function(index, item) {
+                    $(".Namerawmaterials").append(
+                        new Option(item.storagename, item.id)
+                    ); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return;
+            })
+            .fail(function(err) {
+                console.log(err);
+            });
+
+
+        //一级仓库选择出二级仓库
+        form.on("select(TMADE)", function(data) {
+
+            Theoldcuiway("plant/getejck", {
+                    storageId: data.value
+                }, "GET").done(function(resp) {
+                    $(".erji").children().remove();
+                    $(".erji").append(new Option("---请选择---", ""));
+                    $.each(resp.data, function(index, item) {
+                        $(".erji").append(new Option(item.storagename, item.id)); // 下拉菜单里添加元素
+                    });
+                    layui.form.render("select");
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+            return;
+        });
+
+
+
+        //选择二级仓库id调拨 
+        var tts = "";
+        form.on("select(shas)", function(data) {
+            tts = data.value;
+            tiaoyong(tts);
+            return;
+        });
+
+        function tiaoyong(tts) {
+            Theoldcuiway("plant/ckgl/ckdb/getdbp", {
+                    sysType: "2",
+                    outareaid: tts,
+                }, "GET").done(function(resp) {
+
+                    var html = template("contentquery", resp.data);
+                    $(".transfers").html(html);
+
+                    console.log($(".yiji"))
+                    tianjia();
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+        }
+
+        function tianjia() {
+            //一级仓库
+            Theoldcuiway("plant/getyjck", {
+                    repositorytype: 2
+                }, "GET").done(function(resp) {
+                    $(".yiji").children().remove();
+                    $(".yiji").append(new Option("请选择", ""));
+                    $.each(resp.data, function(index, item) {
+                        $(".yiji").append(new Option(item.storagename, item.id));
+                    });
+                    layui.form.render("select");
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+
+            $(".yiji").change(function() {
+                projectobj.outstorageid = $(this).val();
+                projectobj.outstorehouse = $(this).find("option:selected").text();
+                var dds = $(this).val();
+                var thisss = $(this);
+                $(this).parent().next().children().children().remove();
+                $(this).parent().next().children().append(new Option("请选择", ""));
+                projectobj.batchcode = $(this).parent().prev().prev().text();
+                projectobj.num = $(this).parent().prev().text();
+                Theoldcuiway("plant/getejck", {
+                        storageId: dds
+                    }, "GET").done(function(resp) {
+                        $.each(resp.data, function(index, item) {
+                            thisss.parent().next().children().append(new Option(item.storagename, item.id));
+                        });
+                        layui.form.render("select");
+                        return;
+                    })
+                    .fail(function(err) {
+                        console.log(err);
+                    });
+            })
+        }
+
+
+        //上传
+        $(".saves").click(function() {
+
+            if ($("#temis").val() == "") {
+                alerts("请选择时间");
+                return
+            }
+            if ($(".Namerawmaterials").val() == "") {
+                alerts("请选择仓库");
+                return
+            }
+
+            if ($(".erji").val() == "") {
+                alerts("请选择二级仓库");
+                return
+            }
+
+            if ($(".headpeople").val() == "") {
+                alerts("请选择负责人");
+                return
+            }
+
+            projectobj.transferdate = $("#temis").val();
+            projectobj.enterprisename = "名称一";
+            projectobj.systype = 21";
+            // projectobj.weight = "5"
+            Theoldcuiway("plant/ckgl/ckdb/saveckdb", projectobj, "post").done(function(resp) {
+
+                    layer.msg("操作成功", {
+                        icon: 1,
+                        time: 1000
+                    });
+                    setTimeout(function() {
+                        window.location.href = "../transfers.html";
+                    }, 1500);
+                    return;
+                })
+                .fail(function(err) {
+                    console.log(err);
+                });
+        })
+
+
+
+
+
+
+
+
+
+        //返回
+        $(".huifan").click(function() {
+            window.location.href = "../transfers.html";
+        });
+    });
+</script>
