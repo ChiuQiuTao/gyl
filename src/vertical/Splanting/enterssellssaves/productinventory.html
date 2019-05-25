@@ -12,33 +12,40 @@
 </head>
 
 <body>
-    <form class="layui-form" action="">
-        <div class="select common">
-            <div class="select-title">查询条件</div>
+<form class="layui-form" action="">
+    <div class="select common">
+        <div class="select-title">查询条件</div>
 
-            <div class="select-con">
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label" style="width: 110px;">农产品名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" />
-                        </div>
+        <div class="select-con">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 100px">农产品名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="a" search-type="a"/>
                     </div>
                 </div>
+            </div>
 
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
-                </div>
+            <div class="select-btn">
+                <div class="layui-bg-green comquery " lay-event="search">查询</div>
+                <div class="layui-bg-green comquery " lay-event="reset">重置</div>
             </div>
         </div>
-    </form>
-
-    <div class="common-padding">
-        <table class="layui-hide" id="test" lay-filter="testdome"></table>
     </div>
+</form>
+
+<div class="common-padding">
+    <table class="layui-hide" id="zzProductinventory" lay-filter="zzProductinventory"></table>
+</div>
 </body>
+<!-- 头部 -->
+<script type="text/html" id="toolbarinter">
+    <div class="layui-btn-container ">
+        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
+        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
+        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
+    </div>
+</script>
 
 
 <!-- 里面的查看 -->
@@ -50,115 +57,50 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(["table", ], function() {
-        var $ = layui.jquery,
-            table = layui.table;
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Services', 'jquery'], function () {
+        var $ = layui.jquery;
 
-
-        //监听表格里面按钮
-        table.on("tool(testdome)", function(obj) {
-            //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
-            if (layEvent === "detail") {
-                //查看
-                //do somehing
-                layer.msg("查看");
-            }
-        });
-
-        //获取列表
-        var tableIns = table.render({
-            elem: '#test',
-            url: baseaip + "plant/zzjxcgl/ncpkcs",
-            method: "GET",
-            where: {
-                sysType: "1",
-            },
-            headers: {
-                Authorization: "Bearer" + " " + sessions
-            },
-            request: {
-                pageName: "page",
-                limitName: "limit"
-            },
-            limits: [10, 20],
-            parseData: function(res) {
-                //res 即为原始返回的数据
-                console.log(res);
-                return {
-                    code: res.code, //解析接口状态
-                    msg: res.msg, //解析提示文本
-                    totalNum: res.data.totalElements, //解析数据长度
-                    lists: res.data.content //解析数据列表
-                };
-            },
+        var dataType = "zzProductinventory";
+        var services = new layui.Services({
+            baseURL: baseaip,
+            tableId: "zzProductinventory",
             toolbar: "#toolbarinter",
-            response: {
-                statusName: "code", //数据状态的字段名称，默认：code
-                statusCode: 200, //成功的状态码，默认：0
-                msgName: "msg", //状态信息的字段名称，默认：msg
-                countName: "totalNum", //数据总数的字段名称，默认：count
-                dataName: "lists" //数据列表的字段名称，默认：data
+            serachUrl: "dictionaries/query",
+            getUrl: "dictionaries/get",
+            delUrl: "dictionaries/delete",
+            updUrl: "plant/updateNcpxx",
+            saveUrl: "./dialog/addProductinventory.html",
+            deleteField: "id",
+            dataType: dataType,
+            parameter: {
+                keyword: '',
+                type: dataType
             },
-            cellMinWidth: 80,
-            page: {
-                //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ["prev", "page", "next", "skip", "count"], //自定义分页布局
-                //,curr: 5 //设定初始在第 5 页
-                groups: 5, //只显示 1 个连续页码
-                first: true, //不显示首页
-                last: true, //不显示尾页
-                prev: "下一页",
-                next: "上一页",
-                theme: "#c81623"
-            },
-            // height: 'full-20',//满高
-            cols: [
-                [{
-                    field: "id",
-                    title: "农产品名称",
-                    minWidth: 120,
-                    // sort: true,
-                    fixed: "left",
-                    minWidth: 120
-                }, {
-                    field: "username",
-                    title: "库存重量(kg)"
-                }, {
-                    field: "username",
-                    title: "末次采收重量(kg)"
-                }, {
-                    field: "experience",
-                    title: "末次采收日期",
-                    minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                }, {
-                    field: "experience",
-                    title: "末次销售重量",
-                    minWidth: 120,
-                    sort: true,
-                    totalRow: true
-                }, {
-                    field: "experience",
-                    title: "末次销售日期",
-                    minWidth: 120,
-                    sort: true,
-                    totalRow: true
-                }, {
-                    field: "wealth",
-                    width: 137,
-                    title: "更多",
-                    minWidth: 20,
-                    align: "center",
-                    fixed: "right",
-                    toolbar: "#More"
-                }]
-            ]
+            cols: [[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'a',  title: '农产品名称', templet: function (data) {
+                        return (JSON.parse(data.context)).a
+                    }},
+                {field: 'b',  title: '库存重量(kg)', templet: function (data) {
+                        return (JSON.parse(data.context)).b
+                    }},
+                {field: 'c',  title: '末次采收重量(kg)', templet: function (data) {
+                        return (JSON.parse(data.context)).c
+                    }},
+                {field: 'd',  title: '末次采收日期', templet: function (data) {
+                        return (JSON.parse(data.context)).d
+                    }},
+                {field: 'e',  title: '末次销售重量',templet:function (data) {
+                        return (JSON.parse(data.context)).e
+                    }},
+                {field: 'f',  title: '末次销售日期',templet:function (data) {
+                        return (JSON.parse(data.context)).f
+                    }},
+
+            ]],
         });
     });
 </script>
-
 </html>
