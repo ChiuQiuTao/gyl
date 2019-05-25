@@ -12,50 +12,39 @@
 </head>
 
 <body>
-    <form class="layui-form" action="">
-        <div class="select common">
-            <div class="select-title">查询条件</div>
+<form class="layui-form" action="">
+    <div class="select common">
+        <div class="select-title">查询条件</div>
 
-            <div class="select-con">
-                <div class="layui-form-item">
-                    <div class="select-hand-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">退货日期:</label>
-                            <input type="text" class="layui-input" id="date1" />
-                            <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2" />
-                        </div>
+        <div class="select-con">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 100px">客户名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="d" search-type="d"/>
                     </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">客户名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" />
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">退货单号:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
                 </div>
             </div>
-        </div>
-    </form>
 
-    <div class="common-padding">
-        <table class="layui-hide" id="test" lay-filter="testdome"></table>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 100px">退货单号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" id="b" search-type="b"/>
+                    </div>
+                </div>
+            </div>
+            <div class="select-btn">
+                <div class="layui-bg-green comquery " lay-event="search">查询</div>
+                <div class="layui-bg-green comquery " lay-event="reset">重置</div>
+            </div>
+        </div>
     </div>
+</form>
+
+<div class="common-padding">
+    <table class="layui-hide" id="zzProductreturn" lay-filter="zzProductreturn"></table>
+</div>
 </body>
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
@@ -66,6 +55,7 @@
     </div>
 </script>
 
+
 <!-- 里面的查看 -->
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -75,132 +65,45 @@
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(["table", "laydate"], function() {
-        var $ = layui.jquery,
-            table = layui.table,
-            laydate = layui.laydate;
-        laydate.render({
-            elem: "#date1" //指定元素
-        });
-        laydate.render({
-            elem: "#date2" //指定元素
-        });
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Services', 'jquery'], function () {
+        var $ = layui.jquery;
 
-        //监听头部监听
-        table.on("toolbar(testdome)", function(obj) {
-            var checkStatus = table.checkStatus(obj.config.id),
-                data = checkStatus.data; //获取选中的数据
-            switch (obj.event) {
-                case "add":
-                    layer.msg("添加");
-                    break;
-                case "update":
-                    if (data.length === 0) {
-                        layer.msg("请选择一行");
-                    } else if (data.length > 1) {
-                        layer.msg("只能同时编辑一个");
-                    } else {
-                        layer.alert("编辑 [id]：" + checkStatus.data[0].id);
-                    }
-                    break;
-                case "delete":
-                    if (data.length === 0) {
-                        layer.msg("请选择一行");
-                    } else {
-                        layer.msg("删除");
-                    }
-                    break;
-            }
-        });
-
-        //监听表格里面按钮
-        table.on("tool(testdome)", function(obj) {
-            //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
-            var data = obj.data; //获得当前行数据
-            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-            var tr = obj.tr; //获得当前行 tr 的DOM对象
-            if (layEvent === "detail") {
-                //查看
-                //do somehing
-                layer.msg("查看");
-            }
-        });
-
-        //获取列表
-        table.render({
-            elem: "#test",
-            url: "../../../../js/two/data.json",
-            method: "GET",
-            where: {},
-            headers: {
-                Authorization: "Bearer" + " " + sessions
-            },
+        var dataType = "zzProductreturn";
+        var services = new layui.Services({
+            baseURL: baseaip,
+            tableId: "zzProductreturn",
             toolbar: "#toolbarinter",
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
-                //得到当前页码
-                console.log(curr);
-                //得到数据总量
-                console.log(count);
+            serachUrl: "dictionaries/query",
+            getUrl: "dictionaries/get",
+            delUrl: "dictionaries/delete",
+            updUrl: "plant/updateNcpxx",
+            saveUrl: "./dialog/addProductreturn.html",
+            deleteField: "id",
+            dataType: dataType,
+            parameter: {
+                keyword: '',
+                type: dataType
             },
-            request: {
-                limitName: "10"
-            },
-            limits: [10, 20],
-            response: {
-                statusName: "code", //数据状态的字段名称，默认：code
-                statusCode: 0, //成功的状态码，默认：0
-                msgName: null, //状态信息的字段名称，默认：msg
-                countName: "totalNum", //数据总数的字段名称，默认：count
-                dataName: "data" //数据列表的字段名称，默认：data
-            },
-            cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            page: {
-                //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ["prev", "page", "next", "skip", "count"], //自定义分页布局
-                //,curr: 5 //设定初始在第 5 页
-                groups: 5, //只显示 1 个连续页码
-                first: true, //不显示首页
-                last: true, //不显示尾页
-                prev: "下一页",
-                next: "上一页",
-                theme: "#c81623"
-            },
-            // height: 'full-20',//满高
-            cols: [
-                [{
-                    field: "id",
-                    title: "退货日期",
-                    minWidth: 120,
-                    // sort: true,
-                    fixed: "left",
-                    minWidth: 120
-                }, {
-                    field: "username",
-                    title: "退货单号"
-                }, {
-                    field: "username",
-                    title: "客户类型"
-                }, {
-                    field: "experience",
-                    title: "客户名称",
-                    minWidth: 120,
-                    // sort: true,
-                    totalRow: true
-                }, {
-                    field: "wealth",
-                    width: 137,
-                    title: "更多",
-                    minWidth: 20,
-                    align: "center",
-                    fixed: "right",
-                    toolbar: "#More"
-                }]
-            ]
+            cols: [[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'a',  title: '退货日期', templet: function (data) {
+                        return (JSON.parse(data.context)).a
+                    }},
+                {field: 'b',  title: '退货单号', templet: function (data) {
+                        return (JSON.parse(data.context)).b
+                    }},
+                {field: 'c',  title: '客户类型', templet: function (data) {
+                        return (JSON.parse(data.context)).c
+                    }},
+                {field: 'd',  title: '客户名称', templet: function (data) {
+                        return (JSON.parse(data.context)).d
+                    }},
+
+
+            ]],
         });
     });
 </script>
-
 </html>
