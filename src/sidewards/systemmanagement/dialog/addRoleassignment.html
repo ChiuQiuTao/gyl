@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>角色分配</title>
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
+</head>
+<body>
+
+<blockquote class="layui-elem-quote layui-text">
+    角色分配
+</blockquote>
+<form class="layui-form" action="" lay-filter="example" id="example">
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class=" layui-form-label" style="width: 90px"  >用户代号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="a"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class=" layui-form-label" style="width: 90px"  >用户名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="b"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class=" layui-form-label" style="width: 90px"  >手机号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sjh"  class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class=" layui-form-label" style="width: 90px"  >角色名称</label>
+            <div class="layui-input-inline">
+               <select  name="jsmc" id="jsmc" >
+                   <option value="">请选择类型</option>
+               </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn cancels">取消</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="../../../../js/module/jquery-3.4.1.min.js"></script>
+<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../js/common/api.js"></script>
+<script type="text/javascript">
+    var dataId = null;
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+        layui.Tool.init();
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            var type = localStorage.getItem("type");
+            if ( type === null ){
+                alert("数据类型不能为空")
+            }else{
+                var zd = { id:dataId === null ? "" : dataId,
+                    type:type,
+                    context:JSON.stringify(data.field),
+                    keyword:data.field.a+"|"+data.field.b
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame:zd,
+                    url:baseaip+"dictionaries/saveOrUpdate",
+                    callback:(function(){
+                        window.history.back(-2);
+                    })()
+                })
+
+            }
+            return false;
+        });
+
+        // console.info(location.href.split("?")[1])
+        getHrefId();
+
+        $.ajax({
+            type: 'GET',//请求方式
+            url: baseaip+"dictionaries/query?type=xtRolemanagement&keyword=&limit=20",//请求地址
+            dataType: "JSON",//返回数据格式
+            beforeSend:function(xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer" + " " + sessions);
+            },
+            success: function(data){
+                var html = ""
+                var contents = data.data.content
+                for (var i = 0; i < contents.length; i++) {
+                    html += "<option value=\"" + JSON.parse(contents[i].context).b + "\">" + JSON.parse(contents[i].context).b + "</option>"
+                }
+                $("#jsmc").append(html);
+                form.render('select');
+            },
+        });
+
+
+    });
+    function getHrefId(){
+        var loc = location.href;
+        console.log(loc);
+        var url = loc.split("?")[1];
+        console.log(url);
+        if(url && url!=''){
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function(){
+                data  = JSON.parse(dataJson);
+                setForm(data);
+            })():"";
+
+        }else{
+
+        }
+
+    }
+    function setForm(data){
+        layui.use(['form'], function () {
+            console.log(data);
+            console.log('data');
+
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+
+</script>
+
+</html>

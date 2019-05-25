@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>单据设置</title>
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
+</head>
+<body>
+
+<blockquote class="layui-elem-quote layui-text">
+    单据设置
+</blockquote>
+<form class="layui-form" action="" lay-filter="example" id="example">
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">单据代号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="a"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">单据名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="b"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">单据描述</label>
+            <div class="layui-input-inline">
+                <input type="text" name="c"  class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">是否自动编号</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="d" value="自动编号" title="自动编号" checked>
+                <input type="radio" name="d" value="不自动编号" title="不自动编号" >
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">前缀</label>
+            <div class="layui-input-inline">
+                <input type="text" name="e"  class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">后缀</label>
+            <div class="layui-input-inline">
+                <input type="text" name="f"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">单号长度</label>
+            <div class="layui-input-inline">
+                <input type="text" name="g"  class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">加入日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="h"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">日期格式</label>
+            <div class="layui-input-inline">
+                <input type="text" name="i"  class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">流水号规则</label>
+            <div class="layui-input-inline">
+                <input type="text" name="j"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label" style="width: 90px">流程序号</label>
+            <div class="layui-input-inline">
+                <input type="text" name="k"  class="layui-input" >
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn cancels">取消</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="../../../../js/module/jquery-3.4.1.min.js"></script>
+<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../js/common/api.js"></script>
+<script type="text/javascript">
+    var dataId = null;
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+        layui.Tool.init();
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            var type = localStorage.getItem("type");
+            if ( type === null ){
+                alert("数据类型不能为空")
+            }else{
+                var zd = { id:dataId === null ? "" : dataId,
+                    type:type,
+                    context:JSON.stringify(data.field),
+                    keyword:data.field.a+"|"+data.field.b
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame:zd,
+                    url:baseaip+"dictionaries/saveOrUpdate",
+                    callback:(function(){
+                        window.history.back(-2);
+                    })()
+                })
+
+            }
+            return false;
+        });
+        getHrefId();
+
+    });
+    function getHrefId(){
+        var loc = location.href;
+        var url = loc.split("?")[1];
+        if(url && url!=''){
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function(){
+                data  = JSON.parse(dataJson);
+                setForm(data);
+            })():"";
+        }else{
+        }
+    }
+    function setForm(data){
+        layui.use(['form'], function () {
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+</script>
+</html>

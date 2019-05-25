@@ -5,190 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     
-    <title>Document</title>
+    <title>单据设置</title>
     <link rel="stylesheet" href="../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../css/purchaseoverdueform.css">
     <link rel="stylesheet" href="../../../public/font/iconfont.css">
 </head>
 <body>
-    <!-- 查询 -->
-    <div class="select">
-        <div class="select-left">
-            <div class="select-item">
-                <div class="select-item-text">
-                    单据代号
-                </div>
-                <input type="text" class="layui-input select-item-input">
-            </div>
+<!-- 查询 -->
+<div class="select">
+    <div class="select-left">
 
-            <div class="select-item">
-                <div class="select-item-text">
-                    单据名称
-                </div>
-                <input type="text" class="layui-input select-item-input">
-            </div>
-
-            <div class="select-item">
-                <div class="select-item-text">
-                    关键词
-                </div>
-                <input type="text" class="layui-input select-item-input">
-            </div>
-            
-
-           
+        <div class="select-item">
+            <div class="select-item-text" style="width: 90px">单据代号</div>
+            <input type="text" class="layui-input select-item-input"  id="a" search-type="a">
+        </div>
+        <div class="select-item">
+            <div class="select-item-text">单据名称</div>
+            <input type="text" class="layui-input select-item-input" id="b" search-type="b">
         </div>
 
-        <div class="select-right">
-            <div class="select-btn">
-                查询
-            </div>
-            <div class="select-btn">
-                清除
-            </div>
-        </div>
     </div>
 
-
-    <!-- 表单 -->
-    <div class="table">
-        <div class="table-hand">
-            <div class="tab">
-                <div class="tab-item tab-item-this">全部</div>
-                <div class="tab-item">单据</div>
-                <div class="tab-item tab-item-right">基础资料</div>
-            </div>
-            <div class="hand">
-                
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-refresh"></i> 
-                    刷新 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-form"></i> 
-                    打印 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-form"></i> 
-                    打印全部
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-form"></i> 
-                    打印设置 
-                </div>
-                <div class="hand-item">
-                    <i class="layui-icon layui-icon-share"></i> 
-                    导出
-                </div>
-            </div>
-        </div>
-
-        <div class="table-content">
-            <!-- <table class="layui-hide" id="test"></table> -->
-
-
-            <table class="layui-table">
-                <colgroup>
-                    <!-- <col width="150">
-                    <col width="200"> -->
-                    <col>
-                </colgroup>
-                <thead>
-                    <tr>
-                    <th>序号</th>
-                    <th>操作</th>
-                    <th>采购单号</th>
-                    <th>采购日期</th>
-                    <th>付款方式</th>
-                    <th>单据类型名称</th>
-                    <th>付款状态</th>
-                    <th>供应商名称</th>
-                    <th>采购员</th>
-                    </tr> 
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>20152205120315</td>
-                        <td>删除</td>
-                        <td>20152205120315</td>
-                        <td>2015-10-10</td>
-                        <td>支付宝</td>
-                        <td>订单</td>
-                        <td>已支付</td>
-                        <td>雅诗兰黛</td>
-                        <td>阿伟</td>
-                    </tr>
-                    <tr>
-                        <td>20152205120315</td>
-                        <td>删除</td>
-                        <td>20152205120315</td>
-                        <td>2015-10-10</td>
-                        <td>支付宝</td>
-                        <td>订单</td>
-                        <td>已支付</td>
-                        <td>雅诗兰黛</td>
-                        <td>阿伟</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-
-        <div class='page'>
-            <div id="page"></div>
-        </div>
+    <div class="select-right">
+        <div class="select-btn " lay-event="search">查询</div>
+        <div class="select-btn " lay-event="reset">清除</div>
     </div>
+</div>
+
+<div class="common-padding">
+    <table class="layui-hide" id="xtDocumentsset" lay-filter="xtDocumentsset"></table>
+</div>
 </body>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/documentsset.js" charset="utf-8"></script>
-<script>
-    layui.use(['table','laypage','laydate'], function(){
-      var table = layui.table;
-      var laydate = layui.laydate;
-      var laypage = layui.laypage
-        ,layer = layui.layer;
-      //执行一个laydate实例
-      laydate.render({
-        elem: '#date1' //指定元素
-      });
-      laydate.render({
-        elem: '#date2' //指定元素
-      });
+<script src="../../../js/common/jquery.min.js"></script>
+<script src="../../../js/common/api.js"></script>
 
-      laypage.render({
-        elem: 'page'
-        ,count: 100 //数据总数
-      });
-
-      table.render({
-        elem: '#test'
-        ,url:'/demo/table/user/'
-        ,cols: [[
-        {type:'checkbox'}
-        ,{field:'id', title: '序号'}
-        ,{field:'username', title: '操作'}
-        ,{field:'sex', title: '	采购单号'}
-        ,{field:'city', title: '采购日期'}
-        ,{field:'sign', title: '付款方式'}
-        ,{field:'experience', title: '单据类型名称'}
-        ,{field:'score', title: '付款状态'}
-        ,{field:'classify', title: '供应商名称	'}
-        ,{field:'wealth', title: '采购员'}
-        ]]
-        ,page: true
-      });
-    });
-
-
-    // layui.use(['laypage', 'layer'], function(){
-    //     var laypage = layui.laypage
-    //     ,layer = layui.layer;
-        
-    //     //总页数低于页码总数
-    //     laypage.render({
-    //         elem: 'page'
-    //         ,count: 50 //数据总数
-    //     });
-    // });
-</script>
 </html>
+
+<!-- 头部 -->
+<script type="text/html" id="toolbarinter">
+    <div class="layui-btn-container ">
+        <button class="layui-btn  layui-btn-sm colors layui-bg-black" lay-event="add"><i class="layui-icon"></i></i>添加</button>
+        <button class="layui-btn  layui-btn-sm colors  layui-bg-black" lay-event="update"><i class="layui-icon"></i>编辑</button>
+        <button class="layui-btn  layui-btn-sm colors  layui-bg-black" lay-event="delete"><i class="layui-icon"></i>删除</button>
+    </div>
+</script>
+
+<script>
+    layui.config({
+        base: "../../../js/module/"
+    }).use(['Services', 'jquery'], function() {
+        var $ = layui.jquery;
+
+        var dataType = "xtDocumentsset";
+        var services = new layui.Services({
+            baseURL: baseaip,
+            tableId: "xtDocumentsset",
+            toolbar: "#toolbarinter",
+            serachUrl: "dictionaries/query",
+            getUrl: "dictionaries/get",
+            delUrl: "dictionaries/delete",
+            updUrl: "plant/updateNcpxx",
+            saveUrl: "./dialog/addDocumentsset.html",
+            deleteField: "id",
+            dataType: dataType,
+            parameter: {
+                keyword: '',
+                type: dataType
+            },
+            cols:[[
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'a',  title: '单据代号',templet:function (data) {
+                        return (JSON.parse(data.context)).a
+                    }},
+                {field: 'b',  title: '单据名称',templet:function (data) {
+                        return (JSON.parse(data.context)).b
+                    }},
+                {field: 'c',  title: '单据描述',templet:function (data) {
+                        return (JSON.parse(data.context)).c
+                    }},
+                {field: 'd',  title: '是否自动编号',templet:function (data) {
+                        return (JSON.parse(data.context)).d
+                    }},
+                {field: 'e',  title: '前缀',templet:function (data) {
+                        return (JSON.parse(data.context)).e
+                    }},
+                {field: 'f',  title: '后缀',templet:function (data) {
+                        return (JSON.parse(data.context)).f
+                    }},
+                {field: 'g',  title: '单号长度',templet:function (data) {
+                        return (JSON.parse(data.context)).g
+                    }},
+                {field: 'h',  title: '加入日期',templet:function (data) {
+                        return (JSON.parse(data.context)).h
+                    }},
+                {field: 'i',  title: '日期格式',templet:function (data) {
+                        return (JSON.parse(data.context)).i
+                    }},
+                {field: 'j',  title: '流水号规则',templet:function (data) {
+                        return (JSON.parse(data.context)).j
+                    }},
+                {field: 'k',  title: '流程序号',templet:function (data) {
+                        return (JSON.parse(data.context)).k
+                    }},
+
+            ]],
+        });
+    });
+</script>
