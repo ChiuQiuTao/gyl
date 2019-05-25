@@ -9,7 +9,7 @@
                     data = checkStatus.data; //获取选中的数据
                 switch (obj.event) {
                     case 'add':
-                            window.location.href = "./dialog/baseDialog.html";
+                            window.location.href = "./dialog/inventoryDialog.html";
                         break;
                     case 'update':
                         if(data.length === 0){
@@ -18,7 +18,7 @@
                             layer.msg('只能同时编辑一个');
                         } else {
                             
-                            window.location.href = "./dialog/baseDialog.html?id="+data[0].id;
+                            window.location.href = "./dialog/inventoryDialog.html?id="+data[0].id;
                         }
                         break;
                     case 'delete':
@@ -33,8 +33,8 @@
 
             function deleteId(id){
                 Theoldcuiway(
-                    "plant/deleteJdxx", {
-                        jdxxId:id,
+                    "plant/deleteCkxx", {
+                        ckxxId:id,
                     },
                     "POST"
                 )
@@ -55,15 +55,17 @@
           })
           getList();
           function getList(){
-              var landName = document.querySelector('.landName').value
+              var storageName = document.querySelector('#storageName').value;
+              var storageName2 = document.querySelector('#storageName2').value;
             //获取列表
             var tableIns = table.render({
                 elem: "#test",
-                url: baseaip + "plant/jdxxs",
+                url: baseaip + "plant/ckxxs",
                 method: "GET",
                 where: {
-                sysType: "1",
-                landName: landName
+                repositorytype: "2",
+                storageName: storageName,
+                storageName2: storageName2,
                 },
                 headers: {
                 Authorization: "Bearer" + " " + sessions
@@ -74,8 +76,8 @@
                 },
                 limits: [10, 20],
                 parseData: function(res) {
-                    //res 即为原始返回的数据
-                    console.log(res);
+                //res 即为原始返回的数据
+                console.log(res);
                 return {
                     code: res.code, //解析接口状态
                     msg: res.msg, //解析提示文本
@@ -115,45 +117,15 @@
                     align: "center",
                     },
                     {
-                    field: "landname",
-                    title: "基地名称",
+                    field: "parentname",
+                    title: "一级仓库名称",
                     minWidth: 120,
                     align: "center"
                     },
                     {
-                    field: "chargeperson",
-                    title: "负责人",
+                    field: "storagename",
+                    title: "二级仓库名称",
                     minWidth: 120,
-                    align: "center"
-                    },
-                    {
-                    field: "phone",
-                    title: "联系电话",
-                    minWidth: 120,
-                    align: "center"
-                    },
-                    {
-                    field: "address",
-                    title: "详细地址",
-                    minWidth: 120,
-                    align: "center"
-                    },
-                    {
-                    field: "floorarea",
-                    title: "占地面积(m2)",
-                    minWidth: 120,
-                    align: "center"
-                    },
-                    {
-                    field: "coveredarea",
-                    title: "建筑面积()m2",
-                    minWidth: 120,
-                    align: "center"
-                    },
-                    {
-                    field: "environment",
-                    title: "产地环境",
-                    minWidth: 100,
                     align: "center"
                     },
                 ]
