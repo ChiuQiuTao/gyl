@@ -12,71 +12,105 @@
 </head>
 
 <body>
-    <form class="layui-form" action="">
-        <div class="select common">
-            <div class="select-title">查询条件</div>
-
-            <div class="select-con">
-
-
-                <div class="layui-form-item">
-                    <div class="select-hand-item">
+        <form class="layui-form" action="">
+            <div class="select common">
+                <div class="select-title">查询条件</div>
+    
+                <div class="select-con">
+    
+    
+                    <div class="layui-form-item">
                         <div class="layui-inline">
-                            <label class="layui-form-label">退货日期:</label>
-                            <input type="text" class="layui-input" id="date1">
-                            <div style="margin:0 10px;">至</div>
-                            <input type="text" class="layui-input" id="date2">
+                            <label class="layui-form-label">客户名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" search-type="customerName" id="customerName">
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">客户名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
+                  
+                    
+                    
+                    <div class="select-btn">
+                            <div class="layui-bg-green comquery" lay-event="search">查询</div>
+                            <div class="layui-bg-green comquery" lay-event="reset">重置</div>
                         </div>
-                    </div>
                 </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">退货单号:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery ">查询</div>
-                    <div class="layui-bg-green comquery ">重置</div>
-                </div>
+    
             </div>
-
+        </form>
+    
+        <div class="common-padding">
+            <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
         </div>
-    </form>
-
-    <div class="common-padding">
-        <table class="layui-hide" id="testee" lay-filter="testdome"></table>
-    </div>
-
-</body>
-<!-- 头部 -->
-<script type="text/html" id="toolbarinter">
-    <div class="layui-btn-container ">
-        <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
-        <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
-    </div>
-</script>
-
-<!-- 里面的查看 -->
-<script type="text/html" id="More">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-</script>
-<script src="../../../../js/common/jquery.min.js"></script>
-<script src="../../../../js/common/api.js"></script>
-<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/common/template-web.js"></script>
-<script src="../../../../js/two/Efarming/registered.js"></script>
-</html>
+    
+    </body>
+    <!-- 头部 -->
+    <script type="text/html" id="toolbarinter">
+        <div class="layui-btn-container ">
+            <button class="layui-btn  layui-btn-sm colors" lay-event="add"><i class="layui-icon"></i></i>添加</button>
+            <button class="layui-btn  layui-btn-sm colors" lay-event="update"><i class="layui-icon"></i>编辑</button>
+            <button class="layui-btn  layui-btn-sm colors" lay-event="delete"><i class="layui-icon"></i>删除</button>
+        </div>
+    </script>
+    
+    <!-- 里面的查看 -->
+    <script type="text/html" id="More">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    </script>
+    <script src="../../../../js/common/jquery.min.js"></script>
+    <script src="../../../../js/common/api.js"></script>
+    <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+    <script src="../../../../js/common/template-web.js"></script>
+    <script>
+            layui.config({
+                base: '../../../../js/module/'
+            }).use(['Services','jquery'],function () {
+                var $  = layui.jquery;
+               
+                var dataType = 'q2';
+                var services = new layui.Services({
+                    baseURL:baseaip,
+                    tableId:"testdome",
+                    toolbar:"#toolbarinter",
+                    serachUrl:"dictionaries/query",
+                    getUrl:"dictionaries/get",
+                    delUrl:"dictionaries/delete",
+                    updUrl:"plant/updateNcpxx",
+                    saveUrl:"./dialog/livesreturnDialog.html",
+                    deleteField:"id",
+                    dataType:dataType,
+                    parameter:{
+                        keyword:'',
+                        type:dataType
+                    },
+                    cols:[[
+                        {type: 'checkbox', fixed: 'left'},
+                        {field: 'customerType', sort: true, title: '客户类型',templet:function (data) {
+        
+                            return (JSON.parse(data.context)).customerType
+                        }},
+                        {field: 'customerName', sort: true, title: '客户名称',templet:function (data) {
+        
+                                return (JSON.parse(data.context)).customerName
+                         }},
+                        {field: 'date', sort: true, title: '退货日期',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).date
+                        }},
+                        {field: 'person', sort: true, title: '负责人',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).person
+                        }},
+                        {field: 'way', sort: true, title: '处理方式',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).way
+                        }},
+                        {field: 'code', sort: true, title: '录入耳标号',templet:function (data) {
+                            
+                            return (JSON.parse(data.context)).code
+                        }}
+                    ]],
+                });
+            });
+        </script>
+    </html>

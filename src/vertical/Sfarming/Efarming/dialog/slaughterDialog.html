@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>商品信息</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+</head>
+<body>
+
+<blockquote class="layui-elem-quote layui-text">
+    商品信息
+</blockquote>
+<form class="layui-form" action="" lay-filter="example" id="example">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">屠宰日期</label>
+            <div class="layui-input-inline">
+                <input type="text" name="date"  class="layui-input" id="date">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">畜禽名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="farmName"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">负责人</label>
+            <div class="layui-input-inline">
+                    <input type="text" name="person"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">批次</label>
+            <div class="layui-input-inline">
+                <input type="text" name="detectionGist"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">产品名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="institution" class="layui-input">
+            </div>
+            
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">成品总重量</label>
+            <div class="layui-input-inline" style="width: 162px;">
+                <input type="text" name="weight"  class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">KG</div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">单位</label>
+            <div class="layui-input-inline">
+                <input type="text" name="unit"  class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">仓库</label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouse"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">二级仓库</label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouse2"  class="layui-input">
+            </div>
+        </div>
+    </div>
+  
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn cancels">取消</button>
+        </div>
+    </div>
+</form>
+</body>
+<script src="../../../../../js/module/jquery-3.4.1.min.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script type="text/javascript">
+    var dataId = null; 
+    layui.config({
+        base: '../../../../../js/module/'
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+        var laydate = layui.laydate;
+  
+        laydate.render({
+            elem: '#date' //指定元素
+        });
+        layui.Tool.init();
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            var type = localStorage.getItem("type");
+            if ( type === null ){
+                alert("数据类型不能为空")
+            }else{
+                var zd = { id:dataId === null ? "" : dataId,
+                type:type,
+                context:JSON.stringify(data.field),
+                    // keyword:data.field.farmName+"|"+data.field.detectionOrderNo
+                    keyword:data.field.farmName
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame:zd,
+                    url:baseaip+"dictionaries/saveOrUpdate",
+                    callback:(function(){
+                            window.history.back(-2);
+                    })()
+                })
+
+            }
+            return false;
+        });
+
+        // console.info(location.href.split("?")[1])
+        getHrefId();
+
+    });
+    function getHrefId(){
+        var loc = location.href;
+        console.log(loc);
+        var url = loc.split("?")[1];
+        console.log(url);
+        if(url && url!=''){
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function(){
+                data  = JSON.parse(dataJson);
+                setForm(data);
+            })():"";
+            
+        }else{
+            
+        }
+        
+    }
+    function setForm(data){
+        layui.use(['form'], function () {
+            console.log(data);
+            console.log('data');
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+
+</script>
+
+</html>
