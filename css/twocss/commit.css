@@ -258,3 +258,13 @@ input {
     justify-content: center;
     margin-top: 30px;
 }
+.select-type{
+    display: flex;
+}
+.select-type-show{
+    color: #009688;
+}
+.select-type-item{
+    margin-right: 20px;
+    cursor: pointer;
+}

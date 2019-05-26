@@ -50,16 +50,16 @@ var menudata = [{
     //         },
     //     ]
     // },
-    // {
-    //     icon: "icon-ios-information-circ",
-    //     type: "1",
-    //     title: "风控管理",
-    //     child: [{
-    //         url: "../vertical/Scommon/Ccontrol/control.html",
-    //         title: "风控管理中心",
-    //         type: "1"
-    //     }]
-    // },
+    {
+        icon: "icon-ios-information-circ",
+        type: "1",
+        title: "风控管理",
+        child: [{
+            url: "../vertical/Scommon/Ccontrol/control.html",
+            title: "风控管理中心",
+            type: "1"
+        }]
+    },
     {
         icon: "icon-ios-list-box",
         title: "原辅料管理",

@@ -68,7 +68,7 @@
                         <a class="" href="javascript:;">
                             <span class="iconfont">&#xe631;</span> 养殖企业
                         </a>
-                        <dl class="layui-nav-child" id='nav-showfarm'>
+                        <dl class="layui-nav-child" id='nav-farm'>
                         </dl>
                     </li>
 
@@ -155,7 +155,7 @@
                 }
                 enterpriseType = err.enterpriseType;
                 console.log(enterpriseType);
-                this.getElement(enterpriseType);
+                this.getElement('2345');
                 return
             });
         }
@@ -229,8 +229,8 @@
                                 child +
                                 '</dd>'
                             document.querySelector(".nav-show-farm").style.display='block';
-
                             document.querySelector("#nav-farm").innerHTML += elmsFarm;
+                            
                         } else if (enterpriseType[enterpriseTypeIndex] == 4) {
                             elmsPlant += '<dd class="layui-nav-item">' +
                                 '<a class="" href="javascript:;">' +
@@ -238,7 +238,6 @@
                                 child +
                                 '</dd>'
                             document.querySelector(".nav-show-plant").style.display='block';
-
                             document.querySelector("#nav-plant").innerHTML += elmsPlant;
                         } else if (enterpriseType[enterpriseTypeIndex] == 5) {
                             elmsFood += '<dd class="layui-nav-item">' +
@@ -247,7 +246,6 @@
                                 child +
                                 '</dd>'
                             document.querySelector(".nav-show-food").style.display='block';
-
                             document.querySelector("#nav-food").innerHTML += elmsFood;
                         }
                         // elms += '<dd class="layui-nav-item">' +
