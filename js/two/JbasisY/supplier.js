@@ -5,7 +5,10 @@ layui.use(['form','element','table', "layer", "util"], function() {
         element = layui.element,
         util = layui.util,
         form=layui.form;
-
+/*重置*/
+$(".agains").click(function() {
+    window.location.reload();
+})
     //监听头部监听 ||新增
     table.on('toolbar(testdome)', function(obj) {
         var checkStatus = table.checkStatus(obj.config.id),

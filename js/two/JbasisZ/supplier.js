@@ -344,9 +344,9 @@ layui.use(['form','element','table', "layer", "util"], function() {
     document.querySelector('.againsperson').addEventListener('click',function(){
         document.querySelector('#personname').value='';
         document.querySelector('#personcard').value='';
-        document.querySelector('#persontype').value=1;
+        document.querySelector('#auditStaus2').value=1;
 
-        document.querySelector('#personinline').innerHTML='<select name="persontype" lay-verify="" id="persontype"><option value="1" class="persontypeitem" selected="selected">供应商</option><option value="2" class="persontypeitem">客户</option></select>'
+        // document.querySelector('#personinline').innerHTML='<select name="persontype" lay-verify="" id="persontype"><option value="1" class="persontypeitem" selected="selected">供应商</option><option value="2" class="persontypeitem">客户</option></select>'
         getBasPerson();
 
         layui.form.render('select');

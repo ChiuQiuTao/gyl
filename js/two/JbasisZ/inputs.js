@@ -10,6 +10,10 @@ layui.use(['form','table', "laydate"], function() {
     laydate.render({
         elem: '#date2' //指定元素
     });
+         /*重置*/
+         $(".agains").click(function() {
+            window.location.reload();
+        })
     // 切换tab
     var tabItemId='1';
     var enterpriseid='';
@@ -324,5 +328,6 @@ layui.use(['form','table', "laydate"], function() {
             ]
             
         });
+    
     }
 })
