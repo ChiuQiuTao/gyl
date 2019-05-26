@@ -2,12 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28d48ad6-11bd-466a-9db0-3d2b5bf0c1b9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sidewards/base/materialunit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/twoindex.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/twoindex.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/module/jquery-3.4.1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/module/jquery-3.4.1.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vertical/Sfood/statistics/purchasinginformation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfood/statistics/purchasinginformation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vertical/Sfood/statistics/salesinformation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfood/statistics/salesinformation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vertical/Sfood/statistics/salesreturn.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfood/statistics/salesreturn.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/housing.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/housing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/inventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/livestock.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/livestock.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/livestockproduct.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/livestockproduct.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/prevention.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/prevention.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/supplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/supplier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisY/veterinarians.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisY/veterinarians.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisZ/base.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisZ/base.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisZ/inputs.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisZ/inputs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisZ/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisZ/inventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisZ/plot.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisZ/plot.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/two/JbasisZ/supplier.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/two/JbasisZ/supplier.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/customer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/housing.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/housing.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/livestock.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/livestock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/livestockproduct.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/livestockproduct.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/prevention.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/prevention.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/veterinarians.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Sfarming/Jbasis/veterinarians.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/inputs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/inputs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/inventory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/inventory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/nonpro.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/nonpro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/plot.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/Splanting/Jbasis/plot.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vertical/twoindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/vertical/twoindex.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,45 +46,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/vertical/Sfood/statistics/purchasinginformation.html">
+        <entry file="file://$PROJECT_DIR$/js/module/jquery-3.4.1.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="316" column="18" selection-start-line="316" selection-start-column="18" selection-end-line="316" selection-end-column="18" />
+            <state relative-caret-position="248">
+              <caret line="656" column="21" lean-forward="true" selection-start-line="656" selection-start-column="21" selection-end-line="656" selection-end-column="21" />
               <folding>
-                <element signature="n#style#0;n#i#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#dd#0;n#dl#0;n#li#3;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#4;n#div#0;n#dd#0;n#dl#0;n#li#5;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#div#5;n#div#0;n#dd#0;n#dl#0;n#li#5;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vertical/Sfood/statistics/salesinformation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vertical/Sfood/statistics/salesreturn.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
             </state>
           </provider>
         </entry>
@@ -129,9 +122,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-99" />
-    <option name="y" value="47" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-75" />
+    <option name="y" value="32" />
     <option name="width" value="1289" />
     <option name="height" value="754" />
   </component>
@@ -154,6 +147,12 @@
               <item name="WebProject" type="b2602c69:ProjectViewProjectNode" />
               <item name="WebProject" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebProject" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="module" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WebProject" type="b2602c69:ProjectViewProjectNode" />
@@ -237,7 +236,7 @@
       <workItem from="1558769336220" duration="8823000" />
       <workItem from="1558779321652" duration="599000" />
       <workItem from="1558781319160" duration="2351000" />
-      <workItem from="1558838184100" duration="5433000" />
+      <workItem from="1558838184100" duration="5724000" />
     </task>
     <task id="LOCAL-00001" summary="xxxx">
       <created>1558615687374</created>
@@ -309,11 +308,18 @@
       <option name="project" value="LOCAL" />
       <updated>1558783653923</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="统计图">
+      <created>1558843648375</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1558843648375</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62592000" />
+    <option name="totallyTimeSpent" value="62883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -686,38 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/module/jquery-3.4.1.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="681" column="21" selection-start-line="681" selection-start-column="15" selection-end-line="681" selection-end-column="21" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="316" column="18" selection-start-line="316" selection-start-column="18" selection-end-line="316" selection-end-column="18" />
-          <folding>
-            <element signature="n#style#0;n#i#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#dd#0;n#dl#0;n#li#3;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#4;n#div#0;n#dd#0;n#dl#0;n#li#5;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#div#5;n#div#0;n#dd#0;n#dl#0;n#li#5;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/vertical/Sfood/statistics/salesinformation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/vertical/Sfood/statistics/salesreturn.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -729,6 +703,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/vertical/Sfood/statistics/salesinformation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3268">
+          <caret line="119" column="32" selection-start-line="119" selection-start-column="32" selection-end-line="119" selection-end-column="32" />
+          <folding>
+            <element signature="n#style#0;n#i#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#3;n#div#0;n#dd#0;n#dl#0;n#li#3;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#4;n#div#0;n#dd#0;n#dl#0;n#li#5;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#5;n#div#0;n#dd#0;n#dl#0;n#li#5;n#ul#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/module/jquery-3.4.1.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="656" column="21" lean-forward="true" selection-start-line="656" selection-start-column="21" selection-end-line="656" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
