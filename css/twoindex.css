@@ -129,3 +129,6 @@
 .layui-nav-tree .layui-nav-bar {
     background-color: rgba(0, 0, 0, 0);
 }
+.layui-nav-tree .nav-show{
+    display: none ;
+}

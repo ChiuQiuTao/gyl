@@ -3,6 +3,11 @@
         var $ = layui.jquery,
           table = layui.table;
         
+
+           /*重置*/
+    $(".agains").click(function() {
+        window.location.reload();
+    })
            //监听头部监听
             table.on('toolbar(testdome)', function(obj) {
                 var checkStatus = table.checkStatus(obj.config.id),

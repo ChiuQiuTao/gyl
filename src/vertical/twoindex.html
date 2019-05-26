@@ -55,24 +55,24 @@
                     <!--加 layui-nav-itemed 张开 -->
                     <li class="layui-nav-item" id='nav-item-kong'>&nbsp;</li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item nav-show nav-show-product">
                         <a class="" href="javascript:;">
                             <span class="iconfont">&#xe605;</span> 生产加工
                         </a>
-                        <dl class="layui-nav-child" id='nav-product'>
+                        <dl class="layui-nav-child" id='nav-product' >
 
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item nav-show nav-show-farm">
                         <a class="" href="javascript:;">
                             <span class="iconfont">&#xe631;</span> 养殖企业
                         </a>
-                        <dl class="layui-nav-child" id='nav-farm'>
+                        <dl class="layui-nav-child" id='nav-showfarm'>
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item nav-show nav-show-plant">
                         <a class="" href="javascript:;">
                             <span class="iconfont">&#xe600;</span> 种植企业
                         </a>
@@ -81,7 +81,7 @@
                         </dl>
                     </li>
 
-                    <li class="layui-nav-item">
+                    <li class="layui-nav-item nav-show nav-show-food">
                         <a class="" href="javascript:;">
                             <span class="iconfont">&#xe733;</span> 食品经营单位
                         </a>
@@ -154,7 +154,8 @@
                     names[i].innerHTML = err.realName + "(" + err.username + ")";
                 }
                 enterpriseType = err.enterpriseType;
-                this.getElement('2345');
+                console.log(enterpriseType);
+                this.getElement(enterpriseType);
                 return
             });
         }
@@ -218,6 +219,7 @@
                                 '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
                                 child +
                                 '</dd>'
+                            document.querySelector(".nav-show-product").style.display='block';
                             document.querySelector("#nav-product").innerHTML += elmsProduct;
                             document.querySelector(".two-in-menu ul>li:last-child").setAttribute("lay-unselect", "");
                         } else if (enterpriseType[enterpriseTypeIndex] == 3) {
@@ -226,6 +228,8 @@
                                 '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
                                 child +
                                 '</dd>'
+                            document.querySelector(".nav-show-farm").style.display='block';
+
                             document.querySelector("#nav-farm").innerHTML += elmsFarm;
                         } else if (enterpriseType[enterpriseTypeIndex] == 4) {
                             elmsPlant += '<dd class="layui-nav-item">' +
@@ -233,6 +237,8 @@
                                 '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
                                 child +
                                 '</dd>'
+                            document.querySelector(".nav-show-plant").style.display='block';
+
                             document.querySelector("#nav-plant").innerHTML += elmsPlant;
                         } else if (enterpriseType[enterpriseTypeIndex] == 5) {
                             elmsFood += '<dd class="layui-nav-item">' +
@@ -240,6 +246,8 @@
                                 '<i class="iconfont ' + menudata[index].icon + '"></i>' + menudata[index].title + '</a >' +
                                 child +
                                 '</dd>'
+                            document.querySelector(".nav-show-food").style.display='block';
+
                             document.querySelector("#nav-food").innerHTML += elmsFood;
                         }
                         // elms += '<dd class="layui-nav-item">' +

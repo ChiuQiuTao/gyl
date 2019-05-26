@@ -147,6 +147,9 @@
                 ]
             });
           }
-        
+        /*重置*/
+    $(".agains").click(function() {
+        window.location.reload();
+    })
       });
 })()
