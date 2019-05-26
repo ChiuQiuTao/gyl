@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>物料仓库</title>
+    <title>物料单位</title>
     <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
 </head>
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
-    物料仓库
+    物料单位
 </blockquote>
 <form class="layui-form" action="" lay-filter="example" id="example">
 
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >仓库代号</label>
+            <label class=" layui-form-label" style="width: 90px"  >供应商名称</label>
             <div class="layui-input-inline">
                 <input type="text" name="a"  class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >仓库名称</label>
+            <label class=" layui-form-label" style="width: 90px"  >物料名称</label>
             <div class="layui-input-inline">
                 <input type="text" name="b"  class="layui-input">
             </div>
@@ -31,41 +31,47 @@
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >上级仓位</label>
+            <label class=" layui-form-label" style="width: 90px"  >采购单号</label>
             <div class="layui-input-inline">
                 <input type="text" name="c"  class="layui-input" >
             </div>
         </div>
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >管理者</label>
+            <label class=" layui-form-label" style="width: 90px"  >采购日期</label>
             <div class="layui-input-inline">
-                <input type="text" name="d"  class="layui-input">
+                <input type="date" name="d"  class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >安全库存</label>
+            <label class=" layui-form-label" style="width: 90px"  >付款方式</label>
             <div class="layui-input-inline">
                 <input type="text" name="e"  class="layui-input" >
             </div>
         </div>
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >是否停用</label>
+            <label class=" layui-form-label" style="width: 90px"  >单据类型名称</label>
             <div class="layui-input-inline">
-                <input type="radio" name="f"  value="否" title="否" checked>
-                <input type="radio" name="f"  value="是" title="是" >
+                <input type="text" name="f"  class="layui-input">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class=" layui-form-label" style="width: 90px"  >创建时间</label>
+            <label class=" layui-form-label" style="width: 90px"  >付款状态</label>
             <div class="layui-input-inline">
-                <input type="date" name="g"  class="layui-input" >
+                <input type="text" name="g"  class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class=" layui-form-label" style="width: 90px"  >采购员</label>
+            <div class="layui-input-inline">
+                <input type="text" name="h"  class="layui-input">
             </div>
         </div>
     </div>
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
