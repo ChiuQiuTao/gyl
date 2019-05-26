@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>物料维护</title>
+    <title>物料单位</title>
     <link rel="stylesheet" href="../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../css/departmentbase.css">
     <link rel="stylesheet" href="../../../public/font/iconfont.css">
@@ -16,7 +16,7 @@
     <div class="select-left">
         <div class="select-item">
             <div class="select-item-text" style="width: 90px">
-                物料代号
+                供应商名称
             </div>
             <input type="text" class="layui-input select-item-input"  id="a" search-type="a">
         </div>
@@ -39,7 +39,7 @@
 </div>
 
 <div class="common-padding">
-    <table class="layui-hide" id="gylMaterialmaintain" lay-filter="gylMaterialmaintain"></table>
+    <table class="layui-hide" id="gylMaterialunit" lay-filter="gylMaterialunit"></table>
 </div>
 </body>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
@@ -63,16 +63,16 @@
     }).use(['Services', 'jquery'], function() {
         var $ = layui.jquery;
 
-        var dataType = "gylMaterialmaintain";
+        var dataType = "gylMaterialunit";
         var services = new layui.Services({
             baseURL: baseaip,
-            tableId: "gylMaterialmaintain",
+            tableId: "gylMaterialunit",
             toolbar: "#toolbarinter",
             serachUrl: "dictionaries/query",
             getUrl: "dictionaries/get",
             delUrl: "dictionaries/delete",
             updUrl: "plant/updateNcpxx",
-            saveUrl: "./dialog/addMaterialmaintain.html",
+            saveUrl: "./dialog/addMaterialunit.html",
             deleteField: "id",
             dataType: dataType,
             parameter: {
@@ -81,33 +81,29 @@
             },
             cols:[[
                 {type: 'checkbox', fixed: 'left'},
-                {field: 'a', title: '物料代号',templet:function (data) {
+                {field: 'a', title: '供应商名称',templet:function (data) {
                         return (JSON.parse(data.context)).a
                     }},
-                {field: 'b',   title: '名称',templet:function (data) {
+                {field: 'b',   title: '物料名称',templet:function (data) {
                         return (JSON.parse(data.context)).b
                     }},
-                {field: 'c',   title: '规格',templet:function (data) {
+                {field: 'c',   title: '采购单号',templet:function (data) {
                         return (JSON.parse(data.context)).c
                     }},
-
-                {field: 'd',   title: '类别',templet:function (data) {
+                {field: 'd',   title: '采购日期',templet:function (data) {
                         return (JSON.parse(data.context)).d
                     }},
-                {field: 'e',   title: '品牌',templet:function (data) {
+                {field: 'e',   title: '付款方式',templet:function (data) {
                         return (JSON.parse(data.context)).e
                     }},
-                {field: 'f',   title: '计量单位',templet:function (data) {
+                {field: 'f',   title: '单据类型名称',templet:function (data) {
                         return (JSON.parse(data.context)).f
                     }},
-                {field: 'g',   title: '仓库',templet:function (data) {
+                {field: 'g',   title: '付款状态',templet:function (data) {
                         return (JSON.parse(data.context)).g
                     }},
-                {field: 'h',   title: '库存数量',templet:function (data) {
+                {field: 'h',   title: '采购员',templet:function (data) {
                         return (JSON.parse(data.context)).h
-                    }},
-                {field: 'i',   title: '备注',templet:function (data) {
-                        return (JSON.parse(data.context)).i
                     }},
             ]],
         });
