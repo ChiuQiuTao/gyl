@@ -129,7 +129,7 @@
                             $(".erji").children().remove();
                             $(".erji").append(new Option("---请选择---", ""));
                             $.each(resp.data, function(index, item) {
-                                $(".erji").append(new Option(item.storagename, item.parentid)); // 下拉菜单里添加元素
+                                $(".erji").append(new Option(item.storagename, item.id)); // 下拉菜单里添加元素
                             });
                             layui.form.render("select");
                             return;
