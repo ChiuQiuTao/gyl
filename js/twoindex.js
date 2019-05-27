@@ -13,13 +13,18 @@ var menudata = [{
                 title: "消息中心",
                 type: "1"
             },
+            {
+                url: "../vertical/Scommon/Amywork/voucher.html",
+                title: "单据中心",
+                type: "1"
+            },
             // {
-            //     url: "../vertical/Scommon/Amywork/voucher.html",
-            //     title: "单据中心",
+            //     url: "../vertical/Scommon/Amywork/aftersales.html",
+            //     title: "售后服务",
             //     type: "1"
             // },
             {
-                url: "../vertical/Scommon/Amywork/aftersales.html",
+                url: "../vertical/Scommon/Amywork/manage.html",
                 title: "售后服务",
                 type: "1"
             },
@@ -55,7 +60,7 @@ var menudata = [{
         type: "1",
         title: "风控管理",
         child: [{
-            url: "../vertical/Scommon/Ccontrol/control.html",
+            url: "../vertical/Scommon/Ccontrol/control2.html",
             title: "风控管理中心",
             type: "1"
         }]

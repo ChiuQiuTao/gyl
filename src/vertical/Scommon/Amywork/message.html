@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../../css//twocss/amessage.css">
     <link rel="stylesheet" href="../../../../public/font/iconfont.css">
+    <!-- <link rel="stylesheet" href="../../../../css/twocss/commit.css"> -->
 </head>
 
 <body>
@@ -141,17 +142,16 @@
         <div class="mess-data">
             <div class="layui-tab layui-tab-brief" lay-filter="messdeno" style="margin:0;">
                 <ul class="layui-tab-title" style="background-color:#f2f2f2;">
-                    <li class="layui-this">全部<span>0</span></li>
-                    <li>未查看<span>0</span></li>
-                    <li>已查看<span>0</span></li>
-                    <li>处理中<span>0</span></li>
-                    <li>已处理<span>0</span></li>
+                    <li class="select-type-item select-type-show">全部</li>
+                    <li class="select-type-item">未查看</li>
+                    <li class="select-type-item">已查看</li>
+                    <li class="select-type-item">处理中</li>
+                    <li class="select-type-item">已处理</li>
                     <div class="mess-data-more"><a href='./manage.html'>查看更多>></a></div>
-                    <li><i class="layui-icon layui-icon-refresh">刷新</i></li>
+                    <!-- <li><i class="layui-icon layui-icon-refresh">刷新</i></li> -->
                 </ul>
-                <div class="layui-tab-content" style="padding:0;">
+                <!-- <div class="layui-tab-content" style="padding:0;">
                     <div class="layui-tab-item layui-show">
-                        <!-- 查询 -->
                         <div class="mess-check">
                             <div class="layui-inline">
                                 <label class="layui-form-label mess-time">日期:</label>
@@ -176,7 +176,6 @@
                             <button class="layui-btn layui-bg-red layui-btn-sm">查询</button>
                             <button class="layui-btn layui-bg-red layui-btn-sm">清空</button>
                         </div>
-                        <!-- 数据 -->
                         <div class="mess-data-com">
                             <table id="alldemo" lay-filter="messdata" style="height:100%;"></table>
                         </div>
@@ -185,7 +184,28 @@
                     <div class="layui-tab-item">内容3</div>
                     <div class="layui-tab-item">内容4</div>
                     <div class="layui-tab-item">内容5</div>
+                </div> -->
+            </div>
+
+            <div class="common-padding">
+                <!-- 查询 -->
+                <div class="mess-check">
+                    <div class="layui-inline">
+                        <label class="layui-form-label mess-time">单号:</label>
+                        <div class="layui-input-inline mess-time-c">
+                            <input type="text" class="layui-input mess-input" name="s1" search-type="s1" id="s1">
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="display: none">
+                        <label class="layui-form-label mess-time"></label>
+                        <div class="layui-input-inline mess-time-c">
+                            <input type="text" class="layui-input mess-input" name="s3" search-type="s3" id="s3">
+                        </div>
+                    </div>
+                    <button class="layui-btn layui-bg-red layui-btn-sm " lay-event="search">查询</button>
+                    <button class="layui-btn layui-bg-red layui-btn-sm" lay-event="reset">清空</button>
                 </div>
+                    <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
             </div>
         </div>
     </div>
@@ -194,112 +214,95 @@
 
 </body>
 <script src="../../../../public/dist/layui.js"></script>
-
+<script src="../../../../js/common/api.js"></script>
 </html>
 
 <script>
-    layui.use(['element', 'laydate', "table"], function() {
-        var $ = layui.jquery,
-            laydate = layui.laydate,
-            table = layui.table,
-            element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['Services','jquery'],function () {
+        var $  = layui.jquery;
+        var seeType='';
+        var dataType = 'myman';
+        var typeItem = document.querySelectorAll('.select-type-item');
+        for(var i=0;i<typeItem.length;i++){
+            (function(i){
+                typeItem[i].addEventListener('click',function(){
+                    document.querySelector('.select-type-show').classList.remove('select-type-show');
+                    typeItem[i].classList.add('select-type-show');
+                    if(i==0){
+                        seeType='';
+                        document.querySelector('#s3').value='';
+                        getServices();
 
-        //触发事件
-        element.tabChange("messdeno", )
-        element.on('tab(messdeno)', function(data) {
-            console.log(this); //当前Tab标题所在的原始DOM元素
-            console.log(data.index); //得到当前Tab的所在下标
-            console.log(data.elem); //得到当前的Tab大容器
-        });
+                    }else{
+                        seeType=i;
+                        document.querySelector('#s3').value=seeType;
+                        getServices();
+                    }
+                })
+            })(i)
+        }
+        getServices();
+        function getServices(){
+            
+            var services = new layui.Services({
+                baseURL:baseaip,
+                tableId:"testdome",
+                toolbar:"#toolbarinter",
+                serachUrl:"dictionaries/query",
+                getUrl:"dictionaries/get",
+                delUrl:"dictionaries/delete",
+                updUrl:"plant/updateNcpxx",
+                saveUrl:"./dialog/manageDialog.html",
+                deleteField:"id",
+                dataType:dataType,
+                parameter:{
+                    keyword:document.querySelector('#s1').value+'|'+seeType,
+                    type:dataType
+                },
+                cols:[[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 's1', sort: true, title: '单号',templet:function (data) {
 
-        //日期
-        laydate.render({
-            elem: '#messtest'
-        });
+                            return (JSON.parse(data.context)).s1
+                    }},
+                    {field: 's2', sort: true, title: '简称',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s2
+                    }},
+                    {field: 's4', sort: true, title: '平台账号',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s4
+                    }},
+                    {field: 's2', sort: true, title: '单据信息',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s2
+                    }},
+                    {field: 's6', sort: true, title: '时间',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s6
+                    }},
+                    {field: 's3', sort: true, title: '状态',templet:function (data) {
+                        var ret = ''
+                        if((JSON.parse(data.context)).s3==1){
+                            ret = '未查看'
+                        }else if((JSON.parse(data.context)).s3==2){
+                            ret = '已查看'
 
-        laydate.render({
-            elem: '#messtest2'
-        });
+                        }else if((JSON.parse(data.context)).s3==3){
+                            ret = '处理中'
 
-        //数据
-        table.render({
-            elem: '#alldemo',
-            method: "get",
-            contentType: "application/json",
-            headers: {
-                token: 'sasasas'
-            },
-            height: 370,
-            url: '../../../../js/two/data.json', //数据接口
-            page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
-                layout: ['prev', 'page', 'next', 'skip', 'count'],
-                groups: 5, //只显示 1 个连续页码
-                first: '首页', //不显示首页
-                last: '尾页',
-                prev: '<button class="layui-btn layui-btn-primary layui-btn-sm">上一页</button>',
-                next: '<button class="layui-btn layui-btn-primary layui-btn-sm">下一页</button>'
-                    //不显示尾页
-            }, //开启分页
-            done: function(res, curr, count) {
-                //如果是异步请求数据方式，res即为你接口返回的信息。
-                //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
-                console.log(res);
+                        }else if((JSON.parse(data.context)).s3==4){
+                            ret = '已处理'
 
-                //得到当前页码
-                console.log(curr);
-
-                //得到数据总量
-                console.log(count);
-            },
-            // toolbar: 'alldemo',
-            // totalRow: true, //开启合计行
-            cols: [
-                [ //表头
-                    {
-                        field: 'id',
-                        title: 'ID',
-                        width: 80,
-                        sort: true,
-                        // fixed: 'left'
-                    }, {
-                        field: 'username',
-                        title: '用户名',
-                        width: 80
-                    }, {
-                        field: 'sex',
-                        title: '性别',
-                        width: 80,
-                        sort: true
-                    }, {
-                        field: 'city',
-                        title: '城市',
-                        width: 80
-                    }, {
-                        field: 'sign',
-                        title: '签名',
-                        width: 177
-                    }, {
-                        field: 'experience',
-                        title: '积分',
-                        width: 80,
-                        sort: true
-                    }, {
-                        field: 'score',
-                        title: '评分',
-                        width: 80,
-                        sort: true
-                    }, {
-                        field: 'classify',
-                        title: '职业',
-                        width: 80
-                    }, {
-                        field: 'wealth',
-                        title: '财富',
-                        width: 135,
-                        sort: true
-                    },
-                ]
-            ]
-        });
+                        }
+                       
+                        return ret
+                    }},
+                ]],
+            });
+        }
+        
     });
 </script>

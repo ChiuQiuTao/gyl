@@ -204,3 +204,13 @@
     height: 30px;
     margin-top: 4px;
 }
+.select-type{
+    display: flex;
+}
+.select-type-show{
+    color: #009688;
+}
+.select-type-item{
+    margin-right: 20px;
+    cursor: pointer;
+}
