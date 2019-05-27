@@ -138,6 +138,24 @@ var menudata = [{
         ]
     },
     {
+        icon: "icon-jiankong",
+        type: "2",
+        title: "统计分析",
+        child: [{
+            url: "../vertical/Sfood/\statistics/purchasinginformation.html",
+            title: "采购信息统计",
+            type: "2"
+        }, {
+            url: "../vertical/Sfood/\statistics/salesreturn.html",
+            title: "销售退货统计",
+            type: "2"
+        }, {
+            url: "../vertical/Sfood/\statistics/salesinformation.html",
+            title: "销售信息统计",
+            type: "2"
+        }, ]
+    },
+    {
         icon: "icon-ios-folder-open",
         type: "2",
         title: "加工企业仓库管理",
