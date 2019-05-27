@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>商品采购</title>
+    <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
+</head>
+
+<body>
+
+    <blockquote class="layui-elem-quote layui-text">
+        仓库
+    </blockquote>
+    <form class="layui-form" action="" lay-filter="example" id="example" style="margin: 50px  30px  0  140px;">
+
+        <div class="layui-form-item">
+            <div class="layui-inline" style="margin: 10px;">
+                <label class="layui-form-label">仓库名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ckmc" class="layui-input" id="cgrq">
+                </div>
+            </div>
+            <div class="layui-inline" style="margin: 10px;">
+                <label class="layui-form-label">二级仓库</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="rjck" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 40px;">
+            <div class="layui-inline" style="margin: 10px;">
+                <label class="layui-form-label">仓库负责人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="ckfzr" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline" style="margin: 10px;">
+                <label class="layui-form-label">调拨时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="tiemm" class="layui-input" id="test2">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item" style="margin-top: 40px;">
+            <div class="layui-inline" style="margin: 10px;">
+                <label class="layui-form-label">产品名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="mingcsss" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline" style="margin: 10px;">
+                <label class="layui-form-label">调出单号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="danhaiods" class="layui-input" id="te">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item" style="margin-top: 30px;margin-left: 300px;">
+            <div class="layui-input-block" style="margin: 10px;">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="reset" class="layui-btn cancels">取消</button>
+            </div>
+
+
+        </div>
+    </form>
+</body>
+<script src="../../../../../js/module/jquery-3.4.1.min.js"></script>
+<script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script type="text/javascript">
+    var dataId = null;
+    layui.config({
+        base: '../../../../../js/module/'
+    }).use(['Tool', 'form', 'layedit', 'laydate', "serviceTools"], function() {
+        layui.Tool.init();
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+
+
+        //时间
+        laydate.render({
+            elem: '#test2',
+            done: function(value, date) {
+
+                var ss = new Date().getMilliseconds();
+                var s = new Date().getMinutes();
+                var an = value.split("-");
+                var tou = an.join("");
+
+                $("#te").val(tou + ss); //添加单号
+            }
+        });
+
+
+        //监听提交
+        form.on('submit(demo1)', function(data) {
+            var type = localStorage.getItem("type");
+            if (type === null) {
+                alert("数据类型不能为空")
+            } else {
+                var zd = {
+                    id: dataId === null ? "" : dataId,
+                    type: type,
+                    context: JSON.stringify(data.field),
+                    keyword: data.field.ckmc + "|" + data.field.rjck
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame: zd,
+                    url: baseaip + "dictionaries/saveOrUpdate",
+                    callback: (function() {
+                        window.history.back(-2);
+                    })()
+                })
+
+            }
+            return false;
+        });
+
+        // console.info(location.href.split("?")[1])
+        getHrefId();
+
+    });
+
+    function getHrefId() {
+        var loc = location.href;
+        console.log(loc);
+        var url = loc.split("?")[1];
+        console.log(url);
+        if (url && url != '') {
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for (var i = 0; i < len; i++) {
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function() {
+                data = JSON.parse(dataJson);
+                setForm(data);
+            })() : "";
+
+        } else {
+
+        }
+
+    }
+
+    function setForm(data) {
+        layui.use(['form'], function() {
+            console.log(data);
+            console.log('data');
+
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+</script>
+
+</html>
