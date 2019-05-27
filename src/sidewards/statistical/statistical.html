@@ -1,140 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../css/financeform.css">
-    <link rel="stylesheet" href="../../../public/font/iconfont.css">
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="../../../js/module/jquery-3.4.1.min.js"></script>
+    <script src="../../../public/mui/echarts-all.js"></script>
+    <style>
+        .chart {
+            height: 300px;
+        }
+        body{
+            overflow-x:hidden;
+            overflow-y:hidden;
+        }
+    </style>
+
 </head>
 <body>
-    <div class="head">
-        <div class="head-lt">
-        </div>
-        <div class="head-cr">
-            资金状况统计分析
-        </div>
-        <div class="head-rt">
-            <select name="" id="" class="select">
-                <option value="">按销量排行</option>
-                <option value="">按销量额排行</option>
-                <option value="">按时间排行</option>
-            </select>
-            二级报表
-        </div>
-    </div> 
-    
-    <div class="container">
-        <div class="container-sec">
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">采购数据</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>  
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:0K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main1" style="width:100%;height:280px;"></div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">销售数据</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>  
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:0K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main2" style="width:100%;height:280px;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="container-sec">
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">应收账款余额</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>  
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:0K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main3" style="width:100%;height:280px;"></div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">应付账款余额</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>  
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:0K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main4" style="width:100%;height:280px;"></div>
-                    </div>
-                </div>
+<blockquote class="layui-elem-quote">
+    销售报表数据
+</blockquote>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table class="layui-table" id="test">  </table>
             </div>
         </div>
     </div>
-</body>
-<script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/echarts.min.js"></script>
-<script src="../../../js/productanalysis.js" charset="utf-8"></script>
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart1 = echarts.init(document.getElementById('main1'));
-    var myChart2 = echarts.init(document.getElementById('main2'));
-    var myChart3 = echarts.init(document.getElementById('main3'));
-    var myChart4 = echarts.init(document.getElementById('main4'));
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div  style="height: 222px;" id="xsje"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="chart" id="barChart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="chart" id="bold"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var tableData = null;
+    var datas = new Array();
+    var zxtdatas = new Array();
+    layui.use('table', function(){
+        var table = layui.table
+        $ = layui.jquery;
+        table.render({
+            elem: '#test'
+            ,url:'./data/salesreport.json'
+            ,cols: [[
+                {field:'jd',   title: '季度',align:"center"}
+                ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
+                        return percent(data.xsje,data.total)+"%"
+                    }}
+                ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
+                ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+            ]],
+            parseData:function (res) {
+                return {
+                    "code": res.status,
+                    "msg": res.message,
+                    "count": res.total,
+                    "data": res.data.item
+                };
+            },
+            done:function (res, curr, count) {
+                var byId = function(id) {
+                    return document.getElementById(id);
+                };
+                var barChart = echarts.init(byId('barChart'));
+                var list = new Array();
+                $.each(res.data , function (key ,val) {
+                    list.push(percent(val.xsje,val.total));
+                    datas.push({value:val.xssl, name:val.jd})
+                    zxtdatas.push(val.xsje)
+                })
+                barChart.setOption(getOption(list));
 
-    // 指定图表的配置项和数据
-    var option = {
+                var barChart = echarts.init(byId('bold'));
+                barChart.setOption(option);
+
+                var barChart = echarts.init(byId('xsje'));
+                barChart.setOption(zxtOption);
+            }
+        });
+    });
+
+    function percent(num, total) {
+        num = parseFloat(num);
+        total = parseFloat(total);
+        if (isNaN(num) || isNaN(total)) {
+            return "-";
+        }
+        return total <= 0 ? 0 : (Math.round(num / total * 100000) / 100.00);
+    }
+
+
+
+    var getOption = function(datas) {
+        return  {
+            title : {
+                text: '各个季度占比',
+                x:'center'
+            },
+            grid: {
+                x: 35,
+                x2: 10,
+                y: 30,
+                y2: 25
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: false,
+            xAxis: [{
+                type: 'category',
+                data: ['一季度', '二季度', '三季度', '四季度']
+            }],
+            yAxis: [{
+                type: 'value',
+                splitArea: {
+                    show: true
+                }
+            }],
+            series: [{
+                name: '销售数据统计',
+                type: "bar",
+                data: datas
+            }]
+        };
+    };
+
+
+
+    option = {
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
+        title : {
+            text: '销售数量',
+            x:'center'
+        },
         legend: {
             orient: 'vertical',
-            x: 'right',
-            data:['现金','银行']
+            x: 'left',
+            data:['一季度','二季度','三季度','四季度']
         },
         series: [
             {
-                name:'访问来源',
+                name:'销售数量',
                 type:'pie',
-                radius: ['50%', '65%'],
+                radius: ['50%', '70%'],
                 avoidLabelOverlap: false,
                 label: {
                     normal: {
@@ -154,59 +220,35 @@
                         show: false
                     }
                 },
-                data:[
-                    {value:2, name:'现金'},
-                    {value:2, name:'银行'}
-                ]
+                data:datas,
             }
         ]
     };
-    var option2 = {
+
+
+    zxtOption = {
+        title : {
+            text: '销售金额',
+            x:'center'
+        },
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+            formatter: "{a} <br/>{b}: {c} ({d}万)"
         },
-        legend: {
-            orient: 'vertical',
-            x: 'right',
-            data:['现金','银行']
+        xAxis: {
+            type: 'category',
+            data: ['一季度', '二季度', '三季度', '四季度']
         },
-        series: [
-            {
-                name:'访问来源',
-                type:'pie',
-                radius: ['0%', '65%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:[
-                    {value:2, name:'现金'},
-                    {value:2, name:'银行'}
-                ]
-            }
-        ]
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: zxtdatas,
+            type: 'line'
+        }]
     };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart1.setOption(option);
-    myChart2.setOption(option);
-    myChart3.setOption(option2);
-    myChart4.setOption(option2);
+
 
 </script>
+</body>
 </html>
