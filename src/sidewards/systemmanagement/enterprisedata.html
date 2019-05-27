@@ -12,20 +12,22 @@
 </head>
 <body>
     <!-- 查询 -->
-    <form class="layui-form layui-form-pane" action="">
+    <form class="layui-form layui-form-pane" action="" lay-filter="example" id="example">
         <div class="select">
             <div class="select-left">
+                <!-- <input type="text" class="layui-input select-item-input" name="id" id="enterId"> -->
+                <!--  style="display: none" -->
                 <div class="select-item">
                     <div class="select-item-text">
                         公司代号
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s1">
                 </div>
                 <div class="select-item">
                     <div class="select-item-text">
                         中文名称
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s2">
                 </div>
 
                 
@@ -34,99 +36,113 @@
                     <div class="select-item-text">
                         中文地址
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s3">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         电话号码
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s4">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         传真号码
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s5">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         网址
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s6">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         负责人
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s7">
                 </div>
                 <div class="select-item">
-                    <div class="select-item-text">
-                        国家
-                    </div>
-                    <select name="" id="" class="select-item-select2"  lay-ignore>
-                        <option value="">中国</option>
-                        
-                    </select>
+                            <div class="select-item-text">
+                                    所在地区
+                                </div>
+                        <div class="layui-inline-sel" style="display: flex;">
+                            <select name="country" lay-filter="aihao" id='state'>
+                                <option value="0086">中国</option>
+                            </select>
+                        </div>
                 </div>
                 <div class="select-item">
-                    <div class="select-item-text">
-                        省
-                    </div>
-                    <select name="" id="" class="select-item-select2"  lay-ignore>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
-                </div>
+                    <div class="layui-inline">
+                        <div class="layui-inline-sel" style="display: flex;">
+                            
+                            <select name="province" lay-filter="province" class="province" id='province' name="s8">
+                                <option value="">省</option>
+                            </select>
 
-                <div class="select-item">
-                    <div class="select-item-text">
-                        城市
+                        </div>
                     </div>
-                    <select name="" id="" class="select-item-select2"  lay-ignore>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                    </select>
+                </div>
+                <div class="select-item">
+                    <div class="layui-inline">
+                        <div class="layui-inline-sel" style="display: flex;">
+                           
+                            <select name="city" lay-filter="city" class="city" id='city' name="s9">
+                                <option value="">市</option>
+                            </select>
+
+                          
+                        </div>
+                    </div>
+                </div>
+                <div class="select-item">
+                    <div class="layui-inline">
+                        <div class="layui-inline-sel" style="display: flex;">
+                           
+                           
+                            <select name="area" lay-filter="area" class="area" id='district' name="s10">
+                                <option value="">区</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="select-item">
                     <div class="select-item-text">
                         详细地址
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s11">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         邮政编码
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s12">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         电子邮件
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s13">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         行业
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s14">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         官方网址
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s15">
                 </div>
 
 
@@ -134,13 +150,13 @@
                     <div class="select-item-text">
                         备注
                     </div>
-                    <textarea name="" id="" class="select-textarea"></textarea>
+                    <textarea name="" id="" class="select-textarea" name="s16"></textarea>
                 </div>
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="启用客户分权" lay-skin="primary">
+                    <input type="checkbox" name="" title="启用客户分权" lay-skin="primary" name="s17">
                 </div>
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="启用供应商分权" lay-skin="primary">
+                    <input type="checkbox" name="" title="启用供应商分权" lay-skin="primary" name="s18">
                 </div>
             
 
@@ -148,7 +164,7 @@
                     <div class="select-item-text">
                         数字小数位数
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s19">
                 </div>
 
 
@@ -156,55 +172,55 @@
                     <div class="select-item-text">
                         单价小数位数
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s19">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         金额小数位数
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s20">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         商户号
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s21">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         金融平台账号
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s22">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         金融平台密码
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s23">
                 </div>
 
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="是否发送下一步信息" lay-skin="primary">
+                    <input type="checkbox" name="" title="是否发送下一步信息" lay-skin="primary" name="s24">
                 </div>
 
                 <div class="select-item">
                     <div class="select-item-text">
                         业务类型
                     </div>
-                    <input type="text" class="layui-input select-item-input">
+                    <input type="text" class="layui-input select-item-input" name="s25">
                 </div>
 
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="接单引用对方物料基础数据" lay-skin="primary">
+                    <input type="checkbox" name="" title="接单引用对方物料基础数据" lay-skin="primary" name="s26">
                 </div>
 
 
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="启用物料类别分权" lay-skin="primary">
+                    <input type="checkbox" name="" title="启用物料类别分权" lay-skin="primary" name="s27">
                 </div>
             </div>
 
@@ -224,7 +240,6 @@
                 </select>
             </div> -->
         </div>
-    </form>
 
 
     <div class="switch">
@@ -359,14 +374,27 @@
     </div>
 
     
+
+    <div class="layui-form-item" style="margin: 0 auto;display: flex;justify-content: center;margin-top: 20px;">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            <button type="reset" class="layui-btn cancels">取消</button>
+        </div>
+    </div>
+</form>
+
 </body>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/enterprisedata.js" charset="utf-8"></script>
+<script src="../../../js/common/jquery.min.js"></script>
+<script src="../../../js/common/api.js"></script>
 <script>
-    layui.use(['table','laypage','laydate','upload'], function(){
+    layui.use(['table','laypage','laydate','upload','form'], function(){
+        
       var table = layui.table;
       var laydate = layui.laydate;
       var laypage = layui.laypage
+      ,form = layui.form
+
         ,layer = layui.layer;
       //执行一个laydate实例
       laydate.render({
@@ -376,9 +404,75 @@
         elem: '#date2' //指定元素
       });
 
+
         var $ = layui.jquery
         ,upload = layui.upload;
         
+
+
+        getProvince();
+        //选择框列表加载
+        function getProvince(e) {
+            handleAjax('enterprise/getProvincecity', { parentid: e }, "GET").done(function(resp) {
+
+
+                $.each(resp.list, function(index, item) {
+                    $('.province').append(new Option(item.fullName, item.code)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+
+        function getCity(e) {
+            handleAjax('enterprise/getProvincecity', { parentid: e }, "GET").done(function(resp) {
+
+
+                $.each(resp.list, function(index, item) {
+                    $('.city').append(new Option(item.fullName, item.code)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+
+        function getArea(e) {
+            handleAjax('enterprise/getProvincecity', { parentid: e }, "GET").done(function(resp) {
+
+
+                $.each(resp.list, function(index, item) {
+                    $('.area').append(new Option(item.fullName, item.code)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+
+
+        form.on('select(province)', function(data) {
+            console.log(data.value); //得到被选中的值
+            document.querySelector('.city').innerHTML = '<option value="">市</option>';
+            document.querySelector('.area').innerHTML = '<option value="">区</option>';
+
+            getCity(data.value);
+        });
+        form.on('select(city)', function(data) {
+            console.log(data.value); //得到被选中的值
+            document.querySelector('.area').innerHTML = '<option value="">区</option>';
+            getArea(data.value);
+        });
+
+
+
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#test1'
@@ -435,9 +529,94 @@
         });
      
       
+
+        
     });
 
 
    
 </script>
+<script>
+var dataId = null;
+    layui.config({
+        base: '../../../js/module/'
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+        layui.Tool.init();
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            console.info(JSON.stringify(data.field))
+            var type = 'sysenter'
+            if ( type === null ){
+                alert("数据类型不能为空")
+            }else{
+                var zd = { id:dataId === null ? "" : dataId,
+                    type:type,
+                    context:JSON.stringify(data.field),
+                    keyword:""
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame:zd,
+                    url:baseaip+"dictionaries/saveOrUpdate",
+                    callback:(function(){
+                        // window.history.back(-2);
+                    })()
+                })
+
+            }
+            alert(data.field.id)
+            return false;
+        });
+        // getHrefId();
+
+    });
+    // function getHrefId(){
+    //     var loc = location.href;
+    //     var url = loc.split("?")[1];
+    //     if(url && url!=''){
+    //         var para = url.split("&");
+    //         var len = para.length;
+    //         var res = {};
+    //         var arr = [];
+    //         for(var i=0;i<len;i++){
+    //             arr = para[i].split("=");
+    //             res[arr[0]] = arr[1];
+    //         }
+    //         dataId = res.id;
+    //         var dataJson = localStorage.getItem([res.id]);
+    //         dataJson != null && dataJson.trim().length > 0 ? (function(){
+    //             data  = JSON.parse(dataJson);
+    //             setForm(data);
+    //         })():"";
+    //     }else{
+    //     }
+    // }
+    function setForm(data){
+        layui.use(['form'], function () {
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+    Theoldcuiway('dictionaries/queryType', 
+    {   keyword: '',
+        type: 'sysenter'
+    },
+        "GET").done(function(resp) {
+        console.log(resp.data[0].id);
+        dataId=resp.data[0].id
+        setTimeout(function(){
+            setForm(resp.data[0]);
+        },500)
+        return
+    }).fail(function(err) {
+        console.log(err)
+
+    });
+
+
+    
+    </script>
 </html>
