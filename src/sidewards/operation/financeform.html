@@ -1,212 +1,330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="../../../js/module/jquery-3.4.1.min.js"></script>
+    <script src="../../../public/mui/echarts-all.js"></script>
+    <style>
+        .chart {
+            height: 300px;
+        }
+        body{
+           /* overflow-x:hidden;
+            overflow-y:hidden;*/
+        }
+        .p40 {
+            padding: 37px;
+        }
+        .p40>label{
+            color: #333;
+            font-family: "Comic Sans MS";
+            font-size: 2em;
+            text-shadow: 1px 1px 0px #212121;
+        }
+    </style>
 
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../css/financeform.css">
-    <link rel="stylesheet" href="../../../public/font/iconfont.css">
 </head>
 <body>
-    <div class="head">
-        <div class="head-lt">
-        </div>
-        <div class="head-cr">
-            资金状况
-        </div>
-        <div class="head-rt">
-            <select name="" id="" class="select">
-                <option value="">按销量排行</option>
-                <option value="">按销量额排行</option>
-                <option value="">按时间排行</option>
-            </select>
-            二级报表
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="container-sec">
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">销售金额</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>
+<blockquote class="layui-elem-quote">
+    财务基础报表
+</blockquote>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs5">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <!---->
+                    <div class="layui-row">
+                        <div class="layui-col-xs6">
+                            <div class="grid-demo grid-demo-bg1">
+                                <blockquote class="layui-elem-quote p40">
+                                    净收入<label id="jsr">18750</label>(万)
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6">
+                            <div class="grid-demo">
+                                <blockquote class="layui-elem-quote p40">
+                                    线上收入<label id="xssr">1500</label>(万)
+                                </blockquote>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:10000K(千元)
+                    <div class="layui-row">
+                        <div class="layui-col-xs6">
+                            <div class="grid-demo grid-demo-bg1">
+                                <blockquote class="layui-elem-quote p40">
+                                    毛利润<label id="mlr">15000</label>(万)
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="layui-col-xs6">
+                            <div class="grid-demo">
+                                <blockquote class="layui-elem-quote p40">
+                                    盈利润<label id="ylr">5000</label>(万)
+                                </blockquote>
+                            </div>
+                        </div>
                     </div>
-                    <div class="item-content-cr">
-                        <div id="main1" style="width:100%;height:280px;"></div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">采购余额</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:2000K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main2" style="width:100%;height:280px;"></div>
-                    </div>
+                    <!---->
                 </div>
             </div>
         </div>
-
-
-
-        <div class="container-sec">
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">退货余额</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:10000K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main3" style="width:100%;height:280px;"></div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="item">
-                <div class="item-nav">
-                    <div class="item-txt">流动资金</div>
-                    <div class="item-icon">
-                        <i class="layui-icon layui-icon-more"></i>
-                    </div>
-                </div>
-
-                <div class="item-content">
-                    <div class="item-content-lt">
-                        总额:30000K(千元)
-                    </div>
-                    <div class="item-content-cr">
-                        <div id="main4" style="width:100%;height:280px;"></div>
-                    </div>
+        <div class="layui-col-md7">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div  style="height: 222px;" id="xsje"></div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-<script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/echarts.min.js"></script>
-<script src="../../../js/productanalysis.js" charset="utf-8"></script>
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart1 = echarts.init(document.getElementById('main1'));
-    var myChart2 = echarts.init(document.getElementById('main2'));
-    var myChart3 = echarts.init(document.getElementById('main3'));
-    var myChart4 = echarts.init(document.getElementById('main4'));
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs5">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <blockquote class="layui-elem-quote">
+                    花费(万)
+                </blockquote>
+                <table class="layui-table" width="200">
+                    <colgroup>
+                        <col width="100">
+                        <col width="100">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>管理及IT费用</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td> 广告费</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td> 折旧费</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td> 商品税</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td> 投资收入</td>
+                        <td>300</td>
+                    </tr>
+                    <tr>
+                        <td> 房租</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr>
+                        <td> 占用费</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td> 其他操作费用</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td> 差旅费</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td> 交通费用</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td> 食补</td>
+                        <td>30</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+        <div class="layui-col-md7">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="chart" id="bold"></div>
+                <div class="chart" id="hf"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+<script>
+    option = {
+        title: {
+            text: '收益及亏盈',
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+            feature: {
+                dataView: {readOnly: false},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        legend: {
+            data: ['花费','毛利润','线上收益','净收入','利润']
+        },
+        calculable: true,
+        series: [
+            {
+                name:'漏斗图',
+                type:'funnel',
+                left: '10%',
+                top: 60,
+                bottom: 60,
+                width: '80%',
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [
+                    {value: 60, name: '花费'},
+                    {value: 40, name: '毛利润'},
+                    {value: 20, name: '线上收益'},
+                    {value: 80, name: '净收入'},
+                    {value: 100, name: '利润'}
+                ]
+            }
+        ]
+    };
+    var barChart = echarts.init(document.getElementById('xsje'));
+    barChart.setOption(option);
 
-    // 指定图表的配置项和数据
-    var option = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+
+
+    sjtjOption = {
+        title: {
+            text: '收益及亏盈组成(万)',
         },
-        legend: {
-            orient: 'vertical',
-            x: 'right',
-            data:['现金','银行']
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {
+                type : 'shadow'
+            },
+            formatter: function (params) {
+                var tar = params[1];
+                return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type : 'category',
+            splitLine: {show:false},
+            data : ['花费','毛利润','线上收益','净收入','利润']
+
+        },
+        yAxis: {
+            type : 'value'
         },
         series: [
             {
-                name:'访问来源',
-                type:'pie',
-                radius: ['50%', '65%'],
-                avoidLabelOverlap: false,
-                label: {
+                name: '辅助',
+                type: 'bar',
+                stack:  '总量',
+                itemStyle: {
                     normal: {
-                        show: false,
-                        position: 'center'
+                        barBorderColor: 'rgba(0,0,0,0)',
+                        color: 'rgba(0,0,0,0)'
                     },
                     emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
+                        barBorderColor: 'rgba(0,0,0,0)',
+                        color: 'rgba(0,0,0,0)'
                     }
                 },
-                labelLine: {
+                data: [0, 1700, 1400, 1200, 300, 0]
+            },
+            {
+                name: '生活费',
+                type: 'bar',
+                stack: '总量',
+                label: {
                     normal: {
-                        show: false
+                        show: true,
+                        position: 'inside'
                     }
                 },
-                data:[
-                    {value:2, name:'现金'},
-                    {value:2, name:'银行'}
-                ]
+                data:[2900, 1200, 300, 200, 900]
             }
         ]
     };
-    var option2 = {
+
+    var barChart = echarts.init(document.getElementById('bold'));
+    barChart.setOption(sjtjOption);
+
+
+
+
+
+    hFoption = {
+        title: {
+            text: '花费统计(万)',
+        },
         tooltip: {
             trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
+            formatter: "{a} <br/>{b} : {c}万"
         },
-        legend: {
-            orient: 'vertical',
-            x: 'right',
-            data:['现金','银行']
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type : 'category',
+            splitLine: {show:false},
+            data :['管理及IT费用	','广告费','折旧费','商品税','投资收入','房租','占用费','其他操作费用','差旅费','交通费用','食补']
+        },
+        yAxis: {
+            type : 'value'
         },
         series: [
             {
-                name:'访问来源',
-                type:'pie',
-                radius: ['0%', '65%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
-                data:[
-                    {value:2, name:'现金'},
-                    {value:2, name:'银行'}
-                ]
+                name: '花费统计',
+                type: 'bar',
+                stack: '总量',
+                data: [500,300,100,100,300,1000,100,100,50,50,30]
             }
         ]
     };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart1.setOption(option);
-    myChart2.setOption(option);
-    myChart3.setOption(option2);
-    myChart4.setOption(option2);
+
+    var hf = echarts.init(document.getElementById('hf'));
+    hf.setOption(hFoption);
 
 </script>
+</body>
 </html>

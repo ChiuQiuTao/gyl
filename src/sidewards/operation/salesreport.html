@@ -23,38 +23,34 @@
 <blockquote class="layui-elem-quote">
     销售报表数据
 </blockquote>
-<div style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <table class="layui-table" id="test">  </table>
-                </div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table class="layui-table" id="test">  </table>
             </div>
         </div>
-        <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div  style="height: 222px;" id="xsje"></div>
-                </div>
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div  style="height: 222px;" id="xsje"></div>
             </div>
         </div>
     </div>
 </div>
-<div style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="chart" id="barChart"></div>
-                </div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="chart" id="barChart"></div>
             </div>
         </div>
-        <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-body">
-                    <div class="chart" id="bold"></div>
-                </div>
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="chart" id="bold"></div>
             </div>
         </div>
     </div>
@@ -68,10 +64,9 @@
         $ = layui.jquery;
         table.render({
             elem: '#test'
-            ,url:'./data/data.json'
+            ,url:'./data/salesreport.json'
             ,cols: [[
-                {type: 'checkbox', fixed: 'left',align:"center"}
-                ,{field:'jd',   title: '季度',align:"center"}
+                {field:'jd',   title: '季度',align:"center"}
                 ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
                     return percent(data.xsje,data.total)+"%"
                  }}
