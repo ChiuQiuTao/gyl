@@ -1,121 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    
-    <title>Document</title>
-    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../css/salesreport.css">
-    <link rel="stylesheet" href="../../../public/font/iconfont.css">
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="../../../js/module/jquery-3.4.1.min.js"></script>
+    <script src="../../../public/mui/echarts-all.js"></script>
+    <style>
+        .chart {
+            height: 300px;
+        }
+        body{
+            overflow-x:hidden;
+            overflow-y:hidden;
+        }
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="nav">
-                <div class="nav-item nav-item-this">
-                    本周
-                </div>
-                <div class="nav-item">
-                    本月
-                </div>
-                <div class="nav-item">
-                    本季
-                </div>
-                <div class="nav-item">
-                    本年
-                </div>
-            </div>
-            <div class="date">
-                <div class="select-item">
-                    <div class="select-item-text">
-                        日期
-                    </div>
-                    <input type="text" class="layui-input select-item-input" id="date1">
-                    <div class="line"></div>
-                    <input type="text" class="layui-input select-item-input" id="date2">
-                    <div class="selectbtn">查询</div>
-                    <select name="" id="" class="select-item-select">
-                        <option value="">期间</option>
-                        <option value="">期间</option>
-                        <option value="">期间</option>
-                    </select>
+<blockquote class="layui-elem-quote">
+    销售报表数据
+</blockquote>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <table class="layui-table" id="test">  </table>
                 </div>
             </div>
         </div>
-
-        <div class="money">
-            <div class="money-item-n money-item-r">
-                <!-- <div class="money-num"> -->
-                    <div class="money-num-item">
-                        <div class="money-num-t">0.00</div>
-                        <div class="money-num-b">销售额</div>
-                    </div>
-
-                    <div class="money-num-item">
-                        <div class="money-num-t">0.00</div>
-                        <div class="money-num-b">开单数</div>
-                    </div>
-
-                    <div class="money-num-item">
-                        <div class="money-num-t">0.00</div>
-                        <div class="money-num-b">销售数量</div>
-                    </div>
-                <!-- </div> -->
-            </div>
-            <div class="money-item">
-                <div class="money-item-left">
-                    <div class="money-item-txt">单据</div>
-                </div>
-                <div class="money-item-right">
-                    0笔
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div  style="height: 222px;" id="xsje"></div>
                 </div>
             </div>
         </div>
-
-        <div class="select">
-            <div class="item select-r">
-                <select name="" id="" class="select-item-select">
-                    <option value="">时间</option>
-                    <option value="">业务员</option>
-                    <option value="">产品</option>
-                    <option value="">客户</option>
-                </select>
-
-                <div class="data">
-                    查询记录为0
-                </div>
-            </div>
-            <div class="item">
-             
-            </div>
-            
-        </div>
-        
     </div>
-</body>
-<script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/salesreport.js" charset="utf-8"></script>
+</div>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="chart" id="barChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="chart" id="bold"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
-    layui.use(['table','laypage','laydate'], function(){
-      var table = layui.table;
-      var laydate = layui.laydate;
-      var laypage = layui.laypage
-        ,layer = layui.layer;
-      //执行一个laydate实例
-      laydate.render({
-        elem: '#date1' //指定元素
-      });
-      laydate.render({
-        elem: '#date2' //指定元素
-      });
+    var tableData = null;
+    var datas = new Array();
+    var zxtdatas = new Array();
+    layui.use('table', function(){
+        var table = layui.table
+        $ = layui.jquery;
+        table.render({
+            elem: '#test'
+            ,url:'./data/data.json'
+            ,cols: [[
+                {type: 'checkbox', fixed: 'left',align:"center"}
+                ,{field:'jd',   title: '季度',align:"center"}
+                ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
+                    return percent(data.xsje,data.total)+"%"
+                 }}
+                ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
+                ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+            ]],
+            parseData:function (res) {
+                return {
+                    "code": res.status,
+                    "msg": res.message,
+                    "count": res.total,
+                    "data": res.data.item
+                };
+            },
+            done:function (res, curr, count) {
+                var byId = function(id) {
+                    return document.getElementById(id);
+                };
+                var barChart = echarts.init(byId('barChart'));
+                var list = new Array();
+                $.each(res.data , function (key ,val) {
+                    list.push(percent(val.xsje,val.total));
+                    datas.push({value:val.xssl, name:val.jd})
+                    zxtdatas.push(val.xsje)
+                })
+                barChart.setOption(getOption(list));
 
-    
+                var barChart = echarts.init(byId('bold'));
+                barChart.setOption(option);
 
-      
+                var barChart = echarts.init(byId('xsje'));
+                barChart.setOption(zxtOption);
+            }
+        });
     });
+
+    function percent(num, total) {
+        num = parseFloat(num);
+        total = parseFloat(total);
+        if (isNaN(num) || isNaN(total)) {
+            return "-";
+        }
+        return total <= 0 ? 0 : (Math.round(num / total * 100000) / 100.00);
+    }
+
+
+
+    var getOption = function(datas) {
+        return  {
+            title : {
+                text: '各个季度占比',
+                x:'center'
+            },
+            grid: {
+                x: 35,
+                x2: 10,
+                y: 30,
+                y2: 25
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            tooltip : {
+                trigger: 'axis',
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: false,
+            xAxis: [{
+                type: 'category',
+                data: ['一季度', '二季度', '三季度', '四季度']
+            }],
+            yAxis: [{
+                type: 'value',
+                splitArea: {
+                    show: true
+                }
+            }],
+            series: [{
+                name: '销售数据统计',
+                type: "bar",
+                data: datas
+            }]
+        };
+    };
+
+
+
+    option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        title : {
+            text: '销售数量',
+            x:'center'
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:['一季度','二季度','三季度','四季度']
+        },
+        series: [
+            {
+                name:'销售数量',
+                type:'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    normal: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        show: true,
+                        textStyle: {
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:datas,
+            }
+        ]
+    };
+
+
+    zxtOption = {
+        title : {
+            text: '销售金额',
+            x:'center'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}万)"
+        },
+        xAxis: {
+            type: 'category',
+            data: ['一季度', '二季度', '三季度', '四季度']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: zxtdatas,
+            type: 'line'
+        }]
+    };
 
 
 </script>
+</body>
 </html>

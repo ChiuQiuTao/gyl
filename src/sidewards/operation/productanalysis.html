@@ -9,37 +9,23 @@
     <link rel="stylesheet" href="../../../public/dist/css/layui.css">
     <link rel="stylesheet" href="../../../css/productanalysis.css">
     <link rel="stylesheet" href="../../../public/font/iconfont.css">
+    <style>
+        .chart {
+            height: 300px;
+        }
+
+    </style>
+
 </head>
 <body>
     <div class="container">
         <div class="lt">
             <div class="type">
                 <div class="type-item">
-                    商品大分类<b>1</b>个
-                </div>
-                <div class="type-item">
-                    商品小分类<b>1</b>个
+                    商品大分类<b id="spType">0</b>个
                 </div>
             </div>
-            <div class="number">
-                <div class="number-top">
-                    商品库存
-                </div>
-                <div class="number-bottom">
-                    <b>0</b>件
-                </div>
-            </div>
-            <div class="cost">
-                总成本
-            </div>
-            <div class="number">
-                <div class="number-top">
-                        预计营收
-                </div>
-                <div class="number-bottom">
-                    <b>0</b>
-                </div>
-            </div>
+            <div class="chart" id="chart"></div>
         </div>
         <div class="rt">
             <div class="head">
@@ -47,20 +33,191 @@
                     商品排行
                 </div>
                 <div class="head-rt">
-                    <select name="" id="" class="select">
-                        <option value="">按销量排行</option>
-                        <option value="">按销量额排行</option>
-                        <option value="">按时间排行</option>
+                    <select name="" id="spph" class="select">
+                        <option value="xl">按销量排行</option>
+                        <option value="xle">按销量额排行</option>
+                        <option value="sj">按时间排行</option>
                     </select>
                 </div>
             </div>
+            <div class="chart" id="barChart"></div>
         </div>
     </div>
 </body>
+<script src="../../../public/mui/echarts-all.js"></script>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../js/productanalysis.js" charset="utf-8"></script>
 <script>
-    
 
+    var getOption = function(datas) {
+        return  {
+            legend: {
+                data: ['采购信息统计'],
+                bottom: 10,
+                left: 'center',
+            },
+            grid: {
+                x: 35,
+                x2: 10,
+                y: 30,
+                y2: 25
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: false,
+            xAxis: [{
+                type: 'category',
+                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+            }],
+            yAxis: [{
+                type: 'value',
+                splitArea: {
+                    show: true
+                }
+            }],
+            series: [{
+                name: '采购信息统计',
+                type: "bar",
+                data: datas
+            }]
+        };
+    };
+    var byId = function(id) {
+        return document.getElementById(id);
+    };
+    var barChart = echarts.init(byId('barChart'));
+    var datas = {};
+    datas.sj = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
+    barChart.setOption(getOption(datas.sj));
+
+    document.querySelector("#spph").addEventListener("change" , function () {
+        var idData = this.value;
+        datas.xl = [30.0, 20.0, 40.0, 10.2, 80.6, 20.7, 200.6, 300.2, 400.6, 100.0, 6.4, 3.3];
+        datas.xle = [2000.0, 1500.0, 3000.0, 4000.2, 8000.6, 7654.7, 1235.6, 5877.2, 124.6, 1245.0, 615.4, 365.3];
+        barChart.setOption(getOption(datas[idData]));
+    });
+
+
+
+
+var spType = ['家电','奶粉','生活','科技','食品','酒类','特产','农业','养殖','其他'];
+byId("spType").innerHTML = spType.length;
+var option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data:spType
+        },
+        series: [
+            {
+                name:'访问来源',
+                type:'pie',
+                selectedMode: 'single',
+                radius: [0, '30%'],
+
+                label: {
+                    normal: {
+                        position: 'inner'
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data:[
+                    {value:335, name:'销售', selected:true},
+                    {value:679, name:'退货'},
+                    {value:1548, name:'采购'}
+                ]
+            },
+            {
+                name:'商品分析',
+                type:'pie',
+                radius: ['40%', '55%'],
+                label: {
+                    normal: {
+                        formatter: '{a|{a}}{abg|}\n{hr|}\n  {b|{b}：}{c}  {per|{d}%}  ',
+                        backgroundColor: '#eee',
+                        borderColor: '#aaa',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        rich: {
+                            a: {
+                                color: '#999',
+                                lineHeight: 22,
+                                align: 'center'
+                            },
+                            hr: {
+                                borderColor: '#aaa',
+                                width: '100%',
+                                borderWidth: 0.5,
+                                height: 0
+                            },
+                            b: {
+                                fontSize: 16,
+                                lineHeight: 33
+                            },
+                            per: {
+                                color: '#eee',
+                                backgroundColor: '#334455',
+                                padding: [2, 4],
+                                borderRadius: 2
+                            }
+                        }
+                    }
+                },
+                data:[
+                    {value:335, name:'家电'},
+                    {value:310, name:'奶粉'},
+                    {value:234, name:'生活'},
+                    {value:135, name:'科技'},
+                    {value:1048, name:'食品'},
+                    {value:251, name:'酒类'},
+                    {value:147, name:'特产'},
+                    {value:147, name:'养殖'},
+                    {value:147, name:'其它'},
+                    {value:102, name:'农业'}
+                ]
+            }
+        ]
+    };
+    var chart = echarts.init(byId('chart'));
+    chart.setOption(option);
 </script>
 </html>
