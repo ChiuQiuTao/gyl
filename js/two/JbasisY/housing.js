@@ -124,7 +124,7 @@
                     align: "center"
                     },
                     {
-                    field: "parentid",
+                    field: "parentname",
                     title: "基地名称",
                     minWidth: 120,
                     align: "center"
