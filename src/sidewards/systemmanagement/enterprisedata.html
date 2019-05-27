@@ -150,13 +150,13 @@
                     <div class="select-item-text">
                         备注
                     </div>
-                    <textarea name="" id="" class="select-textarea" name="s16"></textarea>
+                    <textarea id="" class="select-textarea" name="s16"></textarea>
                 </div>
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="启用客户分权" lay-skin="primary" name="s17">
+                    <input type="checkbox" title="启用客户分权" lay-skin="primary" name="s17">
                 </div>
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="启用供应商分权" lay-skin="primary" name="s18">
+                    <input type="checkbox" title="启用供应商分权" lay-skin="primary" name="s18">
                 </div>
             
 
@@ -204,7 +204,7 @@
                 </div>
 
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="是否发送下一步信息" lay-skin="primary" name="s24">
+                    <input type="checkbox" title="是否发送下一步信息" lay-skin="primary" name="s24">
                 </div>
 
                 <div class="select-item">
@@ -215,12 +215,12 @@
                 </div>
 
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="接单引用对方物料基础数据" lay-skin="primary" name="s26">
+                    <input type="checkbox" title="接单引用对方物料基础数据" lay-skin="primary" name="s26">
                 </div>
 
 
                 <div class="select-item layui-form-item">
-                    <input type="checkbox" name="" title="启用物料类别分权" lay-skin="primary" name="s27">
+                    <input type="checkbox" title="启用物料类别分权" lay-skin="primary" name="s27">
                 </div>
             </div>
 
@@ -605,18 +605,51 @@ var dataId = null;
         type: 'sysenter'
     },
         "GET").done(function(resp) {
-        console.log(resp.data[0].id);
+        console.log(resp.data[0]);
         dataId=resp.data[0].id
+        var context = JSON.parse(resp.data[0].context)
+        console.log(context);
+        getCity(context.province);
+        getArea(context.city);
         setTimeout(function(){
             setForm(resp.data[0]);
         },500)
+
         return
     }).fail(function(err) {
         console.log(err)
 
     });
 
+        function getCity(e) {
+            handleAjax('enterprise/getProvincecity', { parentid: e }, "GET").done(function(resp) {
 
+
+                $.each(resp.list, function(index, item) {
+                    $('.city').append(new Option(item.fullName, item.code)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
+
+        function getArea(e) {
+            handleAjax('enterprise/getProvincecity', { parentid: e }, "GET").done(function(resp) {
+
+
+                $.each(resp.list, function(index, item) {
+                    $('.area').append(new Option(item.fullName, item.code)); // 下拉菜单里添加元素
+                });
+                layui.form.render("select");
+                return
+            }).fail(function(err) {
+                console.log(err)
+
+            });
+        }
     
     </script>
 </html>

@@ -355,102 +355,71 @@
                     <div class="order-table">
                         <div class="layui-tab layui-tab-card">
                             <ul class="layui-tab-title">
-                                <li class="layui-this">
+                                <li class="layui-this select-type-item select-type-show">
                                     全部
-                                    <div class="tab-number">0</div>
+                                    
                                 </li>
-                                <li>
+                                <li class="select-type-item">
                                     未查看
-                                    <div class="tab-number">0</div>
+                                    
                                 </li>
-                                <li>
+                                <li class="select-type-item">
                                     已查看
-                                    <div class="tab-number">0</div>
+                                    
                                 </li>
-                                <li>
+                                <li class="select-type-item">
                                     处理中
-                                    <div class="tab-number">0</div>
+                                    
                                 </li>
-                                <li>
+                                <li class="select-type-item">
                                     已处理
-                                    <div class="tab-number">0</div>
+                                    
                                 </li>
                             </ul>
-                            <div class="layui-tab-content" style="">
-                                <div class="layui-tab-item layui-show">
-                                    <div class="input-item">
-                                        <div class="date-title">日期:</div>
-                                        <div class="date-select">
-                                            <input type="text" class="layui-input" id="date1">
-                                            <div class="date-line"></div>
-                                            <input type="text" class="layui-input" id="date2">
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="input-item">
-                                        <div class="date-title">单号:</div>
-                                        <div class="date-select">
-                                            <input type="text" class="layui-input">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="input-item">
-                                        <div class="date-title">关键字:</div>
-                                        <div class="date-select">
-                                            <input type="text" class="layui-input">
-                                        </div>
-                                        <div class="btn">查询</div>
-                                        <div class="btn">清除</div>
-                                    </div>
-
-
-
-
-
-                                    <!-- 表单 -->
-                                    <div class="table">
-                                        <table class="layui-table">
-                                            <colgroup>
-                                                <col width="150">
-                                                <col width="200">
-                                                <col>
-                                            </colgroup>
-                                            <thead>
-                                                <tr>
-                                                    <th>单号</th>
-                                                    <th>简称</th>
-                                                    <th>平台账号</th>
-                                                    <th>单据信息</th>
-                                                    <th>时间</th>
-                                                    <th>状态</th>
-                                                    <th>操作</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>20151212100051</td>
-                                                    <td>寒战</td>
-                                                    <td>1056896522</td>
-                                                    <td>已完成</td>
-                                                    <td>2016-11-28</td>
-                                                    <td>已完成</td>
-                                                    <td>成功</td>
-
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
+                        </div>
+                        <div class="select-con" style="height: 27px;">
+                            <!-- <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label" style="width:90px;">单号:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="s1"  class="layui-input" search-type="s1" id='s1' placeholder="请输入详细单号">
                                     </div>
                                 </div>
-                                <div class="layui-tab-item">2</div>
-                                <div class="layui-tab-item">3</div>
-                                <div class="layui-tab-item">4</div>
-                                <div class="layui-tab-item">5</div>
-                                <div class="layui-tab-item">6</div>
                             </div>
+                            <div class="layui-form-item" style="display: none">
+                                <div class="layui-inline">
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="s3"  class="layui-input" search-type="s3" id="s3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="select-btn">
+                                <div class="layui-bg-green comquery" lay-event="search">查询</div>
+                                <div class="layui-bg-green comquery" lay-event="reset">重置</div>
+                            </div> -->
+
+                            
+                            <div class="input-item">
+                                <div class="date-title">单号:</div>
+                                <div class="date-select">
+                                    <input type="text" class="layui-input"name="s1" search-type="s1" id='s1' placeholder="请输入详细单号">
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="display: none">
+                                    <div class="layui-inline">
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="s3"  class="layui-input" search-type="s3" id="s3">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <div class="input-item">
+                                <div class="btn" lay-event="search">查询</div>
+                                <div class="btn" lay-event="reset">清除</div>
+                            </div>
+                        </div>
+                        <div class="common-padding">
+                                <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
                         </div>
                     </div>
                 </div>
@@ -490,7 +459,6 @@
 <script src="./js/common/jquery.min.js"></script>
 <script src="./js/common/api.js"></script>
 <script src="./js/index.js"></script>
-
 <script>
     if (sessions == "" || sessions == null) {
         window.location.href = "./src/login.html";
@@ -575,4 +543,94 @@
     })
 </script>
 
+<script>
+    
+    layui.config({
+        base: './js/module/'
+    }).use(['Services','jquery'],function () {
+        var $  = layui.jquery;
+        var seeType='';
+        var dataType = 'myman';
+        var typeItem = document.querySelectorAll('.select-type-item');
+        for(var i=0;i<typeItem.length;i++){
+            (function(i){
+                typeItem[i].addEventListener('click',function(){
+                    document.querySelector('.select-type-show').classList.remove('select-type-show');
+                    typeItem[i].classList.add('select-type-show');
+                    if(i==0){
+                        seeType='';
+                        document.querySelector('#s3').value='';
+                        getServices();
+
+                    }else{
+                        seeType=i;
+                        document.querySelector('#s3').value=seeType;
+                        getServices();
+                    }
+                })
+            })(i)
+        }
+        getServices();
+        function getServices(){
+            
+            var services = new layui.Services({
+                baseURL:baseaip,
+                tableId:"testdome",
+                toolbar:"#toolbarinter",
+                serachUrl:"dictionaries/query",
+                getUrl:"dictionaries/get",
+                delUrl:"dictionaries/delete",
+                updUrl:"plant/updateNcpxx",
+                saveUrl:"./dialog/manageDialog.html",
+                deleteField:"id",
+                dataType:dataType,
+                parameter:{
+                    keyword:document.querySelector('#s1').value+'|'+seeType,
+                    type:dataType
+                },
+                cols:[[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 's1', sort: true, title: '单号',templet:function (data) {
+
+                            return (JSON.parse(data.context)).s1
+                    }},
+                    {field: 's2', sort: true, title: '简称',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s2
+                    }},
+                    {field: 's4', sort: true, title: '平台账号',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s4
+                    }},
+                    {field: 's2', sort: true, title: '单据信息',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s2
+                    }},
+                    {field: 's6', sort: true, title: '时间',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).s6
+                    }},
+                    {field: 's3', sort: true, title: '状态',templet:function (data) {
+                        var ret = ''
+                        if((JSON.parse(data.context)).s3==1){
+                            ret = '未查看'
+                        }else if((JSON.parse(data.context)).s3==2){
+                            ret = '已查看'
+
+                        }else if((JSON.parse(data.context)).s3==3){
+                            ret = '处理中'
+
+                        }else if((JSON.parse(data.context)).s3==4){
+                            ret = '已处理'
+
+                        }
+                       
+                        return ret
+                    }},
+                ]],
+            });
+        }
+        
+    });
+</script>
 </html>
