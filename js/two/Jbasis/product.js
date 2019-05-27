@@ -50,6 +50,16 @@
         })
        
         getBasProduct();
+        function delProductById(id) {
+            handleAjax('basic/delProductById',
+                {
+                    id:id
+                }, "post").done(function(resp) {
+                layer.msg('删除成功');
+                return
+            }).fail(function(err) {
+            })
+        }
         function getBasProduct(){
             var productname = document.querySelector('#productname').value;
             // var storagelevel = document.querySelector('#storagelevel').value;
