@@ -15,7 +15,9 @@
     <form class="layui-form layui-form-pane" action="" lay-filter="example" id="example">
         <div class="select">
             <div class="select-left">
-                <!-- <input type="text" class="layui-input select-item-input" name="id" id="enterId"> -->
+                <input type="text" class="layui-input select-item-input" name="imgpath1" id="imgpath1">
+                <input type="text" class="layui-input select-item-input" name="imgpath2" id="imgpath2">
+
                 <!--  style="display: none" -->
                 <div class="select-item">
                     <div class="select-item-text">
@@ -247,7 +249,7 @@
             <div class="item item-this">
                 执照信息
             </div>
-            <div class="item">
+            <!-- <div class="item">
                 店铺logo
             </div>
             <div class="item">
@@ -255,7 +257,7 @@
             </div>
             <div class="item">
                 店铺二维码
-            </div>
+            </div> -->
             <div class="item">
                 企业二维码
             </div>
@@ -281,7 +283,7 @@
         </div>
 
 
-        <div class="switch-content" id='switch2'>
+        <!-- <div class="switch-content" id='switch2'>
             <div class="layui-upload">
                 <button type="button" class="layui-btn" id="test1">上传图片</button>
                 <div class="layui-upload-list">
@@ -299,10 +301,10 @@
                   <div class="uploadimg-txt">小图片</div>
                 </div>
             </div> 
-        </div>
+        </div> -->
 
 
-        <div class="switch-content" id='switch3'>
+        <!-- <div class="switch-content" id='switch3'>
             <div class="switch-content-title">应用于供应商首页轮播（尺寸：700 x 500）</div>
 
             <div class="layui-upload">
@@ -339,10 +341,10 @@
                 </div>
         
             </div>
-        </div>
+        </div> -->
 
 
-        <div class="switch-content" id='switch4'>
+        <!-- <div class="switch-content" id='switch4'>
             <div class="switch-content-title">应用于供应商首页底部二维码</div>
 
             <div class="layui-upload">
@@ -354,7 +356,7 @@
                 </div>
             </div> 
 
-            
+             -->
         </div>
 
 
@@ -408,7 +410,19 @@
         var $ = layui.jquery
         ,upload = layui.upload;
         
+      var switchNav = document.querySelectorAll('.switch-nav .item');
+      var switchContent = document.querySelectorAll('.switch-content');
+      for(var i=0;i<switchNav.length;i++){
+          (function(i){
+            switchNav[i].addEventListener('click',function(){
+                document.querySelector('.switch-nav .item-this').classList.remove('item-this');
+                document.querySelector('.switch-content-this').classList.remove('switch-content-this');
+                switchNav[i].classList.add('item-this');
+                switchContent[i].classList.add('switch-content-this');
 
+            })
+          })(i)
+      }
 
         getProvince();
         //选择框列表加载
@@ -473,60 +487,60 @@
 
 
 
-        //普通图片上传
-        var uploadInst = upload.render({
-            elem: '#test1'
-            ,url: '/upload/'
-            ,before: function(obj){
-            //预读本地文件示例，不支持ie8
-            obj.preview(function(index, file, result){
-                $('#demo1').attr('src', result); //图片链接（base64）
-            });
-            }
-            ,done: function(res){
-            //如果上传失败
-            if(res.code > 0){
-                return layer.msg('上传失败');
-            }
-            //上传成功
-            }
-            ,error: function(){
-            //演示失败状态，并实现重传
-            var demoText = $('#demoText1');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function(){
-                uploadInst.upload();
-            });
-            }
-        });
+        // //普通图片上传
+        // var uploadInst = upload.render({
+        //     elem: '#test1'
+        //     ,url: baseaip+'file/upload'
+        //     ,before: function(obj){
+        //     //预读本地文件示例，不支持ie8
+        //     obj.preview(function(index, file, result){
+        //         $('#demo1').attr('src', result); //图片链接（base64）
+        //     });
+        //     }
+        //     ,done: function(res){
+        //     //如果上传失败
+        //     if(res.code > 0){
+        //         return layer.msg('上传成功');
+        //     }
+        //     //上传成功
+        //     }
+        //     ,error: function(){
+        //     //演示失败状态，并实现重传
+        //     var demoText = $('#demoText1');
+        //     demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+        //     demoText.find('.demo-reload').on('click', function(){
+        //         uploadInst.upload();
+        //     });
+        //     }
+        // });
 
 
 
-        var uploadInst = upload.render({
-            elem: '#test2'
-            ,url: '/upload/'
-            ,before: function(obj){
-            //预读本地文件示例，不支持ie8
-            obj.preview(function(index, file, result){
-                $('#demo2').attr('src', result); //图片链接（base64）
-            });
-            }
-            ,done: function(res){
-            //如果上传失败
-            if(res.code > 0){
-                return layer.msg('上传失败');
-            }
-            //上传成功
-            }
-            ,error: function(){
-            //演示失败状态，并实现重传
-            var demoText = $('#demoText2');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function(){
-                uploadInst.upload();
-            });
-            }
-        });
+        // var uploadInst = upload.render({
+        //     elem: '#test2'
+        //     ,url: '/upload/'
+        //     ,before: function(obj){
+        //     //预读本地文件示例，不支持ie8
+        //     obj.preview(function(index, file, result){
+        //         $('#demo2').attr('src', result); //图片链接（base64）
+        //     });
+        //     }
+        //     ,done: function(res){
+        //     //如果上传失败
+        //     if(res.code > 0){
+        //         return layer.msg('上传失败');
+        //     }
+        //     //上传成功
+        //     }
+        //     ,error: function(){
+        //     //演示失败状态，并实现重传
+        //     var demoText = $('#demoText2');
+        //     demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+        //     demoText.find('.demo-reload').on('click', function(){
+        //         uploadInst.upload();
+        //     });
+        //     }
+        // });
      
       
 
@@ -540,13 +554,64 @@
 var dataId = null;
     layui.config({
         base: '../../../js/module/'
-    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools"],function () {
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools","upload"],function () {
         layui.Tool.init();
         var form = layui.form
             ,layer = layui.layer
             ,layedit = layui.layedit
             ,laydate = layui.laydate,
             serviceTools = layui.serviceTools;
+
+
+            //指定允许上传的文件类型
+        layui.upload.render({
+            elem: '#test1'
+            ,url: baseaip+"file/upload"
+            ,accept: 'file'
+            ,exts: 'doc|docx|pdf|png|jpg'
+            ,field:"file"
+            ,done: function(res){
+                var filePath = res.data;
+                filePath = filePath.substring(0,filePath.length - 1 );
+                document.querySelector("#imgpath1").value=filePath;
+                $('#demo1').attr('src', filePath)
+                console.log(filePath)
+            }
+        });
+
+
+        //指定允许上传的文件类型
+        layui.upload.render({
+            elem: '#test2'
+            ,url: baseaip+"file/upload"
+            ,accept: 'file'
+            ,exts: 'doc|docx|pdf|png|jpg'
+            ,field:"file"
+            ,done: function(res){
+                var filePath = res.data;
+                filePath = filePath.substring(0,filePath.length - 1 );
+                // $("#imgpath2").value=filePath;
+                document.querySelector("#imgpath2").value=filePath;
+
+                $('#demo2').attr('src', filePath)
+
+            }
+        });
+
+
+        // //指定允许上传的文件类型
+        // layui.upload.render({
+        //     elem: '#test3'
+        //     ,url: baseaip+"file/upload"
+        //     ,accept: 'file'
+        //     ,exts: 'doc|docx|pdf|png|jpg'
+        //     ,field:"file"
+        //     ,done: function(res){
+        //         var filePath = res.data;
+        //         filePath = filePath.substring(0,filePath.length - 1 );
+        //         $("#htwj").val("").val(filePath);
+        //     }
+        // });
         //监听提交
         form.on('submit(demo1)', function(data){
             console.info(JSON.stringify(data.field))
@@ -611,6 +676,9 @@ var dataId = null;
         console.log(context);
         getCity(context.province);
         getArea(context.city);
+
+        document.querySelector('#demo1').src=context.imgpath1;
+        document.querySelector('#demo2').src=context.imgpath2;
         setTimeout(function(){
             setForm(resp.data[0]);
         },500)
