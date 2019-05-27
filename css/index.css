@@ -248,3 +248,6 @@ iframe{
     color: #fff;
     cursor: pointer;
 }
+.layui-table-tool{
+    z-index: 0 !important;
+}

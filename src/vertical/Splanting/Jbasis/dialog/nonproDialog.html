@@ -5,162 +5,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>种子信息</title>
+    <title>农场品信息</title>
     <link rel="stylesheet" href="../../../../../public/dist/css/layui.css">
-    <link rel="stylesheet" href="../../../../../public/font/iconfont.css">
-    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/supplierDialog.css">
-    <link rel="stylesheet" href="../../../../../css/twocss/Jbasis/productDialog.css">
 </head>
 
 <body>
-    
-    
-    <!-- 企业供应商 -->
-    <form class="layui-form" action="">
-        <div class="select common">
-            <div class="select-title">农产品信息</div>
-            <div class="select-con">
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">农产品名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='productname'>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline" id='inline-type'>
-                        <label class="layui-form-label">种类:</label>
-                        <div class="layui-input-inline">
-                            <select name="producttypeid" lay-verify="" lay-filter="producttypeid" id='producttypeid'>
-                                <option value="">请选择</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
+    <blockquote class="layui-elem-quote layui-text">
+        农产品信息
+    </blockquote>
+    <form class="layui-form" action="" lay-filter="example" id="example">
 
-                <div class="layui-form-item">
-                    <div class="layui-inline" id='inline-type'>
-                        <label class="layui-form-label">种子名称:</label>
-                        <div class="layui-input-inline">
-                            <select name="producttype" lay-verify="" lay-filter="producttype" id='producttype'>
-                                <option value="">请选择</option>
-                            </select>
-                        </div>
-                    </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">农场品名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="productname" class="layui-input" id="productname">
                 </div>
-                
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">生长周期:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" placeholder="" id='cycle'>
-                        </div>
-                        <div class="layui-inline-sel">
-                            <select name="cycleunit" lay-filter="cycleunit" id='cycleunit' lay-verify="required" style="width: 100px;">
-                                <option value="年">年</option>
-                                <option value="月">月</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">保质期:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" placeholder="" id='lifedate'>
-                        </div>
-                        <div class="layui-inline-sel">
-                            <select name="country" lay-filter="storagelevel" id='lifedateunit' lay-verify="required" style="width: 100px;">
-                                <option value="年">年</option>
-                                <option value="月">月</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">销售价:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" placeholder="" id='sellingprice'>
-                        </div>
-                        元
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">单位:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='unit'>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="layui-form-item">
-                    <div class="layui-inline" style="min-width:160px;">
-                        <label class="layui-form-label">预警信息:</label>
-                        <div class="layui-input-block" style="margin-left:0;">
-                            <input type="checkbox" lay-skin="primary" title="是否预警"  lay-filter="earlywarning" id='earlywarning'>
-                        </div>
-                    </div>
-                    <div class="layui-inline stock" style="min-width:210px;display: none;">
-                        <label class="layui-form-label" style="width:60px;">最小库存:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" placeholder="" id='minstock'>
-                        </div>
-                    </div>
-                    <div class="layui-inline stock" style="min-width:210px;display: none;">
-                        <label class="layui-form-label" style="width:60px;">最大库存:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input" placeholder="" id='maxstock'>
-                        </div>
-                    </div>
-                </div>
-       
-        
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">备注:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='remarks'>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">农产品图片:</label>
-                        <div class="layui-input-inline">
-                            <div class="layui-upload" style="display:flex">
-                                <button type="button" class="layui-btn layui-btn-normal selectImg" style="margin-right:10px;">选择文件</button>
-                                <!-- <button type="button" class="layui-btn layui-btn-normal selectImg" style="margin-right:10px;">选择文件</button>
-                                <button type="button" class="layui-btn layui-btn-normal selectImg">选择文件</button> -->
-                            </div>
-                        </div>
-                        <div>
-                            <img src="" alt="" id="showimg" style="width:100px;height:40px;">
-                        </div>
-                    </div>
-                </div>
-               
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery " id="uploadImg">确定</div>
-                    <div class="layui-bg-green comquery " id="updateImg" style="display:none">确定</div>
-                    <div class="layui-bg-green comquery ">取消</div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">农场品条码</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="barcode" class="layui-input">
                 </div>
             </div>
         </div>
-    </form>
-                
-                    
-</body>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">农场品类别</label>
+                <div class="layui-input-inline">
+                    <select name="productclass">
+                    <option value="1">粮食作物</option>
+                    <option value="2">油料作物 </option>
+                    <option value="3">糖料作物</option>
+                    <option value="4">蔬菜作物</option>
+                    <option value="5">果类作物</option>
+                    <option value="6">林产品</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">规格型号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="specifications" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">保质期</label>
+                <div class="layui-input-inline" style="width: 80px;">
+                    <input type="number" name="lifedate" class="layui-input">
+                </div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <select name="lifedateunit" width="100">
+                    <option value="年">年</option>
+                    <option value="月">月</option>
+                    <option value="日">日</option>
+                </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">单位</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="unit" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">农场品重量</label>
+                <div class="layui-input-inline" style="width: 162px;">
+                    <input type="text" name="weight" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">KG</div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">采购价</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="purchaseprice" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">销售价</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sellingprice" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">产地</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="foodaddress" class="layui-input">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">许可证号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="foodcode" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">企业名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="foodcreate_name" class="layui-input">
+                </div>
+            </div>
+        </div>
 
-<script src="../../../../../js/common/jquery.min.js"></script>
-<script src="../../../../../js/common/api.js"></script>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">生产日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="scrq" class="layui-input" id="scrq">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">过期日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="gqrq" class="layui-input" id="gqrq">
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">库存数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="kcsl" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">保质期</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="bzq" class="layui-input">
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                <button type="reset" class="layui-btn cancels">取消</button>
+            </div>
+        </div>
+    </form>
+</body>
+<script src="../../../../../js/module/jquery-3.4.1.min.js"></script>
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../../js/common/template-web.js"></script>
-<script src="../../../../../js/two/Jbasisz/nonproDialog.js"></script>
+<script src="../../../../../js/common/api.js"></script>
+<script type="text/javascript">
+    var dataId = null;
+    layui.config({
+        base: '../../../../../js/module/'
+    }).use(['Tool', 'form', 'layedit', 'laydate', "serviceTools"], function() {
+        layui.Tool.init();
+        var form = layui.form,
+            layer = layui.layer,
+            layedit = layui.layedit,
+            laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+        
+
+        laydate.render({
+            elem: '#scrq' //指定元素
+        });
+        laydate.render({
+            elem: '#gqrq' //指定元素
+        });
+        //监听提交
+        form.on('submit(demo1)', function(data) {
+            var type = localStorage.getItem("type");
+            if (type === null) {
+                alert("数据类型不能为空")
+            } else {
+                var zd = {
+                    id: dataId === null ? "" : dataId,
+                    type: type,
+                    context: JSON.stringify(data.field),
+                    keyword: data.field.productname + "|" + data.field.barcode
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame: zd,
+                    url: baseaip + "dictionaries/saveOrUpdate",
+                    callback: (function() {
+                        window.history.back(-2);
+                    })()
+                })
+
+            }
+            return false;
+        });
+
+        // console.info(location.href.split("?")[1])
+        getHrefId();
+
+    });
+
+    function getHrefId() {
+        var loc = location.href;
+        console.log(loc);
+        var url = loc.split("?")[1];
+        console.log(url);
+        if (url && url != '') {
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for (var i = 0; i < len; i++) {
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function() {
+                data = JSON.parse(dataJson);
+                setForm(data);
+            })() : "";
+
+        } else {
+
+        }
+
+    }
+
+    function setForm(data) {
+        layui.use(['form'], function() {
+            console.log(data);
+            console.log('data');
+
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+</script>
+
 </html>
