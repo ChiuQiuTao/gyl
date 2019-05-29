@@ -7,32 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>产品信息</title>
 </head>
+
 <body>
-<form class="layui-form" action="">
+    <form class="layui-form" action="">
 
-    <div class="select common">
-        <div class="select-title">查询条件</div>
+        <div class="select common">
+            <div class="select-title">查询条件</div>
 
-        <div class="select-con">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">商品名称:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="spmc" search-type="spmc">
+            <div class="select-con">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">商品名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="spmc" search-type="spmc">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="select-btn">
-                <div class="layui-bg-green comquery " lay-event="search">查询</div>
-                <div class="layui-bg-green comquery " lay-event="reset">重置</div>
+                <div class="select-btn">
+                    <div class="layui-bg-green comquery " lay-event="search">查询</div>
+                    <div class="layui-bg-green comquery " lay-event="reset">重置</div>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<div class="common-padding">
-    <table class="layui-hide" id="zztransfers" lay-filter="zztransfers"></table>
-</div>
+    <div class="common-padding">
+        <table class="layui-hide" id="zztransfers" lay-filter="zztransfers"></table>
+    </div>
 </body>
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
@@ -71,71 +72,82 @@
             },
             cols: [
                 [{
-                    type: 'checkbox',
-                    fixed: 'left'
-                }, {
-                    field: 'productname',
-                    sort: true,
-                    title: '商品名称',
-                    templet: function(data) {
+                        type: 'checkbox',
+                        fixed: 'left'
+                    }, {
+                        field: 'productname',
+                        sort: true,
+                        title: '商品名称',
+                        templet: function(data) {
 
-                        return (JSON.parse(data.context)).spmc
-                    }
-                }, {
-                    field: 'barcode',
-                    sort: true,
-                    title: '批次',
-                    templet: function(data) {
+                            return (JSON.parse(data.context)).spmc
+                        }
+                    }, {
+                        field: 'pc',
+                        sort: true,
+                        title: '批次',
+                        templet: function(data) {
 
-                        return (JSON.parse(data.context)).pc
-                    }
-                }, {
-                    field: 'productclass',
-                    sort: true,
-                    title: '库存数量',
-                    templet: function(data) {
+                            return (JSON.parse(data.context)).pc
+                        }
+                    }, {
+                        field: 'dprq',
+                        sort: true,
+                        title: '调拨日期',
+                        templet: function(data) {
 
-                        return (JSON.parse(data.context)).kcsl
-                    }
-                }, {
-                    field: 'specifications',
-                    sort: true,
-                    title: '库存重量',
-                    templet: function(data) {
+                            return (JSON.parse(data.context)).dprq
+                        }
+                    },
 
-                        return (JSON.parse(data.context)).kczl
-                    }
-                }, {
-                    field: 'unit',
-                    sort: true,
-                    title: '调入仓库',
-                    templet: function(data) {
+                    {
+                        field: 'kcsl',
+                        sort: true,
+                        title: '库存数量',
+                        templet: function(data) {
 
-                        return (JSON.parse(data.context)).drck
-                    }
-                }, {
-                    field: 'foodcreate_name',
-                    sort: true,
-                    title: '调入二级仓库',
-                    templet: function(data) {
+                            return (JSON.parse(data.context)).kcsl
+                        }
+                    }, {
+                        field: 'kczl',
+                        sort: true,
+                        title: '库存重量',
+                        templet: function(data) {
 
-                        return (JSON.parse(data.context)).unit
+                            return (JSON.parse(data.context)).kczl
+                        }
+                    }, {
+                        field: 'drck',
+                        sort: true,
+                        title: '调入仓库',
+                        templet: function(data) {
+
+                            return (JSON.parse(data.context)).drck
+                        }
+                    }, {
+                        field: 'unit',
+                        sort: true,
+                        title: '调入二级仓库',
+                        templet: function(data) {
+
+                            return (JSON.parse(data.context)).unit
+                        }
+                    }, {
+                        field: 'dcsl',
+                        sort: true,
+                        title: '调出数量',
+                        templet: function(data) {
+                            return (JSON.parse(data.context)).dcsl
+                        }
+                    }, {
+                        field: 'dczl',
+                        sort: true,
+                        title: '调出重量',
+                        templet: function(data) {
+                            return (JSON.parse(data.context)).dczl
+                        }
                     }
-                }, {
-                    field: 'foodcode',
-                    sort: true,
-                    title: '调出数量',
-                    templet: function(data) {
-                        return (JSON.parse(data.context)).dcsl
-                    }
-                }, {
-                    field: 'foodcode',
-                    sort: true,
-                    title: '调出重量',
-                    templet: function(data) {
-                        return (JSON.parse(data.context)).dczl
-                    }
-                } ]
+                ]
             ],
         });
     });

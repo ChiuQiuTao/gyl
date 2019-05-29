@@ -20,56 +20,59 @@
         <div class="select common">
             <div class="select-title">原辅料信息</div>
             <div class="select-con">
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">原辅料名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="输入原辅料名称" id='productname'>
+
+                <div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">原辅料名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入原辅料名称" id='productname'>
+                            </div>
                         </div>
                     </div>
-                </div>
-               
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">原辅料类型:</label>
-                        <div class="layui-input-inline" id="personinline">
-                            <select name="standardtype" lay-verify="" lay-filter='persontype' id="producttype">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">原辅料类型:</label>
+                            <div class="layui-input-inline" id="personinline">
+                                <select name="standardtype" lay-verify="" lay-filter='persontype' id="producttype">
                                 <option value="技术标准" class="persontypeitem" selected="selected">技术标准</option>
                                 <option value="管理标准" class="persontypeitem">管理标准</option>
                                 <option value="工作标准" class="persontypeitem">工作标准</option>
 
                             </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
 
-                <div class="layui-form-item">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">规格:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入规格" id='specifications'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">商品重量:</label>
+                            <div class="layui-input-inline">
+                                <input type="number" class="layui-input input-d" placeholder="输入商品重量" id='weight'>
+                            </div>
+                            (kg)
+                        </div>
+                    </div>
+
                     <div class="layui-inline">
-                        <label class="layui-form-label">规格:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="输入规格" id='specifications'>
-                        </div>
-                    </div>
-                </div>
+                        <label class="layui-form-label">保质期:</label>
 
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">商品重量:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="输入商品重量" id='weight'>
-                        </div>
-                        (kg)
-                    </div>
-                </div>
+                        <div class="layui-inline-sel layui-inline-selnum">
+                            <input type="number" class="layui-input input-d" placeholder="输入保质期" id='lifedate'>
 
-                <div class="layui-inline">
-                    <label class="layui-form-label">保质期:</label>
-                    
-                    <div class="layui-inline-sel layui-inline-selnum">
-                        <input type="text" class="layui-input input-d" placeholder="输入保质期" id='lifedate'>
-
-                        <!-- <select name="country" lay-filter="storagelevel" id='lifedate' lay-verify="required">
+                            <!-- <select name="country" lay-filter="storagelevel" id='lifedate' lay-verify="required">
                             <option value="">请选择</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -85,18 +88,18 @@
                             <option value="12">12</option>
 
                         </select> -->
-                    </div>
+                        </div>
 
-                    <div class="layui-inline-sel">
-                        <select name="country" lay-filter="storagelevel" id='lifedateunit' lay-verify="required">
+                        <div class="layui-inline-sel">
+                            <select name="country" lay-filter="storagelevel" id='lifedateunit' lay-verify="required">
                             <option value="年">年</option>
                             <option value="月">月</option>
                             <option value="天">天</option>
                         </select>
+                        </div>
                     </div>
-                </div>
 
-                <!-- <div class="layui-form-item">
+                    <!-- <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">保质期单位:</label>
                         <div class="layui-input-inline">
@@ -104,12 +107,12 @@
                         </div>
                     </div>
                 </div> -->
-                
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label" style="width:95px;">商品类型:</label>
-                        <div class="layui-input-inline" id="productclass">
-                            <select name="productclass" lay-verify="" lay-filter='productclass' id="productclass">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label" style="width:95px;">商品类型:</label>
+                            <div class="layui-input-inline" id="productclass">
+                                <select name="productclass" lay-verify="" lay-filter='productclass' id="productclass">
                                 <option value="标准级别" selected="selected">标准级别</option>
                                 <option value="国际食品法典">国际食品法典</option>
                                 <option value="国家标准">国家标准</option>
@@ -119,47 +122,49 @@
                                 <option value="园区标准">园区标准</option>
 
                             </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">执行标准名称:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="输入执行标准名称" id='standardname'>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">执行标准名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入执行标准名称" id='standardname'>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">执行标准编号:</label>
-                        <div class="layui-input-inline">
-                            <select name="standardcode" lay-verify="" lay-filter='standardcode' id="standardcode">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">执行标准编号:</label>
+                            <div class="layui-input-inline">
+                                <select name="standardcode" lay-verify="" lay-filter='standardcode' id="standardcode">
                                 <option value="">选择</option>
                                 
 
                             </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">进货价:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="输入进货价" id='purchaseprice'>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">进货价:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input input-d" placeholder="输入进货价" id='purchaseprice'>
+                            </div>
                         </div>
                     </div>
-                </div>
-               
-               
-                <div class="select-btn">
-                    <div class="layui-bg-green comquery addinfo">确定</div>
-                    <div class="layui-bg-green comquery updateinfo" style="display:none">确定</div>
-                    <div class="layui-bg-green comquery cancels">取消</div>
+
+
+                    <div class="select-btn">
+                        <div class="layui-bg-green comquery addinfo" style="margin-left: 90px;">确定</div>
+                        <div class="layui-bg-green comquery updateinfo" style="display:none">确定</div>
+                        <div class="layui-bg-green comquery cancels">取消</div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </form>
 

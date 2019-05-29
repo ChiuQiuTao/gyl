@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">标准级别:</label>
@@ -97,11 +97,11 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="select-btn">
                     <div class="layui-bg-green comquery " id="addBasStandard">确定</div>
                     <div class="layui-bg-green comquery " id="updateBasStandard" style="display:none">确定</div>
-                    <div class="layui-bg-green comquery cancels">取消</div>
+                    <div class="layui-bg-green comquery cancels" id="cancelssss" onclick="dd();">取消</div>
                 </div>
             </div>
         </div>
@@ -117,3 +117,8 @@
 <script src="../../../../../js/two/Jbasis/enterpriseDialog.js"></script>
 
 </html>
+<script>
+    function dd() {
+        window.location.href = "./../enterprise.html";
+    }
+</script>

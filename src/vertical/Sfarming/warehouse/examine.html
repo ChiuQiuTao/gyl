@@ -73,7 +73,7 @@
             </li>
             <li>
                 <label>仓库:</label>
-                <p>{{$value.address}}</p>
+                <p>{{$value.parentname}}</p>
             </li>
             <li>
                 <label>二级仓库:</label>
@@ -101,7 +101,8 @@
         function nas() {
             //一级仓库
             Theoldcuiway("plant/getyjck", {
-                    repositorytype: 12                }, "GET").done(function(resp) {
+                    repositorytype: 12
+                }, "GET").done(function(resp) {
                     console.log(resp)
                     $(".Namerawmaterials").children().remove();
                     $(".Namerawmaterials").append(new Option("---请选择---", ""));

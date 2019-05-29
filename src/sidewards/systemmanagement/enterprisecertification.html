@@ -33,15 +33,15 @@
 
                     <div class="header-content-item">
                         <div class="header-content-txt">营业执照</div>
-                        <div class="header-content-btn">未录入</div>
+                        <div class="header-content-btn" id="ok1">未录入</div>
                     </div>
                     <div class="header-content-item">
                         <div class="header-content-txt">法人身份证</div>
-                        <div class="header-content-btn">未录入</div>
+                        <div class="header-content-btn" id="ok2">未录入</div>
                     </div>
                     <div class="header-content-item">
                         <div class="header-content-txt">授权书认证</div>
-                        <div class="header-content-btn">未录入</div>
+                        <div class="header-content-btn" id="ok3">未录入</div>
                     </div>
                 </div>
 
@@ -53,33 +53,33 @@
                 <div class="license">
                     <div class="license-nav">
                         营业执照
-                        <div class="btn">
+                        <div class="btn" id="ok4">
                             未录入
                         </div>
                     </div>
                     <div class="license-content">
-                        <div class="license-img">
+                        <img class="license-img" src="" id="ok5">
 
-                        </div>
+
 
                         <div class="license-txt">
                             企业认证，分为企业信息认证，法人认证以及管理员授权认证，对申请使用企业动力云平台的企业进行“企业的合法性、真实性”的核实，以及“申请人是否隶属该企业且经过企业授权”的查证；通过认证的企业，方拥有企业动力云平台的所有功能操作的权限。
                         </div>
                     </div>
 
-                    <div class="select">
+                    <div class="select" id="rerererre">
                         <div class="select-item">
                             <div class="select-item-text">
                                 企业名称
                             </div>
-                            <input type="text" class="layui-input select-item-input">
+                            <input type="text" class="layui-input select-item-input" id="qiyess">
                         </div>
 
                         <div class="select-item">
                             <div class="select-item-text">
                                 企业证件号
                             </div>
-                            <input type="text" class="layui-input select-item-input">
+                            <input type="text" class="layui-input select-item-input" id="hao">
                         </div>
                         <div class="select-item">
                             <div class="select-item-text">
@@ -125,7 +125,7 @@
                             <div class="select-item-text">
                                 证件有效期
                             </div>
-                            <input type="text" class="layui-input select-item-input">
+                            <input type="text" class="layui-input select-item-input" id="youx">
                             <div class="tip-btn">
                                 长期
                             </div>
@@ -146,20 +146,31 @@
                         <div class="upload-nav">
                             上传证件(图片大小不得超过2M)
                         </div>
-                        <div class="upload-content">
-                            <img src="" alt="">
-
-                            <div class="upload-btns">
-                                <div class="upload-btn">上传</div>
-                                <div class="upload-btn">删除</div>
+                        <div class="upload-content" style="display: flex;">
+                            <div style="margin-right: 10px;">
+                                <img src="" alt="" id="ingss">
+                                <div class="upload-btns">
+                                    <div class="upload-btn" style="cursor: pointer;margin-left: 25px;" id="shang">上传</div>
+                                    <!-- <div class="upload-btn" style="cursor: pointer;">删除</div> -->
+                                </div>
+                                <div class="upload-txt">营业执照</div>
                             </div>
-                            <div class="upload-txt">营业执照</div>
+
+                            <div>
+                                <img src="" alt="" id="fardden">
+                                <div class="upload-btns">
+                                    <div class="upload-btn" style="cursor: pointer;margin-left: 25px;" id="faren">上传</div>
+                                    <!-- <div class="upload-btn" style="cursor: pointer;">删除</div> -->
+                                </div>
+                                <div class="upload-txt" style="width: 110px;">法人身份证(正面)</div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
 
-
-                <div class="save">保存</div>
+                <div class="save" id="bao" style="cursor:pointer;">保存</div>
             </div>
         </div>
 
@@ -185,6 +196,7 @@
             util = layui.util,
             form = layui.form,
             element = layui.element,
+            obj = {},
             upload = layui.upload;
 
 
@@ -234,6 +246,119 @@
         })
 
 
+        //上传图片营业
+        var uploadInst = upload.render({
+            elem: '#shang',
+            url: baseaip + "file/upload",
+            accept: 'file',
+            field: "file",
+            done: function(res) {
+                var ss = res.data.split("|");
+                layer.msg(res.msg);
+                $("#ingss").attr("src", ss[0]);
+                $("#ok1").text("已录入");
+                $("#ok4").text("已录入");
+                $("#ok5").attr("src", ss[0]);
+                obj.ying = ss[0];
+            },
+            error: function(res) {
+                layer.msg(res.msg);
+            }
+        });
+
+        //上传图片|法人
+        var uploadInst = upload.render({
+            elem: '#faren',
+            url: baseaip + "file/upload",
+            accept: 'file',
+            field: "file",
+            done: function(res) {
+                var ss = res.data.split("|");
+                layer.msg(res.msg);
+                $("#fardden").attr("src", ss[0]);
+                $("#ok2").text("已录入");
+                obj.faren = ss[0];
+            },
+            error: function(res) {
+                layer.msg(res.msg);
+            }
+        });
+
+
+        Theoldcuiway('dictionaries/query', {
+            type: "fsfsfssfuieinxhbe",
+            keyword: "objniukey"
+        }, "GET").done(function(resp) {
+            console.log(resp)
+                // resp = JSON.parse(resp.data.content)
+            if (resp.length <= 0) {
+
+                $("#rerererre").css("display", "block");
+            } else {
+                $("#rerererre").css("display", "none");
+                $("#ok3").text("已录入");
+                $("#ok1").text("已录入");
+                $("#ok2").text("已录入");
+                $("#bao").css("display", "none");
+                $("#shang").css("display", "none");
+                $("#faren").css("display", "none");
+                $("#ok4").css("display", "none");
+
+            }
+            resp = resp.data.content[0].context;
+            resp = JSON.parse(resp)
+            console.log(resp)
+            $("#fardden").attr("src", resp.faren);
+            $("#ok5").attr("src", resp.ying);
+            $("#ingss").attr("src", resp.ying);
+            return
+        }).fail(function(err) {
+            console.log(err)
+        });
+
+
+
+        $("#bao").click(function() {
+            if (!obj.ying) {
+                layer.msg("请上传营业执照");
+                return
+            }
+
+            if (!obj.faren) {
+                layer.msg("请上传法人身份证");
+                return
+            }
+
+            if ($("#qiyess") == "") {
+                layer.msg("请输入企业名称");
+                return
+            }
+
+            if ($("#hao") == "") {
+                layer.msg("请输入企业企业证件号");
+                return
+            }
+
+            if ($("#youx") == "") {
+                layer.msg("证件有效期");
+                return
+            }
+
+            obj = JSON.stringify(obj)
+            Theoldcuiway('dictionaries/saveOrUpdate', {
+                type: "fsfsfssfuieinxhbe",
+                context: obj,
+                keyword: "objniukey"
+            }, "POST").done(function(resp) {
+                console.log(resp)
+                layer.msg("上传成功!");
+                window.location.reload()
+                return
+            }).fail(function(err) {
+                console.log(err)
+            });
+
+        })
 
 
     })

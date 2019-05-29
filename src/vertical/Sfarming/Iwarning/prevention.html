@@ -26,7 +26,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label" style="width:90px;">禽畜名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input"  id="s3"  search-type="s3">
+                            <input type="text" class="layui-input" id="s3" search-type="s3">
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">防疫项名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="s4"  search-type="s4">
+                            <input type="text" class="layui-input" id="s4" search-type="s4">
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
     </form>
 
     <div class="common-padding">
-            <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
     </div>
 
 </body>
@@ -76,60 +76,95 @@
 <script>
     layui.config({
         base: '../../../../js/module/'
-    }).use(['Services','jquery'],function () {
-        var $  = layui.jquery;
-       
+    }).use(['Services', 'jquery'], function() {
+        var $ = layui.jquery;
+
         var dataType = 'yjper';
         var services = new layui.Services({
-            baseURL:baseaip,
-            tableId:"testdome",
-            toolbar:"#toolbarinter",
-            serachUrl:"dictionaries/query",
-            getUrl:"dictionaries/get",
-            delUrl:"dictionaries/delete",
-            updUrl:"plant/updateNcpxx",
-            saveUrl:"./dialog/preventionDialog.html",
-            deleteField:"id",
-            dataType:dataType,
-            parameter:{
-                keyword:'',
-                type:dataType
+            baseURL: baseaip,
+            tableId: "testdome",
+            toolbar: "#toolbarinter",
+            serachUrl: "dictionaries/query",
+            getUrl: "dictionaries/get",
+            delUrl: "dictionaries/delete",
+            updUrl: "plant/updateNcpxx",
+            saveUrl: "./dialog/preventionDialog.html",
+            deleteField: "id",
+            dataType: dataType,
+            parameter: {
+                keyword: '',
+                type: dataType
             },
-            cols:[[
-                {type: 'checkbox', fixed: 'left'},
-                {field: 's1', sort: true, title: '基地',templet:function (data) {
+            cols: [
+                [{
+                    type: 'checkbox',
+                    fixed: 'left'
+                }, {
+                    field: 's1',
+                    sort: true,
+                    title: '基地',
+                    templet: function(data) {
 
                         return (JSON.parse(data.context)).s1
-                 }},
-                {field: 's2', sort: true, title: '圈舍',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s2
-                }},
-                {field: 's3', sort: true, title: '畜禽名称',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s3
-                }},
-                {field: 's4', sort: true, title: '防疫项名称',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s4
-                }},
-                {field: 's5', sort: true, title: '出生日期',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s5
-                }},
-                {field: 's6', sort: true, title: '预计防疫日期',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s5
-                }},
-                {field: 's7', sort: true, title: '数量',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s5
-                }},
-                {field: 's8', sort: true, title: '防疫时机',templet:function (data) {
-                    
-                    return (JSON.parse(data.context)).s5
-                }},
-            ]],
+                    }
+                }, {
+                    field: 's2',
+                    sort: true,
+                    title: '圈舍',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s2
+                    }
+                }, {
+                    field: 's3',
+                    sort: true,
+                    title: '畜禽名称',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s3
+                    }
+                }, {
+                    field: 's4',
+                    sort: true,
+                    title: '防疫项名称',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s4
+                    }
+                }, {
+                    field: 's5',
+                    sort: true,
+                    title: '出生日期',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s5
+                    }
+                }, {
+                    field: 's6',
+                    sort: true,
+                    title: '预计防疫日期',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s6
+                    }
+                }, {
+                    field: 's7',
+                    sort: true,
+                    title: '数量',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s7
+                    }
+                }, {
+                    field: 's8',
+                    sort: true,
+                    title: '防疫时机',
+                    templet: function(data) {
+
+                        return (JSON.parse(data.context)).s8
+                    }
+                }, ]
+            ],
         });
     });
 </script>

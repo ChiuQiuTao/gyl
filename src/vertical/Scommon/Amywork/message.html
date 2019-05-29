@@ -189,11 +189,11 @@
 
             <div class="common-padding">
                 <!-- 查询 -->
-                <div class="mess-check">
+                <div class="mess-check" style="margin: 15px 0;">
                     <div class="layui-inline">
                         <label class="layui-form-label mess-time">单号:</label>
                         <div class="layui-input-inline mess-time-c">
-                            <input type="text" class="layui-input mess-input" name="s1" search-type="s1" id="s1">
+                            <input type="text" class="layui-input mess-input" name="s1" search-type="s1" id="s1" style=" margin-right: 20px;width: 200px;">
                         </div>
                     </div>
                     <div class="layui-inline" style="display: none">
@@ -205,7 +205,7 @@
                     <button class="layui-btn layui-bg-red layui-btn-sm " lay-event="search">查询</button>
                     <button class="layui-btn layui-bg-red layui-btn-sm" lay-event="reset">清空</button>
                 </div>
-                    <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
+                <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
             </div>
         </div>
     </div>
@@ -215,94 +215,123 @@
 </body>
 <script src="../../../../public/dist/layui.js"></script>
 <script src="../../../../js/common/api.js"></script>
+
 </html>
 
 <script>
     layui.config({
         base: '../../../../js/module/'
-    }).use(['Services','jquery'],function () {
-        var $  = layui.jquery;
-        var seeType='';
+    }).use(['Services', 'jquery'], function() {
+        var $ = layui.jquery;
+        var seeType = '';
         var dataType = 'myman';
         var typeItem = document.querySelectorAll('.select-type-item');
-        for(var i=0;i<typeItem.length;i++){
-            (function(i){
-                typeItem[i].addEventListener('click',function(){
+        for (var i = 0; i < typeItem.length; i++) {
+            (function(i) {
+                typeItem[i].addEventListener('click', function() {
                     document.querySelector('.select-type-show').classList.remove('select-type-show');
                     typeItem[i].classList.add('select-type-show');
-                    if(i==0){
-                        seeType='';
-                        document.querySelector('#s3').value='';
+                    if (i == 0) {
+                        seeType = '';
+                        document.querySelector('#s3').value = '';
                         getServices();
 
-                    }else{
-                        seeType=i;
-                        document.querySelector('#s3').value=seeType;
+                    } else {
+                        seeType = i;
+                        document.querySelector('#s3').value = seeType;
                         getServices();
                     }
                 })
             })(i)
         }
         getServices();
-        function getServices(){
-            
+
+        function getServices() {
+
             var services = new layui.Services({
-                baseURL:baseaip,
-                tableId:"testdome",
-                toolbar:"#toolbarinter",
-                serachUrl:"dictionaries/query",
-                getUrl:"dictionaries/get",
-                delUrl:"dictionaries/delete",
-                updUrl:"plant/updateNcpxx",
-                saveUrl:"./dialog/manageDialog.html",
-                deleteField:"id",
-                dataType:dataType,
-                parameter:{
-                    keyword:document.querySelector('#s1').value+'|'+seeType,
-                    type:dataType
+                baseURL: baseaip,
+                tableId: "testdome",
+                toolbar: "#toolbarinter",
+                serachUrl: "dictionaries/query",
+                getUrl: "dictionaries/get",
+                delUrl: "dictionaries/delete",
+                updUrl: "plant/updateNcpxx",
+                saveUrl: "./dialog/manageDialog.html",
+                deleteField: "id",
+                dataType: dataType,
+                parameter: {
+                    keyword: document.querySelector('#s1').value + '|' + seeType,
+                    type: dataType
                 },
-                cols:[[
-                    {type: 'checkbox', fixed: 'left'},
-                    {field: 's1', sort: true, title: '单号',templet:function (data) {
+                cols: [
+                    [{
+                        type: 'checkbox',
+                        fixed: 'left'
+                    }, {
+                        field: 's1',
+                        sort: true,
+                        title: '单号',
+                        templet: function(data) {
 
                             return (JSON.parse(data.context)).s1
-                    }},
-                    {field: 's2', sort: true, title: '简称',templet:function (data) {
-                        
-                        return (JSON.parse(data.context)).s2
-                    }},
-                    {field: 's4', sort: true, title: '平台账号',templet:function (data) {
-                        
-                        return (JSON.parse(data.context)).s4
-                    }},
-                    {field: 's2', sort: true, title: '单据信息',templet:function (data) {
-                        
-                        return (JSON.parse(data.context)).s2
-                    }},
-                    {field: 's6', sort: true, title: '时间',templet:function (data) {
-                        
-                        return (JSON.parse(data.context)).s6
-                    }},
-                    {field: 's3', sort: true, title: '状态',templet:function (data) {
-                        var ret = ''
-                        if((JSON.parse(data.context)).s3==1){
-                            ret = '未查看'
-                        }else if((JSON.parse(data.context)).s3==2){
-                            ret = '已查看'
-
-                        }else if((JSON.parse(data.context)).s3==3){
-                            ret = '处理中'
-
-                        }else if((JSON.parse(data.context)).s3==4){
-                            ret = '已处理'
-
                         }
-                       
-                        return ret
-                    }},
-                ]],
+                    }, {
+                        field: 's2',
+                        sort: true,
+                        title: '简称',
+                        templet: function(data) {
+
+                            return (JSON.parse(data.context)).s2
+                        }
+                    }, {
+                        field: 's4',
+                        sort: true,
+                        title: '平台账号',
+                        templet: function(data) {
+
+                            return (JSON.parse(data.context)).s4
+                        }
+                    }, {
+                        field: 's2',
+                        sort: true,
+                        title: '单据信息',
+                        templet: function(data) {
+
+                            return (JSON.parse(data.context)).s2
+                        }
+                    }, {
+                        field: 's6',
+                        sort: true,
+                        title: '时间',
+                        templet: function(data) {
+
+                            return (JSON.parse(data.context)).s6
+                        }
+                    }, {
+                        field: 's3',
+                        sort: true,
+                        title: '状态',
+                        templet: function(data) {
+                            var ret = ''
+                            if ((JSON.parse(data.context)).s3 == 1) {
+                                ret = '未查看'
+                            } else if ((JSON.parse(data.context)).s3 == 2) {
+                                ret = '已查看'
+
+                            } else if ((JSON.parse(data.context)).s3 == 3) {
+                                ret = '处理中'
+
+                            } else if ((JSON.parse(data.context)).s3 == 4) {
+                                ret = '已处理'
+
+                            }
+
+                            return ret
+                        }
+                    }, ]
+                ],
             });
         }
-        
+
     });
 </script>
