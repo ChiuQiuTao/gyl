@@ -55,6 +55,10 @@
                 document.querySelector('#state').value = resp.data.state;
                 document.querySelector('#address').value = resp.data.address;
                 document.querySelector('#corporation').value = resp.data.corporation;
+                document.querySelector('#linkphone').value = resp.data.linkphone;
+                document.querySelector('#linkman').value = resp.data.linkman;
+                document.querySelector('#remark').value = resp.data.remark;
+                $('#showimg').attr('src',resp.data.imgs)
                 setTimeout(function(){
                     document.querySelector('#province').value = resp.data.province;
                     document.querySelector('#city').value = resp.data.city;
@@ -132,6 +136,21 @@
         document.querySelector('#uploadImg').addEventListener('click',function(){
             uploadImg();
         })
+        //指定允许上传的文件类型
+        layui.upload.render({
+            elem: '#selectImg'
+            ,url: baseaip+"file/upload"
+            ,accept: 'file'
+            ,exts: 'doc|docx|pdf|png|jpg'
+            ,field:"file"
+            ,done: function(res){
+                var filePath = res.data;
+                filePath = filePath.substring(0,filePath.length - 1 );
+                document.querySelector("#imgpath").value=filePath;
+                $('#showimg').attr('src', filePath)
+                console.log(filePath);
+            }
+        });
         //新增
         function uploadImg(){
             Theoldcuiway(
@@ -145,7 +164,12 @@
                     district:$('#district').val(),
                     address:$('#address').val(),
                     corporation:$('#corporation').val(),
-                    enterpriseclass:'企业供应商信息',
+                    enterpriseclass:'3',
+                    linkphone:$('#linkphone').val(),
+                    linkman:$('#linkman').val(),
+                    remark:$('#remark').val(),
+                    imgs:$('#imgpath').val(),
+                    // auditstaus:0,
                 },
                 "POST"
             )
@@ -176,8 +200,12 @@
                 district:$('#district').val(),
                 address:$('#address').val(),
                 corporation:$('#corporation').val(),
-                // enterpriseclass:'企业客户信息',
-
+                enterpriseclass:'3',
+                linkphone:$('#linkphone').val(),
+                linkman:$('#linkman').val(),
+                remark:$('#remark').val(),
+                imgs:$('#imgpath').val(),
+                // auditstaus:0,
             }, "POST").done(function(resp) {
                 layer.msg('更新成功');
                 setTimeout(function(){

@@ -5,45 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>产品信息</title>
+    <title>仓库信息</title>
+    <link rel="stylesheet" href="../../../../public/dist/css/layui.css">
+    <link rel="stylesheet" href="../../../../public/font/iconfont.css">
+    <link rel="stylesheet" href="../../../../css/twocss/commit.css">
 </head>
+
 <body>
-<form class="layui-form" action="">
+    <form class="layui-form" action="">
 
-    <div class="select common">
-        <div class="select-title">查询条件</div>
-
-        <div class="select-con">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">仓库名称:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="productName" search-type="productName">
+        <div class="select common">
+            <div class="select-title">查询条件</div>
+            <div class="select-con">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">仓库名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="storageName">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">二级仓库:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="barcode" search-type="barcode">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label" style="width:105px;">二级仓库名称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="storageName2">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="select-btn">
-                <div class="layui-bg-green comquery " lay-event="search">查询</div>
-                <div class="layui-bg-green comquery " lay-event="reset">重置</div>
+                <div class="select-btn">
+                    <div class="layui-bg-green comquery Rawquery">查询</div>
+                    <div class="layui-bg-green comquery agains">重置</div>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<div class="common-padding">
-    <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
-</div>
+    <div class="common-padding">
+        <table class="layui-hide" id="test" lay-filter="testdome"></table>
+    </div>
 </body>
 <!-- 头部 -->
 <script type="text/html" id="toolbarinter">
@@ -58,57 +60,10 @@
 <script type="text/html" id="More">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
 </script>
-<script src="../../../../js/module/jquery-3.4.1.min.js"></script>
-<script>
-    layui.config({
-        base: '../../../../js/module/'
-    }).use(['Services', 'jquery'], function() {
-        var $ = layui.jquery;
-        var dataType = "ckmc_111";
-        var services = new layui.Services({
-            baseURL: baseaip,
-            tableId: "testdome",
-            toolbar: "#toolbarinter",
-            serachUrl: "dictionaries/query",
-            getUrl: "dictionaries/get",
-            delUrl: "dictionaries/delete",
-            updUrl: "plant/updateNcpxx",
-            saveUrl: "./dialog/inventoryDialog.html",
-            deleteField: "id",
-            dataType: dataType,
-            parameter: {
-                keyword: '',
-                type: dataType
-            },
-            cols: [
-                [{
-                    type: 'checkbox',
-                    fixed: 'left'
-                }, {
-                    field: 'ckmc',
-                    sort: true,
-                    title: '仓库名称',
-                    templet: function(data) {
-                        return (JSON.parse(data.context)).ckmc
-                    }
-                }, {
-                    field: 'rjck',
-                    sort: true,
-                    title: '二级仓库',
-                    templet: function(data) {
-                        return (JSON.parse(data.context)).rjck
-                    }
-                }, {
-                    field: 'ckfzr',
-                    sort: true,
-                    title: '仓库负责人',
-                    templet: function(data) {
-                        return (JSON.parse(data.context)).ckfzr
-                    }
-                }, ]
-            ],
-        });
-    });
-</script>
+
+<script src="../../../../js/common/jquery.min.js"></script>
+<script src="../../../../js/common/api.js"></script>
+<script src="../../../../public/dist/layui.js" charset="utf-8"></script>
+<script src="../../../../js/two/JbasisF/inventory.js"></script>
 
 </html>

@@ -122,7 +122,9 @@
                     console.log(err);
                 });
             }
-    
+            document.querySelector('.cancels').addEventListener('click',function(){
+                window.location.href = '../plot.html'
+            })
         })
     
     })()

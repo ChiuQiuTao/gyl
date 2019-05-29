@@ -15,7 +15,7 @@
                 phone: phone, 
                 persontype: '1', 
                 remark: remark, 
-                systype:1
+                systype:3
             }, "POST").done(function(resp) {
                 console.log(resp)
                 layer.msg('新增成功');
@@ -86,7 +86,7 @@
                 phone:document.querySelector('#phone').value,
                 remark:document.querySelector('#remark').value,
                 persontype:'1',
-                systype:1,
+                systype:3,
             },
              "POST").done(function(resp) {
                 console.log(resp)

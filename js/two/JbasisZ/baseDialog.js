@@ -152,6 +152,10 @@
                 });
             }
     
+
+            document.querySelector('.cancels').addEventListener('click',function(){
+                window.location.href = '../base.html'
+            })
         })
     
     })()

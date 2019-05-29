@@ -5,7 +5,7 @@
         
 
            /*重置*/
-    $(".agains").click(function() {
+    $(".reset").click(function() {
         window.location.reload();
     })
            //监听头部监听
