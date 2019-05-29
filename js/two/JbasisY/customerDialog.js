@@ -145,6 +145,11 @@
                     district:$('#district').val(),
                     address:$('#address').val(),
                     corporation:$('#corporation').val(),
+                    linkphone:$('#linkphone').val(),
+                    linkman:$('#linkman').val(),
+                    remark:$('#remark').val(),
+                    imgs:$('#imgpath').val(),
+                auditstaus:0,
                     enterpriseclass:'企业客户信息',
                 },
                 "POST"
@@ -162,6 +167,21 @@
             });
         }
 
+        //指定允许上传的文件类型
+        layui.upload.render({
+            elem: '#selectImg'
+            ,url: baseaip+"file/upload"
+            ,accept: 'file'
+            ,exts: 'doc|docx|pdf|png|jpg'
+            ,field:"file"
+            ,done: function(res){
+                var filePath = res.data;
+                filePath = filePath.substring(0,filePath.length - 1 );
+                document.querySelector("#imgpath").value=filePath;
+                $('#showimg').attr('src', filePath)
+                console.log(filePath);
+            }
+        });
         
         //更新
         function updateInfo(id){
@@ -176,6 +196,10 @@
                 district:$('#district').val(),
                 address:$('#address').val(),
                 corporation:$('#corporation').val(),
+                linkphone:$('#linkphone').val(),
+                    linkman:$('#linkman').val(),
+                    remark:$('#remark').val(),
+                    imgs:$('#imgpath').val(),
                 // enterpriseclass:'企业客户信息',
 
             }, "POST").done(function(resp) {

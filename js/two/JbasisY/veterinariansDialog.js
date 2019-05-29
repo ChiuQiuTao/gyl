@@ -1,12 +1,16 @@
 (function(){
     (function(){
         layui.use(['table', "laydate"], function() {
-            var laydate = layui.laydate;
+            var $ = layui.jquery,
+            laydate = layui.laydate;
            
             document.querySelector('#addBasStandard').addEventListener('click',function(){
                 addBasStandard();
             })
-           
+           /*取消*/
+           $(".cancels").click(function() {
+            window.location.href = "../housing.html";
+        })
             getHrefId();
             function getHrefId(){
                 var loc = location.href;

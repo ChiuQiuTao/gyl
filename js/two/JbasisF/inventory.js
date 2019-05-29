@@ -2,7 +2,10 @@
     layui.use(["table"], function() {
         var $ = layui.jquery,
           table = layui.table;
-        
+        /*重置*/
+    $(".agains").click(function() {
+        window.location.reload();
+    })
            //监听头部监听
             table.on('toolbar(testdome)', function(obj) {
                 var checkStatus = table.checkStatus(obj.config.id),
@@ -63,7 +66,7 @@
                 url: baseaip + "plant/ckxxs",
                 method: "GET",
                 where: {
-                repositorytype: "2",
+                repositorytype: "3",
                 storageName: storageName,
                 storageName2: storageName2,
                 },

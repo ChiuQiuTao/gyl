@@ -12,7 +12,7 @@
 </head>
 <body>
     <!-- 企业供应商 -->
-    <form class="layui-form" action="">
+    <form class="layui-form" action="" lay-filter="example" id="example">
         <div class="select common">
             <div class="select-title">供应商信息</div>
             <div class="select-con">
@@ -84,22 +84,22 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="layui-form-item">
+                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">联系人:</label>
                         <div class="layui-input-inline">
                             <input type="text" class="layui-input input-d" placeholder="输入联系人" id='linkman'>
                         </div>
                     </div>
-                </div> -->
-                <!-- <div class="layui-form-item">
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">联系电话:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="输入联系电话" id='phone'>
+                            <input type="text" class="layui-input input-d" placeholder="输入联系电话" id='linkphone'>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- <div class="layui-form-item">
                     <div class="layui-inline">
@@ -118,7 +118,7 @@
                         </div>
                     </div>
                 </div> -->
-                <!-- <div class="layui-form-item">
+                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">企业图片:</label>
                         <div class="layui-input-inline">
@@ -127,18 +127,19 @@
                                 <div class="layui-upload-list">
                                     <img class="layui-upload-img" id="showimg" style="width:80px;height:38px;margin-left: 15px;border: 1px solid #fff;">
                                 </div>
+                                <input type="text" id='imgpath' style="display: none">
                             </div>
                         </div>
                     </div>
-                </div> -->
-                <!-- <div class="layui-form-item">
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">备注:</label>
                         <div class="layui-input-inline">
                             <input type="text" class="layui-input input-d" placeholder="输入备注" id='remark'>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- <div class="layui-form-item">
                     <div class="layui-inline">

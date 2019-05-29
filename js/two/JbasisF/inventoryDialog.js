@@ -66,8 +66,7 @@
                 storagename: storagename,
                 chargeperson: chargeperson,
                 remarks: remarks,
-                repositorytype:3
-            }, "POST").done(function(resp) {
+                repositorytype:3            }, "POST").done(function(resp) {
                 console.log(resp);
                 layer.msg('更新成功');
                 setTimeout(function(){
@@ -82,11 +81,11 @@
         }
         //查看详情
         function getBasStorageVo(delid){
-            Theoldcuiway('plant/getCkxx', {
+            Theoldcuiway('plant/getCkxx', { 
                 ckxxId: delid,
             }, "GET").done(function(resp) {
                 console.log(resp);
-             
+                
                 one.style.display = 'none';
                 two.style.display = 'block';
                 setTimeout(function(){
@@ -101,6 +100,7 @@
                 return
             }).fail(function(err) {
                 console.log(err)
+                
             });
         }
         // 查询企业仓库
@@ -165,8 +165,7 @@
                 storagename: storagename,
                 chargeperson: chargeperson,
                 remarks: remarks,
-                repositorytype:3
-            }, "POST").done(function(resp) {
+                repositorytype:3            }, "POST").done(function(resp) {
                 console.log(resp)
                 
                 layer.msg('新增成功');

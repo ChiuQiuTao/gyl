@@ -94,8 +94,8 @@ $(".agains").click(function() {
                 {
                 // "alt": "图片名",
                 "pid": 666, //图片id
-                "src": data.picturepath, //原图地址
-                "thumb": data.picturepath //缩略图地址
+                "src": data.imgs, //原图地址
+                "thumb": data.imgs //缩略图地址
                 }
             ]
             }
@@ -162,9 +162,8 @@ $(".agains").click(function() {
             method: "GET",
             where: {
             sysType: 2,
-            enterprisename: enterprisename,
             license: license,
-            enterprisename: enterprisename,
+            enterpriseName: enterprisename,
             auditStaus:auditStaus,
             },
             headers: {
@@ -233,7 +232,48 @@ $(".agains").click(function() {
                 title: "法定负责人",
                 minWidth: 120,
                 align: "center"
-                },
+                }, {
+                    field: 'linkman',
+                    title: '联系人',
+                    align: "center",
+                    minWidth: 130
+                }, {
+                    field: 'linkphone',
+                    title: '联系人电话',
+                    align: "center",
+                    minWidth: 150
+                }, {
+                    field: 'imgs',
+                    title: '营业执照图片地址',
+                    align: "center",
+                    minWidth: 180,
+                    event: 'showImg', 
+                    templet: function(d) {
+                        return '<img src="'+d.imgs+'" alt="" class="licenseimg">'
+                    }
+                }, {
+                    field: 'auditstaus',
+                    title: '审核状态',
+                    align: "center",
+                    minWidth: 100,
+                    templet: function(d) {
+                        var num = null;
+                        console.log(d.auditstaus)
+                        if (d.auditstaus == "0") {
+                            num = "待审批"
+                            return num
+                        }
+
+                        if (d.auditstaus == "1" || d.auditstaus == "审批通过") {
+                            num = "审批通过"
+                            return num
+                        }
+                        if (d.auditstaus == "2" || d.auditstaus == "审批不通过") {
+                            num = "审批不通过"
+                            return num
+                        }
+                    }
+                }
                             
             ]
             ]
