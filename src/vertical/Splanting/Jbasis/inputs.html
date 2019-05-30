@@ -16,7 +16,6 @@
 
         <div class="select common">
             <div class="select-title">查询条件</div>
-
             <div class="select-tab">
                 <div class="item item-this" data-id='1'>
                     种子信息
@@ -27,7 +26,6 @@
                 <div class="item" data-id='3'>
                     肥料信息
                 </div>
-
                 <div class="item" data-id='4'>
                     其他投入品信息
                 </div>
@@ -40,11 +38,13 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" id="putseedname">
+                            <input type="text" class="layui-input" id="putseedname" search-type="putseedname">
                         </div>
                     </div>
-                </div>
+                    <input type="text" class="layui-input" id="inputtype" search-type="inputtype" style='display: none' value="1">
 
+                </div>
+<!-- 
                 <div class="layui-form-item" id="item-type1" style="display:block">
                     <div class="layui-inline" id='inline-type'>
                         <label class="layui-form-label">种类:</label>
@@ -93,19 +93,19 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery " id="findBasPutseedList">查询</div>
-                    <div class="layui-bg-green comquery agains">重置</div>
+                    <div class="layui-bg-green comquery " id="findBasPutseedList" lay-event="search">查询</div>
+                    <div class="layui-bg-green comquery agains" lay-event="reset">重置</div>
                 </div>
             </div>
         </div>
     </form>
 
     <div class="common-padding">
-        <table class="layui-hide" id="test" lay-filter="testdome"></table>
+        <table class="layui-hide" id="testdome" lay-filter="testdome"></table>
     </div>
 
 </body>
@@ -129,6 +129,168 @@
 <script src="../../../../js/common/jquery.min.js"></script>
 <script src="../../../../js/common/api.js"></script>
 <script src="../../../../public/dist/layui.js" charset="utf-8"></script>
-<script src="../../../../js/two/JbasisZ/inputs.js"></script>
+<!-- <script src="../../../../js/two/JbasisZ/inputs.js"></script> -->
+<script>
+    layui.config({
+        base: '../../../../js/module/'
+    }).use(['form','Services','jquery'],function () {
+        var $ = layui.jquery,
+        table = layui.table,
+        form = layui.form,
+        laydate = layui.laydate;
+        var dataType = 'zzinputs';
+        // 切换tab
+        var tabItemId='1';
+        document.querySelector('#inputtype').value = tabItemId
+        var enterpriseid='';
+        tabItems = document.querySelectorAll('.select-tab>.item');
+        for(var i=0;i<tabItems.length;i++){
+            (function(i){
+                tabItems[i].addEventListener('click',function(){
+                    var tabItemThis = null;
+                    if(document.querySelector('.select-tab>.item-this')){
+                        tabItemThis = document.querySelector('.select-tab>.item-this');
+                        tabItemThis.classList.remove('item-this');
+                    }
+                    tabItems[i].classList.add('item-this');
+                    tabItemId = tabItems[i].getAttribute("data-id");
+                    document.querySelector('#inputtype').value = tabItemId
+                    console.log(tabItemId);
+                    getServices(tabItemId);
+                    
+                })
+            })(i)
+            
+        }
 
+        document.querySelector('.agains').addEventListener('click',function(){
+            document.querySelector('.select-tab>.item-this').classList.remove('item-this');
+        })
+        var producttypeid=null;
+        // 选择框选择显示
+        function showSelect(){
+            form.on('select(type)', function(data){
+                console.log(data);
+                var index = data.elem.selectedIndex;
+                index = index-1;
+                var ctypelist = document.querySelectorAll('.inline-ctype');
+                for(var i=0;i<ctypelist.length;i++){
+                    ctypelist[i].style.display='none';
+                }
+                ctypelist[index].style.display='block';
+            });    
+        }
+        form.on('select(ctype)', function(data){
+            console.log(data);
+            producttypeid=data.value;
+        });    
+        
+        getServices(1);
+        function getServices(index){
+            
+            var services = new layui.Services({
+                baseURL:baseaip,
+                tableId:"testdome",
+                toolbar:"#toolbarinter",
+                serachUrl:"dictionaries/query",
+                getUrl:"dictionaries/get",
+                delUrl:"dictionaries/delete",
+                updUrl:"plant/updateNcpxx",
+                saveUrl:"./dialog/inputsDialog"+index+".html",
+                deleteField:"id",
+                dataType:dataType,
+                parameter:{
+                    keyword:document.querySelector('#putseedname').value+'|'+document.querySelector('#inputtype').value,
+                    type:dataType
+                },
+                cols:[[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 'putseedname', sort: true, title: '名称',templet:function (data) {
+
+                            return (JSON.parse(data.context)).putseedname
+                    }},
+                    {field: 'producttypeid', sort: true, title: '种类',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).producttypeid
+                    }},
+                    {field: 'unit', sort: true, title: '单位',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).unit
+                    }},
+                    {field: 'registrationmark', sort: true, title: '审定/登记号',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).registrationmark
+                    }},
+                    {field: ['lifedate','lifedateunit'], sort: true, title: '保质期',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).lifedate+(JSON.parse(data.context)).lifedateunit
+                    }},
+                   
+                    {field: 'enterprisename', sort: true, title: '生产企业名称',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).enterprisename
+                    }},
+                    // {field: 's5', sort: true, title: '状态',templet:function (data) {
+                        
+                    //     return (JSON.parse(data.context)).s5
+                    // }},
+                ]],
+            });
+        }
+        
+
+
+        function getServicesUser(index){
+            
+            var services = new layui.Services({
+                baseURL:baseaip,
+                tableId:"testdome",
+                toolbar:"#toolbarinter",
+                serachUrl:"dictionaries/query",
+                getUrl:"dictionaries/get",
+                delUrl:"dictionaries/delete",
+                updUrl:"plant/updateNcpxx",
+                saveUrl:"./dialog/inputsDialog"+index+".html",
+                deleteField:"id",
+                dataType:dataType,
+                parameter:{
+                    keyword:'',
+                    type:dataType
+                },
+                cols:[[
+                    {type: 'checkbox', fixed: 'left'},
+                    {field: 'putseedname', sort: true, title: '名称',templet:function (data) {
+
+                            return (JSON.parse(data.context)).putseedname
+                    }},
+                    {field: 'producttypeid', sort: true, title: '种类',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).producttypeid
+                    }},
+                    {field: 'unit', sort: true, title: '单位',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).unit
+                    }},
+                    {field: 'registrationmark', sort: true, title: '审定/登记号',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).registrationmark
+                    }},
+                    {field: ['lifedate','lifedateunit'], sort: true, title: '保质期',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).lifedate+(JSON.parse(data.context)).lifedateunit
+                    }},
+                   
+                    {field: 'enterprisename', sort: true, title: '生产企业名称',templet:function (data) {
+                        
+                        return (JSON.parse(data.context)).enterprisename
+                    }},
+                    // {field: 's5', sort: true, title: '状态',templet:function (data) {
+                        
+                    //     return (JSON.parse(data.context)).s5
+                    // }},
+                ]],
+            });
+        }
+    });
+</script>
 </html>

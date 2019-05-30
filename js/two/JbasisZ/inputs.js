@@ -10,102 +10,109 @@ layui.use(['form','table', "laydate"], function() {
     laydate.render({
         elem: '#date2' //指定元素
     });
-         /*重置*/
-         $(".agains").click(function() {
-            window.location.reload();
-        })
-    // 切换tab
-    var tabItemId='1';
-    var enterpriseid='';
-    tabItems = document.querySelectorAll('.select-tab>.item');
-    for(var i=0;i<tabItems.length;i++){
-        (function(i){
-            tabItems[i].addEventListener('click',function(){
-                var tabItemThis = document.querySelector('.select-tab>.item-this');
-                tabItemThis.classList.remove('item-this');
-                tabItems[i].classList.add('item-this');
-                tabItemId = tabItems[i].getAttribute("data-id");
-                console.log(tabItemId);
-                findBasPutseedList(enterpriseid);
-                if(i==0){
-                    document.querySelector('#item-type1').style.display='block';
-                    document.querySelector('#item-type2').style.display='none';
-                    document.querySelector('#item-type3').style.display='none';
+    /*重置*/
+    $(".agains").click(function() {
+        window.location.reload();
+    })
+    // // 切换tab
+    // var tabItemId='1';
+    // var enterpriseid='';
+    // tabItems = document.querySelectorAll('.select-tab>.item');
+    // for(var i=0;i<tabItems.length;i++){
+    //     (function(i){
+    //         tabItems[i].addEventListener('click',function(){
+    //             var tabItemThis = document.querySelector('.select-tab>.item-this');
+    //             tabItemThis.classList.remove('item-this');
+    //             tabItems[i].classList.add('item-this');
+    //             tabItemId = tabItems[i].getAttribute("data-id");
+    //             console.log(tabItemId);
+    //             findBasPutseedList(enterpriseid);
+    //             if(i==0){
+    //                 document.querySelector('#item-type1').style.display='block';
+    //                 document.querySelector('#item-type2').style.display='none';
+    //                 document.querySelector('#item-type3').style.display='none';
 
-                }else if(i==1||i==3){
-                    document.querySelector('#item-type1').style.display='none';
-                    document.querySelector('#item-type2').style.display='block';
-                    document.querySelector('#item-type3').style.display='none';
-                }else if(i==2){
-                    document.querySelector('#item-type1').style.display='none';
-                    document.querySelector('#item-type2').style.display='none';
-                    document.querySelector('#item-type3').style.display='block';
-                }
-            })
-        })(i)
+    //             }else if(i==1){
+    //                 document.querySelector('#item-type1').style.display='none';
+    //                 document.querySelector('#item-type2').style.display='block';
+    //                 document.querySelector('#item-type3').style.display='none';
+    //             }else if(i==2){
+    //                 document.querySelector('#item-type1').style.display='none';
+    //                 document.querySelector('#item-type2').style.display='none';
+    //                 document.querySelector('#item-type3').style.display='block';
+    //             }else if(i==3){
+    //                 document.querySelector('#item-type1').style.display='none';
+    //                 document.querySelector('#item-type2').style.display='none';
+    //             }
+    //         })
+    //     })(i)
         
-    }
-    //监听头部监听
-    table.on('toolbar(testdome)', function(obj) {
-        var checkStatus = table.checkStatus(obj.config.id),
-            data = checkStatus.data; //获取选中的数据
-        switch (obj.event) {
-            case 'add':
-                if(tabItemId==1){
-                    window.location.href = "./dialog/inputsDialog.html";
-                }else if(tabItemId==2||tabItemId==4){
-                    window.location.href = "./dialog/inputsDialog2.html";
-                }else if(tabItemId==3){
-                    window.location.href = "./dialog/inputsDialog3.html";
-                }
-                break;
-            case 'update':
-                if(data.length === 0){
-                    layer.msg('请选择一行');
-                } else if(data.length > 1){
-                    layer.msg('只能同时编辑一个');
-                } else {
-                    if(tabItemId==1){
-                        window.location.href = "./dialog/inputsDialog.html?id="+data[0].id;
-                    }else if(tabItemId==2||tabItemId==4){
-                        window.location.href = "./dialog/inputsDialog2.html?id="+data[0].id;
-                    }else if(tabItemId==3){
-                        window.location.href = "./dialog/inputsDialog3.html?id="+data[0].id;
-                    }
-                }
-                break;
-            case 'delete':
-                if (data.length === 0) {
-                    layer.msg('请选择一行');
-                } else {
-                    layer.msg('删除');
-                }
-                break;
-        };
-    });
+    // }
+    // //监听头部监听
+    // table.on('toolbar(testdome)', function(obj) {
+    //     var checkStatus = table.checkStatus(obj.config.id),
+    //         data = checkStatus.data; //获取选中的数据
+    //     switch (obj.event) {
+    //         case 'add':
+    //             if(tabItemId==1){
+    //                 window.location.href = "./dialog/inputsDialog.html";
+    //             }else if(tabItemId==2){
+    //                 window.location.href = "./dialog/inputsDialog2.html";
+    //             }else if(tabItemId==3){
+    //                 window.location.href = "./dialog/inputsDialog3.html";
+    //             }else if(tabItemId==4){
+    //                 window.location.href = "./dialog/inputsDialog4.html";
+    //             }
+    //             break;
+    //         case 'update':
+    //             if(data.length === 0){
+    //                 layer.msg('请选择一行');
+    //             } else if(data.length > 1){
+    //                 layer.msg('只能同时编辑一个');
+    //             } else {
+    //                 if(tabItemId==1){
+    //                     window.location.href = "./dialog/inputsDialog.html?id="+data[0].id;
+    //                 }else if(tabItemId==2){
+    //                     window.location.href = "./dialog/inputsDialog2.html?id="+data[0].id;
+    //                 }else if(tabItemId==3){
+    //                     window.location.href = "./dialog/inputsDialog3.html?id="+data[0].id;
+    //                 }else if(tabItemId==4){
+    //                     window.location.href = "./dialog/inputsDialog4.html?id="+data[0].id;
+    //                 }
+    //             }
+    //             break;
+    //         case 'delete':
+    //             if (data.length === 0) {
+    //                 layer.msg('请选择一行');
+    //             } else {
+    //                 layer.msg('删除');
+    //             }
+    //             break;
+    //     };
+    // });
     //监听表格里面按钮
     table.on('tool(testdome)', function(obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         
     });
 
-    var producttypeid=null;
-    // 选择框选择显示
-    function showSelect(){
-        form.on('select(type)', function(data){
-            console.log(data);
-            var index = data.elem.selectedIndex;
-            index = index-1;
-            var ctypelist = document.querySelectorAll('.inline-ctype');
-            for(var i=0;i<ctypelist.length;i++){
-                ctypelist[i].style.display='none';
-            }
-            ctypelist[index].style.display='block';
-        });    
-    }
-    form.on('select(ctype)', function(data){
-        console.log(data);
-        producttypeid=data.value;
-    });    
+    // var producttypeid=null;
+    // // 选择框选择显示
+    // function showSelect(){
+    //     form.on('select(type)', function(data){
+    //         console.log(data);
+    //         var index = data.elem.selectedIndex;
+    //         index = index-1;
+    //         var ctypelist = document.querySelectorAll('.inline-ctype');
+    //         for(var i=0;i<ctypelist.length;i++){
+    //             ctypelist[i].style.display='none';
+    //         }
+    //         ctypelist[index].style.display='block';
+    //     });    
+    // }
+    // form.on('select(ctype)', function(data){
+    //     console.log(data);
+    //     producttypeid=data.value;
+    // });    
     
 
 
@@ -124,77 +131,77 @@ layui.use(['form','table', "laydate"], function() {
             return
         });
     }
-    getBasProducttype();
-    getTypeParentidByName();
-    //种子种类查询
-    function getBasProducttype(){
-        handleAjax('PlantBasPutseed/getBasProducttype', {
-            parentid:'0000000000003'
-        }, "GET").done(function(resp) {
-            console.log(resp);
+    // getBasProducttype();
+    // getTypeParentidByName();
+    // //种子种类查询
+    // function getBasProducttype(){
+    //     handleAjax('PlantBasPutseed/getBasProducttype', {
+    //         parentid:'0000000000003'
+    //     }, "GET").done(function(resp) {
+    //         console.log(resp);
 
-            for(var i=0;i<resp.list.length;i++){
-                document.querySelector('#type').innerHTML=document.querySelector('#type').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
-                document.querySelector('#inline-type').innerHTML=document.querySelector('#inline-type').innerHTML
-                +'<div class="layui-input-inline inline-ctype" style="display:none;"><select name="ctype" lay-filter="ctype" class="ctype"><option value="">请选择</option></select></div>'
-                var ctypelist = document.querySelectorAll('.ctype');
-                for(var j=0;j<resp.list[i].viList.length;j++){
-                    ctypelist[i].innerHTML=ctypelist[i].innerHTML+'<option value="'+resp.list[i].viList[j].pid+'">'+resp.list[i].viList[j].pname+'</option>'
-                }
-            }
-            layui.form.render("select");
-            showSelect();
-            return
-        }).fail(function(err) {
-            console.log(err);
-            return
-        });
-    }
-    // 农药/其它投入品种别查询
-    function getTypeParentidByName(){
-        var listVo={
-            'pid':'0000000000002',
-            'pname':'农药/其他投入品'
-        }
-        var listVo = JSON.stringify(listVo);
-        handleAjax('PlantBasPutseed/getTypeParentidByName', {
-            listVo:listVo
-        }, "GET").done(function(resp) {
-            console.log(resp);
+    //         for(var i=0;i<resp.list.length;i++){
+    //             document.querySelector('#type').innerHTML=document.querySelector('#type').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
+    //             document.querySelector('#inline-type').innerHTML=document.querySelector('#inline-type').innerHTML
+    //             +'<div class="layui-input-inline inline-ctype" style="display:none;"><select name="ctype" lay-filter="ctype" class="ctype"><option value="">请选择</option></select></div>'
+    //             var ctypelist = document.querySelectorAll('.ctype');
+    //             for(var j=0;j<resp.list[i].viList.length;j++){
+    //                 ctypelist[i].innerHTML=ctypelist[i].innerHTML+'<option value="'+resp.list[i].viList[j].pid+'">'+resp.list[i].viList[j].pname+'</option>'
+    //             }
+    //         }
+    //         layui.form.render("select");
+    //         showSelect();
+    //         return
+    //     }).fail(function(err) {
+    //         console.log(err);
+    //         return
+    //     });
+    // }
+    // // 农药/其它投入品种别查询
+    // function getTypeParentidByName(){
+    //     var listVo={
+    //         'pid':'0000000000002',
+    //         'pname':'农药/其他投入品'
+    //     }
+    //     var listVo = JSON.stringify(listVo);
+    //     handleAjax('PlantBasPutseed/getTypeParentidByName', {
+    //         listVo:listVo
+    //     }, "GET").done(function(resp) {
+    //         console.log(resp);
 
-            for(var i=0;i<resp.list.length;i++){
-                document.querySelector('#typefarm').innerHTML = document.querySelector('#typefarm').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
-            }
-            layui.form.render("select");
-            // showSelect();
-            return
-        }).fail(function(err) {
-            console.log(err);
-            return
-        });
-    }
-    // 肥料投入品种别查询
-    getTypegetParentidByCaregoryName();
-    function getTypegetParentidByCaregoryName(){
-        var listVo={
-            'pid':'0000000000002',
-            'pname':'肥料'
-        }
-        var listVo = JSON.stringify(listVo);
-        handleAjax('PlantBasPutseed/getTypegetParentidByCaregoryName', {
-            listVo:listVo
-        }, "GET").done(function(resp) {
-            console.log(resp);
-            for(var i=0;i<resp.list.length;i++){
-                document.querySelector('#typefertilizer').innerHTML = document.querySelector('#typefertilizer').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
-            }
-            layui.form.render("select");
-            return
-        }).fail(function(err) {
-            console.log(err);
-            return
-        });
-    }
+    //         for(var i=0;i<resp.list.length;i++){
+    //             document.querySelector('#typefarm').innerHTML = document.querySelector('#typefarm').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
+    //         }
+    //         layui.form.render("select");
+    //         // showSelect();
+    //         return
+    //     }).fail(function(err) {
+    //         console.log(err);
+    //         return
+    //     });
+    // }
+    // // 肥料投入品种别查询
+    // getTypegetParentidByCaregoryName();
+    // function getTypegetParentidByCaregoryName(){
+    //     var listVo={
+    //         'pid':'0000000000002',
+    //         'pname':'肥料'
+    //     }
+    //     var listVo = JSON.stringify(listVo);
+    //     handleAjax('PlantBasPutseed/getTypegetParentidByCaregoryName', {
+    //         listVo:listVo
+    //     }, "GET").done(function(resp) {
+    //         console.log(resp);
+    //         for(var i=0;i<resp.list.length;i++){
+    //             document.querySelector('#typefertilizer').innerHTML = document.querySelector('#typefertilizer').innerHTML+'<option value="'+resp.list[i].pid+'" data-id="'+i+'">'+resp.list[i].pname+'</option>'
+    //         }
+    //         layui.form.render("select");
+    //         return
+    //     }).fail(function(err) {
+    //         console.log(err);
+    //         return
+    //     });
+    // }
     document.querySelector('#findBasPutseedList').addEventListener('click',function(){
         findBasPutseedList();
     })

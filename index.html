@@ -24,15 +24,15 @@
 
         </div>
         <div class="login-hand">
-            <div class="state">
+            <!-- <div class="state">
                 认证状态（未录入）
-            </div>
+            </div> -->
             <div class="people">
                 <i class="layui-icon layui-icon-username" style="font-size: 24px;cursor: pointer;"></i>
                 <div class="">
                     <i class="layui-icon layui-icon-down" style="font-size: 12px;margin: 10px;cursor: pointer;" id='more'></i>
                 </div>
-                黄奕(1053395537)
+                <div class="username">暂未登录</div> 
             </div>
             <div class="exit">
                 退出登录
@@ -347,11 +347,15 @@
 
                     <div class="order-title">
                         <div class="order-title-line"></div>
-                        <div class="order-title-txt">最新消息</div>
+                        <div class="order-title-txt">消息管理</div>
                         <div class="order-title-icon">
                             <img src="./img/refresh.png" alt="">
                         </div>
+                        
                     </div>
+                    <div class="message" style="float: right;position: relative;margin-top: -20px;">
+                            <a href="./src/vertical/Scommon/Amywork/manage.html">更多>></a>
+                        </div>
                     <div class="order-table">
                         <div class="layui-tab layui-tab-card">
                             <ul class="layui-tab-title">
@@ -466,6 +470,25 @@
 </script>
 
 <script>
+    // 获取用户信息
+    getUser();
+    function getUser(e) {
+        handleAjax('user/getUser', {}, "GET").done(function(resp) {
+            var names = document.querySelector('.username');
+            console.log(resp);
+            return
+        }).fail(function(err) {
+            var names = document.querySelector('.username');
+            console.log(err);
+            if(err.realName||err.username){
+                names.innerHTML = err.realName+'('+ err.username+')'
+            }
+            return
+        });
+    }
+    document.querySelector('.exit').addEventListener('click',function(){
+        window.location.href = "./src/login.html";
+    })
     getClientHeight();
 
     function getClientHeight() {

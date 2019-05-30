@@ -21,7 +21,7 @@
 </head>
 <body>
 <blockquote class="layui-elem-quote">
-    销售报表数据
+    采购数据
 </blockquote>
 <div class="layui-row layui-col-space15">
     <div class="layui-col-md6">
@@ -70,8 +70,8 @@
                 ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
                         return percent(data.xsje,data.total)+"%"
                     }}
-                ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
-                ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+                ,{field:'xsje',  title: '采购金额(万)',align:"center" ,sort: true}
+                ,{field:'xssl', title: '采购数量',align:"center" ,sort: true}
             ]],
             parseData:function (res) {
                 return {

@@ -140,7 +140,7 @@
         function getUser(e) {
             handleAjax('user/getUser', {}, "GET").done(function(resp) {
                 // console.log(resp);
-                var names = document.querySelectorAll('.r.ealname');
+                var names = document.querySelectorAll('.realname');
                 for (var i = 0; i < names.length; i++) {
                     names[i].innerHTML = resp.realName + "(" + resp.username + ")";
                 }

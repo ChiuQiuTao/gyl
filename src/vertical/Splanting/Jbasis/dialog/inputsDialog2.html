@@ -16,15 +16,16 @@
     
     
     <!-- 企业供应商 -->
-    <form class="layui-form" action="">
+    <form class="layui-form" action="" lay-filter="example" id="example">
         <div class="select common">
             <div class="select-title">种子信息</div>
             <div class="select-con">
+                <input type="text" class="layui-input input-d" placeholder="" id='inputtype' name='inputtype' value='2' style='display:none;'>
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='putseedname'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='putseedname' name='putseedname'>
                         </div>
                     </div>
                 </div>
@@ -32,37 +33,19 @@
                     <div class="layui-inline" id='inline-type'>
                         <label class="layui-form-label">种类:</label>
                         <div class="layui-input-inline">
-                            <select name="producttypeid" lay-verify="" lay-filter="producttypeid" id='producttypeid'>
+                                <input type="text" class="layui-input input-d" placeholder="" id='producttypeid' name='producttypeid'>
+
+                            <!-- <select name="producttypeid" lay-verify="" lay-filter="producttypeid" id='producttypeid' name='producttypeid'>
                                 <option value="">请选择</option>
-                            </select>
+                            </select> -->
                         </div>
                     </div>
                 </div>
-                <!-- <div class="layui-form-item">
-                    <div class="layui-inline" id='inline-type2'>
-                        <label class="layui-form-label">种类:</label>
-                        <div class="layui-input-inline">
-                            <select name="producttypeid" lay-verify="" lay-filter="producttypeid" id='producttypeid2'>
-                                <option value="">请选择</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline" id='inline-type3'>
-                        <label class="layui-form-label">种类:</label>
-                        <div class="layui-input-inline">
-                            <select name="producttypeid" lay-verify="" lay-filter="producttypeid" id='producttypeid3'>
-                                <option value="">请选择</option>
-                            </select>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">规格:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='specifications'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='specifications' name='specifications'>
                         </div>
                     </div>
                 </div>
@@ -70,7 +53,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">单位:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='unit'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='unit' name='unit'>
                         </div>
                     </div>
                 </div>
@@ -78,7 +61,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">审定/登记号:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='registrationmark'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='registrationmark' name='registrationmark'>
                         </div>
                     </div>
                 </div>
@@ -86,12 +69,13 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">保质期:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input" placeholder="" id='lifedate'>
+                            <input type="text" class="layui-input" placeholder="" id='lifedate' name='lifedate'>
                         </div>
                         <div class="layui-inline-sel">
-                            <select name="country" lay-filter="storagelevel" id='lifedateunit' lay-verify="required" style="width: 100px;">
+                            <select lay-filter="storagelevel" id='lifedateunit' lay-verify="required" name='lifedateunit' style="width: 100px;">
                                 <option value="年">年</option>
                                 <option value="月">月</option>
+                                <option value="天">天</option>
                             </select>
                         </div>
                     </div>
@@ -101,7 +85,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">执行标准号:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='standardno'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='standardno' name='standardno'>
                         </div>
                     </div>
                 </div>
@@ -110,7 +94,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">生产企业名称:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='enterprisename'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='enterprisename' name='enterprisename'>
                         </div>
                     </div>
                 </div>
@@ -118,7 +102,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">品牌:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='brand'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='brand' name='brand'>
                         </div>
                     </div>
                 </div>
@@ -126,7 +110,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">适宜区域:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='suitablearea'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='suitablearea' name='suitablearea'>
                         </div>
                     </div>
                 </div>
@@ -134,7 +118,7 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">进货价:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='purchaseprice'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='purchaseprice' name='purchaseprice'>
                         </div>
                         元
                     </div>
@@ -143,16 +127,28 @@
                     <div class="layui-inline">
                         <label class="layui-form-label">备注:</label>
                         <div class="layui-input-inline">
-                            <input type="text" class="layui-input input-d" placeholder="" id='remarks'>
+                            <input type="text" class="layui-input input-d" placeholder="" id='remarks' name='remarks'>
                         </div>
                     </div>
                 </div>
 
                 <div class="layui-form-item">
-                    <div class="layui-inline">
+                    <div class="layui-inline" style="min-width:160px;">
                         <label class="layui-form-label">预警信息:</label>
-                        <div class="layui-input-block">
-                            <input type="checkbox" lay-skin="primary" title="是否预警"  lay-filter="earlywarning" id='earlywarning'>
+                        <div class="layui-input-block" style="margin-left:0;">
+                            <input type="checkbox" lay-skin="primary" title="是否预警"  lay-filter="earlywarning" id='earlywarning' name='earlywarning'>
+                        </div>
+                    </div>
+                    <div class="layui-inline stock" style="min-width:210px;display: none;">
+                        <label class="layui-form-label" style="width:60px;">最小库存:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='minstock' name='minstock'>
+                        </div>
+                    </div>
+                    <div class="layui-inline stock" style="min-width:210px;display: none;">
+                        <label class="layui-form-label" style="width:60px;">最大库存:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" placeholder="" id='maxstock' name='maxstock'>
                         </div>
                     </div>
                 </div>
@@ -162,20 +158,19 @@
                         <div class="layui-input-inline">
                             <div class="layui-upload" style="display:flex">
                                 <button type="button" class="layui-btn layui-btn-normal selectImg" style="margin-right:10px;">选择文件</button>
-                                <!-- <button type="button" class="layui-btn layui-btn-normal selectImg" style="margin-right:10px;">选择文件</button>
-                                <button type="button" class="layui-btn layui-btn-normal selectImg">选择文件</button> -->
                             </div>
                         </div>
                         <div>
                             <img src="" alt="" id="showimg" style="width:100px;height:40px;">
+                            <input type="text" class="layui-input" placeholder="" name='pathimg' style="display: none" id="pathimg">
                         </div>
                     </div>
                 </div>
                
                 <div class="select-btn">
-                    <div class="layui-bg-green comquery " id="uploadImg">确定</div>
-                    <div class="layui-bg-green comquery " id="updateImg" style="display:none">确定</div>
-                    <div class="layui-bg-green comquery ">取消</div>
+                    <div class="layui-bg-green comquery " id="uploadImg" lay-submit="" lay-filter="demo1">确定</div>
+                    <!-- <div class="layui-bg-green comquery " id="updateImg" style="display:none">确定</div> -->
+                    <div class="layui-bg-green comquery cancels" type="reset">取消</div>
                 </div>
             </div>
         </div>
@@ -188,5 +183,128 @@
 <script src="../../../../../js/common/api.js"></script>
 <script src="../../../../../public/dist/layui.js" charset="utf-8"></script>
 <script src="../../../../../js/common/template-web.js"></script>
-<script src="../../../../../js/two/Jbasisz/inputsDialog2.js"></script>
+<!-- <script src="../../../../../js/two/Jbasisz/inputsDialog.js"></script> -->
+<script>
+     var dataId = null; 
+    layui.config({
+        base: '../../../../../js/module/'
+    }).use(['Tool','form', 'layedit', 'laydate',"serviceTools","upload"],function () {
+        var laydate = layui.laydate;
+  
+        laydate.render({
+            elem: '#date' //指定元素
+        });
+        layui.Tool.init();
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate,
+            serviceTools = layui.serviceTools;
+        //监听提交
+
+        //指定允许上传的文件类型
+        layui.upload.render({
+            elem: '.selectImg'
+            ,url: baseaip+"file/upload"
+            ,accept: 'file'
+            ,exts: 'doc|docx|pdf|png|jpg'
+            ,field:"file"
+            ,done: function(res){
+                var filePath = res.data;
+                filePath = filePath.substring(0,filePath.length - 1 );
+                document.querySelector("#pathimg").value=filePath;
+                $('#showimg').attr('src', filePath);
+                console.log(filePath)
+            }
+        });
+
+
+        // 是否预警
+        form.on('checkbox(earlywarning)', function(data){
+            earlywarning=data.elem.checked;
+            var stock = document.querySelectorAll('.stock');
+            if(data.elem.checked){
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='block'
+                }
+            }else{
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='none'
+                }
+            }
+            
+        }); 
+        form.on('submit(demo1)', function(data){
+            var type = localStorage.getItem("type");
+            if ( type === null ){
+                alert("数据类型不能为空")
+            }else{
+                var zd = { id:dataId === null ? "" : dataId,
+                type:type,
+                context:JSON.stringify(data.field),
+                    // keyword:data.field.farmName+"|"+data.field.detectionOrderNo
+                    keyword:data.field.putseedname+"|"+data.field.inputtype
+                }
+                serviceTools.EditOrSaveOrDelete({
+                    parame:zd,
+                    url:baseaip+"dictionaries/saveOrUpdate",
+                    callback:(function(){
+                            window.history.back(-2);
+                    })()
+                })
+
+            }
+            return false;
+        });
+
+        // console.info(location.href.split("?")[1])
+        getHrefId();
+
+    });
+    function getHrefId(){
+        var loc = location.href;
+        console.log(loc);
+        var url = loc.split("?")[1];
+        console.log(url);
+        if(url && url!=''){
+            var para = url.split("&");
+            var len = para.length;
+            var res = {};
+            var arr = [];
+            for(var i=0;i<len;i++){
+                arr = para[i].split("=");
+                res[arr[0]] = arr[1];
+            }
+            dataId = res.id;
+            var dataJson = localStorage.getItem([res.id]);
+            dataJson != null && dataJson.trim().length > 0 ? (function(){
+                data  = JSON.parse(dataJson);
+                setForm(data);
+            })():"";
+            
+        }else{
+            
+        }
+        
+    }
+    function setForm(data){
+        layui.use(['form'], function () {
+            console.log(JSON.parse(data.context));
+            console.log('data');
+            $('#showimg').attr('src',  JSON.parse(data.context).pathimg);
+            document.querySelector('#pathimg').value=JSON.parse(data.context).pathimg;
+            var stock = document.querySelectorAll('.stock');
+            if(JSON.parse(data.context).earlywarning){
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='block'
+                }
+            }else{
+                for(var i=0;i<stock.length;i++){
+                    stock[i].style.display='none'
+                }
+            }
+            layui.form.val('example', JSON.parse(data.context));
+        })
+    }
+</script>
 </html>

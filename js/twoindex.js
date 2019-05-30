@@ -10,7 +10,7 @@ var menudata = [{
             // }, 
             {
                 url: "../vertical/Scommon/Amywork/message.html",
-                title: "消息中心",
+                title: "消息管理",
                 type: "1"
             },
             {
@@ -25,7 +25,7 @@ var menudata = [{
             // },
             {
                 url: "../vertical/Scommon/Amywork/manage.html",
-                title: "售后服务",
+                title: "服务交易",
                 type: "1"
             },
         ]
