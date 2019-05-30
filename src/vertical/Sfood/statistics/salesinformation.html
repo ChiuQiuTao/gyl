@@ -15,10 +15,11 @@
             margin: 0px;
             padding: 0px;
         }
+        
         .layui-elem-quote {
             border-bottom: 1px solid #009688
         }
-
+        
         .select-con {
             background-color: inherit;
             padding-top: 0px;
@@ -31,132 +32,142 @@
 
 <body>
 
-<blockquote class="layui-elem-quote layui-text">
-    销售信息统计
-</blockquote>
-<form class="layui-form" action="">
+    <blockquote class="layui-elem-quote layui-text">
+        销售信息统计
+    </blockquote>
+    <form class="layui-form" action="">
 
-    <div class="select common">
-        <div class="select-con">
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">年度查询</label>
-                    <div class="layui-input-inline">
-                        <input type="text" class="layui-input" id="test2" placeholder="yyyy">
+        <div class="select common">
+            <div class="select-con">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">年度查询</label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="test2" placeholder="yyyy">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="select-btn">
+                <!-- <div class="select-btn">
                 <div class="layui-bg-green comquery " lay-event="search">查询</div>
+            </div> -->
             </div>
         </div>
+    </form>
+    <div class="mui-content">
+        <div class="mui-content-padded">
+            <div class="chart" id="barChart"></div>
+        </div>
     </div>
-</form>
-<div class="mui-content">
-    <div class="mui-content-padded">
-        <div class="chart" id="barChart"></div>
-    </div>
-</div>
 
 
-<script>
-    var getOption = function(datas) {
-        var defaultData = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
-        return  {
-            legend: {
-                data: ['销售统计'],
-                bottom: 10,
-                left: 'center',
-            },
-            grid: {
-                x: 35,
-                x2: 10,
-                y: 30,
-                y2: 25
-            },
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            toolbox: {
-                show: false,
-                feature: {
-                    mark: {
-                        show: true
-                    },
-                    dataView: {
-                        show: true,
-                        readOnly: false
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
-                    },
-                    saveAsImage: {
+    <script>
+        var getOption = function(datas) {
+            var defaultData = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
+            return {
+                legend: {
+                    data: ['销售统计'],
+                    bottom: 10,
+                    left: 'center',
+                },
+                grid: {
+                    x: 35,
+                    x2: 10,
+                    y: 30,
+                    y2: 25
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                toolbox: {
+                    show: false,
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                calculable: false,
+                xAxis: [{
+                    type: 'category',
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                }],
+                yAxis: [{
+                    type: 'value',
+                    splitArea: {
                         show: true
                     }
-                }
-            },
-            calculable: false,
-            xAxis: [{
-                type: 'category',
-                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
-            }],
-            yAxis: [{
-                type: 'value',
-                splitArea: {
-                    show: true
-                }
-            }],
-            series: [{
-                name: '销售统计',
-                type: "bar",
-                data: typeof  datas !== "undefined" ? (function () {
-                    var series = new Array();
-                    for (var i = 0 ; i < 10 ; i++){
-                        series.push(Math.ceil(Math.random()*100))
-                    }
-                    return datas.getFullYear() === new Date().getFullYear() ? defaultData : series ;
-                })():(function () {
-                   return  defaultData;
-                })()
-            }]
+                }],
+                series: [{
+                    name: '销售统计',
+                    type: "bar",
+                    data: typeof datas !== "undefined" ? (function() {
+                        var series = new Array();
+                        for (var i = 0; i < 10; i++) {
+                            series.push(Math.ceil(Math.random() * 100))
+                        }
+                        return datas.getFullYear() === new Date().getFullYear() ? defaultData : series;
+                    })() : (function() {
+                        return defaultData;
+                    })()
+                }]
+            };
         };
-    };
-    var byId = function(id) {
-        return document.getElementById(id);
-    };
-    var barChart = echarts.init(byId('barChart'));
-    barChart.setOption(getOption(new Date()));
+        var byId = function(id) {
+            return document.getElementById(id);
+        };
+        var barChart = echarts.init(byId('barChart'));
+        barChart.setOption(getOption(new Date()));
 
-    layui.use(['form', 'layedit', 'laydate'], function() {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate;
+        layui.use(['form', 'layedit', 'laydate'], function() {
+            var form = layui.form,
+                layer = layui.layer,
+                layedit = layui.layedit,
+                laydate = layui.laydate;
 
-        laydate.render({
-            elem: '#test2',
-            type: 'year',
-            max:new Date().format("yyyy-MM-dd"),
-            format:"yyyy-MM-dd",
-            done: function(value, date){
-                barChart.setOption(getOption(new Date(value)));
-            }
+            laydate.render({
+                elem: '#test2',
+                type: 'year',
+                max: new Date().format("yyyy-MM-dd"),
+                format: "yyyy-MM-dd",
+                done: function(value, date) {
+                    barChart.setOption(getOption(new Date(value)));
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>

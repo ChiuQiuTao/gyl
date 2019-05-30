@@ -106,14 +106,10 @@ function Theoldcuiway(url, param, type, contentType) {
     return ajaxs(url, param, type, contentType).then(
         function(resp) {
             // 成功回调
-
-            if (resp.status == 200) {
-                sessionStorage.setItem("keyssname", resp.jwtToken);
-                sessions = sessionStorage.getItem("keyssname");
-                return resp;
+            if (typeof resp == "string") {
+                resp = JSON.parse(resp);
             }
-
-            if (resp.code == 200) {
+            if (resp) {
                 return resp; // 直接返回要处理的数据，作为默认参数传入之后done()方法的回调
             } else {
                 return jq.Deferred().reject(resp); // 返回一个失败状态的deferred对象，把错误代码作为默认参数传入之后fail()方法的回调
@@ -126,6 +122,7 @@ function Theoldcuiway(url, param, type, contentType) {
             setTimeout(function() {
                 layer.closeAll("loading");
             }, 2000);
+            console.log(err); // 打印状态码
         }
     );
 }

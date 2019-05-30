@@ -216,8 +216,7 @@
                 <p style="width: 190px;">{{$value.ordercode}} </p>
             </li>
             <li>
-                <label>检测结论:</label>
-                {{if $value.testresult == "1"}}
+                <label>检测结论:</label> {{if $value.testresult == "1"}}
                 <p style="text-align: center;">待检测</p>
                 {{else if $value.testresult == "2" }}
                 <p style="text-align: center;">检测合格</p>
@@ -225,7 +224,7 @@
                 <p style="text-align: center;">不合格</p>
                 {{/if}}
             </li>
-            
+
         </ul>
         <div style="padding:10px  0  0 10px;">检测信息</div>
         <table class="layui-table">
@@ -283,7 +282,7 @@
             /*检测*/
             if (layEvent === 'detection') {
                 // Detectionsinglesingle(data.id);
-                window.location.href = "./newpage/detectionNew.html?id="+data.id;
+                window.location.href = "./newpage/detectionNew.html?id=" + data.id;
                 return
             }
         });
@@ -312,24 +311,29 @@
                                 item.orderdate = times(item.orderdate);
                             }
                         });
-                        var resultlist=[];
-                        var testnamelist=[];
-                        var prolist=[];
+                        var resultlist = [];
+                        var testnamelist = [];
+                        var prolist = [];
                         // 判断是不是数组
-                        if(resp.list[0].result.indexOf("[")==0){
+                        var ss = resp.list[0].result.indexOf("[");
+
+                        if (ss == 0) {
                             resultlist = JSON.parse(resp.list[0].result);
-                        }else{
+                        } else {
                             resultlist.push(resp.list[0].result);
                         }
-                        if(resp.list[0].testname.indexOf("[")==0){
+                        if (ss == 0) {
                             testnamelist = JSON.parse(resp.list[0].testname);
-                        }else{
+                        } else {
                             testnamelist.push(resp.list[0].testname);
                         }
-                        for(var i=0;i<resultlist.length;i++){
-                            prolist.push({'resultlist':resultlist[i],'testnamelist':testnamelist[i]})
+                        for (var i = 0; i < resultlist.length; i++) {
+                            prolist.push({
+                                'resultlist': resultlist[i],
+                                'testnamelist': testnamelist[i]
+                            })
                         }
-                        resp.list[0].prolist=prolist;
+                        resp.list[0].prolist = prolist;
                         console.log(resp);
 
                         var html = template("contentquery", resp);
@@ -403,81 +407,82 @@
             // height: 'full-20',//满高
             cols: [
                 [{
-                    title: '编号',
-                    type: 'numbers',
-                    fixed: 'left'
-                }, {
-                    field: 'orderdate',
-                    title: '检测日期',
-                    sort: true,
-                    fixed: 'left',
-                    minWidth: 120,
-                    align: "center",
-                    templet: function(d) {
-                        var numv = null;
-                        if (d.orderdate == "" || d.orderdate == null) {
-                            numv = " ";
-                        } else {
-                            numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
-                        }
-                        return numv
-                    },
-                }, {
-                    field: 'ordercode',
-                    align: "center",
-                    title: "检测单号",
-                    sort: true,
-                    minWidth: 160,
-                }, {
-                    field: 'productname',
-                    title: '产品名称',
-                    minWidth: 120,
-                    sort: true,
-                    align: "center",
-                }, {
-                    field: 'batch',
-                    title: '生产批次',
-                    align: "center",
-                    minWidth: 20,
-                    sort: true
-                }, {
-                    field: 'testresult',
-                    title: '检测结论',
-                    minWidth: 120,
-                    align: "center",
-                    templet: function(d) {
-                        var num = null;
-                        console.log(d.testresult)
-                        if (d.testresult == "1") {
-                            num = "待检测"
-                            return num
-                        }
+                        title: '编号',
+                        type: 'numbers',
+                        fixed: 'left'
+                    }, {
+                        field: 'orderdate',
+                        title: '检测日期',
+                        sort: true,
+                        fixed: 'left',
+                        minWidth: 120,
+                        align: "center",
+                        templet: function(d) {
+                            var numv = null;
+                            if (d.orderdate == "" || d.orderdate == null) {
+                                numv = " ";
+                            } else {
+                                numv = d.orderdate = layui.util.toDateString(d.orderdate, 'yyyy-MM-dd');
+                            }
+                            return numv
+                        },
+                    }, {
+                        field: 'ordercode',
+                        align: "center",
+                        title: "检测单号",
+                        sort: true,
+                        minWidth: 160,
+                    }, {
+                        field: 'productname',
+                        title: '产品名称',
+                        minWidth: 120,
+                        sort: true,
+                        align: "center",
+                    }, {
+                        field: 'batch',
+                        title: '生产批次',
+                        align: "center",
+                        minWidth: 20,
+                        sort: true
+                    }, {
+                        field: 'testresult',
+                        title: '检测结论',
+                        minWidth: 120,
+                        align: "center",
+                        templet: function(d) {
+                            var num = null;
+                            console.log(d.testresult)
+                            if (d.testresult == "1") {
+                                num = "待检测"
+                                return num
+                            }
 
-                        if (d.testresult == "2" || d.testresult == "合格") {
-                            num = "合格"
-                            return num
+                            if (d.testresult == "2" || d.testresult == "合格") {
+                                num = "合格"
+                                return num
+                            }
+                            if (d.testresult == "3" || d.testresult == "不合格") {
+                                num = "不合格"
+                                return num
+                            }
                         }
-                        if (d.testresult == "3" || d.testresult == "不合格") {
-                            num = "不合格"
-                            return num
-                        }
+                    },
+                    // {
+                    //     field: 'result',
+                    //     title: '检测结果',
+                    //     align: "center",
+                    //     minWidth: 120
+                    // }, 
+                    {
+                        field: 'wealth',
+                        width: 137,
+                        title: '更多',
+                        minWidth: 80,
+                        align: "center",
+                        fixed: 'right',
+                        toolbar: '#More',
                     }
-                }, 
-                // {
-                //     field: 'result',
-                //     title: '检测结果',
-                //     align: "center",
-                //     minWidth: 120
-                // }, 
-                {
-                    field: 'wealth',
-                    width: 137,
-                    title: '更多',
-                    minWidth: 80,
-                    align: "center",
-                    fixed: 'right',
-                    toolbar: '#More',
-                }]
+                ]
             ]
         });
 
