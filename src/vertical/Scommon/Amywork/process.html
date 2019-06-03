@@ -21,11 +21,11 @@
             <div class="process-l-top-l">
                 <div class="bgred"></div>
                 <p>sdfds</p>
-                <input type="text" class="layui-input">
+                <input type="text" class="layui-input" id="msgxx">
             </div>
-            <div class="process-l-top-r">
+            <div class="process-l-top-r" style="display: flex;">
                 <button class="layui-btn  layui-btn-sm process-add">新增</button>
-                <button class="layui-btn layui-btn-sm  proeditor">编辑</button>
+                <button class="layui-btn layui-btn-sm  proeditor" style="display: none;">删除</button>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
             <a href="javascript:;" class="bgred"></a>
             <p>流程图列表</p>
         </div>
-        <ul>
+        <ul id="liebiao">
 
         </ul>
     </div>
@@ -57,6 +57,9 @@
 <script src="../../../../public/dist/layui.js"></script>
 <script src="../../../../public/thinking/jsmind.js"></script>
 <script src="../../../../public/thinking/jsmind.draggable.js"></script>
+<script src="../../../../js/common/jquery.min.js"></script>
+<script src="../../../../js/common/api.js"></script>
+
 
 </html>
 <script>
@@ -72,79 +75,133 @@
             var $ = layui.$,
                 layer = layui.layer,
                 namesli = null,
+                jm = {},
+                ider = "",
                 lisname = null;
 
+
             //数据
-            var mind = {
-                "meta": {
-                    "name": "",
-                    "author": "",
-                    "version": "",
-                },
-                "format": "node_array",
-                "data": [{
-                        "id": "root",
-                        "isroot": true,
-                        "topic": "jsMind",
-                        "bg": true
-                    },
 
-                    {
-                        "id": "sub1",
-                        "parentid": "root",
-                        "topic": "sub1",
-                        // "background-color": "#0000ff",
-                        "bg": true
-                    }, {
-                        "id": "sub11",
-                        "parentid": "sub1",
-                        "topic": "sub11",
-                        "bg": true
-                    }, {
-                        "id": "sub12",
-                        "parentid": "sub1",
-                        "topic": "sub12",
-                        "bg": true
-                    }, {
-                        "id": "sub13",
-                        "parentid": "sub1",
-                        "topic": "sub13",
-                        "bg": true
-                    },
+            function returns() {
 
-                    {
-                        "id": "sub2",
-                        "parentid": "root",
-                        "topic": "sub2",
-                        "bg": true
-                    }, {
-                        "id": "sub21",
-                        "parentid": "sub2",
-                        "topic": "sub21",
-                        "bg": true
-                    }, {
-                        "id": "sub22",
-                        "parentid": "sub2",
-                        "topic": "sub22",
-                        // "foreground-color": "#33ff33" //文字颜色
-                        "bg": true
+                var mind = {
+                    "meta": {
+                        "name": "",
+                        "author": "",
+                        "version": "",
                     },
+                    "format": "node_array",
+                    "data": [{
+                            "id": "root",
+                            "isroot": true,
+                            "topic": "jsMind",
+                            "bg": true
+                        },
 
-                    {
-                        "id": "sub3",
-                        "parentid": "root",
-                        "topic": "sub3",
-                        "bg": true
-                    },
-                ]
-            };
+                        {
+                            "id": "sub1",
+                            "parentid": "root",
+                            "topic": "sub1",
+                            // "background-color": "#0000ff",
+                            "bg": true
+                        }, {
+                            "id": "sub11",
+                            "parentid": "sub1",
+                            "topic": "sub11",
+                            "bg": true
+                        }, {
+                            "id": "sub12",
+                            "parentid": "sub1",
+                            "topic": "sub12",
+                            "bg": true
+                        }, {
+                            "id": "sub13",
+                            "parentid": "sub1",
+                            "topic": "sub13",
+                            "bg": true
+                        },
+
+                        {
+                            "id": "sub2",
+                            "parentid": "root",
+                            "topic": "sub2",
+                            "bg": true
+                        }, {
+                            "id": "sub21",
+                            "parentid": "sub2",
+                            "topic": "sub21",
+                            "bg": true
+                        }, {
+                            "id": "sub22",
+                            "parentid": "sub2",
+                            "topic": "sub22",
+                            // "foreground-color": "#33ff33" //文字颜色
+                            "bg": true
+                        },
+
+                        {
+                            "id": "sub3",
+                            "parentid": "root",
+                            "topic": "sub3",
+                            "bg": true
+                        },
+                    ]
+                };
+
+                return mind
+            }
+
             var options = {
                 container: 'jsmind_container',
                 editable: false,
                 theme: 'greensea'
             }
 
-            var jm = jsMind.show(options, mind);
+
+            jm = jsMind.show(options, returns());
+
+
+            //流程图列表
+            var uu = {
+                keyword: "",
+                type: "xxxfjjggangyang"
+            }
+            Theoldcuiway("dictionaries/queryType", uu, "GET").done(function(resp) {
+                console.log(resp.data)
+                lisname = resp.data;
+                $.each(resp.data, function(v, it) {
+                    console.log(it.keyword)
+                    $("#liebiao").append('<li style="padding:8px  10px;"  arrtsdd=' + it.id + '>' + it.keyword + '</li>');
+                })
+                Eatshit()
+            }).fail(function(err) {
+                console.log(err)
+            });
+
+
+            function Eatshit() {
+                $("#liebiao>li").click(function() {
+                    $(this).css("backgroundColor", "#e2e2e2");
+                    $(this).siblings().css("backgroundColor", "#fff");
+                    var s = $(this).attr("arrtsdd")
+                    $.each(lisname, function(v, its) {
+                        if (its.id == s) {
+                            ider = its.id;
+                            var joss = JSON.parse(its.context);
+                            joss = JSON.parse(joss.lin);
+                            $(".jsmind-inner").remove();
+                            jm = jsMind.show(options, joss);
+                            $(".proeditor").css("display", "block");
+                            $(".proeditor").text("保存");
+                            $(".process-editor-one").css("display", "block");
+                            $(".process-add").text("删除");
+                            $("#msgxx").css("display", "block");
+                            $(".process-l-top-l>p").css("display", "none");
+                        }
+                    })
+
+                })
+            }
 
 
             $(".process-add").click(function() {
@@ -168,38 +225,49 @@
                             $(".process-editor-one").css("display", "block");
                             $(".process-l-top-l>input").val($(".newlis").val());
                             _this.text("取消新增");
+                            $(".proeditor").css("display", "block");
                             $(".proeditor").text("保存");
-                            //列表
-                            lisname = '<li>' + $(".newlis").val() + '</li>'
-                            $(".process-r>ul").append(lisname);
+
                             layer.close(layer.index);
                             return;
                         }
                     });
                     return;
                 }
+
+
+
                 //取消新增
                 if ($(this).text() == "取消新增") {
                     var r = confirm("你确定放弃当前修改，取消新增？")
                     if (r == true) {
-
-                        _this.text("新增");
-                        $(".proeditor").text("编辑");
-                        console.log(lisname)
-                        $(".process-r>ul>li:last-child").remove();
+                        window.location.reload()
                     }
                     return;
                 }
+
+
                 //删除
                 if ($(this).text() == "删除") {
                     var r = confirm('你确定要删除当前流程图？');
                     if ($(".process-r>ul>li").length > 0) {
-                        var r = confirm('你确定要删除当前流程图[' + namesli + ']？')
+                        console.log(ider)
+
+                        Theoldcuiway("dictionaries/delete", {
+                            id: ider
+
+                        }, "POST").done(function(resp) {
+                            console.log(resp)
+                            window.location.reload()
+                        }).fail(function(err) {
+                            console.log(err)
+                        });
+
                     }
                     if (r == true) {
 
                         _this.text("新增");
-                        $(".proeditor").text("编辑");
+
                     }
                     return;
                 }
@@ -211,16 +279,13 @@
                 var _thiss = $(this);
 
                 $('.process-l-top-l>p').css("display", "none");
-                if ($(this).text() == "编辑") {
-                    $(".process-l-top-l>input").css("display", "block");
-                    $(".process-editor-one").css("display", "block");
-                    _thiss.text("保存");
-                    $(".process-add").text("删除");
+                if ($(this).text() == "删除") {
 
-                    jm.enable_edit(); //可编辑
-                    gaibain(); //可改变背景
                     return;
                 }
+
+
+
                 if ($(this).text() == "保存") {
                     jm.disable_edit(); //不可编辑
                     if ($(".process-l-top-l>input").val() == "") {
@@ -244,9 +309,32 @@
                                 //保存数据
                                 var mind_data = jm.get_data();
                                 var mind_string = jsMind.util.json.json2string(mind_data);
-                                prompt_info(mind_string);
-                                hime(); //隐藏
+                                // prompt_info(mind_string);
 
+
+                                var linkss = {
+                                    title: $("#msgxx").val(),
+                                    lin: mind_string,
+                                }
+                                var obj = {
+                                    id: ider,
+                                    context: JSON.stringify(linkss),
+                                    keyword: $("#msgxx").val(),
+                                    type: "xxxfjjggangyang"
+                                }
+
+                                Theoldcuiway("dictionaries/saveOrUpdate", obj, "POST").done(function(resp) {
+
+                                    if (resp.code == 200) {
+                                        layer.msg("添加成功");
+                                    }
+                                    window.location.reload();
+                                }).fail(function(err) {
+                                    console.log(err)
+                                });
+
+
+                                hime(); //隐藏                          
                                 return;
                             },
                             btn2: function(index, layero) {
@@ -274,11 +362,13 @@
                     bg: true
                 }
                 var node = jm.add_node(selected_node, nodeid, topic, data);
-
+                jm.enable_edit();
+                gaibain();
             })
 
             function hime() {
                 $(".process-editor-one").hide();
+                $("#msgxx").val("");
             }
             //改变背景||删除
             function gaibain() {

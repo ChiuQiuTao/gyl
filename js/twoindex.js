@@ -2,12 +2,11 @@ var menudata = [{
         icon: "icon-ios-archive",
         title: "我的工作",
         type: "1",
-        child: [
-            // {
-            //     url: "../vertical/Scommon/Amywork/process.html",
-            //     title: "我的流程",
-            //     type: "1"
-            // }, 
+        child: [{
+                url: "../vertical/Scommon/Amywork/process.html",
+                title: "服务交易",
+                type: "1"
+            },
             {
                 url: "../vertical/Scommon/Amywork/message.html",
                 title: "消息管理",
@@ -23,11 +22,11 @@ var menudata = [{
             //     title: "售后服务",
             //     type: "1"
             // },
-            {
-                url: "../vertical/Scommon/Amywork/manage.html",
-                title: "服务交易",
-                type: "1"
-            },
+            // {
+            //     url: "../vertical/Scommon/Amywork/manage.html",
+            //     title: "服务交易",
+            //     type: "1"
+            // },
         ]
     },
     // {
