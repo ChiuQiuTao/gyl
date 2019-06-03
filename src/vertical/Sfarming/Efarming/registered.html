@@ -234,13 +234,26 @@
                     field: "orderdate",
                     title: "入栏日期",
                     minWidth: 120,
-                    align: "center"
+                    align: "center",
+                    templet:function(data){
+                        console.log(data.orderdate);
+                        var yymmdd =  new Date(data.orderdate);
+                        return yymmdd.getFullYear() + '-' + (yymmdd.getMonth() + 1) + '-' + yymmdd.getDate()
+                    }
                     },
                     {
                     field: "supplytype",
                     title: "供应商类型",
                     minWidth: 120,
-                    align: "center"
+                    align: "center",
+                    templet:function (data) {
+                        console.log(data.supplytype);
+                        if(data.supplytype==1){
+                            return '企业供应商'
+                        }else{
+                            return '个人供应商'
+                        }
+                    }
                     },
                     {
                     field: "supplyname",

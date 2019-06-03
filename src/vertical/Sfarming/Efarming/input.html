@@ -226,7 +226,12 @@
                             field: "inputdate",
                             title: "投入日期",
                             minWidth: 120,
-                            align: "center"
+                            align: "center",
+                            templet:function(data){
+                                console.log(data.inputdate);
+                                var yymmdd =  new Date(data.inputdate);
+                                return yymmdd.getFullYear() + '-' + (yymmdd.getMonth() + 1) + '-' + yymmdd.getDate()
+                            }
                             },
                            
                             {
@@ -269,7 +274,12 @@
                             field: "inputno",
                             title: "录入时间",
                             minWidth: 50,
-                            align: "center"
+                            align: "center",
+                            templet:function(data){
+                                console.log(data.inputno);
+                                var yymmdd =  new Date(data.inputno);
+                                return yymmdd.getFullYear() + '-' + (yymmdd.getMonth() + 1) + '-' + yymmdd.getDate()
+                            }
                             },
                         ]
                         ]
