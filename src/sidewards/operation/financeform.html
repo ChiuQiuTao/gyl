@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="../../../js/module/jquery-3.4.1.min.js"></script>
     <script src="../../../public/mui/echarts-all.js"></script>
+    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
     <style>
         .chart {
             height: 300px;
@@ -25,10 +26,63 @@
             font-size: 2em;
             text-shadow: 1px 1px 0px #212121;
         }
+        .layui-form-item{
+            display: flex;
+            position: absolute;
+            margin-left: 200px;
+        }
+        .layui-form-label{
+            width: 100px;
+        }
+        .layui-input-block{
+            margin-left: 10px;
+        }
     </style>
 
 </head>
 <body>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择单位</label>
+        <div class="layui-input-block">
+            <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                <option value="年">年</option>
+                <option value="月">月</option>
+                <option value="周">周</option>
+                <option value="日">日</option>
+            </select>
+        </div>
+        <label class="layui-form-label">选择年</label>
+        <div class="layui-input-block">
+            <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+            </select>
+        </div>
+        <div style="display: none;" class="monthshow">
+            <label class="layui-form-label">选择月</label>
+            <div class="layui-input-block">
+                <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit" style="display: none;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+</form>
 <blockquote class="layui-elem-quote">
     财务基础报表
 </blockquote>
@@ -153,7 +207,10 @@
         </div>
     </div>
     </div>
+
+    <script src="../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
+    
     option = {
         title: {
             text: '收益及亏盈',
@@ -325,6 +382,37 @@
     var hf = echarts.init(document.getElementById('hf'));
     hf.setOption(hFoption);
 
+
+
+
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        form.on('select(selectunit)', function(data) {
+
+            var barChart = echarts.init(document.getElementById('xsje'));
+            barChart.setOption(option);
+
+            var barChart = echarts.init(document.getElementById('bold'));
+            barChart.setOption(sjtjOption);
+
+
+            var hf = echarts.init(document.getElementById('hf'));
+            hf.setOption(hFoption);
+            if(data.value=='年'){
+                document.querySelector('.monthshow').style.display='none';
+            }else if(data.value=='月'){
+                document.querySelector('.monthshow').style.display='none';
+            }else if(data.value=='周'){
+                document.querySelector('.monthshow').style.display='flex';
+            }else if(data.value=='日'){
+                document.querySelector('.monthshow').style.display='flex';
+            }
+        });
+    });
 </script>
 </body>
 </html>

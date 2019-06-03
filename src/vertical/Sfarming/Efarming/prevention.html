@@ -257,7 +257,12 @@
                             field: "antiepidemicdate",
                             title: "防疫日期",
                             minWidth: 50,
-                            align: "center"
+                            align: "center",
+                            templet:function(data){
+                                console.log(data.antiepidemicdate);
+                                var yymmdd =  new Date(data.antiepidemicdate);
+                                return yymmdd.getFullYear() + '-' + (yymmdd.getMonth() + 1) + '-' + yymmdd.getDate()
+                            }
                             },
                             
                         ]

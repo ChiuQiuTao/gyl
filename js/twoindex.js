@@ -3,11 +3,11 @@ var menudata = [{
         title: "我的工作",
         type: "1",
         child: [
-            // {
-            //     url: "../vertical/Scommon/Amywork/process.html",
-            //     title: "我的流程",
-            //     type: "1"
-            // }, 
+            {
+                url: "../vertical/Scommon/Amywork/process.html",
+                title: "我的流程",
+                type: "1"
+            }, 
             {
                 url: "../vertical/Scommon/Amywork/message.html",
                 title: "消息管理",

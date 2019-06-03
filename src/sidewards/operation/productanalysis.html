@@ -13,11 +13,63 @@
         .chart {
             height: 300px;
         }
-
+        .layui-form-item{
+            display: flex;
+            /* position: absolute; */
+            margin-left: 200px;
+        }
+        .layui-form-label{
+            width: 100px;
+        }
+        .layui-input-block{
+            margin-left: 10px;
+        }
     </style>
 
 </head>
 <body>
+<form class="layui-form" action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择单位</label>
+        <div class="layui-input-block">
+            <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                <option value="年">年</option>
+                <option value="月" selected>月</option>
+                <option value="周">周</option>
+                <option value="日">日</option>
+            </select>
+        </div>
+        <label class="layui-form-label">选择年</label>
+        <div class="layui-input-block">
+            <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+            </select>
+        </div>
+        <div style="display: none;" class="monthshow">
+            <label class="layui-form-label">选择月</label>
+            <div class="layui-input-block">
+                <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit" style="display: none;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+</form>
     <div class="container">
         <div class="lt">
             <div class="type">
@@ -33,11 +85,11 @@
                     商品排行
                 </div>
                 <div class="head-rt">
-                    <select name="" id="spph" class="select">
+                    <!-- <select name="" id="spph" class="select">
                         <option value="xl">按销量排行</option>
                         <option value="xle">按销量额排行</option>
                         <option value="sj">按时间排行</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
             <div class="chart" id="barChart"></div>
@@ -47,8 +99,8 @@
 <script src="../../../public/mui/echarts-all.js"></script>
 <script src="../../../public/dist/layui.js" charset="utf-8"></script>
 <script>
-
-    var getOption = function(datas) {
+    var dataTitle = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+    var getOption = function(datas,dataTitle) {
         return  {
             legend: {
                 data: ['采购信息统计'],
@@ -98,7 +150,7 @@
             calculable: false,
             xAxis: [{
                 type: 'category',
-                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                data: dataTitle
             }],
             yAxis: [{
                 type: 'value',
@@ -119,14 +171,14 @@
     var barChart = echarts.init(byId('barChart'));
     var datas = {};
     datas.sj = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
-    barChart.setOption(getOption(datas.sj));
+    barChart.setOption(getOption(datas.sj,dataTitle));
 
-    document.querySelector("#spph").addEventListener("change" , function () {
-        var idData = this.value;
-        datas.xl = [30.0, 20.0, 40.0, 10.2, 80.6, 20.7, 200.6, 300.2, 400.6, 100.0, 6.4, 3.3];
-        datas.xle = [2000.0, 1500.0, 3000.0, 4000.2, 8000.6, 7654.7, 1235.6, 5877.2, 124.6, 1245.0, 615.4, 365.3];
-        barChart.setOption(getOption(datas[idData]));
-    });
+    // document.querySelector("#spph").addEventListener("change" , function () {
+    //     var idData = this.value;
+    //     datas.xl = [30.0, 20.0, 40.0, 10.2, 80.6, 20.7, 200.6, 300.2, 400.6, 100.0, 6.4, 3.3];
+    //     datas.xle = [2000.0, 1500.0, 3000.0, 4000.2, 8000.6, 7654.7, 1235.6, 5877.2, 124.6, 1245.0, 615.4, 365.3];
+    //     barChart.setOption(getOption(datas[idData],dataTitle));
+    // });
 
 
 
@@ -219,5 +271,40 @@ var option = {
     };
     var chart = echarts.init(byId('chart'));
     chart.setOption(option);
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+            form.on('select(selectunit)', function(data) {
+                var chart = echarts.init(byId('chart'));
+                chart.setOption(option);
+                if(data.value=='年'){
+                    document.querySelector('.monthshow').style.display='none';
+                    datasSj = [20.0, 15.0, 30.0, 10.2];
+                    dataTitle=['第一季','第二季','第三季','第四季']
+                    var barChart = echarts.init(byId('barChart'));
+                    barChart.setOption(getOption(datasSj,dataTitle));
+                }else if(data.value=='月'){
+                    document.querySelector('.monthshow').style.display='none';
+                    datasSj = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
+                    dataTitle=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                    var barChart = echarts.init(byId('barChart'));
+                    barChart.setOption(getOption(datasSj,dataTitle));
+                }else if(data.value=='周'){
+                    document.querySelector('.monthshow').style.display='flex';
+                    datasSj = [20.0, 15.0, 30.0, 10.2];
+                    dataTitle=['第一周','第二周','第三周','第四周']
+                    var barChart = echarts.init(byId('barChart'));
+                    barChart.setOption(getOption(datasSj,dataTitle));
+                }else if(data.value=='日'){
+                    document.querySelector('.monthshow').style.display='flex';
+                    datasSj = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6];
+                    dataTitle=['周一','周二','周三','周四','周五','周六','周日']
+                    var barChart = echarts.init(byId('barChart'));
+                    barChart.setOption(getOption(datasSj,dataTitle));
+                }
+        });
+    });
 </script>
 </html>

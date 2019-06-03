@@ -9,17 +9,74 @@
     <script src="../../../js/module/jquery-3.4.1.min.js"></script>
     <script src="../../../public/mui/echarts-all.js"></script>
     <style>
+        body{
+            min-height: 1000px;
+        }
         .chart {
-            height: 300px;
+            height: 250px;
         }
         body{
             overflow-x:hidden;
             overflow-y:hidden;
         }
+        .layui-form-item{
+            display: flex;
+            position: absolute;
+            margin-left: 200px;
+        }
+        .layui-form-label{
+            width: 100px;
+        }
+        .layui-input-block{
+            margin-left: 10px;
+        }
+        
     </style>
 
 </head>
 <body>
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择单位</label>
+            <div class="layui-input-block">
+                <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                    <option value="年">年</option>
+                    <option value="月">月</option>
+                    <option value="周">周</option>
+                    <option value="日">日</option>
+                </select>
+            </div>
+            <label class="layui-form-label">选择年</label>
+            <div class="layui-input-block">
+                <select name="selectyear" lay-verify="required" lay-filter="selectyear" id="selectyear">
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                </select>
+            </div>
+            <div style="display: none;" class="monthshow">
+                <label class="layui-form-label">选择月</label>
+                <div class="layui-input-block">
+                    <select name="selectmonth" lay-verify="required" lay-filter="selectmonth" id="selectmonth" style="display: none;">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+    </form>
 <blockquote class="layui-elem-quote">
     销售报表数据
 </blockquote>
@@ -59,194 +116,402 @@
     var tableData = null;
     var datas = new Array();
     var zxtdatas = new Array();
-    layui.use('table', function(){
-        var table = layui.table
+    var titleList = new Array();
+    console.log(datas);
+    console.log('datas');
+    layui.use(['table','form'], function(){
+        var table = layui.table,
+        form = layui.form,
         $ = layui.jquery;
-        table.render({
-            elem: '#test'
-            ,url:'./data/salesreport.json'
-            ,cols: [[
-                {field:'jd',   title: '季度',align:"center"}
-                ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
-                    return percent(data.xsje,data.total)+"%"
-                 }}
-                ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
-                ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
-            ]],
-            parseData:function (res) {
-                return {
-                    "code": res.status,
-                    "msg": res.message,
-                    "count": res.total,
-                    "data": res.data.item
-                };
-            },
-            done:function (res, curr, count) {
-                var byId = function(id) {
-                    return document.getElementById(id);
-                };
-                var barChart = echarts.init(byId('barChart'));
-                var list = new Array();
-                $.each(res.data , function (key ,val) {
-                    list.push(percent(val.xsje,val.total));
-                    datas.push({value:val.xssl, name:val.jd})
-                    zxtdatas.push(val.xsje)
-                })
-                barChart.setOption(getOption(list));
-
-                var barChart = echarts.init(byId('bold'));
-                barChart.setOption(option);
-
-                var barChart = echarts.init(byId('xsje'));
-                barChart.setOption(zxtOption);
+        yearList();
+        var unit = '年';
+        form.on('select(selectunit)', function(data) {
+            console.log(data.value); //得到被选中的值
+            datas=[];
+            zxtdatas=[];
+            titleList=[];
+            // datas = new Array();
+            // zxtdatas = new Array();
+            // titleList = new Array();
+            unit=data.value
+            if(data.value=='年'){
+                yearList();
+                document.querySelector('.monthshow').style.display='none';
+            }else if(data.value=='月'){
+                monthList();
+                document.querySelector('.monthshow').style.display='none';
+            }else if(data.value=='周'){
+                weekList();
+                document.querySelector('.monthshow').style.display='flex';
+            }else if(data.value=='日'){
+                dayList();
+                document.querySelector('.monthshow').style.display='flex';
             }
         });
-    });
-
-    function percent(num, total) {
-        num = parseFloat(num);
-        total = parseFloat(total);
-        if (isNaN(num) || isNaN(total)) {
-            return "-";
+        form.on('select(selectyear)', function(data) {
+            if(unit=='年'){
+                yearList();
+            }else if(unit=='月'){
+                monthList();
+            }else if(unit=='周'){
+                weekList();
+            }else if(unit=='日'){
+                dayList();
+            }
+        });
+        form.on('select(selectmonth)', function(data) {
+            if(unit=='周'){
+                weekList();
+            }else{
+                dayList();
+            }
+        });
+        function percent(num, total) {
+            num = parseFloat(num);
+            total = parseFloat(total);
+            if (isNaN(num) || isNaN(total)) {
+                return "-";
+            }
+            return total <= 0 ? 0 : (Math.round(num / total * 100000) / 100.00);
         }
-        return total <= 0 ? 0 : (Math.round(num / total * 100000) / 100.00);
-    }
 
 
 
-    var getOption = function(datas) {
-        return  {
-            title : {
-                text: '各个季度占比',
-                x:'center'
-            },
-            grid: {
-                x: 35,
-                x2: 10,
-                y: 30,
-                y2: 25
-            },
-            toolbox: {
-                show : true,
-                feature : {
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            tooltip : {
-                trigger: 'axis',
-                formatter: "{a} <br/>{b} : {c}%"
-            },
-            toolbox: {
-                show: false,
-                feature: {
-                    mark: {
-                        show: true
-                    },
-                    dataView: {
-                        show: true,
-                        readOnly: false
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
-                    },
-                    saveAsImage: {
-                        show: true
+        var getOption = function(datas) {
+            return  {
+                title : {
+                    text: '各个时期占比',
+                    x:'center'
+                },
+                grid: {
+                    x: 35,
+                    x2: 10,
+                    y: 30,
+                    y2: 25
+                },
+                toolbox: {
+                    show : true,
+                    feature : {
+                        dataView : {show: true, readOnly: false},
+                        magicType : {show: true, type: ['line', 'bar']},
+                        restore : {show: true},
+                        saveAsImage : {show: true}
                     }
-                }
-            },
-            calculable: false,
-            xAxis: [{
-                type: 'category',
-                data: ['一季度', '二季度', '三季度', '四季度']
-            }],
-            yAxis: [{
-                type: 'value',
-                splitArea: {
-                    show: true
-                }
-            }],
-            series: [{
-                name: '销售数据统计',
-                type: "bar",
-                data: datas
-            }]
-        };
-    };
-
-
-
-    option = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}%)"
-        },
-        title : {
-            text: '销售数量',
-            x:'center'
-        },
-        legend: {
-            orient: 'vertical',
-            x: 'left',
-            data:['一季度','二季度','三季度','四季度']
-        },
-        series: [
-            {
-                name:'销售数量',
-                type:'pie',
-                radius: ['50%', '70%'],
-                avoidLabelOverlap: false,
-                label: {
-                    normal: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        show: true,
-                        textStyle: {
-                            fontSize: '30',
-                            fontWeight: 'bold'
+                },
+                tooltip : {
+                    trigger: 'axis',
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: false,
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
                         }
                     }
                 },
-                labelLine: {
-                    normal: {
-                        show: false
+                calculable: false,
+                xAxis: [{
+                    type: 'category',
+                    data: titleList
+                }],
+                yAxis: [{
+                    type: 'value',
+                    splitArea: {
+                        show: true
                     }
+                }],
+                series: [{
+                    name: '销售数据统计',
+                    type: "bar",
+                    data: datas
+                }]
+            };
+        };
+
+
+        function optionSale(titleList,datas){
+            return option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
                 },
-                data:datas,
-            }
-        ]
-    };
+                title : {
+                    text: '销售数量',
+                    x:'center'
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data:titleList
+                },
+                series: [
+                    {
+                        name:'销售数量',
+                        type:'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:datas,
+                    }
+                ]
+            };
 
 
-    zxtOption = {
-        title : {
-            text: '销售金额',
-            x:'center'
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}: {c} ({d}万)"
-        },
-        xAxis: {
-            type: 'category',
-            data: ['一季度', '二季度', '三季度', '四季度']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: zxtdatas,
-            type: 'line'
-        }]
-    };
+        }
+       
+
+        function zxtOptionf(titleList,zxtdatas){
+            return zxtOption = {
+                title : {
+                    text: '销售金额',
+                    x:'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}万)"
+                },
+                xAxis: {
+                    type: 'category',
+                    data: titleList
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: zxtdatas,
+                    type: 'line'
+                }]
+            };
+        }
+        
+
+
+
+        function yearList(){
+            table.render({
+                elem: '#test'
+                ,height: 195
+                ,url:'./data/salesreport.json'
+                ,cols: [[
+                    {field:'jd',   title: '季度',align:"center"}
+                    ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
+                        return percent(data.xsje,data.total)+"%"
+                    }}
+                    ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
+                    ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+                ]],
+                parseData:function (res) {
+                    return {
+                        "code": res.status,
+                        "msg": res.message,
+                        "count": res.total,
+                        "data": res.data.item
+                    };
+                },
+                done:function (res, curr, count) {
+                    var byId = function(id) {
+                        return document.getElementById(id);
+                    };
+                    var barChart = echarts.init(byId('barChart'));
+                    var list = new Array();
+                    datas=[];
+                    zxtdatas=[];
+                    titleList=[];
+                    $.each(res.data , function (key ,val) {
+                        list.push(percent(val.xsje,val.total));
+                        datas.push({value:val.xssl, name:val.jd});
+                        zxtdatas.push(val.xsje);
+                        titleList.push(val.jd);
+
+                    })
+                    barChart.setOption(getOption(list));
+
+                    var barChart = echarts.init(byId('bold'));
+                    barChart.setOption(optionSale(titleList,datas));
+                    var barChart = echarts.init(byId('xsje'));
+                    barChart.setOption(zxtOptionf(titleList,zxtdatas));
+                }
+            });
+        }
+        function monthList(){
+            table.render({
+                elem: '#test'
+                ,height: 195
+                ,url:'./data/salesreportm.json'
+                ,cols: [[
+                    {field:'jd',   title: '月份',align:"center"}
+                    ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
+                        return percent(data.xsje,data.total)+"%"
+                    }}
+                    ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
+                    ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+                ]],
+                parseData:function (res) {
+                    return {
+                        "code": res.status,
+                        "msg": res.message,
+                        "count": res.total,
+                        "data": res.data.item
+                    };
+                },
+                done:function (res, curr, count) {
+                    var byId = function(id) {
+                        return document.getElementById(id);
+                    };
+                    var barChart = echarts.init(byId('barChart'));
+                    var list = new Array();
+                    datas=[];
+                    zxtdatas=[];
+                    titleList=[];
+                    $.each(res.data , function (key ,val) {
+                        console.log(val.xssl);
+                        list.push(percent(val.xsje,val.total));
+                        datas.push({value:val.xssl, name:val.jd});
+                        zxtdatas.push(val.xsje);
+                        titleList.push(val.jd);
+                    })
+                    barChart.setOption(getOption(list));
+                    var barChart = echarts.init(byId('bold'));
+                    barChart.setOption(optionSale(titleList,datas));
+                    var barChart = echarts.init(byId('xsje'));
+                    barChart.setOption(zxtOptionf(titleList,zxtdatas));
+                }
+            });
+        }
+
+        function weekList(){
+            table.render({
+                elem: '#test'
+                ,height: 195
+                ,url:'./data/salesreportweed.json'
+                ,cols: [[
+                    {field:'jd',   title: '月份',align:"center"}
+                    ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
+                        return percent(data.xsje,data.total)+"%"
+                    }}
+                    ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
+                    ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+                ]],
+                parseData:function (res) {
+                    return {
+                        "code": res.status,
+                        "msg": res.message,
+                        "count": res.total,
+                        "data": res.data.item
+                    };
+                },
+                done:function (res, curr, count) {
+                    var byId = function(id) {
+                        return document.getElementById(id);
+                    };
+                    var barChart = echarts.init(byId('barChart'));
+                    var list = new Array();
+                    console.log(res.data);
+                    datas=[];
+                    zxtdatas=[];
+                    titleList=[];
+                    $.each(res.data , function (key ,val) {
+                        console.log(val.xssl);
+                        list.push(percent(val.xsje,val.total));
+                        datas.push({value:val.xssl, name:val.jd});
+                        zxtdatas.push(val.xsje);
+                        titleList.push(val.jd);
+                    })
+                    barChart.setOption(getOption(list));
+
+                    var barChart = echarts.init(byId('bold'));
+                    barChart.setOption(optionSale(titleList,datas));
+                    var barChart = echarts.init(byId('xsje'));
+                    barChart.setOption(zxtOptionf(titleList,zxtdatas));
+                }
+            });
+        }
+        
+
+
+        function dayList(){
+            table.render({
+                elem: '#test'
+                ,height: 195
+                ,url:'./data/salesreportd.json'
+                ,cols: [[
+                    {field:'jd',   title: '月份',align:"center"}
+                    ,{field:'zb',   title: '占比', sort: true,align:"center",templet:function (data) {
+                        return percent(data.xsje,data.total)+"%"
+                    }}
+                    ,{field:'xsje',  title: '销售金额(万)',align:"center" ,sort: true}
+                    ,{field:'xssl', title: '销售数量',align:"center" ,sort: true}
+                ]],
+                parseData:function (res) {
+                    return {
+                        "code": res.status,
+                        "msg": res.message,
+                        "count": res.total,
+                        "data": res.data.item
+                    };
+                },
+                done:function (res, curr, count) {
+                    var byId = function(id) {
+                        return document.getElementById(id);
+                    };
+                    var barChart = echarts.init(byId('barChart'));
+                    var list = new Array();
+                    console.log(res.data);
+                    datas=[];
+                    zxtdatas=[];
+                    titleList=[];
+                    console.log(datas);
+                    $.each(res.data , function (key ,val) {
+                        console.log(val.xssl);
+                        list.push(percent(val.xsje,val.total));
+                        datas.push({value:val.xssl, name:val.jd});
+                        zxtdatas.push(val.xsje);
+                        titleList.push(val.jd);
+                    })
+                    barChart.setOption(getOption(list));
+                    var barChart = echarts.init(byId('bold'));
+                    // console.log(option(titleList,datas));
+                    barChart.setOption(optionSale(titleList,datas));
+                    var barChart = echarts.init(byId('xsje'));
+                    barChart.setOption(zxtOptionf(titleList,zxtdatas));
+                }
+            });
+        }
+    });
+
+    
 
 
 </script>

@@ -1,0 +1,13 @@
+{
+    "status": 0,
+    "message": "",
+    "total": 180,
+    "data": {
+        "item": [
+            {"jd":"咖啡豆","zb":"越南咖啡豆","sgyxssl":"100","xsje":100,"xssl":30000, "total":6666},
+            {"jd":"包装盒","zb":"咖啡包装盒","sgyxssl":"175","xsje":175,"xssl":50000, "total":6666},
+            {"jd":"包装袋","zb":"咖啡包装袋","sgyxssl":"200","xsje":200,"xssl":60000, "total":6666},
+            {"jd":"添加剂","zb":"添加剂包装盒","sgyxssl":"175","xsje":175,"xssl":50000, "total":6666}
+        ]
+    }
+}

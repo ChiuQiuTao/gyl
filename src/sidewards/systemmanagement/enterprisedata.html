@@ -476,7 +476,6 @@
             console.log(data.value); //得到被选中的值
             document.querySelector('.city').innerHTML = '<option value="">市</option>';
             document.querySelector('.area').innerHTML = '<option value="">区</option>';
-
             getCity(data.value);
         });
         form.on('select(city)', function(data) {

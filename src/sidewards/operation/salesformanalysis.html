@@ -9,6 +9,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <script src="../../../public/mui/echarts-all.js"></script>
     <script src="../../../js/module/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../../../public/dist/css/layui.css">
+    
     <style>
         .chart {
             height: 300px;
@@ -23,6 +25,17 @@
             background-color: inherit;
             padding-top: 0px;
         }
+        .layui-form-item{
+            display: flex;
+            position: absolute;
+            margin-left: 200px;
+        }
+        .layui-form-label{
+            width: 100px;
+        }
+        .layui-input-block{
+            margin-left: 10px;
+        }
     </style>
 
 
@@ -30,7 +43,48 @@
 </head>
 
 <body>
-
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择单位</label>
+            <div class="layui-input-block">
+                <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                    <option value="年">年</option>
+                    <option value="月">月</option>
+                    <option value="周">周</option>
+                    <option value="日">日</option>
+                </select>
+            </div>
+            <label class="layui-form-label">选择年</label>
+            <div class="layui-input-block">
+                <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit">
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                </select>
+            </div>
+            <div style="display: none;" class="monthshow">
+                <label class="layui-form-label">选择月</label>
+                <div class="layui-input-block">
+                    <select name="selectunit" lay-verify="required" lay-filter="selectunit" id="selectunit" style="display: none;">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+            </div>
+            
+        </div>
+    </form>
 <blockquote class="layui-elem-quote layui-text">
     销售信息统计分析
 </blockquote>
@@ -42,6 +96,9 @@
 
 
 <script>
+    // var datas = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
+    var dataTitle = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+    // getOption(datas,dataTitle);
     var getOption = function(datas) {
         var defaultData = [20.0, 15.0, 30.0, 10.2, 80.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3];
         return  {
@@ -93,7 +150,7 @@
             calculable: false,
             xAxis: [{
                 type: 'category',
-                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                data: dataTitle
             }],
             yAxis: [{
                 type: 'value',
@@ -120,14 +177,33 @@
         return document.getElementById(id);
     };
     var barChart = echarts.init(byId('barChart'));
-    barChart.setOption(getOption(new Date()));
+        barChart.setOption(getOption(new Date()));
+    
+   
 
     layui.use(['form', 'layedit', 'laydate'], function() {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
-
+        form.on('select(selectunit)', function(data) {
+            
+            if(data.value=='年'){
+                dataTitle = ['第一季','第二季','第三季','第四季']
+                document.querySelector('.monthshow').style.display='none';
+            }else if(data.value=='月'){
+                dataTitle = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                document.querySelector('.monthshow').style.display='none';
+            }else if(data.value=='周'){
+                dataTitle = ['第一周','第二周','第三周','第四周']
+                document.querySelector('.monthshow').style.display='flex';
+            }else if(data.value=='日'){
+                dataTitle = ['周一','周二','周三','周四','周五','周六','周日']
+                document.querySelector('.monthshow').style.display='flex';
+            }
+            var barChart = echarts.init(byId('barChart'));
+            barChart.setOption(getOption(new Date()));
+        });
         laydate.render({
             elem: '#test2',
             type: 'year',
